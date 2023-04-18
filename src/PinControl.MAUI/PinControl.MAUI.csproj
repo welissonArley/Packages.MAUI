@@ -19,8 +19,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Folder Include="Views\" />
+	  <Folder Include="Resources\Images\" />
 	  <Folder Include="ViewModels\" />
+	  <Folder Include="Views\Components\Square\" />
+	  <Folder Include="Views\Pages\" />
 	</ItemGroup>
 
 </Project>

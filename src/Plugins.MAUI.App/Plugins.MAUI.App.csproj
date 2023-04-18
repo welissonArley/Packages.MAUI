@@ -56,4 +56,8 @@
 	  <Folder Include="Resources\Raw\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\PinControl.MAUI\PinControl.MAUI.csproj" />
+	</ItemGroup>
+
 </Project>
