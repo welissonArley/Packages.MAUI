@@ -1,6 +1,6 @@
 ﻿using PinControl.MAUI.Helpers.Extensions;
 
-namespace PinControl.MAUI.Views.Components.Base;
+namespace PinControl.MAUI.Views.Components.CodeViewer.Base;
 public abstract class ShowCodeViewer : CodeViewer
 {
     protected const double FONT_SIZE = 32;
@@ -25,7 +25,7 @@ public abstract class ShowCodeViewer : CodeViewer
     }
 
     public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(double), typeof(ShowCodeViewer), FONT_SIZE, propertyChanged: OnPropertyChanged);
-    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(ShowCodeViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#000000" : "#FFFFFF"), propertyChanged: OnPropertyChanged);
+    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(ShowCodeViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#FFFFFF" : "#000000"), propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(ShowCodeViewer), FONT_FAMILY, propertyChanged: OnPropertyChanged);
 
     protected Label CreateLabel(char? codeChar = null)

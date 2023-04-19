@@ -1,10 +1,11 @@
 using PinControl.MAUI.Helpers.Extensions;
 
-namespace PinControl.MAUI.Views.Components.Base;
+namespace PinControl.MAUI.Views.Components.CodeViewer.Base;
 
 public abstract class CodeViewer : ContentView
 {
     protected const ushort CODE_LENGTH = 4;
+    protected const uint CIRCLE_SIZE = 20;
 
     public string Code
     {
@@ -17,8 +18,6 @@ public abstract class CodeViewer : ContentView
         get { return (ushort)GetValue(CodeLengthProperty); }
         set { SetValue(CodeLengthProperty, value); }
     }
-
-    protected const uint CIRCLE_SIZE = 20;
 
     public Color Color
     {
@@ -39,17 +38,26 @@ public abstract class CodeViewer : ContentView
 
     protected static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodeViewer)bindable).CreateContent();
 
-    protected Grid CreateGridToShowContent()
+    public void CreateContent()
     {
-        return new()
+        Grid grid = new()
         {
             HorizontalOptions = LayoutOptions.Center,
             ColumnSpacing = Size * 0.5,
             ColumnDefinitions = new ColumnDefinitionCollection(Enumerable.Repeat(new ColumnDefinition { Width = Size }, CodeLength).ToArray())
         };
+
+        for (var index = 0; index < CodeLength; index++)
+        {
+            char? codeChar = Code.Length > index ? Code.ElementAt(index) : null;
+
+            grid.Add(view: CreateCodeView(codeChar), column: index);
+        }
+
+        Content = grid;
     }
 
-    public abstract void CreateContent();
+    public abstract IView CreateCodeView(char? codeChar);
 
     public CodeViewer() => CreateContent();
 }
