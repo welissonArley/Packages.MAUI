@@ -1,3 +1,5 @@
+using PinControl.MAUI.Helpers.Extensions;
+
 namespace PinControl.MAUI.Views.Components.Base;
 
 public abstract class CodeViewer : ContentView
@@ -30,7 +32,7 @@ public abstract class CodeViewer : ContentView
         set { SetValue(SizeProperty, value); }
     }
 
-    public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(CodeViewer), Color.FromArgb("#000000"), propertyChanged: OnPropertyChanged);
+    public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(CodeViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#000000" : "#FFFFFF"), propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty SizeProperty = BindableProperty.Create(nameof(Size), typeof(uint), typeof(CodeViewer), CIRCLE_SIZE, propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty CodeProperty = BindableProperty.Create(nameof(Code), typeof(string), typeof(CodeViewer), string.Empty, propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty CodeLengthProperty = BindableProperty.Create(nameof(CodeLength), typeof(ushort), typeof(CodeViewer), CODE_LENGTH, propertyChanged: OnPropertyChanged);
