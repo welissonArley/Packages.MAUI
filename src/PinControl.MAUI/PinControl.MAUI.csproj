@@ -19,7 +19,21 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Folder Include="Resources\Images\" />
+	  <None Remove="Resources\Images\icon_delete.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Images\icon_delete.svg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiImage>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Platforms\Android\" />
+	  <Folder Include="Platforms\iOS\" />
+	  <Folder Include="Platforms\MacCatalyst\" />
+	  <Folder Include="Platforms\Tizen\" />
+	  <Folder Include="Platforms\Windows\" />
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Views\Pages\" />
 	</ItemGroup>
