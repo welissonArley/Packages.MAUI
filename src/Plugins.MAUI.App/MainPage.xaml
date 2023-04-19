@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:pinControl="clr-namespace:PinControl.MAUI.Views.Components.Circle;assembly=PinControl.MAUI"
+             xmlns:pinControl="clr-namespace:PinControl.MAUI.Views.Components.Square;assembly=PinControl.MAUI"
              x:Class="Plugins.MAUI.App.MainPage">
 
     <VerticalStackLayout Padding="0,10,0,0">
-        <pinControl:CircleHidingCode Size="20" Code="12"/>
+        <pinControl:SquareHidingCode Size="25" Code="1" Color="#EFAA2A"/>
     </VerticalStackLayout>
 </ContentPage>

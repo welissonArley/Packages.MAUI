@@ -35,16 +35,4 @@ public class CircleShowingCode : ShowCodeViewer
             Fill = hasCodeValue ? new SolidColorBrush(Color) : new SolidColorBrush(Color.WithAlpha(0.2f))
         };
     }
-
-    private Label CreateLabel(char? codeChar = null)
-    {
-        return new Label
-        {
-            TextColor = TextColor,
-            FontSize = FontSize,
-            HorizontalOptions = LayoutOptions.Center,
-            VerticalOptions = LayoutOptions.Center,
-            Text = codeChar.HasValue ? $"{codeChar}" : string.Empty
-        };
-    }
 }
