@@ -1,7 +1,7 @@
-using PinControl.MAUI.Views.Components.CodeViewer.Base;
-using PinControl.MAUI.Views.Components.CodeViewer.Circle;
+using PinControl.MAUI.Views.Components.CodeViewers.Base;
+using PinControl.MAUI.Views.Components.CodeViewers.Hide;
+using PinControl.MAUI.Views.Components.Keyboards;
 using PinControl.MAUI.Views.Components.Keyboards.Base;
-using PinControl.MAUI.Views.Components.Keyboards.Circle;
 
 namespace PinControl.MAUI.Views.Pages;
 
@@ -13,35 +13,35 @@ public class CodePage : ContentPage
         set { SetValue(IllustrationProperty, value); }
     }
 
-    public string Title1
+    public string Headline
     {
-        get { return (string)GetValue(Title1Property); }
-        set { SetValue(Title1Property, value); }
+        get { return (string)GetValue(HeadlineProperty); }
+        set { SetValue(HeadlineProperty, value); }
     }
 
-    public string Title2
+    public string SubHeadline
     {
-        get { return (string)GetValue(Title2Property); }
-        set { SetValue(Title2Property, value); }
+        get { return (string)GetValue(SubHeadlineProperty); }
+        set { SetValue(SubHeadlineProperty, value); }
     }
 
-    public CodeViewer CodeViewer
+    public BaseCodeViewer CodeViewer
     {
-        get { return (CodeViewer)GetValue(CodeViewerProperty); }
+        get { return (BaseCodeViewer)GetValue(CodeViewerProperty); }
         set { SetValue(CodeViewerProperty, value); }
     }
 
-    public KeyboardViewer KeyboardViewer
+    public BaseKeyboardViewer KeyboardViewer
     {
-        get { return (KeyboardViewer)GetValue(KeyboardViewerProperty); }
+        get { return (BaseKeyboardViewer)GetValue(KeyboardViewerProperty); }
         set { SetValue(KeyboardViewerProperty, value); }
     }
 
     public static readonly BindableProperty IllustrationProperty = BindableProperty.Create(nameof(Illustration), typeof(Image), typeof(CodePage), null, propertyChanged: OnPropertyChanged);
-    public static readonly BindableProperty Title1Property = BindableProperty.Create(nameof(Title1), typeof(string), typeof(CodePage), null, propertyChanged: OnPropertyChanged);
-    public static readonly BindableProperty Title2Property = BindableProperty.Create(nameof(Title2), typeof(string), typeof(CodePage), null, propertyChanged: OnPropertyChanged);
-    public static readonly BindableProperty CodeViewerProperty = BindableProperty.Create(nameof(CodeViewer), typeof(CodeViewer), typeof(CodePage), new CircleHidingCode(), propertyChanged: OnPropertyChanged);
-    public static readonly BindableProperty KeyboardViewerProperty = BindableProperty.Create(nameof(KeyboardViewer), typeof(KeyboardViewer), typeof(CodePage), new KeyboardCircle(), propertyChanged: OnPropertyChanged);
+    public static readonly BindableProperty HeadlineProperty = BindableProperty.Create(nameof(Headline), typeof(string), typeof(CodePage), null, propertyChanged: OnPropertyChanged);
+    public static readonly BindableProperty SubHeadlineProperty = BindableProperty.Create(nameof(SubHeadline), typeof(string), typeof(CodePage), null, propertyChanged: OnPropertyChanged);
+    public static readonly BindableProperty CodeViewerProperty = BindableProperty.Create(nameof(CodeViewer), typeof(BaseCodeViewer), typeof(CodePage), new CircleHidingCodeViewer(), propertyChanged: OnPropertyChanged);
+    public static readonly BindableProperty KeyboardViewerProperty = BindableProperty.Create(nameof(KeyboardViewer), typeof(BaseKeyboardViewer), typeof(CodePage), new KeyboardCircle(), propertyChanged: OnPropertyChanged);
     
     protected static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).CreateContent();
 
@@ -52,7 +52,7 @@ public class CodePage : ContentPage
         if (Illustration is not null)
             verticalLayout.Children.Add(Illustration);
 
-        if (!string.IsNullOrEmpty(Title1) || !string.IsNullOrEmpty(Title2))
+        if (!string.IsNullOrEmpty(Headline) || !string.IsNullOrEmpty(SubHeadline))
             verticalLayout.Children.Add(CreateTitlePhrase());
 
         verticalLayout.Children.Add(CodeViewer);
@@ -82,8 +82,8 @@ public class CodePage : ContentPage
             Spacing = 10,
             Children =
             {
-                new Label { Text = Title1, FontAttributes = FontAttributes.Bold },
-                new Label { Text = Title2 }
+                new Label { Text = Headline, FontAttributes = FontAttributes.Bold, HorizontalOptions = LayoutOptions.Center },
+                new Label { Text = SubHeadline, HorizontalOptions = LayoutOptions.Center }
             }
         };
     }

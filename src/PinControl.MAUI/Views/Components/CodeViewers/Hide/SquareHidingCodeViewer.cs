@@ -1,7 +1,14 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
 
-namespace PinControl.MAUI.Views.Components.CodeViewer.Square;
-public class SquareHidingCode : Base.CodeViewer
+namespace PinControl.MAUI.Views.Components.CodeViewers.Hide;
+
+/* Unmerged change from project 'PinControl.MAUI (net7.0)'
+Before:
+public class SquareHidingCodeViewer : Base.BaseCodeViewer
+After:
+public class SquareHidingCodeViewer : BaseCodeViewer
+*/
+public class SquareHidingCodeViewer : Base.BaseCodeViewer
 {
     public override IView CreateCodeView(char? codeChar)
     {

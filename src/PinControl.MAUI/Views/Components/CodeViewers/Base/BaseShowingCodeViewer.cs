@@ -1,7 +1,7 @@
 ﻿using PinControl.MAUI.Helpers.Extensions;
 
-namespace PinControl.MAUI.Views.Components.CodeViewer.Base;
-public abstract class ShowCodeViewer : CodeViewer
+namespace PinControl.MAUI.Views.Components.CodeViewers.Base;
+public abstract class BaseShowingCodeViewer : BaseCodeViewer
 {
     protected const double FONT_SIZE = 32;
     protected const string FONT_FAMILY = "OpenSansRegular";
@@ -24,9 +24,9 @@ public abstract class ShowCodeViewer : CodeViewer
         set { SetValue(FontFamilyProperty, value); }
     }
 
-    public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(double), typeof(ShowCodeViewer), FONT_SIZE, propertyChanged: OnPropertyChanged);
-    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(ShowCodeViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#FFFFFF" : "#000000"), propertyChanged: OnPropertyChanged);
-    public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(ShowCodeViewer), FONT_FAMILY, propertyChanged: OnPropertyChanged);
+    public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(double), typeof(BaseShowingCodeViewer), FONT_SIZE, propertyChanged: OnPropertyChanged);
+    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(BaseShowingCodeViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#FFFFFF" : "#000000"), propertyChanged: OnPropertyChanged);
+    public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(BaseShowingCodeViewer), FONT_FAMILY, propertyChanged: OnPropertyChanged);
 
     protected Label CreateLabel(char? codeChar = null)
     {

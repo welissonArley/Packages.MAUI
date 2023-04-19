@@ -1,8 +1,8 @@
 using Microsoft.Maui.Controls.Shapes;
 
-namespace PinControl.MAUI.Views.Components.CodeViewer.Circle;
+namespace PinControl.MAUI.Views.Components.CodeViewers.Hide;
 
-public class CircleHidingCode : Base.CodeViewer
+public class CircleHidingCodeViewer : Base.BaseCodeViewer
 {
     public override IView CreateCodeView(char? codeChar)
     {

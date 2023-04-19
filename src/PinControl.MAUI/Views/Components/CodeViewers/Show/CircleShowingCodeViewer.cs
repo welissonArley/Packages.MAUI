@@ -1,9 +1,9 @@
 using Microsoft.Maui.Controls.Shapes;
-using PinControl.MAUI.Views.Components.CodeViewer.Base;
+using PinControl.MAUI.Views.Components.CodeViewers.Base;
 
-namespace PinControl.MAUI.Views.Components.CodeViewer.Circle;
+namespace PinControl.MAUI.Views.Components.CodeViewers.Show;
 
-public class CircleShowingCode : ShowCodeViewer
+public class CircleShowingCodeViewer : BaseShowingCodeViewer
 {
     public override IView CreateCodeView(char? codeChar)
     {

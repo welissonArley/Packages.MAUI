@@ -1,7 +1,7 @@
 ﻿using PinControl.MAUI.Views.Components.Keyboards.Base;
 
-namespace PinControl.MAUI.Views.Components.Keyboards.NoShape;
-public class KeyboardWithoutShape : KeyboardViewer
+namespace PinControl.MAUI.Views.Components.Keyboards;
+public class KeyboardCircle : BaseKeyboardShapeViewer
 {
     public override Button CreateButton(string value)
     {
@@ -9,7 +9,10 @@ public class KeyboardWithoutShape : KeyboardViewer
         {
             WidthRequest = Size,
             HeightRequest = Size,
-            BackgroundColor = TextColor.WithAlpha(0),
+            BorderWidth = Size * 0.03,
+            BorderColor = ShapeColor,
+            BackgroundColor = ShapeColor.WithAlpha(0),
+            CornerRadius = Convert.ToInt32(Size / 2.0),
             Text = value,
             FontSize = FontSize,
             TextColor = TextColor
