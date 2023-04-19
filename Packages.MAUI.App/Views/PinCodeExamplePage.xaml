@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<codeView:CodePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Packages.MAUI.App.Views.PinCodeExamplePage"
+    xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels"
+    xmlns:codeView="clr-namespace:PinControl.MAUI.Views.Pages;assembly=PinControl.MAUI"
+    xmlns:code="clr-namespace:PinControl.MAUI.Views.Components.CodeViewers.Show;assembly=PinControl.MAUI"
+    xmlns:keyboard="clr-namespace:PinControl.MAUI.Views.Components.Keyboards;assembly=PinControl.MAUI"
+    x:DataType="viewModel:PinCodeViewModel" CallbackCodeFinished="{Binding CodeEndedCommand}">
+
+    <codeView:CodePage.Illustration>
+        <Image Source="dotnet_bot.png" HeightRequest="80"/>
+    </codeView:CodePage.Illustration>
+
+    <codeView:CodePage.Headline>
+        Teste
+    </codeView:CodePage.Headline>
+
+    <codeView:CodePage.CodeViewer>
+        <code:CircleShowingCodeViewer Size="45"/>
+    </codeView:CodePage.CodeViewer>
+
+    <codeView:CodePage.KeyboardViewer>
+        <keyboard:KeyboardSquare ShapeColor="Black" TextColor="White" CancelText="Annuler" CancelTextColor="Red" CancelTextFontSize="20"/>
+    </codeView:CodePage.KeyboardViewer>
+
+</codeView:CodePage>

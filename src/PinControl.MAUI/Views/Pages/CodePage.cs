@@ -2,11 +2,15 @@ using PinControl.MAUI.Views.Components.CodeViewers.Base;
 using PinControl.MAUI.Views.Components.CodeViewers.Hide;
 using PinControl.MAUI.Views.Components.Keyboards;
 using PinControl.MAUI.Views.Components.Keyboards.Base;
+using System.Text;
+using System.Windows.Input;
 
 namespace PinControl.MAUI.Views.Pages;
 
 public class CodePage : ContentPage
 {
+    private string _code = string.Empty;
+
     public Image Illustration
     {
         get { return (Image)GetValue(IllustrationProperty); }
@@ -37,11 +41,18 @@ public class CodePage : ContentPage
         set { SetValue(KeyboardViewerProperty, value); }
     }
 
+    public ICommand CallbackCodeFinished
+    {
+        get { return (ICommand)GetValue(CallbackCodeFinishedProperty); }
+        set { SetValue(CallbackCodeFinishedProperty, value); }
+    }
+
     public static readonly BindableProperty IllustrationProperty = BindableProperty.Create(nameof(Illustration), typeof(Image), typeof(CodePage), null, propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty HeadlineProperty = BindableProperty.Create(nameof(Headline), typeof(string), typeof(CodePage), null, propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty SubHeadlineProperty = BindableProperty.Create(nameof(SubHeadline), typeof(string), typeof(CodePage), null, propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty CodeViewerProperty = BindableProperty.Create(nameof(CodeViewer), typeof(BaseCodeViewer), typeof(CodePage), new CircleHidingCodeViewer(), propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty KeyboardViewerProperty = BindableProperty.Create(nameof(KeyboardViewer), typeof(BaseKeyboardViewer), typeof(CodePage), new KeyboardCircle(), propertyChanged: OnPropertyChanged);
+    public static readonly BindableProperty CallbackCodeFinishedProperty = BindableProperty.Create(nameof(CallbackCodeFinishedProperty), typeof(ICommand), typeof(CodePage), null, propertyChanged: null);
     
     protected static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).CreateContent();
 
@@ -57,6 +68,30 @@ public class CodePage : ContentPage
 
         verticalLayout.Children.Add(CodeViewer);
 
+        KeyboardViewer.SetCommand(new Command(async (value) =>
+        {
+            if ((int)value == -1 && !string.IsNullOrWhiteSpace(_code))
+            {
+                _code = _code.Remove(_code.Length - 1);
+
+                CodeViewer.SetCode(_code);
+            }
+            else if ((int)value != -1 && _code.Length + 1 <= CodeViewer.CodeLength)
+            {
+                var sb = new StringBuilder(_code, CodeViewer.CodeLength);
+                sb.Append(value);
+
+                _code = sb.ToString();
+
+                CodeViewer.SetCode(_code);
+            }
+
+            if (_code.Length == CodeViewer.CodeLength)
+            {
+                CallbackCodeFinished?.Execute(_code);
+                await Shell.Current.GoToAsync("..");
+            }
+        }));
         verticalLayout.Children.Add(KeyboardViewer);
 
         Content = verticalLayout;

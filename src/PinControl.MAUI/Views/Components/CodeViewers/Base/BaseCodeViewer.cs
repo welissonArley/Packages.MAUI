@@ -7,11 +7,7 @@ public abstract class BaseCodeViewer : ContentView
     protected const ushort CODE_LENGTH = 4;
     protected const uint CIRCLE_SIZE = 20;
 
-    public string Code
-    {
-        get { return (string)GetValue(CodeProperty); }
-        set { SetValue(CodeProperty, value); }
-    }
+    public string Code { get; private set; } = string.Empty;
 
     public ushort CodeLength
     {
@@ -33,7 +29,6 @@ public abstract class BaseCodeViewer : ContentView
 
     public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(BaseCodeViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#000000" : "#FFFFFF"), propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty SizeProperty = BindableProperty.Create(nameof(Size), typeof(uint), typeof(BaseCodeViewer), CIRCLE_SIZE, propertyChanged: OnPropertyChanged);
-    public static readonly BindableProperty CodeProperty = BindableProperty.Create(nameof(Code), typeof(string), typeof(BaseCodeViewer), string.Empty, propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty CodeLengthProperty = BindableProperty.Create(nameof(CodeLength), typeof(ushort), typeof(BaseCodeViewer), CODE_LENGTH, propertyChanged: OnPropertyChanged);
 
     protected static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseCodeViewer)bindable).CreateContent();
@@ -60,4 +55,10 @@ public abstract class BaseCodeViewer : ContentView
     public abstract IView CreateCodeView(char? codeChar);
 
     public BaseCodeViewer() => CreateContent();
+
+    public void SetCode(string code)
+    {
+        Code = code;
+        CreateContent();
+    }
 }

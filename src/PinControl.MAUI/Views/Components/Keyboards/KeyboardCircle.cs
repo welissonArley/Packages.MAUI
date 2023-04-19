@@ -3,7 +3,7 @@
 namespace PinControl.MAUI.Views.Components.Keyboards;
 public class KeyboardCircle : BaseKeyboardShapeViewer
 {
-    public override Button CreateButton(string value)
+    public override Button CreateButton(int value)
     {
         return new Button
         {
@@ -13,7 +13,7 @@ public class KeyboardCircle : BaseKeyboardShapeViewer
             BorderColor = ShapeColor,
             BackgroundColor = ShapeColor.WithAlpha(0),
             CornerRadius = Convert.ToInt32(Size / 2.0),
-            Text = value,
+            Text = $"{value}",
             FontSize = FontSize,
             TextColor = TextColor
         };

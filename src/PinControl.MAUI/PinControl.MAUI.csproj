@@ -20,15 +20,10 @@
 
 	<ItemGroup>
 	  <Compile Remove="Platforms\**" />
-	  <Compile Remove="ViewModels\**" />
 	  <EmbeddedResource Remove="Platforms\**" />
-	  <EmbeddedResource Remove="ViewModels\**" />
 	  <MauiCss Remove="Platforms\**" />
-	  <MauiCss Remove="ViewModels\**" />
 	  <MauiXaml Remove="Platforms\**" />
-	  <MauiXaml Remove="ViewModels\**" />
 	  <None Remove="Platforms\**" />
-	  <None Remove="ViewModels\**" />
 	</ItemGroup>
 
 	<ItemGroup>

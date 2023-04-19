@@ -1,4 +1,7 @@
-﻿namespace Packages.MAUI.App;
+﻿using CommunityToolkit.Maui;
+using Packages.MAUI.App.Helpers;
+
+namespace Packages.MAUI.App;
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
@@ -6,6 +9,8 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
+            .RegisterPagesAndViewModels()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -13,5 +18,12 @@ public static class MauiProgram
             });
 
         return builder.Build();
+    }
+
+    private static MauiAppBuilder RegisterPagesAndViewModels(this MauiAppBuilder mauiAppBuilder)
+    {
+        mauiAppBuilder.Services.AddTransientWithShellRoute<Views.PinCodeExamplePage, ViewModels.PinCodeViewModel>(RoutePages.PINCODE_PAGE);
+
+        return mauiAppBuilder;
     }
 }

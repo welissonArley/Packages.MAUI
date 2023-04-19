@@ -1,4 +1,5 @@
 using PinControl.MAUI.Helpers.Extensions;
+using System.Windows.Input;
 
 namespace PinControl.MAUI.Views.Components.Keyboards.Base;
 
@@ -8,6 +9,8 @@ public abstract class BaseKeyboardViewer : ContentView
     protected const uint FONT_SIZE = 32;
     protected const uint CANCEL_TEXT_FONT_SIZE = 18;
     protected const string CANCEL_TEXT = "Cancel";
+
+    private ICommand _callbackKeyboardCommand;
 
     public uint Size
     {
@@ -62,27 +65,33 @@ public abstract class BaseKeyboardViewer : ContentView
             RowDefinitions = new RowDefinitionCollection(Enumerable.Repeat(new RowDefinition { Height = new GridLength(Size, GridUnitType.Star) }, 4).ToArray())
         };
 
-        grid.Add(view: CreateButton("1"), column: 0, row: 0);
-        grid.Add(view: CreateButton("2"), column: 1, row: 0);
-        grid.Add(view: CreateButton("3"), column: 2, row: 0);
-        grid.Add(view: CreateButton("4"), column: 0, row: 1);
-        grid.Add(view: CreateButton("5"), column: 1, row: 1);
-        grid.Add(view: CreateButton("6"), column: 2, row: 1);
-        grid.Add(view: CreateButton("7"), column: 0, row: 2);
-        grid.Add(view: CreateButton("8"), column: 1, row: 2);
-        grid.Add(view: CreateButton("9"), column: 2, row: 2);
+        grid.Add(view: AddButtonWithCommand(1), column: 0, row: 0);
+        grid.Add(view: AddButtonWithCommand(2), column: 1, row: 0);
+        grid.Add(view: AddButtonWithCommand(3), column: 2, row: 0);
+        grid.Add(view: AddButtonWithCommand(4), column: 0, row: 1);
+        grid.Add(view: AddButtonWithCommand(5), column: 1, row: 1);
+        grid.Add(view: AddButtonWithCommand(6), column: 2, row: 1);
+        grid.Add(view: AddButtonWithCommand(7), column: 0, row: 2);
+        grid.Add(view: AddButtonWithCommand(8), column: 1, row: 2);
+        grid.Add(view: AddButtonWithCommand(9), column: 2, row: 2);
         grid.Add(view: CreateCancelOption(), column: 0, row: 3);
-        grid.Add(view: CreateButton("0"), column: 1, row: 3);
-        grid.Add(view: CreateImageOption(), column: 2, row: 3);
+        grid.Add(view: AddButtonWithCommand(0), column: 1, row: 3);
+        grid.Add(view: CreateDeleteOption(), column: 2, row: 3);
 
         Content = grid;
     }
 
-    public abstract IView CreateButton(string option);
+    private IView AddButtonWithCommand(int value)
+    {
+        var button = CreateButton(value);
+        button.Command = new Command(() => { _callbackKeyboardCommand?.Execute(value); });
+
+        return button;
+    }
 
     private Label CreateCancelOption()
     {
-        return new Label
+        var label = new Label
         {
             Text = CancelText,
             VerticalOptions = LayoutOptions.Center,
@@ -90,10 +99,14 @@ public abstract class BaseKeyboardViewer : ContentView
             FontSize = CancelTextFontSize,
             TextColor = CancelTextColor
         };
+
+        label.GestureRecognizers.Add(new TapGestureRecognizer { Command = new Command(async() => { await Shell.Current.GoToAsync(".."); }) });
+
+        return label;
     }
-    private VerticalStackLayout CreateImageOption()
+    private VerticalStackLayout CreateDeleteOption()
     {
-        return new VerticalStackLayout
+        var verticalLayout = new VerticalStackLayout
         {
             HeightRequest = Size,
             WidthRequest = Size,
@@ -108,5 +121,12 @@ public abstract class BaseKeyboardViewer : ContentView
                 }
             }
         };
+
+        verticalLayout.GestureRecognizers.Add(new TapGestureRecognizer { Command = new Command(() => { _callbackKeyboardCommand?.Execute(-1); }) });
+
+        return verticalLayout;
     }
+
+    public abstract Button CreateButton(int option);
+    public void SetCommand(ICommand callbackCommand) => _callbackKeyboardCommand = callbackCommand;
 }
