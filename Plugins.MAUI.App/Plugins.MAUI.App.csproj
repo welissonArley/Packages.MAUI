@@ -61,7 +61,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\PinControl.MAUI\PinControl.MAUI.csproj" />
+	  <ProjectReference Include="..\src\PinControl.MAUI\PinControl.MAUI.csproj" />
 	</ItemGroup>
 
 </Project>

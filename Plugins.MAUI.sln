@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1D500DEE-A72
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5CA04243-9BD1-48B1-9733-AEA8E83ECD5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.MAUI.App", "src\Plugins.MAUI.App\Plugins.MAUI.App.csproj", "{B3CE3E68-2893-4D5B-8DAD-6C1E40136799}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugins.MAUI.App", "Plugins.MAUI.App\Plugins.MAUI.App.csproj", "{B3CE3E68-2893-4D5B-8DAD-6C1E40136799}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinControl.MAUI", "src\PinControl.MAUI\PinControl.MAUI.csproj", "{5E9AECA2-5553-4C18-816D-A163E9A68845}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PinControl.MAUI", "src\PinControl.MAUI\PinControl.MAUI.csproj", "{5E9AECA2-5553-4C18-816D-A163E9A68845}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,7 +32,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B3CE3E68-2893-4D5B-8DAD-6C1E40136799} = {1D500DEE-A72B-4218-8E89-6C1A8F3A1FFD}
 		{5E9AECA2-5553-4C18-816D-A163E9A68845} = {1D500DEE-A72B-4218-8E89-6C1A8F3A1FFD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
