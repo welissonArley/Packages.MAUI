@@ -1,4 +1,4 @@
-﻿namespace Plugins.MAUI.App;
+﻿namespace Packages.MAUI.App;
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()

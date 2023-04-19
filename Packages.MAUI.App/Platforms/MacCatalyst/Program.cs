@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Plugins.MAUI.App;
+namespace Packages.MAUI.App;
 public class Program
 {
     // This is the main entry point of the application.

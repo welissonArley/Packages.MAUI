@@ -4,7 +4,7 @@
              xmlns:codeView="clr-namespace:PinControl.MAUI.Views.Pages;assembly=PinControl.MAUI"
                    xmlns:code="clr-namespace:PinControl.MAUI.Views.Components.CodeViewers.Show;assembly=PinControl.MAUI"
                    xmlns:keyboard="clr-namespace:PinControl.MAUI.Views.Components.Keyboards;assembly=PinControl.MAUI"
-             x:Class="Plugins.MAUI.App.MainPage">
+             x:Class="Packages.MAUI.App.MainPage">
 
     <codeView:CodePage.Illustration>
         <Image Source="dotnet_bot.png" HeightRequest="80"/>

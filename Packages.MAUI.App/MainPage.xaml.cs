@@ -1,4 +1,4 @@
-﻿namespace Plugins.MAUI.App;
+﻿namespace Packages.MAUI.App;
 
 public partial class MainPage : PinControl.MAUI.Views.Pages.CodePage
 {
