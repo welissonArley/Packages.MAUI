@@ -6,7 +6,7 @@ public abstract class KeyboardViewer : ContentView
 {
     protected const uint SHAPE_SIZE = 80;
     protected const uint FONT_SIZE = 32;
-    protected const uint CANCEL_TEXT_FONT_SIZE = 20;
+    protected const uint CANCEL_TEXT_FONT_SIZE = 18;
     protected const string CANCEL_TEXT = "Cancel";
 
     public uint Size
@@ -91,14 +91,22 @@ public abstract class KeyboardViewer : ContentView
             TextColor = CancelTextColor
         };
     }
-    private ImageButton CreateImageOption()
+    private VerticalStackLayout CreateImageOption()
     {
-        return new ImageButton
+        return new VerticalStackLayout
         {
-            WidthRequest = Size,
             HeightRequest = Size,
-            Padding = Size * 0.125,
-            Source = ImageSource.FromFile("Resources/Images/icon_delete.png")
+            WidthRequest = Size,
+            Padding = Size * 0.32,
+            Children =
+            {
+                new Image
+                {
+                    VerticalOptions = LayoutOptions.Center,
+                    HorizontalOptions = LayoutOptions.Center,
+                    Source = ImageSource.FromFile("Resources/Images/icon_delete.png")
+                }
+            }
         };
     }
 }
