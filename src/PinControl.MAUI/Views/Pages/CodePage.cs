@@ -64,7 +64,7 @@ public class CodePage : ContentPage
             verticalLayout.Children.Add(Illustration);
 
         if (!string.IsNullOrEmpty(Headline) || !string.IsNullOrEmpty(SubHeadline))
-            verticalLayout.Children.Add(CreateTitlePhrase());
+            verticalLayout.Children.Add(CreateHeadlines());
 
         verticalLayout.Children.Add(CodeViewer);
 
@@ -109,7 +109,7 @@ public class CodePage : ContentPage
         };
     }
 
-    private IView CreateTitlePhrase()
+    private IView CreateHeadlines()
     {
        return new VerticalStackLayout
         {
@@ -117,8 +117,8 @@ public class CodePage : ContentPage
             Spacing = 10,
             Children =
             {
-                new Label { Text = Headline, FontAttributes = FontAttributes.Bold, HorizontalOptions = LayoutOptions.Center },
-                new Label { Text = SubHeadline, HorizontalOptions = LayoutOptions.Center }
+                new Label { Text = Headline, FontAttributes = FontAttributes.Bold, HorizontalOptions = LayoutOptions.Center, IsVisible = !string.IsNullOrWhiteSpace(Headline) },
+                new Label { Text = SubHeadline, HorizontalOptions = LayoutOptions.Center, IsVisible = !string.IsNullOrWhiteSpace(SubHeadline) }
             }
         };
     }

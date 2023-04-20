@@ -89,20 +89,28 @@ public abstract class BaseKeyboardViewer : ContentView
         return button;
     }
 
-    private Label CreateCancelOption()
+    private VerticalStackLayout CreateCancelOption()
     {
-        var label = new Label
+        var verticalLayout = new VerticalStackLayout
         {
-            Text = CancelText,
-            VerticalOptions = LayoutOptions.Center,
-            HorizontalOptions = LayoutOptions.Center,
-            FontSize = CancelTextFontSize,
-            TextColor = CancelTextColor
+            HeightRequest = Size,
+            WidthRequest = Size,
+            Padding = new Thickness(0, Size * 0.32, 0, Size * 0.32),
+            Children =
+            {
+                new Label
+                {
+                    Text = CancelText,
+                    HorizontalOptions = LayoutOptions.Center,
+                    FontSize = CancelTextFontSize,
+                    TextColor = CancelTextColor
+                }
+            }
         };
 
-        label.GestureRecognizers.Add(new TapGestureRecognizer { Command = new Command(async() => { await Shell.Current.GoToAsync(".."); }) });
+        verticalLayout.GestureRecognizers.Add(new TapGestureRecognizer { Command = new Command(async () => { await Shell.Current.GoToAsync(".."); }) });
 
-        return label;
+        return verticalLayout;
     }
     private VerticalStackLayout CreateDeleteOption()
     {
@@ -117,7 +125,7 @@ public abstract class BaseKeyboardViewer : ContentView
                 {
                     VerticalOptions = LayoutOptions.Center,
                     HorizontalOptions = LayoutOptions.Center,
-                    Source = ImageSource.FromFile("Resources/Images/icon_delete.png")
+                    Source = ImageSource.FromFile(Application.Current.IsLightMode() ? "Resources/Images/icon_delete_dark.png" : "Resources/Images/icon_delete_light.png") 
                 }
             }
         };
