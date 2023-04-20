@@ -26,16 +26,4 @@
 	  <None Remove="Platforms\**" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <None Remove="Resources\Images\icon_delete_dark.svg" />
-	  <None Remove="Resources\Images\icon_delete_light.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Resources\Images\icon_delete_dark.svg">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Include="Resources\Images\icon_delete_light.svg" />
-	</ItemGroup>
-
 </Project>

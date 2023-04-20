@@ -1,4 +1,4 @@
-using PinControl.MAUI.Helpers.Extensions;
+﻿using PinControl.MAUI.Helpers.Extensions;
 using System.Windows.Input;
 
 namespace PinControl.MAUI.Views.Components.Keyboards.Base;
@@ -42,6 +42,11 @@ public abstract class BaseKeyboardViewer : ContentView
         get { return (string)GetValue(CancelTextProperty); }
         set { SetValue(CancelTextProperty, value); }
     }
+    public Color BackspaceColor
+    {
+        get { return (Color)GetValue(BackspaceColorProperty); }
+        set { SetValue(BackspaceColorProperty, value); }
+    }
 
     public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(BaseKeyboardViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#000000" : "#FFFFFF"), propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty CancelTextColorProperty = BindableProperty.Create(nameof(CancelTextColor), typeof(Color), typeof(BaseKeyboardViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#000000" : "#FFFFFF"), propertyChanged: OnPropertyChanged);
@@ -49,6 +54,7 @@ public abstract class BaseKeyboardViewer : ContentView
     public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(uint), typeof(BaseKeyboardViewer), FONT_SIZE, propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty CancelTextFontSizeProperty = BindableProperty.Create(nameof(CancelTextFontSize), typeof(uint), typeof(BaseKeyboardViewer), FONT_SIZE, propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty CancelTextProperty = BindableProperty.Create(nameof(CancelText), typeof(string), typeof(BaseKeyboardViewer), CANCEL_TEXT, propertyChanged: OnPropertyChanged);
+    public static readonly BindableProperty BackspaceColorProperty = BindableProperty.Create(nameof(BackspaceColor), typeof(Color), typeof(BaseKeyboardViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#000000" : "#FFFFFF"), propertyChanged: OnPropertyChanged);
 
     protected static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseKeyboardViewer)bindable).CreateContent();
 
@@ -112,7 +118,7 @@ public abstract class BaseKeyboardViewer : ContentView
 
         return verticalLayout;
     }
-    private VerticalStackLayout CreateDeleteOption()
+    private IView CreateDeleteOption()
     {
         var verticalLayout = new VerticalStackLayout
         {
@@ -121,11 +127,13 @@ public abstract class BaseKeyboardViewer : ContentView
             Padding = Size * 0.32,
             Children =
             {
-                new Image
+                new Label
                 {
                     VerticalOptions = LayoutOptions.Center,
                     HorizontalOptions = LayoutOptions.Center,
-                    Source = ImageSource.FromFile(Application.Current.IsLightMode() ? "Resources/Images/icon_delete_dark.png" : "Resources/Images/icon_delete_light.png") 
+                    Text = "⌫",
+                    TextColor = BackspaceColor,
+                    FontSize = Size * 0.35
                 }
             }
         };

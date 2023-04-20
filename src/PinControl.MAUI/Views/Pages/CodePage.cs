@@ -52,7 +52,7 @@ public class CodePage : ContentPage
     public static readonly BindableProperty SubHeadlineProperty = BindableProperty.Create(nameof(SubHeadline), typeof(string), typeof(CodePage), null, propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty CodeViewerProperty = BindableProperty.Create(nameof(CodeViewer), typeof(BaseCodeViewer), typeof(CodePage), new CircleHidingCodeViewer(), propertyChanged: OnPropertyChanged);
     public static readonly BindableProperty KeyboardViewerProperty = BindableProperty.Create(nameof(KeyboardViewer), typeof(BaseKeyboardViewer), typeof(CodePage), new KeyboardCircle(), propertyChanged: OnPropertyChanged);
-    public static readonly BindableProperty CallbackCodeFinishedProperty = BindableProperty.Create(nameof(CallbackCodeFinishedProperty), typeof(ICommand), typeof(CodePage), null, propertyChanged: null);
+    public static readonly BindableProperty CallbackCodeFinishedProperty = BindableProperty.Create(nameof(CallbackCodeFinishedProperty), typeof(ICommand), typeof(CodePage), new Command(async () => await Shell.Current.GoToAsync("..")), propertyChanged: null);
     
     protected static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).CreateContent();
 
@@ -68,7 +68,7 @@ public class CodePage : ContentPage
 
         verticalLayout.Children.Add(CodeViewer);
 
-        KeyboardViewer.SetCommand(new Command(async (value) =>
+        KeyboardViewer.SetCommand(new Command((value) =>
         {
             if ((int)value == -1 && !string.IsNullOrWhiteSpace(_code))
             {
@@ -87,10 +87,7 @@ public class CodePage : ContentPage
             }
 
             if (_code.Length == CodeViewer.CodeLength)
-            {
                 CallbackCodeFinished?.Execute(_code);
-                await Shell.Current.GoToAsync("..");
-            }
         }));
         verticalLayout.Children.Add(KeyboardViewer);
 
@@ -103,8 +100,8 @@ public class CodePage : ContentPage
     {
         return new VerticalStackLayout
         {
-            Margin = new Thickness(20, 30, 20, 30),
-            Spacing = 30,
+            Margin = new Thickness(20, 0, 20, 30),
+            Spacing = 0,
             Children = { }
         };
     }
@@ -115,10 +112,11 @@ public class CodePage : ContentPage
         {
             HorizontalOptions = LayoutOptions.Center,
             Spacing = 10,
+            Margin = new Thickness(0,10, 0, 40),
             Children =
             {
-                new Label { Text = Headline, FontAttributes = FontAttributes.Bold, HorizontalOptions = LayoutOptions.Center, IsVisible = !string.IsNullOrWhiteSpace(Headline) },
-                new Label { Text = SubHeadline, HorizontalOptions = LayoutOptions.Center, IsVisible = !string.IsNullOrWhiteSpace(SubHeadline) }
+                new Label { Text = Headline, FontAttributes = FontAttributes.Bold, HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.Center, IsVisible = !string.IsNullOrWhiteSpace(Headline) },
+                new Label { Text = SubHeadline, HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.Center, IsVisible = !string.IsNullOrWhiteSpace(SubHeadline) }
             }
         };
     }

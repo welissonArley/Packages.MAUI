@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<codeView:CodePage
+<codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Packages.MAUI.App.Views.PinCodeExamplePage"
     xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels"
-    xmlns:codeView="clr-namespace:PinControl.MAUI.Views.Pages;assembly=PinControl.MAUI"
-    xmlns:code="clr-namespace:PinControl.MAUI.Views.Components.CodeViewers.Show;assembly=PinControl.MAUI"
+    xmlns:codePage="clr-namespace:PinControl.MAUI.Views.Pages;assembly=PinControl.MAUI"
+    xmlns:codeViewer="clr-namespace:PinControl.MAUI.Views.Components.CodeViewers.Show;assembly=PinControl.MAUI"
     xmlns:keyboard="clr-namespace:PinControl.MAUI.Views.Components.Keyboards;assembly=PinControl.MAUI"
-    x:DataType="viewModel:PinCodeViewModel" CallbackCodeFinished="{Binding CodeEndedCommand}">
+    x:DataType="viewModel:PinCodeViewModel"
+    CallbackCodeFinished="{Binding CodeEndedCommand}"
+    Headline="Lorem Ipsum is simply dummy text of the printing and typesetting industry.">
 
-    <codeView:CodePage.Illustration>
-        <Image Source="dotnet_bot.png" HeightRequest="80"/>
-    </codeView:CodePage.Illustration>
+    <codePage:CodePage.Illustration>
+        <Image Source="dotnet_bot.png" HeightRequest="100"/>
+    </codePage:CodePage.Illustration>
 
-    <codeView:CodePage.Headline>
-        Teste
-    </codeView:CodePage.Headline>
+    <codePage:CodePage.CodeViewer>
+        <codeViewer:CircleShowingCodeViewer
+            Size="50"
+            TextColor="{AppThemeBinding Light=White, Dark=Black}"
+            Color="{AppThemeBinding Light=Black,Dark=White}"
+            FontSize="32"
+            FontFamily="RalewayBlack"
+            Margin="0,0,0,40"/>
+    </codePage:CodePage.CodeViewer>
 
-    <codeView:CodePage.CodeViewer>
-        <code:CircleShowingCodeViewer Size="45"/>
-    </codeView:CodePage.CodeViewer>
+    <codePage:CodePage.KeyboardViewer>
+        <keyboard:KeyboardCircle
+            ShapeColor="{AppThemeBinding Light=Black, Dark=White}"
+            CancelTextColor="{AppThemeBinding Light=Black, Dark=White}"
+            FontSize="32"
+            CancelTextFontSize="20"
+            TextColor="{AppThemeBinding Light=Black, Dark=White}"
+            BackspaceColor="Red"/>
+    </codePage:CodePage.KeyboardViewer>
 
-    <codeView:CodePage.KeyboardViewer>
-        <keyboard:KeyboardSquare ShapeColor="Black" TextColor="White" CancelText="Annuler" CancelTextColor="Red" CancelTextFontSize="20"/>
-    </codeView:CodePage.KeyboardViewer>
-
-</codeView:CodePage>
+</codePage:CodePage>
