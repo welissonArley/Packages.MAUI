@@ -1,6 +1,6 @@
-using PinControl.MAUI.Helpers.Extensions;
+using MauiCode.Helpers.Extensions;
 
-namespace PinControl.MAUI.Views.Components.CodeViewers.Base;
+namespace MauiCode.Views.Components.CodeViewers.Base;
 
 public abstract class BaseCodeViewer : ContentView
 {

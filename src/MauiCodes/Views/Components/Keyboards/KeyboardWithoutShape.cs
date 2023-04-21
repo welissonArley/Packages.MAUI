@@ -1,7 +1,7 @@
-﻿using PinControl.MAUI.Views.Components.Keyboards.Base;
+﻿using MauiCode.Views.Components.Keyboards.Base;
 
-namespace PinControl.MAUI.Views.Components.Keyboards;
-public class KeyboardSquare : BaseKeyboardShapeViewer
+namespace MauiCode.Views.Components.Keyboards;
+public class KeyboardWithoutShape : BaseKeyboardViewer
 {
     public override Button CreateButton(int value)
     {
@@ -9,8 +9,7 @@ public class KeyboardSquare : BaseKeyboardShapeViewer
         {
             WidthRequest = Size,
             HeightRequest = Size,
-            BackgroundColor = ShapeColor,
-            CornerRadius = Convert.ToInt32(Size * 0.2),
+            BackgroundColor = TextColor.WithAlpha(0),
             Text = $"{value}",
             FontSize = FontSize,
             TextColor = TextColor

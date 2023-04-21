@@ -1,5 +1,5 @@
+using MauiCode.Views.Pages;
 using Packages.MAUI.App.ViewModels;
-using PinControl.MAUI.Views.Pages;
 
 namespace Packages.MAUI.App.Views;
 

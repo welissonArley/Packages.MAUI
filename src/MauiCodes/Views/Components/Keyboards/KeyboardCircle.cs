@@ -1,6 +1,6 @@
-﻿using PinControl.MAUI.Views.Components.Keyboards.Base;
+﻿using MauiCode.Views.Components.Keyboards.Base;
 
-namespace PinControl.MAUI.Views.Components.Keyboards;
+namespace MauiCode.Views.Components.Keyboards;
 public class KeyboardCircle : BaseKeyboardShapeViewer
 {
     public override Button CreateButton(int value)
