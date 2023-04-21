@@ -1,7 +1,7 @@
-﻿using PinControl.MAUI.Helpers.Extensions;
+﻿using MauiCode.Helpers.Extensions;
 using System.Windows.Input;
 
-namespace PinControl.MAUI.Views.Components.Keyboards.Base;
+namespace MauiCode.Views.Components.Keyboards.Base;
 
 public abstract class BaseKeyboardViewer : ContentView
 {

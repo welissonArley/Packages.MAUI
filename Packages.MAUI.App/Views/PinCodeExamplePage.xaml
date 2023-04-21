@@ -4,9 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Packages.MAUI.App.Views.PinCodeExamplePage"
     xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels"
-    xmlns:codePage="clr-namespace:PinControl.MAUI.Views.Pages;assembly=PinControl.MAUI"
-    xmlns:codeViewer="clr-namespace:PinControl.MAUI.Views.Components.CodeViewers.Show;assembly=PinControl.MAUI"
-    xmlns:keyboard="clr-namespace:PinControl.MAUI.Views.Components.Keyboards;assembly=PinControl.MAUI"
+    xmlns:codePage="clr-namespace:MauiCode.Views.Pages;assembly=MauiCodes"
+    xmlns:codeViewer="clr-namespace:MauiCode.Views.Components.CodeViewers.Show;assembly=MauiCodes"
+    xmlns:keyboard="clr-namespace:MauiCode.Views.Components.Keyboards;assembly=MauiCodes"
     x:DataType="viewModel:PinCodeViewModel"
     CallbackCodeFinished="{Binding CodeEndedCommand}"
     Headline="Lorem Ipsum is simply dummy text of the printing and typesetting industry.">

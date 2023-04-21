@@ -1,6 +1,6 @@
-﻿using PinControl.MAUI.Helpers.Extensions;
+﻿using MauiCode.Helpers.Extensions;
 
-namespace PinControl.MAUI.Views.Components.CodeViewers.Base;
+namespace MauiCode.Views.Components.CodeViewers.Base;
 public abstract class BaseShowingCodeViewer : BaseCodeViewer
 {
     protected const double FONT_SIZE = 32;

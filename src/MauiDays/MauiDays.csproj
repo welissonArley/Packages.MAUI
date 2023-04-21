@@ -15,15 +15,18 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Platforms\**" />
-	  <EmbeddedResource Remove="Platforms\**" />
-	  <MauiCss Remove="Platforms\**" />
-	  <MauiXaml Remove="Platforms\**" />
-	  <None Remove="Platforms\**" />
+	  <Folder Include="Platforms\Android\" />
+	  <Folder Include="Platforms\iOS\" />
+	  <Folder Include="Platforms\MacCatalyst\" />
+	  <Folder Include="Platforms\Tizen\" />
+	  <Folder Include="Platforms\Windows\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Mopups" Version="1.1.1" />
 	</ItemGroup>
 
 </Project>

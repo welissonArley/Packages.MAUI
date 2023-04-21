@@ -1,11 +1,11 @@
-using PinControl.MAUI.Views.Components.CodeViewers.Base;
-using PinControl.MAUI.Views.Components.CodeViewers.Hide;
-using PinControl.MAUI.Views.Components.Keyboards;
-using PinControl.MAUI.Views.Components.Keyboards.Base;
+using MauiCode.Views.Components.CodeViewers.Base;
+using MauiCode.Views.Components.CodeViewers.Hide;
+using MauiCode.Views.Components.Keyboards;
+using MauiCode.Views.Components.Keyboards.Base;
 using System.Text;
 using System.Windows.Input;
 
-namespace PinControl.MAUI.Views.Pages;
+namespace MauiCode.Views.Pages;
 
 public class CodePage : ContentPage
 {

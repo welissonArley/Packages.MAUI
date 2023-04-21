@@ -1,6 +1,6 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
 
-namespace PinControl.MAUI.Views.Components.CodeViewers.Hide;
+namespace MauiCode.Views.Components.CodeViewers.Hide;
 
 /* Unmerged change from project 'PinControl.MAUI (net7.0)'
 Before:
