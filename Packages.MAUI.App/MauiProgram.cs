@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Maui;
+using MauiDays;
+using Mopups.Hosting;
 using Packages.MAUI.App.Helpers;
 
 namespace Packages.MAUI.App;
@@ -10,6 +12,8 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .ConfigureMopups()
+            .ConfigureMauiDays()
             .RegisterPagesAndViewModels()
             .ConfigureFonts(fonts =>
             {
