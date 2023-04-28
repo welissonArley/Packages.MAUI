@@ -18,11 +18,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Folder Include="Platforms\Android\" />
-	  <Folder Include="Platforms\iOS\" />
-	  <Folder Include="Platforms\MacCatalyst\" />
-	  <Folder Include="Platforms\Tizen\" />
-	  <Folder Include="Platforms\Windows\" />
+	  <Folder Include="Views\Pages\" />
 	</ItemGroup>
 
 	<ItemGroup>
