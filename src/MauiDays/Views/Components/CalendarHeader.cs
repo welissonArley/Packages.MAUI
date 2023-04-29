@@ -90,6 +90,12 @@ public class CalendarHeader
 
         return this;
     }
+    public CalendarHeader IsMonthCalendar()
+    {
+        MonthCalendar = true;
+
+        return this;
+    }
 
     public IView Build()
     {
@@ -102,13 +108,21 @@ public class CalendarHeader
 
         previousDateButton.Clicked += (_, _) =>
         {
-            CurrentDate.AddMonths(-1);
+            if (MonthCalendar)
+                CurrentDate.AddYears(-1);
+            else
+                CurrentDate.AddMonths(-1);
+
             ButtonSelectedBase(labelShowingDate, previousDateButton, nextDateButton);
         };
 
         nextDateButton.Clicked += (_, _) =>
         {
-            CurrentDate.AddMonths(1);
+            if (MonthCalendar)
+                CurrentDate.AddYears(1);
+            else
+                CurrentDate.AddMonths(1);
+
             ButtonSelectedBase(labelShowingDate, previousDateButton, nextDateButton);
         };
 
@@ -168,25 +182,44 @@ public class CalendarHeader
         if (!MinimumDate.HasValue)
             return;
 
-        var minMonth = new DateOnly(MinimumDate.Value.Year, MinimumDate.Value.Month, 1);
+        if (MonthCalendar)
+            SetVisibilityButtonComparingDateMonthsCalendar(MinimumDate.Value, button);
+        else
+        {
+            var minMonth = new DateOnly(MinimumDate.Value.Year, MinimumDate.Value.Month, 1);
 
-        SetVisibilityButtonComparingDate(minMonth, button);
+            SetVisibilityButtonComparingDateDaysCalendar(minMonth, button);
+        }
     }
     private void CheckMaxDate(Button button)
     {
         if (!MaximumDate.HasValue)
             return;
 
-        var maxMonth = new DateOnly(MaximumDate.Value.Year, MaximumDate.Value.Month, 1);
+        if (MonthCalendar)
+            SetVisibilityButtonComparingDateMonthsCalendar(MaximumDate.Value, button);
+        else
+        {
+            var maxMonth = new DateOnly(MaximumDate.Value.Year, MaximumDate.Value.Month, 1);
 
-        SetVisibilityButtonComparingDate(maxMonth, button);
+            SetVisibilityButtonComparingDateDaysCalendar(maxMonth, button);
+        }
     }
-    private void SetVisibilityButtonComparingDate(DateOnly dateToCompare, Button button)
+    private void SetVisibilityButtonComparingDateDaysCalendar(DateOnly dateToCompare, Button button)
     {
         var currentDate = CurrentDate.GetDate();
         var currentMonth = new DateOnly(currentDate.Year, currentDate.Month, 1);
 
         if (currentMonth == dateToCompare)
+            button.IsVisible = false;
+        else
+            button.IsVisible = true;
+    }
+    private void SetVisibilityButtonComparingDateMonthsCalendar(DateOnly dateToCompare, Button button)
+    {
+        var currentDate = CurrentDate.GetDate();
+
+        if (currentDate.Year == dateToCompare.Year)
             button.IsVisible = false;
         else
             button.IsVisible = true;

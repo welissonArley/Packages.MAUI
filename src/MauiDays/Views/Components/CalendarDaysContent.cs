@@ -97,6 +97,20 @@ public class CalendarDaysContent
         return this;
     }
 
+    public CalendarDaysContent SetSelectedDayColor(Color color)
+    {
+        SelectedDayColor = color;
+
+        return this;
+    }
+
+    public CalendarDaysContent SetSelectedBackgroundColor(Color color)
+    {
+        SelectedBackgroundColor = color;
+
+        return this;
+    }
+
     public CalendarDaysContent SetMinimumDate(DateOnly? date)
     {
         MinimumDate = date;

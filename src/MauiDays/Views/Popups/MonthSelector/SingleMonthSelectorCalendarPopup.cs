@@ -4,13 +4,13 @@ using Mopups.Pages;
 using Mopups.Services;
 using System.Globalization;
 
-namespace MauiDays.Views.Popups.DaySelector;
-public class SingleDaySelectorCalendarPopup
+namespace MauiDays.Views.Popups.MonthSelector;
+public class SingleMonthSelectorCalendarPopup
 {
-    private static SingleDaySelectorCalendarPopup _instance;
+    private static SingleMonthSelectorCalendarPopup _instance;
 
     private readonly PopupPage _popup;
-    private readonly DateOnlyService CurrentDate = new ();
+    private readonly DateOnlyService CurrentDate = new();
 
     private static Action<DateOnly> _callbackConfirm;
 
@@ -20,15 +20,14 @@ public class SingleDaySelectorCalendarPopup
     private CultureInfo Culture { get; set; }
     private string TextCancel { get; set; } = "CANCEL";
     private Color ConfirmButtonColor { get; set; } = Color.FromArgb("#47D19D");
-    private string DaysOfWeekFontFamily { get; set; } = "OpenSans";
-    private string DaysFontFamily { get; set; } = "OpenSans";
-    private Color SelectedDayColor { get; set; } = Colors.White;
+    private string MonthFontFamily { get; set; } = "OpenSans";
+    private Color SelectedMonthColor { get; set; } = Colors.White;
     private Color SelectedBackgroundColor { get; set; } = Colors.Black;
 
     private DateOnly? MinimumDate { get; set; } = null;
     private DateOnly? MaximumDate { get; set; } = null;
 
-    private SingleDaySelectorCalendarPopup()
+    private SingleMonthSelectorCalendarPopup()
     {
         if (_popup is null)
         {
@@ -50,113 +49,106 @@ public class SingleDaySelectorCalendarPopup
         }
     }
 
-    public static SingleDaySelectorCalendarPopup Instance(Action<DateOnly> callbackConfirm)
+    public static SingleMonthSelectorCalendarPopup Instance(Action<DateOnly> callbackConfirm)
     {
-        _instance = new SingleDaySelectorCalendarPopup();
+        _instance = new SingleMonthSelectorCalendarPopup();
 
         _callbackConfirm = callbackConfirm;
 
         return _instance;
     }
 
-    public SingleDaySelectorCalendarPopup CalendarBackgroundColor(Color color)
+    public SingleMonthSelectorCalendarPopup CalendarBackgroundColor(Color color)
     {
         _popup.Content.BackgroundColor = color;
 
         return this;
     }
 
-    public SingleDaySelectorCalendarPopup PopupBackgroundColor(Color color)
+    public SingleMonthSelectorCalendarPopup PopupBackgroundColor(Color color)
     {
         _popup.BackgroundColor = color;
 
         return this;
     }
 
-    public SingleDaySelectorCalendarPopup SetDate(DateOnly date)
+    public SingleMonthSelectorCalendarPopup SetDate(DateOnly date)
     {
         CurrentDate.SetDate(date);
 
         return this;
     }
 
-    public SingleDaySelectorCalendarPopup SetCulture(CultureInfo culture)
+    public SingleMonthSelectorCalendarPopup SetCulture(CultureInfo culture)
     {
         Culture = culture;
 
         return this;
     }
 
-    public SingleDaySelectorCalendarPopup SetPrimaryColor(Color color)
+    public SingleMonthSelectorCalendarPopup SetPrimaryColor(Color color)
     {
         PrimaryColor = color;
 
         return this;
     }
 
-    public SingleDaySelectorCalendarPopup SetHeaderFontFamily(string fontFamily)
+    public SingleMonthSelectorCalendarPopup SetHeaderFontFamily(string fontFamily)
     {
         HeaderFontFamily = fontFamily;
 
         return this;
     }
 
-    public SingleDaySelectorCalendarPopup SetTextCancel(string textCancel)
+    public SingleMonthSelectorCalendarPopup SetTextCancel(string textCancel)
     {
         TextCancel = textCancel;
 
         return this;
     }
 
-    public SingleDaySelectorCalendarPopup SetCancelFontFamily(string fontFamily)
+    public SingleMonthSelectorCalendarPopup SetCancelFontFamily(string fontFamily)
     {
         CancelFontFamily = fontFamily;
 
         return this;
     }
 
-    public SingleDaySelectorCalendarPopup SetConfirmButtonColor(Color color)
+    public SingleMonthSelectorCalendarPopup SetConfirmButtonColor(Color color)
     {
         ConfirmButtonColor = color;
 
         return this;
     }
 
-    public SingleDaySelectorCalendarPopup SetDaysOfWeekFontFamily(string fontFamily)
+    public SingleMonthSelectorCalendarPopup SetMonthFontFamily(string fontFamily)
     {
-        DaysOfWeekFontFamily = fontFamily;
+        MonthFontFamily = fontFamily;
 
         return this;
     }
 
-    public SingleDaySelectorCalendarPopup SetDaysFontFamily(string fontFamily)
+    public SingleMonthSelectorCalendarPopup SetSelectedMonthColor(Color color)
     {
-        DaysFontFamily = fontFamily;
+        SelectedMonthColor = color;
 
         return this;
     }
 
-    public SingleDaySelectorCalendarPopup SetSelectedDayColor(Color color)
-    {
-        SelectedDayColor = color;
-
-        return this;
-    }
-
-    public SingleDaySelectorCalendarPopup SetSelectedBackgroundColor(Color color)
+    public SingleMonthSelectorCalendarPopup SetSelectedBackgroundColor(Color color)
     {
         SelectedBackgroundColor = color;
 
         return this;
     }
 
-    public SingleDaySelectorCalendarPopup SetMinimumDate(DateOnly date)
+    public SingleMonthSelectorCalendarPopup SetMinimumDate(DateOnly date)
     {
         MinimumDate = date;
 
         return this;
     }
-    public SingleDaySelectorCalendarPopup SetMaximumDate(DateOnly date)
+    public SingleMonthSelectorCalendarPopup SetMaximumDate(DateOnly date)
     {
         MaximumDate = date;
 
@@ -174,19 +166,19 @@ public class SingleDaySelectorCalendarPopup
             .SetCulture(Culture)
             .SetMinimumDate(MinimumDate)
             .SetMaximumDate(MaximumDate)
+            .IsMonthCalendar()
             .Build();
 
-        var calendarContent = CalendarDaysContent
+        var calendarContent = CalendarMonthsContent
             .Instance()
             .SetPrimaryColor(PrimaryColor)
             .SetCulture(Culture)
             .SetDate(CurrentDate)
-            .SetDaysOfWeekFontFamily(DaysOfWeekFontFamily)
-            .SetDaysFontFamily(DaysFontFamily)
+            .SetMonthsFontFamily(MonthFontFamily)
             .SetMinimumDate(MinimumDate)
             .SetMaximumDate(MaximumDate)
             .SetSelectedBackgroundColor(SelectedBackgroundColor)
-            .SetSelectedDayColor(SelectedDayColor)
+            .SetSelectedMonthColor(SelectedMonthColor)
             .Build();
 
         var confirmationControls = CalendarConfirmationControls
