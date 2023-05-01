@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Maui;
-using MauiDays;
 using Mopups.Hosting;
 using Packages.MAUI.App.Helpers;
 
@@ -13,7 +12,6 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
             .ConfigureMopups()
-            .ConfigureMauiDays()
             .RegisterPagesAndViewModels()
             .ConfigureFonts(fonts =>
             {
@@ -26,7 +24,10 @@ public static class MauiProgram
 
     private static MauiAppBuilder RegisterPagesAndViewModels(this MauiAppBuilder mauiAppBuilder)
     {
-        mauiAppBuilder.Services.AddTransientWithShellRoute<Views.PinCodeExamplePage, ViewModels.PinCodeViewModel>(RoutePages.PINCODE_PAGE);
+        mauiAppBuilder.Services.AddTransient<Views.DashboardPage, ViewModels.DashboardViewModel>();
+        mauiAppBuilder.Services.AddTransientWithShellRoute<Views.PinCode.PinCodeDashboardPage, ViewModels.PinCode.PinCodeDashboardViewModel>(RoutePages.DASHBOARD_PINCODE_PAGE);
+        mauiAppBuilder.Services.AddTransientWithShellRoute<Views.Calendar.CalendarDashboardPage, ViewModels.Calendar.CalendarDashboardViewModel>(RoutePages.DASHBOARD_CALENDAR_PAGE);
+        mauiAppBuilder.Services.AddTransientWithShellRoute<Views.PinCode.PinCodePage, ViewModels.PinCode.PinCodeViewModel>(RoutePages.PINCODE_PAGE);
 
         return mauiAppBuilder;
     }

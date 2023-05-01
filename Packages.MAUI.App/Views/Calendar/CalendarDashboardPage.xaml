@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Packages.MAUI.App.Views.Calendar.CalendarDashboardPage"
+             xmlns:viewmodel="clr-namespace:Packages.MAUI.App.ViewModels.Calendar"
+             x:DataType="viewmodel:CalendarDashboardViewModel">
+    <VerticalStackLayout Spacing="30" Margin="0,70,0,0">
+        <Button Text="Single DAY calendar popup" Command="{Binding SingleDayCommand}" />
+        <Button Text="Single MONTH calendar popup" Command="{Binding SingleMonthCommand}" />
+    </VerticalStackLayout>
+</ContentPage>

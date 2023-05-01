@@ -7,11 +7,11 @@ public class CalendarConfirmationControls
     private Action _callbackCancel = null;
     private Action _callbackConfirm = null;
 
-    private Color PrimaryColor { get; set; } = Colors.Black;
-    private Color BackgroundColor { get; set; } = Colors.White;
-    private Color ConfirmButtonColor { get; set; } = Color.FromArgb("#47D19D");
-    private string FontFamily { get; set; } = "OpenSansSemibold";
-    private string TextCancel { get; set; } = "CANCEL";
+    private Color PrimaryColor { get; set; }
+    private Color BackgroundColor { get; set; }
+    private Color ConfirmButtonColor { get; set; }
+    private string FontFamily { get; set; }
+    private string TextCancel { get; set; }
 
     private CalendarConfirmationControls()
     {
@@ -93,7 +93,7 @@ public class CalendarConfirmationControls
         var okButton = new Button
         {
             Text = "✔",
-            TextColor = PrimaryColor,
+            TextColor = BackgroundColor,
             FontSize = 20,
             CornerRadius = 25,
             HeightRequest = 50,

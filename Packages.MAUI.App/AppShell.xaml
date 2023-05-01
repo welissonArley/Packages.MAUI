@@ -4,11 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Packages.MAUI.App.Views"
+    xmlns:routes="clr-namespace:Packages.MAUI.App.Helpers"
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate local:DashboardPage}"
+        Route="{Static routes:RoutePages.DASHBOARD_PAGE}" />
 
 </Shell>

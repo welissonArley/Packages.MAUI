@@ -5,10 +5,43 @@
              x:Class="Packages.MAUI.App.App">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+            <Color x:Key="DarkModeColor">#1F1E19</Color>
+            <Color x:Key="DangerActionDarkModeColor">#F64747</Color>
+            <Color x:Key="DangerActionLightModeColor">#DF340C</Color>
+            <Color x:Key="GoodActionDarkModeColor">#00B16A</Color>
+            <Color x:Key="GoodActionLightModeColor">#37705C</Color>
         </ResourceDictionary>
+
+        <Style TargetType="Shell" ApplyToDerivedTypes="True">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark={StaticResource DarkModeColor}}"/>
+            <Setter Property="ForegroundColor" Value="{AppThemeBinding Light=Black, Dark=White}"/>
+        </Style>
+        
+        <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark={StaticResource DarkModeColor}}"/>
+            <Setter Property="Padding" Value="30,10,30,45"/>
+        </Style>
+
+        <Style TargetType="Label" ApplyToDerivedTypes="True">
+            <Setter Property="TextColor" Value="{AppThemeBinding Light=Black, Dark=White}"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style TargetType="Button" ApplyToDerivedTypes="True">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=Black, Dark=White}"/>
+            <Setter Property="TextColor" Value="{AppThemeBinding Light=White, Dark=Black}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="HeightRequest" Value="50" />
+        </Style>
+
+        <Style TargetType="BoxView" ApplyToDerivedTypes="True">
+            <Setter Property="Color" Value="{AppThemeBinding Light=Black, Dark=White}"/>
+            <Setter Property="HeightRequest" Value="2"/>
+        </Style>
+
+        <Style TargetType="Switch" ApplyToDerivedTypes="True">
+            <Setter Property="OnColor" Value="{AppThemeBinding Light=Black, Dark=White}"/>
+            <Setter Property="ThumbColor" Value="{AppThemeBinding Light=Black, Dark=White}"/>
+        </Style>
     </Application.Resources>
 </Application>

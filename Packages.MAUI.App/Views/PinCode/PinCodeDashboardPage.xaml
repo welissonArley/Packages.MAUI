@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Packages.MAUI.App.Views.PinCode.PinCodeDashboardPage"
+             xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels.PinCode"
+             xmlns:enums="clr-namespace:Packages.MAUI.App.Model.Enums"
+             x:DataType="viewModel:PinCodeDashboardViewModel">
+    <ContentPage.Resources>
+        <Style TargetType="Border">
+            <Setter Property="StrokeShape" Value="RoundRectangle 15" />
+            <Setter Property="Padding" Value="10,20,10,10" />
+        </Style>
+    </ContentPage.Resources>
+    <VerticalStackLayout>
+        <Label Text="HEADLINE" FontSize="16" FontAttributes="Bold" Margin="0,10,0,10"/>
+        <Entry Placeholder="Confirm your PinCode" Text="{Binding Headline}"/>
+        <Label Text="SUBHEADLINE" FontSize="10" FontAttributes="Bold" Margin="0,10,0,10"/>
+        <Entry Placeholder="Enter the code to login" Text="{Binding Subheadline}"/>
+
+        <Label Text="ILLUSTRATION" FontSize="16" FontAttributes="Bold" Margin="0,20,0,10"/>
+        <Grid ColumnDefinitions="*,*, *, *" ColumnSpacing="5" Margin="0,0,0,30">
+            <Border BackgroundColor="#804FD674" Grid.Column="0" Opacity="0.5">
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding IllustrationType}" Value="{Static enums:IllustrationType.Turtle}">
+                        <Setter Property="Opacity" Value="1"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding IllustrationChangedCommand}" CommandParameter="{Static enums:IllustrationType.Turtle}"/>
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="5">
+                    <Image Source="turtle.png" HeightRequest="40" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#80FF4757" Grid.Column="1" Opacity="0.5">
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding IllustrationType}" Value="{Static enums:IllustrationType.Dog}">
+                        <Setter Property="Opacity" Value="1"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding IllustrationChangedCommand}" CommandParameter="{Static enums:IllustrationType.Dog}"/>
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="5">
+                    <Image Source="dog.png" HeightRequest="40" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#80FFCA00" Grid.Column="2" Opacity="0.5">
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding IllustrationType}" Value="{Static enums:IllustrationType.Bird}">
+                        <Setter Property="Opacity" Value="1"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding IllustrationChangedCommand}" CommandParameter="{Static enums:IllustrationType.Bird}"/>
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="5">
+                    <Image Source="bird.png" HeightRequest="40" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#800D6AE4" Grid.Column="3" Opacity="0.5">
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding IllustrationType}" Value="{Static enums:IllustrationType.None}">
+                        <Setter Property="Opacity" Value="1"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding IllustrationChangedCommand}" CommandParameter="{Static enums:IllustrationType.None}"/>
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="5">
+                    <Image Source="none.png" HeightRequest="40" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <BoxView />
+
+        <Label Text="CODE" FontSize="16" FontAttributes="Bold" Margin="0,20,0,10"/>
+        <Grid ColumnDefinitions="*, 50">
+            <Label Text="Show code?" VerticalOptions="Center" Grid.Column="0"/>
+            <Switch Grid.Column="1" IsToggled="{Binding ShowCode}" />
+        </Grid>
+        <Grid ColumnDefinitions="*, 50">
+            <Label Text="Square viewer?" VerticalOptions="Center" Grid.Column="0"/>
+            <Switch Grid.Column="1" IsToggled="{Binding SquareViewer}" />
+        </Grid>
+
+        <BoxView />
+        
+        <Label Text="KEYBOARD" FontSize="16" FontAttributes="Bold" Margin="0,20,0,10"/>
+        <Grid ColumnDefinitions="*,*,*" RowDefinitions="50" ColumnSpacing="10" Padding="10" BackgroundColor="#F0F0F0">
+            <Border Grid.Column="0" Padding="0" BackgroundColor="Transparent">
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding KeyboardType}" Value="{Static enums:KeyboardType.Circle}">
+                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=Black}"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding KeyboardTypeChangedCommand}" CommandParameter="{Static enums:KeyboardType.Circle}"/>
+                </Border.GestureRecognizers>
+                <Label Text="CIRCLE" VerticalOptions="Center" HorizontalOptions="Center"/>
+            </Border>
+            <Border Grid.Column="1" Padding="0" BackgroundColor="Transparent">
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding KeyboardType}" Value="{Static enums:KeyboardType.Square}">
+                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=Black}"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding KeyboardTypeChangedCommand}" CommandParameter="{Static enums:KeyboardType.Square}"/>
+                </Border.GestureRecognizers>
+                <Label Text="SQUARE" VerticalOptions="Center" HorizontalOptions="Center"/>
+            </Border>
+            <Border Grid.Column="2" Padding="0" BackgroundColor="Transparent">
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding KeyboardType}" Value="{Static enums:KeyboardType.NoShape}">
+                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=Black}"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding KeyboardTypeChangedCommand}" CommandParameter="{Static enums:KeyboardType.NoShape}"/>
+                </Border.GestureRecognizers>
+                <Label Text="NO SHAPE" VerticalOptions="Center" HorizontalOptions="Center"/>
+            </Border>
+        </Grid>
+        
+        <Button Text="Generate PinCode Page" Command="{Binding GeneratePageCommand}" VerticalOptions="EndAndExpand" Margin="0,30,0,0" />
+    </VerticalStackLayout>
+</ContentPage>
