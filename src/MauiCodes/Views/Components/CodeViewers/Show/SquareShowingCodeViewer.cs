@@ -12,7 +12,7 @@ public class SquareShowingCodeViewer : BaseShowingCodeViewer
             WidthRequest = Size,
             HeightRequest = Size,
             Stroke = new SolidColorBrush(Color),
-            Background = codeChar.HasValue ? new SolidColorBrush() : new SolidColorBrush(Color.WithAlpha(0.2f)),
+            Background = codeChar.HasValue ? new SolidColorBrush(Color) : new SolidColorBrush(Color.WithAlpha(0.2f)),
             StrokeThickness = 2,
             StrokeShape = new RoundRectangle
             {

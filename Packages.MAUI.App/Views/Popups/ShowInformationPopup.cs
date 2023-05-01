@@ -1,3 +1,4 @@
+using MauiCode.Helpers.Extensions;
 using Mopups.Services;
 
 namespace Packages.MAUI.App.Views.Popups;
@@ -13,17 +14,18 @@ public class ShowInformationPopup : Mopups.Pages.PopupPage
             Spacing = 30,
             Margin = 30,
             Padding = 30,
-            BackgroundColor = Colors.White,
+            BackgroundColor = Application.Current.IsLightMode() ? Colors.White : Application.Current.GetDarkMode(),
             VerticalOptions = LayoutOptions.Center,
             Children =
             {
-                new Label { Text = "Result info", FontSize = 18, TextColor = Colors.Black, FontAttributes = FontAttributes.Bold },
-                new Label { Text = message, FontSize = 18, TextColor = Colors.Black },
+                new Label { Text = "Result info", FontSize = 18, TextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White, FontAttributes = FontAttributes.Bold },
+                new Label { Text = message, FontSize = 18, TextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White },
                 new Button
                 {
                     Text = "Confirm",
                     HorizontalOptions = LayoutOptions.End,
-                    BackgroundColor = Color.FromArgb("#0066fe"),
+                    TextColor = Application.Current.IsLightMode() ? Colors.White : Application.Current.GetDarkMode(),
+                    BackgroundColor = Color.FromArgb(Application.Current.IsLightMode() ? "#3455DB" : "#19B5FE"),
                     FontAttributes = FontAttributes.Bold,
                     Command = new Command(async () =>
                     {

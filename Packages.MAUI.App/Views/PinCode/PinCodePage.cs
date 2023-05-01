@@ -39,7 +39,7 @@ public class PinCodePage : CodePage, IQueryAttributable
             return new SquareShowingCodeViewer
             {
                 Size = 40,
-                TextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
+                TextColor = Application.Current.IsLightMode() ? Colors.White : Colors.Black,
                 Color = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 FontSize = 25,
                 CodeLength = 4,
@@ -62,8 +62,8 @@ public class PinCodePage : CodePage, IQueryAttributable
         {
             return new CircleShowingCodeViewer
             {
-                Size = 20,
-                TextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
+                Size = 40,
+                TextColor = Application.Current.IsLightMode() ? Colors.White : Colors.Black,
                 Color = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 FontSize = 25,
                 CodeLength = 6,
@@ -88,6 +88,7 @@ public class PinCodePage : CodePage, IQueryAttributable
             {
                 ShapeColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 CancelTextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
+                BackspaceColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 FontSize = 25,
                 Size = 70,
                 CancelTextFontSize = 18,
@@ -96,6 +97,7 @@ public class PinCodePage : CodePage, IQueryAttributable
             KeyboardType.NoShape => new KeyboardWithoutShape
             {
                 CancelTextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
+                BackspaceColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 FontSize = 25,
                 Size = 70,
                 CancelTextFontSize = 18,
@@ -105,6 +107,7 @@ public class PinCodePage : CodePage, IQueryAttributable
             {
                 ShapeColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 CancelTextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
+                BackspaceColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 FontSize = 25,
                 Size = 70,
                 CancelTextFontSize = 18,
@@ -127,7 +130,7 @@ public class PinCodePage : CodePage, IQueryAttributable
         return new Image
         {
             Source = ImageSource.FromFile(path),
-            HeightRequest = 80,
+            HeightRequest = 120,
             Margin = new Thickness(0, 0, 0, 40),
         };
     }

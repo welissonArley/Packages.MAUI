@@ -19,7 +19,7 @@
 
         <Label Text="ILLUSTRATION" FontSize="16" FontAttributes="Bold" Margin="0,20,0,10"/>
         <Grid ColumnDefinitions="*,*, *, *" ColumnSpacing="5" Margin="0,0,0,30">
-            <Border BackgroundColor="#804FD674" Grid.Column="0" Opacity="0.5">
+            <Border BackgroundColor="{AppThemeBinding Light=#804FD674,Dark=#804ADD8C}" Grid.Column="0" Opacity="0.5">
                 <Border.Triggers>
                     <DataTrigger TargetType="Border" Binding="{Binding IllustrationType}" Value="{Static enums:IllustrationType.Turtle}">
                         <Setter Property="Opacity" Value="1"/>
@@ -33,7 +33,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Border BackgroundColor="#80FF4757" Grid.Column="1" Opacity="0.5">
+            <Border BackgroundColor="{AppThemeBinding Light=#80FF4757,Dark=#80F64747}" Grid.Column="1" Opacity="0.5">
                 <Border.Triggers>
                     <DataTrigger TargetType="Border" Binding="{Binding IllustrationType}" Value="{Static enums:IllustrationType.Dog}">
                         <Setter Property="Opacity" Value="1"/>
@@ -47,7 +47,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Border BackgroundColor="#80FFCA00" Grid.Column="2" Opacity="0.5">
+            <Border BackgroundColor="{AppThemeBinding Light=#80FFCA00,Dark=#80F5D76E}" Grid.Column="2" Opacity="0.5">
                 <Border.Triggers>
                     <DataTrigger TargetType="Border" Binding="{Binding IllustrationType}" Value="{Static enums:IllustrationType.Bird}">
                         <Setter Property="Opacity" Value="1"/>
@@ -61,7 +61,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Border BackgroundColor="#800D6AE4" Grid.Column="3" Opacity="0.5">
+            <Border BackgroundColor="{AppThemeBinding Light=#800D6AE4,Dark=#80ADD8E6}" Grid.Column="3" Opacity="0.5">
                 <Border.Triggers>
                     <DataTrigger TargetType="Border" Binding="{Binding IllustrationType}" Value="{Static enums:IllustrationType.None}">
                         <Setter Property="Opacity" Value="1"/>
@@ -70,8 +70,10 @@
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding IllustrationChangedCommand}" CommandParameter="{Static enums:IllustrationType.None}"/>
                 </Border.GestureRecognizers>
-                <VerticalStackLayout Spacing="5">
-                    <Image Source="none.png" HeightRequest="40" />
+                <VerticalStackLayout>
+                    <VerticalStackLayout HeightRequest="40" Padding="0,5,0,5" VerticalOptions="Center">
+                        <Label Text="NONE" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
                 </VerticalStackLayout>
             </Border>
         </Grid>
@@ -91,39 +93,57 @@
         <BoxView />
         
         <Label Text="KEYBOARD" FontSize="16" FontAttributes="Bold" Margin="0,20,0,10"/>
-        <Grid ColumnDefinitions="*,*,*" RowDefinitions="50" ColumnSpacing="10" Padding="10" BackgroundColor="#F0F0F0">
+        <Grid ColumnDefinitions="*,*,*" RowDefinitions="50" ColumnSpacing="10" Padding="10">
             <Border Grid.Column="0" Padding="0" BackgroundColor="Transparent">
                 <Border.Triggers>
                     <DataTrigger TargetType="Border" Binding="{Binding KeyboardType}" Value="{Static enums:KeyboardType.Circle}">
-                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=Black}"/>
+                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=Black, Dark=White}"/>
                     </DataTrigger>
                 </Border.Triggers>
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding KeyboardTypeChangedCommand}" CommandParameter="{Static enums:KeyboardType.Circle}"/>
                 </Border.GestureRecognizers>
-                <Label Text="CIRCLE" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label Text="CIRCLE" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding KeyboardType}" Value="{Static enums:KeyboardType.Circle}">
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light=White, Dark=Black}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
             </Border>
             <Border Grid.Column="1" Padding="0" BackgroundColor="Transparent">
                 <Border.Triggers>
                     <DataTrigger TargetType="Border" Binding="{Binding KeyboardType}" Value="{Static enums:KeyboardType.Square}">
-                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=Black}"/>
+                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=Black, Dark=White}"/>
                     </DataTrigger>
                 </Border.Triggers>
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding KeyboardTypeChangedCommand}" CommandParameter="{Static enums:KeyboardType.Square}"/>
                 </Border.GestureRecognizers>
-                <Label Text="SQUARE" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label Text="SQUARE" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding KeyboardType}" Value="{Static enums:KeyboardType.Square}">
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light=White, Dark=Black}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
             </Border>
             <Border Grid.Column="2" Padding="0" BackgroundColor="Transparent">
                 <Border.Triggers>
                     <DataTrigger TargetType="Border" Binding="{Binding KeyboardType}" Value="{Static enums:KeyboardType.NoShape}">
-                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=Black}"/>
+                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=Black, Dark=White}"/>
                     </DataTrigger>
                 </Border.Triggers>
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding KeyboardTypeChangedCommand}" CommandParameter="{Static enums:KeyboardType.NoShape}"/>
                 </Border.GestureRecognizers>
-                <Label Text="NO SHAPE" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label Text="NO SHAPE" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding KeyboardType}" Value="{Static enums:KeyboardType.NoShape}">
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light=White, Dark=Black}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
             </Border>
         </Grid>
         

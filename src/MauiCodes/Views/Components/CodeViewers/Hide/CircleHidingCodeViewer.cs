@@ -11,8 +11,8 @@ public class CircleHidingCodeViewer : Base.BaseCodeViewer
             WidthRequest = Size,
             HeightRequest = Size,
             HorizontalOptions = LayoutOptions.Start,
-            Fill = codeChar.HasValue ? new SolidColorBrush(Color) : new SolidColorBrush(),
-            StrokeThickness = 5,
+            Fill = codeChar.HasValue ? new SolidColorBrush(Color) : new SolidColorBrush(Color.WithAlpha(0.2f)),
+            StrokeThickness = Size * 0.1,
             Stroke = new SolidColorBrush(Color)
         };
     }

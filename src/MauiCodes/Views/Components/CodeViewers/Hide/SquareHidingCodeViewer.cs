@@ -12,7 +12,7 @@ public class SquareHidingCodeViewer : Base.BaseCodeViewer
             HeightRequest = Size,
             Stroke = new SolidColorBrush(Color),
             Background = codeChar.HasValue ? new SolidColorBrush(Color) : new SolidColorBrush(Color.WithAlpha(0.2f)),
-            StrokeThickness = 2,
+            StrokeThickness = Size * 0.1,
             StrokeShape = new RoundRectangle
             {
                 CornerRadius = new CornerRadius(Size * 0.2)
