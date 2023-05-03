@@ -36,9 +36,9 @@ My project is focused on providing a collection of libraries that simplify and e
 ### **Features**
 Here are some details about the libraries included in this project:
 
-- **Pincode library (MauiCodes):** Our pincode library provides a simple and customizable page to add PIN code functionality to your .NET MAUI applications. The library includes different options for keyboard, code viewer, colors, and more.
+- **Pincode library (MauiCodes):** my pincode library provides a simple and customizable page to add PIN code functionality to your .NET MAUI applications. The library includes different options for keyboard, code viewer, colors, and more.
 
-- **Calendar library (MauiDays):** Our calendar library provides a customizable calendar control that can be easily integrated into your .NET MAUI projects to help manage dates. The library includes various features such as multi-language support, month selector, calendar page, and more.
+- **Calendar library (MauiDays):** my calendar library provides a customizable calendar control that can be easily integrated into your .NET MAUI projects to help manage dates. The library includes various features such as multi-language support, month selector, calendar page, and more.
 
 Each library in my project comes with its own documentation, providing detailed information and examples on how to use it in your .NET MAUI projects.
 
