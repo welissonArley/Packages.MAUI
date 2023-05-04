@@ -37,7 +37,7 @@ public partial class PinCodeDashboardViewModel : ObservableObject
         {
             { "headline", Headline },
             { "subHeadline", Subheadline },
-            { "illustration", illustrationType },
+            { "illustration", IllustrationType },
             { "showCode", ShowCode },
             { "squareViewer", SquareViewer },
             { "keyboardType", KeyboardType }

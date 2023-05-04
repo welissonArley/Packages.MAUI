@@ -221,7 +221,10 @@ public class CalendarDaysContent
 
     private void SetDaysOfTheWeekHeader()
     {
-        string[] daysOfWeek = Culture.DateTimeFormat.AbbreviatedDayNames;
+        var daysOfWeek = Culture.DateTimeFormat.AbbreviatedDayNames;
+
+        if (Culture.DateTimeFormat.FirstDayOfWeek != DayOfWeek.Sunday)
+            daysOfWeek = daysOfWeek.Skip(1).Append(daysOfWeek.ElementAt(0)).ToArray();
 
         for (var index = 0; index < daysOfWeek.Length; index++)
             _view.Add(CreateLabelForDayOfTheWeek(daysOfWeek.ElementAt(index)), column: index, row: 0);

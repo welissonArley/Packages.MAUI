@@ -178,7 +178,7 @@ public class CalendarMonthsContent
         return new()
         {
             Background = Colors.Transparent,
-            Padding = 20,
+            Padding = new Thickness(15,20,15,20),
             Margin = 0
         };
     }
