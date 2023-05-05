@@ -248,9 +248,9 @@ If you choose the keyboard with shape, you can use the following property too:
     </codePage:CodePage.CodeViewer>
 ```
 
-## Conclusion
+## License
 
-With this NuGet package, you can easily add a customizable pin code page to your .NET MAUI applications. I hope you find it useful and welcome any feedback or contributions to the project.
+Mauidays is released under the MIT License. See LICENSE.txt for details.
 
 
 <!-- Images -->
