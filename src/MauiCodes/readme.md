@@ -254,5 +254,5 @@ With this NuGet package, you can easily add a customizable pin code page to your
 
 
 <!-- Images -->
-[code-viewers-screenshot]: ../../images/CodeViewers.png
-[keyboard-screenshot]: ../../images/KeyboardViewer.png
+[code-viewers-screenshot]: https://drive.google.com/uc?id=1EX_fTkVVkHcnq9b4twuyvvr06rF6ecC0
+[keyboard-screenshot]: https://drive.google.com/uc?id=1NuYguBdXEx6K1UiqYgW7wSma1QVQNP5o
