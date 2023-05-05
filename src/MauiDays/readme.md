@@ -16,12 +16,13 @@
         <li><a href="#usage">Usage</a></li>
         <ul>
           <li><a href="#popups">Popups</a></li>
+          <ul>
+            <li><a href="#customizable-properties-for-calendar-mopups">Customizable properties for Calendar Mopups</a></li>    
+          </ul>
           <li><a href="#calendar-page">Calendar Page</a></li>     
-        </ul>
-        <li><a href="#customizing-the-appearance">Customizing the Appearance</a></li>        
+        </ul>      
       </ul>
     </li>
-    <li><a href="#conclusion">Conclusion</a></li>
   </ol>
 </details>
 
@@ -99,100 +100,79 @@ var popup = SingleMonthSelectorCalendarPopup
 await await MopupService.Instance.PushAsync(popup);
 ```
 
-## Customizable properties
+Below the month calendar, you will find a list of available options for the Day Selector popup and Month Selector popup:
 
-This package provides several ways to customize the appearance of the pin code page to fit the look and feel of your application. You can customize the colors and the page's elements.
+- **SingleDaySelectorCalendarPopup:** the popup allows the user to select only one day.
+- **SingleMonthSelectorCalendarPopup:** popup with the option to select a single month.
 
-### Headline & Image
+## Customizable properties for Calendar Mopups
 
-You have the option to customize the headline, subheadline, and image on your page. However, I understand that not all developers may want to include these properties. That's why these properties can be null or empty. Of course, I encourage you to experiment with different combinations of these properties to create a truly unique and engaging experience for your users.
+- **Date:** allows you to set an initial date for the calendar.
+- **Culture:** allows you to set the calendar culture, which can affect the formatting of dates and the names of months and weekdays displayed in the calendar popups.
+- **PrimaryColor:** allows you to customize the color scheme of the calendar and selectors to match your app's branding.
+- **SelectedMonthColor/SelectedDayColor:** allows you to change the text color that is displayed when a user selects a day/month on the calendar.
+- **SelectedBackgroundColor:** allows you to change the background color that is displayed when a user selects a day/month on the calendar.
+- **MinimumDate:** You may use this property to set the minimum selectable date on the calendar.
+- **MaximumDate:** You may use this property to set the maximum selectable date on the calendar.
+- **DaysOfWeekFontFamily:** allows you to customize the font family for the days of the week in the calendar.
+- **DaysFontFamily/MonthsFontFamily:** allowd you to set the font family for the text displayed for the days/month on the popups.
+- **TextCancel:**  is a property that allows you to customize the text for the cancel button.
+- **SetCancelFontFamily:** allows you to set the font family for the cancel button text.
+- **ConfirmButtonColor:** is a property that allows you to customize the color of the confirm button on the popup. Keep in mind the contrast ration, because the text color for this button is always the PrimaryColor.
+- **CalendarBackgroundColor:** property allows you to set the background color of the calendar page.
+- **PopupBackgroundColor:** property allows you to set the background color of the popups.
 
-
-
-#### Customizable properties
-
-- **CodeLength:** allows you to set the desired length of your pin code.
-- **Color:** allows you to set the color of the pin code shape.
-- **Size:** allows you to set the size of the pin code shape.
-
-If you choose show the pin code, you can use the following properties too:
-
-- **FontSize:** allows you to set the font size for the numbers.
-- **TextColor:** allows you to set the text color for the numbers.
-- **FontFamily:** allows you to set the font family for the numbers.
-
-```xaml
-<codePage:CodePage.CodeViewer>
-        <codeViewer:CircleShowingCodeViewer
-            Size="40"
-            TextColor="{AppThemeBinding Light=White, Dark=Black}"
-            Color="{AppThemeBinding Light=Black,Dark=White}"
-            FontSize="25"
-            FontFamily="RalewayBlack"
-            CodeLength="6"
-            Margin="0,0,0,40"/>
-    </codePage:CodePage.CodeViewer>
-```
-
-### Keyboard
-
-You can select from a keyboard without any shape, a square shape, or a circle shape, depending on the look and feel you want to achieve.
-
-![Keyboard Availables][keyboard-screenshot]
-
-Here's an example:
-
-```xaml
-<?xml version="1.0" encoding="utf-8" ?>
-<codePage:CodePage
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codePage="clr-namespace:MauiCode.Views.Pages;assembly=MauiCodes"
-    xmlns:keyboard="clr-namespace:MauiCode.Views.Components.Keyboards;assembly=MauiCodes"
-    x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage"
-    CallbackCodeFinished="{Binding UserEndTheCodeCommand}">
-    
-    <codePage:CodePage.KeyboardViewer>
-        <keyboard:KeyboardSquare />
-    </codePage:CodePage.KeyboardViewer>
-    
-</codePage:CodePage>
-```
-
-The equivalent C# code is:
+Now that you know all properties to customize yours popups, let's see an example with the fluent syntax:
 
 ```csharp
-var pinCodePage = new CodePage();
+public static class CalendarPopupBuilder
+{
+    public static SingleMonthSelectorCalendarPopup SingleMonth(Action<DateOnly> callbackConfirm)
+    {
+        return SingleMonthSelectorCalendarPopup
+            .Instance(callbackConfirm)
+            .PopupBackgroundColor(PopupBackgroundColor())
+            .SetCancelFontFamily(CancelFontFamily())
+            .SetHeaderFontFamily(HeaderFontFamily())
+            .SetMonthFontFamily(LabelFontFamily())
+            .CalendarBackgroundColor(CalendarBackgroundColor())
+            .SetPrimaryColor(PrimaryColor())
+            .SetConfirmButtonColor(ColorForConfirmButton())
+            .SetSelectedBackgroundColor(SelectedBackgroundColor())
+            .SetSelectedMonthColor(SelectedLabelColor());
+    }
 
-pinCodePage.KeyboardViewer = new KeyboardSquare();
+    private static Color ColorForConfirmButton() => Color.FromArgb(Application.Current.IsLightMode() ? "#40806A" : "#00D46A");
+    private static Color PrimaryColor() => Application.Current.IsLightMode() ? Colors.Black : Colors.White;
+    private static Color SelectedBackgroundColor() => Application.Current.IsLightMode() ? Colors.Black : Colors.White;
+    private static Color SelectedLabelColor() => Application.Current.IsLightMode() ? Colors.White : Colors.Black;
+    private static Color CalendarBackgroundColor() => Application.Current.IsLightMode() ? Colors.White : Application.Current.GetDarkMode();
+    private static Color PopupBackgroundColor() => Color.FromArgb("#80A1A1A1");
+    private static string CancelFontFamily() => "OpenSansRegular";
+    private static string HeaderFontFamily() => "OpenSansSemibold";
+    private static string LabelFontFamily() => "OpenSansRegular";
+}
 
-```
 
-#### Customizable properties
+public partial class CalendarDashboardViewModel : ObservableObject
+{
+    [RelayCommand]
+    public static async void SingleMonth()
+    {
+        var today = DateTime.Today;
 
-- **Size:** allows you to set the size of the pin code shape.
-- **FontSize:** allows you to set the font size for the numbers.
-- **CancelTextFontSize:** allows you to set the font size for the text "Cancel".
-- **TextColor:** allows you to set the text color for the numbers.
-- **CancelTextColor:** allows you to set the text color for the text "Cancel".
-- **CancelText:** allows you to set the string to show if the user want to cancel the operation, this is useful for translation for example.
-- **BackspaceColor:** allows you to set the color of backspace button.
+        var popup = CalendarPopupBuilder
+            .SingleMonth((date) =>
+            {
+                //do something with the date
+            })
+            .SetMinimumDate(new DateOnly(today.Year - 1, today.Month, 7))
+            .SetMaximumDate(new DateOnly(today.Year + 1, today.Month, 7))
+            .Build();
 
-If you choose the keyboard with shape, you can use the following property too:
-
-- **ShapeColor:** allows you to set the color for the shape.
-
-```xaml
-<codePage:CodePage.KeyboardViewer>
-        <keyboard:KeyboardCircle
-            ShapeColor="{AppThemeBinding Light=Black, Dark=White}"
-            CancelTextColor="{AppThemeBinding Light=Black, Dark=White}"
-            FontSize="25"
-            Size="70"
-            CancelTextFontSize="18"
-            CancelText="CANCEL"
-            TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
-    </codePage:CodePage.CodeViewer>
+        await MopupService.Instance.PushAsync(popup);
+    }
+}
 ```
 
 ## License
