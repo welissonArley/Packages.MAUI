@@ -13,10 +13,10 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#usage">Usage</a></li>
         <li><a href="#customizing-the-appearance">Customizing the Appearance</a></li>        
       </ul>
     </li>
-    <li><a href="#conclusion">Conclusion</a></li>
   </ol>
 </details>
 
@@ -54,7 +54,15 @@ Install-Package MauiCode
 
 Once the package is installed, you can add a pin code page to your application.
 
+### Usage
+
 **REMEMBER:** be sure to provide a command callback. It will be automatically triggered once the user has provided the entire code.
+
+To use the pin code page, you need to add a reference to the CodePage namespace in your XAML file:
+
+```xaml
+xmlns:codePage="clr-namespace:MauiCode.Views.Pages;assembly=MauiCodes"
+```
 
 Here's an example:
 
