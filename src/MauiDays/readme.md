@@ -197,7 +197,7 @@ If you choose the keyboard with shape, you can use the following property too:
 
 ## License
 
-Mauidays is released under the MIT License. See LICENSE.txt for details.
+MauiDays is released under the MIT License. See LICENSE.txt for details.
 
 
 <!-- Images -->
