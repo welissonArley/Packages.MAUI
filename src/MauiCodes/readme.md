@@ -24,6 +24,8 @@
 
 This library provides developers with an easy way to add a customizable pin code page to their .NET MAUI applications. With just a few lines of code, you can create a secure page that requires a pin code to access.
 
+![PinCode Page Screenshot][hero-image]
+
 ### **Compatibility**
 
 | Platform | Version | Availability |
@@ -264,3 +266,4 @@ MauiCodes is released under the MIT License. See LICENSE.txt for details.
 <!-- Images -->
 [code-viewers-screenshot]: https://drive.google.com/uc?id=1EX_fTkVVkHcnq9b4twuyvvr06rF6ecC0
 [keyboard-screenshot]: https://drive.google.com/uc?id=1NuYguBdXEx6K1UiqYgW7wSma1QVQNP5o
+[hero-image]: https://drive.google.com/uc?id=1jS36_xALlvNo899FaqY5jjU-M5PIh7C6
