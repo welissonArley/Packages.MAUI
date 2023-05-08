@@ -65,6 +65,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\src\MauiCodes\MauiCodes.csproj" />
 	  <ProjectReference Include="..\src\MauiDays\MauiDays.csproj" />
+	  <ProjectReference Include="..\src\Shared\Shared.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -75,6 +76,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\Calendar\CalendarDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Calendar\SingleDaySelectorPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PinCode\PinCodeDashboardPage.xaml">

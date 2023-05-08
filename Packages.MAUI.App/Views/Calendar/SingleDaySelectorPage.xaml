@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:SingleDaySelectorPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:MauiDays.Views.Pages;assembly=MauiDays"
+    xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels.Calendar"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    x:Class="Packages.MAUI.App.Views.Calendar.SingleDaySelectorPage"
+    x:DataType="viewModel:SingleDaySelectorViewModel"
+    OnDaySelectedCommand="{Binding SelectedDayCommand}"
+    MinimumDate="{Binding MinimumDate}"
+    MaximumDate="{Binding MaximumDate}"
+    PrimaryColor="{AppThemeBinding Light=Black, Dark=White}"
+    SelectedBackgroundColor="{AppThemeBinding Light=Black, Dark=White}"
+    SelectedDayColor="{AppThemeBinding Light=White, Dark=Black}"
+    HeaderFontFamily="OpenSansRegular"
+    DaysOfWeekFontFamily="OpenSansRegular"
+    DaysFontFamily="OpenSansRegular"
+    DaysWithEvents="{Binding DaysWithEvents}"
+    Date="{Binding Date}">
+
+   <page:SingleDaySelectorPage.MyContent>
+        <VerticalStackLayout Margin="0,40,0,0">
+            <Label Text="Current data:" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+            <Label Text="{Binding Date, StringFormat='{}{0:MMMM/dd/yyyy}'}" HorizontalOptions="Center" FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+        </VerticalStackLayout>
+    </page:SingleDaySelectorPage.MyContent>
+
+</page:SingleDaySelectorPage>

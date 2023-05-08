@@ -19,11 +19,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Folder Include="Views\Pages\" />
+	  <PackageReference Include="Mopups" Version="1.1.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Mopups" Version="1.1.1" />
+	  <ProjectReference Include="..\Shared\Shared.csproj" />
 	</ItemGroup>
 
 </Project>
