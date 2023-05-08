@@ -1,5 +1,5 @@
 ﻿using MauiDays.Services;
-using MauiDays.Views.Components;
+using MauiDays.Views.Components.Popup;
 using Mopups.Pages;
 using Mopups.Services;
 using System.Globalization;
@@ -157,7 +157,7 @@ public class SingleMonthSelectorCalendarPopup
 
     public PopupPage Build()
     {
-        var header = CalendarHeader
+        var header = CalendarHeaderComponent
             .Instance()
             .SetPrimaryColor(PrimaryColor)
             .SetBackgroundColor(_popup.Content.BackgroundColor)
@@ -169,7 +169,7 @@ public class SingleMonthSelectorCalendarPopup
             .IsMonthCalendar()
             .Build();
 
-        var calendarContent = CalendarMonthsContent
+        var calendarContent = CalendarSingleMonthSelectorComponent
             .Instance()
             .SetPrimaryColor(PrimaryColor)
             .SetCulture(Culture)
@@ -181,7 +181,7 @@ public class SingleMonthSelectorCalendarPopup
             .SetSelectedMonthColor(SelectedMonthColor)
             .Build();
 
-        var confirmationControls = CalendarConfirmationControls
+        var confirmationControls = CalendarConfirmationControlsComponent
             .Instance()
             .SetPrimaryColor(PrimaryColor)
             .SetBackgroundColor(_popup.Content.BackgroundColor)

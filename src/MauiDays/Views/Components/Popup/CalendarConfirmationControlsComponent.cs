@@ -1,7 +1,7 @@
-﻿namespace MauiDays.Views.Components;
-public class CalendarConfirmationControls
+﻿namespace MauiDays.Views.Components.Popup;
+public class CalendarConfirmationControlsComponent
 {
-    private static CalendarConfirmationControls _instance;
+    private static CalendarConfirmationControlsComponent _instance;
 
     private readonly Grid _view;
     private Action _callbackCancel = null;
@@ -13,7 +13,7 @@ public class CalendarConfirmationControls
     private string FontFamily { get; set; }
     private string TextCancel { get; set; }
 
-    private CalendarConfirmationControls()
+    private CalendarConfirmationControlsComponent()
     {
         if (_view is null)
         {
@@ -28,49 +28,49 @@ public class CalendarConfirmationControls
         }
     }
 
-    public static CalendarConfirmationControls Instance()
+    public static CalendarConfirmationControlsComponent Instance()
     {
-        _instance = new CalendarConfirmationControls();
+        _instance = new CalendarConfirmationControlsComponent();
 
         return _instance;
     }
 
-    public CalendarConfirmationControls SetPrimaryColor(Color color)
+    public CalendarConfirmationControlsComponent SetPrimaryColor(Color color)
     {
         PrimaryColor = color;
 
         return this;
     }
 
-    public CalendarConfirmationControls SetBackgroundColor(Color color)
+    public CalendarConfirmationControlsComponent SetBackgroundColor(Color color)
     {
         BackgroundColor = color;
 
         return this;
     }
 
-    public CalendarConfirmationControls SetFontFamily(string fontFamily)
+    public CalendarConfirmationControlsComponent SetFontFamily(string fontFamily)
     {
         FontFamily = fontFamily;
 
         return this;
     }
 
-    public CalendarConfirmationControls SetTextCancel(string textCancel)
+    public CalendarConfirmationControlsComponent SetTextCancel(string textCancel)
     {
         TextCancel = textCancel;
 
         return this;
     }
 
-    public CalendarConfirmationControls SetConfirmButtonColor(Color color)
+    public CalendarConfirmationControlsComponent SetConfirmButtonColor(Color color)
     {
         ConfirmButtonColor = color;
 
         return this;
     }
 
-    public CalendarConfirmationControls SetCallbacks(Action callbackCancel, Action callbackConfirm)
+    public CalendarConfirmationControlsComponent SetCallbacks(Action callbackCancel, Action callbackConfirm)
     {
         _callbackCancel = callbackCancel;
         _callbackConfirm = callbackConfirm;

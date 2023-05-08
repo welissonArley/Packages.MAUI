@@ -2,26 +2,86 @@
 using System.Globalization;
 
 namespace MauiDays.Views.Components;
-public class CalendarDaysContent
+public abstract class BaseCalendarDaysComponent
 {
-    private static CalendarDaysContent _instance;
+    protected Border CurrentLayoutSelected;
 
     private readonly Grid _view;
 
-    private Border CurrentLayoutSelected;
+    protected DateOnlyService CurrentDate;
+    protected CultureInfo Culture { get; set; }
+    protected Color PrimaryColor { get; set; }
+    protected string DaysOfWeekFontFamily { get; set; }
+    protected string DaysFontFamily { get; set; }
+    protected Color SelectedDayColor { get; set; }
+    protected Color SelectedBackgroundColor { get; set; }
 
-    private DateOnlyService CurrentDate;
-    private CultureInfo Culture { get; set; }
-    private Color PrimaryColor { get; set; }
-    private string DaysOfWeekFontFamily { get; set; }
-    private string DaysFontFamily { get; set; }
-    private Color SelectedDayColor { get; set; }
-    private Color SelectedBackgroundColor { get; set; }
+    protected DateOnly? MinimumDate { get; set; }
+    protected DateOnly? MaximumDate { get; set; }
 
-    private DateOnly? MinimumDate { get; set; }
-    private DateOnly? MaximumDate { get; set; }
+    public BaseCalendarDaysComponent SetDate(DateOnlyService date)
+    {
+        CurrentDate = date;
 
-    private CalendarDaysContent()
+        return this;
+    }
+
+    public BaseCalendarDaysComponent SetCulture(CultureInfo culture)
+    {
+        Culture = culture;
+
+        return this;
+    }
+
+    public BaseCalendarDaysComponent SetPrimaryColor(Color color)
+    {
+        PrimaryColor = color;
+
+        return this;
+    }
+
+    public BaseCalendarDaysComponent SetDaysOfWeekFontFamily(string fontFamily)
+    {
+        DaysOfWeekFontFamily = fontFamily;
+
+        return this;
+    }
+
+    public BaseCalendarDaysComponent SetDaysFontFamily(string fontFamily)
+    {
+        DaysFontFamily = fontFamily;
+
+        return this;
+    }
+
+    public BaseCalendarDaysComponent SetSelectedDayColor(Color color)
+    {
+        SelectedDayColor = color;
+
+        return this;
+    }
+
+    public BaseCalendarDaysComponent SetSelectedBackgroundColor(Color color)
+    {
+        SelectedBackgroundColor = color;
+
+        return this;
+    }
+
+    public BaseCalendarDaysComponent SetMinimumDate(DateOnly? date)
+    {
+        MinimumDate = date;
+
+        return this;
+    }
+    public BaseCalendarDaysComponent SetMaximumDate(DateOnly? date)
+    {
+        MaximumDate = date;
+
+        return this;
+    }
+
+    protected BaseCalendarDaysComponent()
     {
         if (_view is null)
         {
@@ -53,75 +113,8 @@ public class CalendarDaysContent
 
             Culture = CultureInfo.CurrentCulture;
         }
-    }
-
-    public static CalendarDaysContent Instance()
-    {
-        _instance = new CalendarDaysContent();
-
-        return _instance;
-    }
-
-    public CalendarDaysContent SetDate(DateOnlyService date)
-    {
-        CurrentDate = date;
-
-        return this;
-    }
-
-    public CalendarDaysContent SetCulture(CultureInfo culture)
-    {
-        Culture = culture;
-
-        return this;
-    }
-
-    public CalendarDaysContent SetPrimaryColor(Color color)
-    {
-        PrimaryColor = color;
-
-        return this;
-    }
-
-    public CalendarDaysContent SetDaysOfWeekFontFamily(string fontFamily)
-    {
-        DaysOfWeekFontFamily = fontFamily;
-
-        return this;
-    }
-
-    public CalendarDaysContent SetDaysFontFamily(string fontFamily)
-    {
-        DaysFontFamily = fontFamily;
-
-        return this;
-    }
-
-    public CalendarDaysContent SetSelectedDayColor(Color color)
-    {
-        SelectedDayColor = color;
-
-        return this;
-    }
-
-    public CalendarDaysContent SetSelectedBackgroundColor(Color color)
-    {
-        SelectedBackgroundColor = color;
-
-        return this;
-    }
-
-    public CalendarDaysContent SetMinimumDate(DateOnly? date)
-    {
-        MinimumDate = date;
-
-        return this;
-    }
-    public CalendarDaysContent SetMaximumDate(DateOnly? date)
-    {
-        MaximumDate = date;
-
-        return this;
+        else
+            _view.Clear();
     }
 
     public IView Build()
@@ -154,6 +147,30 @@ public class CalendarDaysContent
         SetDaysOnCalendar();
     }
 
+    private void SetDaysOfTheWeekHeader()
+    {
+        var daysOfWeek = Culture.DateTimeFormat.AbbreviatedDayNames;
+
+        if (Culture.DateTimeFormat.FirstDayOfWeek != DayOfWeek.Sunday)
+            daysOfWeek = daysOfWeek.Skip(1).Append(daysOfWeek.ElementAt(0)).ToArray();
+
+        for (var index = 0; index < daysOfWeek.Length; index++)
+            _view.Add(CreateLabelForDayOfTheWeek(daysOfWeek.ElementAt(index)), column: index, row: 0);
+    }
+
+    private Label CreateLabelForDayOfTheWeek(string day)
+    {
+        return new()
+        {
+            Text = day,
+            TextColor = PrimaryColor,
+            VerticalOptions = LayoutOptions.Center,
+            HorizontalOptions = LayoutOptions.Center,
+            FontSize = 12,
+            FontFamily = DaysOfWeekFontFamily
+        };
+    }
+
     private void SetDaysOnCalendar()
     {
         var currentDate = CurrentDate.GetDate();
@@ -164,6 +181,15 @@ public class CalendarDaysContent
 
         (int lastRowSet, int lastColumnSet) = SetDaysCurrentMonth(lastDayCurrentMonth, startColumnForCurrentMonth);
         CompleteCalendarToAvoidResize(lastRowSet, lastColumnSet);
+    }
+
+    private int CalculateStartColumn(DateOnly date)
+    {
+        var dayofWeek = (int)date.DayOfWeek;
+
+        var column = Culture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Sunday ? dayofWeek : dayofWeek - 1;
+
+        return column == -1 ? 6 : column;
     }
 
     private (int lastRowSet, int lastColumnSet) SetDaysCurrentMonth(DateOnly lastDayCurrentMonth, int startColumnForCurrentMonth)
@@ -202,6 +228,7 @@ public class CalendarDaysContent
 
         return (row, column);
     }
+
     private void CompleteCalendarToAvoidResize(int row, int column)
     {
         while (row < 7)
@@ -219,49 +246,17 @@ public class CalendarDaysContent
         }
     }
 
-    private void SetDaysOfTheWeekHeader()
-    {
-        var daysOfWeek = Culture.DateTimeFormat.AbbreviatedDayNames;
-
-        if (Culture.DateTimeFormat.FirstDayOfWeek != DayOfWeek.Sunday)
-            daysOfWeek = daysOfWeek.Skip(1).Append(daysOfWeek.ElementAt(0)).ToArray();
-
-        for (var index = 0; index < daysOfWeek.Length; index++)
-            _view.Add(CreateLabelForDayOfTheWeek(daysOfWeek.ElementAt(index)), column: index, row: 0);
-    }
-
-    private Label CreateLabelForDayOfTheWeek(string day)
-    {
-        return new ()
-        {
-            Text = day,
-            TextColor = PrimaryColor,
-            VerticalOptions = LayoutOptions.Center,
-            HorizontalOptions = LayoutOptions.Center,
-            FontSize = 12,
-            FontFamily = DaysOfWeekFontFamily
-        };
-    }
-
-    private int CalculateStartColumn(DateOnly date)
-    {
-        var dayofWeek = (int)date.DayOfWeek;
-
-        var column = Culture.DateTimeFormat.FirstDayOfWeek == DayOfWeek.Sunday ? dayofWeek : dayofWeek - 1;
-
-        return column == -1 ? 6 : column;
-    }
-
     private static Border CreateLayout()
     {
-        return new ()
+        return new()
         {
             Background = Colors.Transparent,
             Padding = 10,
             Margin = 0
         };
     }
-    private Label CreateDayLabel(int day, Color color)
+
+    protected virtual Label CreateDayLabel(int day, Color color)
     {
         return new()
         {
@@ -272,6 +267,13 @@ public class CalendarDaysContent
             VerticalOptions = LayoutOptions.Center,
             FontFamily = DaysFontFamily
         };
+    }
+    private Label CreateDayLabelForSelectedDay(int day)
+    {
+        var label = CreateDayLabel(day, SelectedDayColor);
+        label.TextColor = SelectedDayColor;
+
+        return label;
     }
 
     private bool AllowSelectDay(DateOnly date)
@@ -285,7 +287,7 @@ public class CalendarDaysContent
         return true;
     }
 
-    private TapGestureRecognizer CreateTappedCommandForDay(DateOnly day, Border layout)
+    protected virtual TapGestureRecognizer CreateTappedCommandForDay(DateOnly day, Border layout)
     {
         var tapGestureRecognizer = new TapGestureRecognizer();
         tapGestureRecognizer.Tapped += (s, e) =>
@@ -295,7 +297,7 @@ public class CalendarDaysContent
             if (day.Day != currentDate.Day)
             {
                 layout.Background = SelectedBackgroundColor;
-                layout.Content = CreateDayLabel(day.Day, SelectedDayColor);
+                layout.Content = CreateDayLabelForSelectedDay(day.Day);
 
                 CurrentLayoutSelected.Background = Colors.Transparent;
                 CurrentLayoutSelected.Content = CreateDayLabel(currentDate.Day, PrimaryColor);

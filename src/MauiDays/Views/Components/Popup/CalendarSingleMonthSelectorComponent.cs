@@ -1,11 +1,10 @@
 ﻿using MauiDays.Services;
 using System.Globalization;
-using System.Text.RegularExpressions;
 
-namespace MauiDays.Views.Components;
-public class CalendarMonthsContent
+namespace MauiDays.Views.Components.Popup;
+public class CalendarSingleMonthSelectorComponent
 {
-    private static CalendarMonthsContent _instance;
+    private static CalendarSingleMonthSelectorComponent _instance;
 
     private readonly Grid _view;
 
@@ -21,7 +20,7 @@ public class CalendarMonthsContent
     private DateOnly? MinimumDate { get; set; }
     private DateOnly? MaximumDate { get; set; }
 
-    private CalendarMonthsContent()
+    private CalendarSingleMonthSelectorComponent()
     {
         if (_view is null)
         {
@@ -48,63 +47,63 @@ public class CalendarMonthsContent
         }
     }
 
-    public static CalendarMonthsContent Instance()
+    public static CalendarSingleMonthSelectorComponent Instance()
     {
-        _instance = new CalendarMonthsContent();
+        _instance = new CalendarSingleMonthSelectorComponent();
 
         return _instance;
     }
 
-    public CalendarMonthsContent SetDate(DateOnlyService date)
+    public CalendarSingleMonthSelectorComponent SetDate(DateOnlyService date)
     {
         CurrentDate = date;
 
         return this;
     }
 
-    public CalendarMonthsContent SetCulture(CultureInfo culture)
+    public CalendarSingleMonthSelectorComponent SetCulture(CultureInfo culture)
     {
         Culture = culture;
 
         return this;
     }
 
-    public CalendarMonthsContent SetPrimaryColor(Color color)
+    public CalendarSingleMonthSelectorComponent SetPrimaryColor(Color color)
     {
         PrimaryColor = color;
 
         return this;
     }
 
-    public CalendarMonthsContent SetSelectedMonthColor(Color color)
+    public CalendarSingleMonthSelectorComponent SetSelectedMonthColor(Color color)
     {
         SelectedMonthColor = color;
 
         return this;
     }
 
-    public CalendarMonthsContent SetSelectedBackgroundColor(Color color)
+    public CalendarSingleMonthSelectorComponent SetSelectedBackgroundColor(Color color)
     {
         SelectedBackgroundColor = color;
 
         return this;
     }
 
-    public CalendarMonthsContent SetMonthsFontFamily(string fontFamily)
+    public CalendarSingleMonthSelectorComponent SetMonthsFontFamily(string fontFamily)
     {
         MonthsFontFamily = fontFamily;
 
         return this;
     }
 
-    public CalendarMonthsContent SetMinimumDate(DateOnly? date)
+    public CalendarSingleMonthSelectorComponent SetMinimumDate(DateOnly? date)
     {
         if (date.HasValue)
             MinimumDate = new DateOnly(date.Value.Year, date.Value.Month, 1);
 
         return this;
     }
-    public CalendarMonthsContent SetMaximumDate(DateOnly? date)
+    public CalendarSingleMonthSelectorComponent SetMaximumDate(DateOnly? date)
     {
         if (date.HasValue)
             MaximumDate = new DateOnly(date.Value.Year, date.Value.Month, 1);
@@ -178,7 +177,7 @@ public class CalendarMonthsContent
         return new()
         {
             Background = Colors.Transparent,
-            Padding = new Thickness(15,20,15,20),
+            Padding = new Thickness(15, 20, 15, 20),
             Margin = 0
         };
     }

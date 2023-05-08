@@ -1,5 +1,5 @@
 ﻿using MauiDays.Services;
-using MauiDays.Views.Components;
+using MauiDays.Views.Components.Popup;
 using Mopups.Pages;
 using Mopups.Services;
 using System.Globalization;
@@ -165,7 +165,7 @@ public class SingleDaySelectorCalendarPopup
 
     public PopupPage Build()
     {
-        var header = CalendarHeader
+        var header = CalendarHeaderComponent
             .Instance()
             .SetPrimaryColor(PrimaryColor)
             .SetBackgroundColor(_popup.Content.BackgroundColor)
@@ -176,7 +176,7 @@ public class SingleDaySelectorCalendarPopup
             .SetMaximumDate(MaximumDate)
             .Build();
 
-        var calendarContent = CalendarDaysContent
+        var calendarContent = CalendarSingleDaySelectorComponent
             .Instance()
             .SetPrimaryColor(PrimaryColor)
             .SetCulture(Culture)
@@ -189,7 +189,7 @@ public class SingleDaySelectorCalendarPopup
             .SetSelectedDayColor(SelectedDayColor)
             .Build();
 
-        var confirmationControls = CalendarConfirmationControls
+        var confirmationControls = CalendarConfirmationControlsComponent
             .Instance()
             .SetPrimaryColor(PrimaryColor)
             .SetBackgroundColor(_popup.Content.BackgroundColor)

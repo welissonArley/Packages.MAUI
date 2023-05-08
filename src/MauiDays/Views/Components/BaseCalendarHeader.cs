@@ -2,13 +2,11 @@
 using System.Globalization;
 
 namespace MauiDays.Views.Components;
-public class CalendarHeader
+public abstract class BaseCalendarHeader
 {
-    private static CalendarHeader _instance;
-
     private readonly Grid _view;
 
-    private DateOnlyService CurrentDate;
+    protected DateOnlyService CurrentDate;
     private Color PrimaryColor { get; set; }
     private Color BackgroundColor { get; set; }
     private string FontFamily { get; set; }
@@ -18,7 +16,7 @@ public class CalendarHeader
     private DateOnly? MinimumDate { get; set; }
     private DateOnly? MaximumDate { get; set; }
 
-    private CalendarHeader()
+    protected BaseCalendarHeader()
     {
         if (_view is null)
         {
@@ -34,63 +32,58 @@ public class CalendarHeader
 
             Culture = CultureInfo.CurrentCulture;
         }
+        else
+            _view.Clear();
     }
 
-    public static CalendarHeader Instance()
-    {
-        _instance = new CalendarHeader();
-
-        return _instance;
-    }
-
-    public CalendarHeader SetPrimaryColor(Color color)
+    public BaseCalendarHeader SetPrimaryColor(Color color)
     {
         PrimaryColor = color;
 
         return this;
     }
 
-    public CalendarHeader SetBackgroundColor(Color color)
+    public BaseCalendarHeader SetBackgroundColor(Color color)
     {
         BackgroundColor = color;
 
         return this;
     }
 
-    public CalendarHeader SetFontFamily(string fontFamily)
+    public BaseCalendarHeader SetFontFamily(string fontFamily)
     {
         FontFamily = fontFamily;
 
         return this;
     }
 
-    public CalendarHeader SetDate(DateOnlyService date)
+    public BaseCalendarHeader SetDate(DateOnlyService date)
     {
         CurrentDate = date;
 
         return this;
     }
 
-    public CalendarHeader SetCulture(CultureInfo culture)
+    public BaseCalendarHeader SetCulture(CultureInfo culture)
     {
         Culture = culture;
 
         return this;
     }
 
-    public CalendarHeader SetMinimumDate(DateOnly? date)
+    public BaseCalendarHeader SetMinimumDate(DateOnly? date)
     {
         MinimumDate = date;
 
         return this;
     }
-    public CalendarHeader SetMaximumDate(DateOnly? date)
+    public BaseCalendarHeader SetMaximumDate(DateOnly? date)
     {
         MaximumDate = date;
 
         return this;
     }
-    public CalendarHeader IsMonthCalendar()
+    public BaseCalendarHeader IsMonthCalendar()
     {
         MonthCalendar = true;
 
@@ -108,20 +101,14 @@ public class CalendarHeader
 
         previousDateButton.Clicked += (_, _) =>
         {
-            if (MonthCalendar)
-                CurrentDate.AddYears(-1);
-            else
-                CurrentDate.AddMonths(-1);
+            HeaderButtonNextPreviousCommand(-1);
 
             ButtonSelectedBase(labelShowingDate, previousDateButton, nextDateButton);
         };
 
         nextDateButton.Clicked += (_, _) =>
         {
-            if (MonthCalendar)
-                CurrentDate.AddYears(1);
-            else
-                CurrentDate.AddMonths(1);
+            HeaderButtonNextPreviousCommand(1);
 
             ButtonSelectedBase(labelShowingDate, previousDateButton, nextDateButton);
         };
@@ -140,7 +127,7 @@ public class CalendarHeader
 
     private Button CreateButton(string symbol, Thickness thickness)
     {
-        return new ()
+        return new()
         {
             Text = symbol,
             TextColor = PrimaryColor,
@@ -157,7 +144,7 @@ public class CalendarHeader
     private void ButtonSelectedBase(Label labelShowingDate, Button previousDateButton, Button nextDateButton)
     {
         labelShowingDate.UpdateText(CurrentDate.GetDate(), Culture, MonthCalendar);
-        
+
         CheckMinDate(previousDateButton);
         CheckMaxDate(nextDateButton);
     }
@@ -223,6 +210,14 @@ public class CalendarHeader
             button.IsVisible = false;
         else
             button.IsVisible = true;
+    }
+
+    protected virtual void HeaderButtonNextPreviousCommand(int timeToAdd)
+    {
+        if (MonthCalendar)
+            CurrentDate.AddYears(timeToAdd);
+        else
+            CurrentDate.AddMonths(timeToAdd);
     }
 }
 
