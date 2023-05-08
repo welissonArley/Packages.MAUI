@@ -1,4 +1,4 @@
-﻿using MauiCode.Helpers.Extensions;
+﻿using Shared.Helpers.Extensions;
 
 namespace MauiCode.Views.Components.Keyboards.Base;
 public abstract class BaseKeyboardShapeViewer : BaseKeyboardViewer

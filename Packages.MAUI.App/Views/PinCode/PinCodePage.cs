@@ -1,4 +1,3 @@
-using MauiCode.Helpers.Extensions;
 using MauiCode.Views.Components.CodeViewers.Base;
 using MauiCode.Views.Components.CodeViewers.Hide;
 using MauiCode.Views.Components.CodeViewers.Show;
@@ -7,6 +6,7 @@ using MauiCode.Views.Components.Keyboards.Base;
 using MauiCode.Views.Pages;
 using Packages.MAUI.App.Model.Enums;
 using Packages.MAUI.App.ViewModels.PinCode;
+using Shared.Helpers.Extensions;
 
 namespace Packages.MAUI.App.Views.PinCode;
 

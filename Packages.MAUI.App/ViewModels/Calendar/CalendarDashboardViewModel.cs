@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mopups.Services;
+using Packages.MAUI.App.Helpers;
 using Packages.MAUI.App.Helpers.Calendar;
 using Packages.MAUI.App.Views.Popups;
 
@@ -8,7 +9,7 @@ namespace Packages.MAUI.App.ViewModels.Calendar;
 public partial class CalendarDashboardViewModel : ObservableObject
 {
     [RelayCommand]
-    public static async void SingleMonth()
+    public static async Task SingleMonth()
     {
         var today = DateTime.Today;
 
@@ -25,7 +26,7 @@ public partial class CalendarDashboardViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public static async void SingleDay()
+    public static async Task SingleDay()
     {
         var today = DateTime.Today;
 
@@ -40,6 +41,9 @@ public partial class CalendarDashboardViewModel : ObservableObject
 
         await MopupService.Instance.PushAsync(popup);
     }
+
+    [RelayCommand]
+    public static async Task SingleDayPage() => await Shell.Current.GoToAsync(RoutePages.SINGLE_DAY_CALENDAR_PAGE);
 
     private static async Task Callback(DateOnly date, bool isMonth)
     {

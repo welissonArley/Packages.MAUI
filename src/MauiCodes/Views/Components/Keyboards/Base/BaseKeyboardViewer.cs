@@ -1,4 +1,4 @@
-﻿using MauiCode.Helpers.Extensions;
+﻿using Shared.Helpers.Extensions;
 using System.Windows.Input;
 
 namespace MauiCode.Views.Components.Keyboards.Base;

@@ -1,5 +1,5 @@
-using MauiCode.Helpers.Extensions;
 using Mopups.Services;
+using Shared.Helpers.Extensions;
 
 namespace Packages.MAUI.App.Views.Popups;
 

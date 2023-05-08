@@ -26,4 +26,8 @@
 	  <None Remove="Platforms\**" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Shared\Shared.csproj" />
+	</ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
-﻿using MauiCode.Helpers.Extensions;
-using MauiDays.Views.Popups.DaySelector;
+﻿using MauiDays.Views.Popups.DaySelector;
 using MauiDays.Views.Popups.MonthSelector;
+using Shared.Helpers.Extensions;
 
 namespace Packages.MAUI.App.Helpers.Calendar;
 public static class CalendarPopupBuilder
