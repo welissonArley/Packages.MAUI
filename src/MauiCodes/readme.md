@@ -41,7 +41,7 @@ This library provides developers with an easy way to add a customizable pin code
 - **Code viewer:** includes several different options for customization.
 - **Headline:** you have the flexibility to fully customize the headline phrases.
 - **Color customization:** giving you complete control over the look and feel of your keyboard and code viewer.
-- **Customize the length of your code:** adjust the code lenght (default is 4).
+- **Customize the length of your code:** adjust the code length (default is 4).
 - and others.
 
 ## Getting Started
@@ -178,7 +178,7 @@ pinCodePage.CodeViewer = new CircleHidingCodeViewer();
 - **Color:** allows you to set the color of the pin code shape.
 - **Size:** allows you to set the size of the pin code shape.
 
-If you choose show the pin code, you can use the following properties too:
+If you choose to show the pin code, you can use the following properties too:
 
 - **FontSize:** allows you to set the font size for the numbers.
 - **TextColor:** allows you to set the text color for the numbers.
@@ -238,7 +238,7 @@ pinCodePage.KeyboardViewer = new KeyboardSquare();
 - **CancelTextFontSize:** allows you to set the font size for the text "Cancel".
 - **TextColor:** allows you to set the text color for the numbers.
 - **CancelTextColor:** allows you to set the text color for the text "Cancel".
-- **CancelText:** allows you to set the string to show if the user want to cancel the operation, this is useful for translation for example.
+- **CancelText:** allows you to set the string to show if the user wants to cancel the operation. This is useful for translation, for example.
 - **BackspaceColor:** allows you to set the color of backspace button.
 
 If you choose the keyboard with shape, you can use the following property too:
