@@ -183,7 +183,38 @@ public partial class CalendarDashboardViewModel : ObservableObject
 
 #### Pages
 
-jhjkjkh
+My customizable calendar page give you the freedom to create a personalized interface with a customizable calendar and IView of your choice. The page receive as parameter a command that triggers every time a user selects a day. This powerful combination allows you displaying detailed information about a selected day, or triggering a specific event.
+
+Here's an example:
+
+```xaml
+<page:SingleDaySelectorPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:MauiDays.Views.Pages;assembly=MauiDays"
+    x:Class="Packages.MAUI.App.Views.Calendar.SingleDaySelectorPage"
+    OnDaySelectedCommand="{Binding SelectedDayCommand}">
+
+   <page:SingleDaySelectorPage.MyContent>
+        <VerticalStackLayout Margin="0,40,0,0">
+            <Label Text="YOU CAN CREATE ANY KIND OF IVIEW INSIDE THE PROPERTY MyContent" />
+        </VerticalStackLayout>
+    </page:SingleDaySelectorPage.MyContent>
+
+</page:SingleDaySelectorPage>
+```
+
+don't forget to change the Code-behind
+
+```csharp
+public partial class SingleDaySelectorPage : MauiDays.Views.Pages.SingleDaySelectorPage
+{
+  public SingleDaySelectorPage()
+	{
+		InitializeComponent();
+	}
+}
+```
 
 ##### Customizable properties for Calendar Pages
 
