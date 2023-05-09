@@ -4,16 +4,24 @@ namespace MauiCode.Views.Components.CodeViewers.Hide;
 
 public class CircleHidingCodeViewer : Base.BaseCodeViewer
 {
-    public override IView CreateCodeView(char? codeChar)
+    protected override IView CreateCodeView()
     {
         return new Ellipse
         {
             WidthRequest = Size,
             HeightRequest = Size,
             HorizontalOptions = LayoutOptions.Start,
-            Fill = codeChar.HasValue ? new SolidColorBrush(Color) : new SolidColorBrush(Color.WithAlpha(0.2f)),
+            Fill = ColorWithAlpha(),
             StrokeThickness = Size * 0.1,
             Stroke = new SolidColorBrush(Color)
         };
+    }
+
+    protected override void ChangeColorCodeView(IView view)
+    {
+        var layout = (Ellipse)view;
+
+        layout.Stroke = new SolidColorBrush(Color);
+        layout.Fill = ColorWithAlpha();
     }
 }
