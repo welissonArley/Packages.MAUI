@@ -29,7 +29,7 @@
                     <TapGestureRecognizer Command="{Binding IllustrationChangedCommand}" CommandParameter="{Static enums:IllustrationType.Turtle}"/>
                 </Border.GestureRecognizers>
                 <VerticalStackLayout Spacing="5">
-                    <Image Source="turtle.png" HeightRequest="40" />
+                    <Image Source="turtle_thumbnail.png" HeightRequest="40" />
                 </VerticalStackLayout>
             </Border>
 
@@ -43,7 +43,7 @@
                     <TapGestureRecognizer Command="{Binding IllustrationChangedCommand}" CommandParameter="{Static enums:IllustrationType.Dog}"/>
                 </Border.GestureRecognizers>
                 <VerticalStackLayout Spacing="5">
-                    <Image Source="dog.png" HeightRequest="40" />
+                    <Image Source="dog_thumbnail.png" HeightRequest="40" />
                 </VerticalStackLayout>
             </Border>
 
@@ -57,7 +57,7 @@
                     <TapGestureRecognizer Command="{Binding IllustrationChangedCommand}" CommandParameter="{Static enums:IllustrationType.Bird}"/>
                 </Border.GestureRecognizers>
                 <VerticalStackLayout Spacing="5">
-                    <Image Source="bird.png" HeightRequest="40" />
+                    <Image Source="bird_thumbnail.png" HeightRequest="40" />
                 </VerticalStackLayout>
             </Border>
 

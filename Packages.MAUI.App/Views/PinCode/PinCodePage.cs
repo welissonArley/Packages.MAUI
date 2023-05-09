@@ -53,7 +53,7 @@ public class PinCodePage : CodePage, IQueryAttributable
             {
                 Size = 20,
                 Color = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
-                CodeLength = 6,
+                CodeLength = 4,
                 Margin = new Thickness(0, 0, 0, 40)
             };
         }
@@ -66,7 +66,7 @@ public class PinCodePage : CodePage, IQueryAttributable
                 TextColor = Application.Current.IsLightMode() ? Colors.White : Colors.Black,
                 Color = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 FontSize = 25,
-                CodeLength = 6,
+                CodeLength = 4,
                 Margin = new Thickness(0, 0, 0, 40)
             };
         }
@@ -75,7 +75,7 @@ public class PinCodePage : CodePage, IQueryAttributable
         {
             Size = 20,
             Color = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
-            CodeLength = 6,
+            CodeLength = 4,
             Margin = new Thickness(0, 0, 0, 40)
         };
     }
@@ -116,7 +116,7 @@ public class PinCodePage : CodePage, IQueryAttributable
         };
     }
 
-    private static Image GetImage(IllustrationType illustrationType)
+    private Image GetImage(IllustrationType illustrationType)
     {
         if (illustrationType == IllustrationType.None) return null;
 
@@ -131,7 +131,7 @@ public class PinCodePage : CodePage, IQueryAttributable
         {
             Source = ImageSource.FromFile(path),
             HeightRequest = 120,
-            Margin = new Thickness(0, 0, 0, 40),
+            Margin = new Thickness(0, 0, 0, !string.IsNullOrWhiteSpace(Headline) || !string.IsNullOrWhiteSpace(SubHeadline) ? 40 : 0),
         };
     }
 }
