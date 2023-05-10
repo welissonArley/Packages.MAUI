@@ -247,15 +247,15 @@ If you choose the keyboard with shape, you can use the following property too:
 
 ```xaml
 <codePage:CodePage.KeyboardViewer>
-        <keyboard:KeyboardCircle
-            ShapeColor="{AppThemeBinding Light=Black, Dark=White}"
-            CancelTextColor="{AppThemeBinding Light=Black, Dark=White}"
-            FontSize="25"
-            Size="70"
-            CancelTextFontSize="18"
-            CancelText="CANCEL"
-            TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
-    </codePage:CodePage.CodeViewer>
+    <keyboard:KeyboardCircle
+        ShapeColor="{AppThemeBinding Light=Black, Dark=White}"
+        CancelTextColor="{AppThemeBinding Light=Black, Dark=White}"
+        FontSize="25"
+        Size="70"
+        CancelTextFontSize="18"
+        CancelText="CANCEL"
+        TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+</codePage:CodePage.CodeViewer>
 ```
 
 ## License
