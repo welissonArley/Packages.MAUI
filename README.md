@@ -42,7 +42,7 @@ Here are some details about the libraries included in this project:
 
 Each library in my project comes with its own documentation, providing detailed information and examples on how to use it in your .NET MAUI projects.
 
-I recommend exploring the documentation to understand the full range of capabilities each librarie offer.
+I recommend exploring the documentation to understand the full range of capabilities each library offers.
 
 Simply navigate to the corresponding folder in my GitHub repository and look for the documentation file.
 
@@ -71,18 +71,18 @@ You can install the NuGet Package into your .NET MAUI project or download the so
 
 ##### **Installation**
 
-1. Clone the repo
+1. Clone the repo:
    ```sh
    git clone https://github.com/welissonArley/Packages.MAUI.git
    ```
 
-2. Run the app Packages.MAUI.App to see the examples of all libraries
+2. Run the app Packages.MAUI.App to see the examples of all libraries.
 
 3. Have a good time testing.
 
 ## **BONUS**
 
-If you are new to .NET MAUI or you want to imporve or skills, I also offer a course on this topic. This course is designed to help developers learn from the basics of .NET MAUI development and how to build and publish on Google Play and App Store. You can find more information about the course on my website: https://www.homuai.com/homuai-course.
+If you are new to .NET MAUI or you want to improve your skills, I also offer a course on this topic. This course is designed to help developers learn from the basics of .NET MAUI development and how to build and publish on Google Play and App Store. You can find more information about the course on my website: https://www.homuai.com/homuai-course.
 
 ## **Roadmap**
 
