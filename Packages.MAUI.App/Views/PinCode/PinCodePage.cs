@@ -90,7 +90,7 @@ public class PinCodePage : CodePage, IQueryAttributable
                 CancelTextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 BackspaceColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 FontSize = 25,
-                Size = 70,
+                Size = 75,
                 CancelTextFontSize = 18,
                 TextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White
             },
@@ -99,7 +99,7 @@ public class PinCodePage : CodePage, IQueryAttributable
                 CancelTextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 BackspaceColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 FontSize = 25,
-                Size = 70,
+                Size = 75,
                 CancelTextFontSize = 18,
                 TextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White
             },
@@ -109,7 +109,7 @@ public class PinCodePage : CodePage, IQueryAttributable
                 CancelTextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 BackspaceColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 FontSize = 25,
-                Size = 70,
+                Size = 75,
                 CancelTextFontSize = 18,
                 TextColor = Application.Current.IsLightMode() ? Colors.White : Colors.Black
             }

@@ -27,4 +27,21 @@ public class SquareHidingCodeViewer : Base.BaseCodeViewer
         layout.Stroke = new SolidColorBrush(Color);
         layout.Background = ColorWithAlpha();
     }
+
+    public override void SetCode(string code)
+    {
+        base.SetCode(code);
+
+        for (var index = 0; index < CodeLength; index++)
+        {
+            var item = (Border)_layout.ElementAt(index);
+
+            char? codeChar = code.Length > index ? code.ElementAt(index) : null;
+
+            if (codeChar.HasValue)
+                item.Background = new SolidColorBrush(Color);
+            else
+                item.Background = ColorWithAlpha();
+        }
+    }
 }

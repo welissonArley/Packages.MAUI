@@ -24,4 +24,21 @@ public class CircleHidingCodeViewer : Base.BaseCodeViewer
         layout.Stroke = new SolidColorBrush(Color);
         layout.Fill = ColorWithAlpha();
     }
+
+    public override void SetCode(string code)
+    {
+        base.SetCode(code);
+
+        for (var index = 0; index < CodeLength; index++)
+        {
+            var item = (Ellipse)_layout.ElementAt(index);
+
+            char? codeChar = code.Length > index ? code.ElementAt(index) : null;
+
+            if (codeChar.HasValue)
+                item.Fill = new SolidColorBrush(Color);
+            else
+                item.Fill = ColorWithAlpha();
+        }
+    }
 }

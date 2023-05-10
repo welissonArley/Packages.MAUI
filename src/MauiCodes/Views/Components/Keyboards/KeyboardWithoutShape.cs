@@ -3,7 +3,7 @@
 namespace MauiCode.Views.Components.Keyboards;
 public class KeyboardWithoutShape : BaseKeyboardViewer
 {
-    public override Button CreateButton(int value)
+    protected override Button CreateButton(int value)
     {
         return new Button
         {
@@ -14,5 +14,11 @@ public class KeyboardWithoutShape : BaseKeyboardViewer
             FontSize = FontSize,
             TextColor = TextColor
         };
+    }
+
+    protected override void SetSize(Button button)
+    {
+        button.WidthRequest = Size;
+        button.HeightRequest = Size;
     }
 }
