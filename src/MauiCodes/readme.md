@@ -186,15 +186,15 @@ If you choose to show the pin code, you can use the following properties too:
 
 ```xaml
 <codePage:CodePage.CodeViewer>
-        <codeViewer:CircleShowingCodeViewer
-            Size="40"
-            TextColor="{AppThemeBinding Light=White, Dark=Black}"
-            Color="{AppThemeBinding Light=Black,Dark=White}"
-            FontSize="25"
-            FontFamily="RalewayBlack"
-            CodeLength="6"
-            Margin="0,0,0,40"/>
-    </codePage:CodePage.CodeViewer>
+    <codeViewer:CircleShowingCodeViewer
+        Size="40"
+        TextColor="{AppThemeBinding Light=White, Dark=Black}"
+        Color="{AppThemeBinding Light=Black,Dark=White}"
+        FontSize="25"
+        FontFamily="RalewayBlack"
+        CodeLength="6"
+        Margin="0,0,0,40"/>
+</codePage:CodePage.CodeViewer>
 ```
 
 ### Keyboard
