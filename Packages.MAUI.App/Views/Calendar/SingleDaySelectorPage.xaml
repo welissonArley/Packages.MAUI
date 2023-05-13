@@ -17,6 +17,8 @@
     DaysOfWeekFontFamily="OpenSansRegular"
     DaysFontFamily="OpenSansRegular"
     DaysWithEvents="{Binding DaysWithEvents}"
+    HighlightColor="{AppThemeBinding Light=#DC143C, Dark=#F22613}"
+    Culture="{Binding Culture}"
     Date="{Binding Date}">
 
    <page:SingleDaySelectorPage.MyContent>

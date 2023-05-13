@@ -2,9 +2,7 @@
 public class DateOnlyService
 {
     private DateOnly _date;
-    private Action _onChangedMonth;
-    private Action _onChangedYear;
-    private Action _onChoseDayInNextOrPreviousMonth;
+    private Action _onHeaderChangeDate;
 
     public DateOnlyService() => SetDate(DateOnly.FromDateTime(DateTime.Today));
 
@@ -14,27 +12,19 @@ public class DateOnlyService
     {
         var oldDate = _date;
         _date = dateTime;
-
-        if (oldDate.Month != dateTime.Month && _onChoseDayInNextOrPreviousMonth is not null)
-            _onChoseDayInNextOrPreviousMonth();
-
     }
 
     public void AddMonths(int month)
     {
         _date = _date.AddMonths(month);
-        if (_onChangedMonth is not null)
-            _onChangedMonth();
+        _onHeaderChangeDate?.Invoke();
     }
 
     public void AddYears(int years)
     {
         _date = _date.AddYears(years);
-        if (_onChangedYear is not null)
-            _onChangedYear();
+        _onHeaderChangeDate?.Invoke();
     }
 
-    public void OnChangedMonth(Action onChange) => _onChangedMonth = onChange;
-    public void OnChangedYear(Action onChange) => _onChangedYear = onChange;
-    public void OnChoseDayInNextOrPreviousMonth(Action onChange) => _onChoseDayInNextOrPreviousMonth = onChange;
+    public void OnHeaderChangeDate(Action action) => _onHeaderChangeDate = action;
 }

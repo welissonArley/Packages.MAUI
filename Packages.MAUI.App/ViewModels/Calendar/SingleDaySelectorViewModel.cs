@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Globalization;
 
 namespace Packages.MAUI.App.ViewModels.Calendar;
 public partial class SingleDaySelectorViewModel : ObservableObject
@@ -16,8 +17,13 @@ public partial class SingleDaySelectorViewModel : ObservableObject
     [ObservableProperty]
     public IList<int> daysWithEvents;
 
+    [ObservableProperty]
+    public CultureInfo culture;
+
     public SingleDaySelectorViewModel()
     {
+        Culture = CultureInfo.CurrentCulture;
+
         var today = DateOnly.FromDateTime(DateTime.Today);
 
         Date = today;

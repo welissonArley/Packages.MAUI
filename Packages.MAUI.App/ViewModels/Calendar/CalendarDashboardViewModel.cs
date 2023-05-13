@@ -11,13 +11,14 @@ public partial class CalendarDashboardViewModel : ObservableObject
     [RelayCommand]
     public static async Task SingleMonth()
     {
-        var today = DateTime.Today;
+        var today = DateOnly.FromDateTime(DateTime.Today);
 
         var popup = CalendarPopupBuilder
             .SingleMonth(async (date) =>
             {
                 await Callback(date, true);
             })
+            .SetDate(today)
             .SetMinimumDate(new DateOnly(today.Year - 1, today.Month, 7))
             .SetMaximumDate(new DateOnly(today.Year + 1, today.Month, 7))
             .Build();
@@ -28,7 +29,7 @@ public partial class CalendarDashboardViewModel : ObservableObject
     [RelayCommand]
     public static async Task SingleDay()
     {
-        var today = DateTime.Today;
+        var today = DateOnly.FromDateTime(DateTime.Today);
 
         var popup = CalendarPopupBuilder
             .SingleDay(async (date) =>
@@ -47,6 +48,8 @@ public partial class CalendarDashboardViewModel : ObservableObject
 
     private static async Task Callback(DateOnly date, bool isMonth)
     {
+        await MopupService.Instance.PopAsync();
+
         var datestring = date.ToString(isMonth ? "MMMM/yyyy" : "dd-MMMM-yyyy");
 
         var popup = new ShowInformationPopup($"Did you choose {datestring}?");
