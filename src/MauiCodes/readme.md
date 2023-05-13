@@ -14,7 +14,8 @@
       <ul>
         <li><a href="#installation">Installation</a></li>
         <li><a href="#usage">Usage</a></li>
-        <li><a href="#customizing-the-appearance">Customizing the Appearance</a></li>        
+        <li><a href="#customizing-the-appearance">Customizing the Appearance</a></li>
+        <li><a href="#full-code">Full code</a></li>
       </ul>
     </li>
   </ol>
@@ -186,15 +187,15 @@ If you choose to show the pin code, you can use the following properties too:
 
 ```xaml
 <codePage:CodePage.CodeViewer>
-        <codeViewer:CircleShowingCodeViewer
-            Size="40"
-            TextColor="{AppThemeBinding Light=White, Dark=Black}"
-            Color="{AppThemeBinding Light=Black,Dark=White}"
-            FontSize="25"
-            FontFamily="RalewayBlack"
-            CodeLength="6"
-            Margin="0,0,0,40"/>
-    </codePage:CodePage.CodeViewer>
+    <codeViewer:CircleShowingCodeViewer
+        Size="40"
+        TextColor="{AppThemeBinding Light=White, Dark=Black}"
+        Color="{AppThemeBinding Light=Black,Dark=White}"
+        FontSize="25"
+        FontFamily="RalewayBlack"
+        CodeLength="6"
+        Margin="0,0,0,40"/>
+</codePage:CodePage.CodeViewer>
 ```
 
 ### Keyboard
@@ -247,15 +248,57 @@ If you choose the keyboard with shape, you can use the following property too:
 
 ```xaml
 <codePage:CodePage.KeyboardViewer>
-        <keyboard:KeyboardCircle
-            ShapeColor="{AppThemeBinding Light=Black, Dark=White}"
-            CancelTextColor="{AppThemeBinding Light=Black, Dark=White}"
+    <keyboard:KeyboardCircle
+        ShapeColor="{AppThemeBinding Light=Black, Dark=White}"
+        CancelTextColor="{AppThemeBinding Light=Black, Dark=White}"
+        FontSize="25"
+        Size="70"
+        CancelTextFontSize="18"
+        CancelText="CANCEL"
+        TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+</codePage:CodePage.CodeViewer>
+```
+
+## Full code
+
+```xaml
+<?xml version="1.0" encoding="utf-8" ?>
+<codePage:CodePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:codePage="clr-namespace:MauiCode.Views.Pages;assembly=MauiCodes"
+    x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage"
+    CallbackCodeFinished="{Binding UserEndTheCodeCommand}"
+    Headline="YOUR HEADLINE HERE"
+    SubHeadline="YOUR SUBHEADLINE HERE">
+    
+    <codePage:CodePage.Illustration>
+        <Image Source="illustration_dog.png" HeightRequest="80"/>
+    </codePage:CodePage.Illustration>
+    
+    <codePage:CodePage.CodeViewer>
+        <codeViewer:CircleShowingCodeViewer
+            Size="40"
+            TextColor="{AppThemeBinding Light=White, Dark=Black}"
+            Color="{AppThemeBinding Light=Black,Dark=White}"
             FontSize="25"
-            Size="70"
-            CancelTextFontSize="18"
-            CancelText="CANCEL"
-            TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+            FontFamily="RalewayBlack"
+            CodeLength="6"
+            Margin="0,0,0,40"/>
     </codePage:CodePage.CodeViewer>
+  
+  <codePage:CodePage.KeyboardViewer>
+      <keyboard:KeyboardCircle
+          ShapeColor="{AppThemeBinding Light=Black, Dark=White}"
+          CancelTextColor="{AppThemeBinding Light=Black, Dark=White}"
+          FontSize="25"
+          Size="70"
+          CancelTextFontSize="18"
+          CancelText="CANCEL"
+          TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+  </codePage:CodePage.CodeViewer>
+    
+</codePage:CodePage>
 ```
 
 ## License
