@@ -1,7 +1,7 @@
 ﻿using Shared.Helpers.Extensions;
 using System.Windows.Input;
 
-namespace MauiCode.Views.Components.Keyboards.Base;
+namespace MauiCodes.Views.Components.Keyboards.Base;
 
 public abstract class BaseKeyboardViewer : ContentView
 {

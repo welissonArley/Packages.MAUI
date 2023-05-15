@@ -1,9 +1,9 @@
-using MauiCode.Views.Components.CodeViewers.Base;
-using MauiCode.Views.Components.CodeViewers.Hide;
-using MauiCode.Views.Components.CodeViewers.Show;
-using MauiCode.Views.Components.Keyboards;
-using MauiCode.Views.Components.Keyboards.Base;
-using MauiCode.Views.Pages;
+using MauiCodes.Views.Components.CodeViewers.Base;
+using MauiCodes.Views.Components.CodeViewers.Hide;
+using MauiCodes.Views.Components.CodeViewers.Show;
+using MauiCodes.Views.Components.Keyboards;
+using MauiCodes.Views.Components.Keyboards.Base;
+using MauiCodes.Views.Pages;
 using Packages.MAUI.App.Model.Enums;
 using Packages.MAUI.App.ViewModels.PinCode;
 using Shared.Helpers.Extensions;

@@ -1,6 +1,6 @@
-﻿using MauiCode.Views.Components.Keyboards.Base;
+﻿using MauiCodes.Views.Components.Keyboards.Base;
 
-namespace MauiCode.Views.Components.Keyboards;
+namespace MauiCodes.Views.Components.Keyboards;
 public class KeyboardWithoutShape : BaseKeyboardViewer
 {
     protected override Button CreateButton(int value)

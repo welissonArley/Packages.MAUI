@@ -1,6 +1,6 @@
 ﻿using Shared.Helpers.Extensions;
 
-namespace MauiCode.Views.Components.CodeViewers.Base;
+namespace MauiCodes.Views.Components.CodeViewers.Base;
 public abstract class BaseShowingCodeViewer : BaseCodeViewer
 {
     protected const double FONT_SIZE = 32;

@@ -1,7 +1,7 @@
-using MauiCode.Views.Components.CodeViewers.Base;
+using MauiCodes.Views.Components.CodeViewers.Base;
 using Microsoft.Maui.Controls.Shapes;
 
-namespace MauiCode.Views.Components.CodeViewers.Show;
+namespace MauiCodes.Views.Components.CodeViewers.Show;
 
 public class CircleShowingCodeViewer : BaseShowingCodeViewer
 {

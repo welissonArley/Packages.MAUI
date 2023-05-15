@@ -1,6 +1,6 @@
 ﻿using Shared.Helpers.Extensions;
 
-namespace MauiCode.Views.Components.Keyboards.Base;
+namespace MauiCodes.Views.Components.Keyboards.Base;
 public abstract class BaseKeyboardShapeViewer : BaseKeyboardViewer
 {
     public Color ShapeColor

@@ -1,6 +1,6 @@
 using Microsoft.Maui.Controls.Shapes;
 
-namespace MauiCode.Views.Components.CodeViewers.Hide;
+namespace MauiCodes.Views.Components.CodeViewers.Hide;
 
 public class CircleHidingCodeViewer : Base.BaseCodeViewer
 {

@@ -1,11 +1,11 @@
-using MauiCode.Views.Components.CodeViewers.Base;
-using MauiCode.Views.Components.CodeViewers.Hide;
-using MauiCode.Views.Components.Keyboards;
-using MauiCode.Views.Components.Keyboards.Base;
+using MauiCodes.Views.Components.CodeViewers.Base;
+using MauiCodes.Views.Components.CodeViewers.Hide;
+using MauiCodes.Views.Components.Keyboards;
+using MauiCodes.Views.Components.Keyboards.Base;
 using System.Text;
 using System.Windows.Input;
 
-namespace MauiCode.Views.Pages;
+namespace MauiCodes.Views.Pages;
 
 public class CodePage : ContentPage
 {
