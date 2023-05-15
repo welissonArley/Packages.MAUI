@@ -66,28 +66,40 @@ Install-Package MauiDays
 
 #### Popups
 
-Please, remember that you need to install the Mopups nuget package. This dependency is necessary to use the popups.
+Please, remember that you need to install and configure the Mopups nuget package. This dependency is necessary to use the popups.
 
 ```powershell
 Install-Package Mopups
+```
+
+```csharp
+public static MauiApp CreateMauiApp()
+{
+	var builder = MauiApp.CreateBuilder();
+	builder
+    		.UseMauiApp<App>()
+    		.ConfigureMopups();
+
+	return builder.Build();
+}
 ```
 
 You can use the Calendar popups with a fluent syntax, a programming style that focuses on making code more readable. By using the fluent syntax, it becomes easier for the developer to understand and modify the behavior of the popups, making it a more user-friendly and efficient approach to programming.
 
 Keep in mind that:
 
-1. You should always start by calling the **Instance** function, which takes a command as an argument. This command will be triggered when the user clicks the confirm button on the selector popups.
-2. You should always finish by calling the **Build** function to receive the instance of the popup.
+1. It is crucial for you to start implementing the two callback functions. One for when the user interacts with a cancel button and another one to OK button. This approach ensures that your application can respond appropriately to the user's actions and provide a good user experience. By providing a callback function for the cancel button, you enable the user to abort the current operation or close a dialog without proceeding further. On the other hand, by including a callback function for the OK button, you allow the user to confirm their selection and the callback will receive the date choosed.
+2. You should always finish by calling the **BUILD** function to receive an popup instance.
 
 Here's an example:
 
 ```csharp
-var popup = SingleDaySelectorCalendarPopup
-            .Instance(async (date) =>
-            {
-                await OnDateChanged(date);
-            })
-            .Build();
+var popup = new SingleDaySelectorCalendarPopup
+	(
+	    callbackCancel: async () => { await MopupService.Instance.PopAsync(); },
+	    callbackConfirm: async (date) => { await OnDateChanged(date); }
+	)
+	.Build();
 
 await MopupService.Instance.PushAsync(popup);
 ```
@@ -96,11 +108,11 @@ and the same for the Month selector:
 
 ```csharp
 var popup = SingleMonthSelectorCalendarPopup
-            .Instance(async (month) =>
-            {
-                await OnDateChanged(month);
-            })
-            .Build();
+	(
+	    callbackCancel: async () => { await MopupService.Instance.PopAsync(); },
+	    callbackConfirm: async (date) => { await OnDateChanged(date); }
+	)
+	.Build();
 
 await MopupService.Instance.PushAsync(popup);
 ```
@@ -112,66 +124,107 @@ Below, you will find a list of available options for the Day Selector popup and 
 
 ##### Customizable properties for Calendar Mopups
 
-- **Date:** allows you to set an initial date for the calendar.
-- **Culture:** allows you to set the calendar culture, which can affect the formatting of dates and the names of months and weekdays displayed in the calendar popups.
-- **PrimaryColor:** allows you to customize the color scheme of the calendar and selectors to match your app's branding.
-- **SelectedMonthColor/SelectedDayColor:** allows you to change the text color that is displayed when a user selects a day/month on the calendar.
-- **SelectedBackgroundColor:** allows you to change the background color that is displayed when a user selects a day/month on the calendar.
-- **MinimumDate:** You may use this property to set the minimum selectable date on the calendar.
-- **MaximumDate:** You may use this property to set the maximum selectable date on the calendar.
-- **DaysOfWeekFontFamily:** allows you to customize the font family for the days of the week in the calendar.
-- **DaysFontFamily/MonthsFontFamily:** allowd you to set the font family for the text displayed for the days/month on the popups.
-- **HeaderFontFamily:** allows you to customize the font family for the calendar's header, that means the month year displayed
-- **TextCancel:**  is a property that allows you to customize the text for the cancel button.
+- **SetCulture:** allows you to set the calendar culture, which can affect the formatting of dates and the names of months and weekdays displayed in the calendar popups.
+- **SetPopupBackgroundColor:** property allows you to set the background color of the popups.
+- **SetCalendarBackgroundColor:** property allows you to set the background color of the calendar page.
+- **SetHeaderFontFamily:** allows you to customize the font family for the calendar's header, that means the month year displayed or just the year if you are using the month calendar popup.
+- **SetLabelFontFamily:** allowd you to set the font family for the text displayed for the days/month on the popups.
+- **SetPrimaryColor:** allows you to customize the color scheme of the calendar (day label, calendar's header) to match your app's branding.
+- **SetConfirmButtonColor:** is a property that allows you to customize the color of the confirm button on the popup. Keep in mind the contrast ration.
+- **SetConfirmButtonTextColor:** allows you customize the color for the check on the Confirm button.
+- **SetTextCancel:** is a property that allows you to customize the text for the cancel button.
 - **SetCancelFontFamily:** allows you to set the font family for the cancel button text.
-- **ConfirmButtonColor:** is a property that allows you to customize the color of the confirm button on the popup. Keep in mind the contrast ration, because the text color for this button is always the PrimaryColor.
-- **CalendarBackgroundColor:** property allows you to set the background color of the calendar page.
-- **PopupBackgroundColor:** property allows you to set the background color of the popups.
+- **SetSelectedBackgroundColor:** allows you to change the background color that is displayed when a user selects a day/month on the calendar.
+- **SetSelectedLabelColor:** allows you to change the text color that is displayed when a user selects a day/month on the calendar.
+- **SetDate:** allows you to set an initial date for the calendar.
+- **SetMinimumDate:** You may use this property to set the minimum selectable date on the calendar.
+- **SetMaximumDate:** You may use this property to set the maximum selectable date on the calendar.
+- **DontCloseWhenBackgroundIsClicked:** call this function if you don't want to allow the user close the popups if they touch on the popup's background.
+
+If you are using the Calendar Day selector, you can use the following property too, BUT remember: for technical reasons you need to call this function at first, that means:
+
+```csharp
+var popup = SingleMonthSelectorCalendarPopup
+	(
+	    callbackCancel: async () => { await MopupService.Instance.PopAsync(); },
+	    callbackConfirm: async (date) => { await OnDateChanged(date); }
+	)
+	.SetDaysOfWeekFontFamily(LabelDaysOfWeekFontFamily())
+	...
+	.Build();
+
+await MopupService.Instance.PushAsync(popup);
+```
+
+- **SetDaysOfWeekFontFamily:** allows you to customize the font family for the days of the week in the calendar.
 
 Now that you know all properties to customize your popups, let's see an example with the fluent syntax:
 
 ```csharp
 public static class CalendarPopupBuilder
 {
-    public static SingleMonthSelectorCalendarPopup SingleMonth(Action<DateOnly> callbackConfirm)
+    public static BaseCalendarPopup SingleMonth(Action<DateOnly> callbackConfirm)
     {
-        return SingleMonthSelectorCalendarPopup
-            .Instance(callbackConfirm)
-            .PopupBackgroundColor(PopupBackgroundColor())
-            .SetCancelFontFamily(CancelFontFamily())
-            .SetHeaderFontFamily(HeaderFontFamily())
-            .SetMonthFontFamily(LabelFontFamily())
-            .CalendarBackgroundColor(CalendarBackgroundColor())
+        return new SingleMonthSelectorCalendarPopup(async () => { await MopupService.Instance.PopAsync(); }, callbackConfirm)
+            .SetPopupBackgroundColor(PopupBackgroundColor())
+            .SetCalendarBackgroundColor(CalendarBackgroundColor())
             .SetPrimaryColor(PrimaryColor())
+            .SetHeaderFontFamily(HeaderFontFamily())
             .SetConfirmButtonColor(ColorForConfirmButton())
+            .SetTextCancel("CANCEL")
+            .SetConfirmButtonTextColor(SelectedConfirmButtonTextColor())
+            .SetCancelFontFamily(CancelFontFamily())
+            .SetCulture(Culture())
             .SetSelectedBackgroundColor(SelectedBackgroundColor())
-            .SetSelectedMonthColor(SelectedLabelColor());
+            .SetSelectedLabelColor(SelectedLabelColor())
+            .SetLabelFontFamily(LabelFontFamily());
+    }
+
+    public static BaseCalendarPopup SingleDay(Action<DateOnly> callbackConfirm)
+    {
+        return new SingleDaySelectorCalendarPopup(async () => { await MopupService.Instance.PopAsync(); }, callbackConfirm)
+            .SetDaysOfWeekFontFamily(LabelDaysOfWeekFontFamily())
+            .SetPopupBackgroundColor(PopupBackgroundColor())
+            .SetCalendarBackgroundColor(CalendarBackgroundColor())
+            .SetPrimaryColor(PrimaryColor())
+            .SetHeaderFontFamily(HeaderFontFamily())
+            .SetConfirmButtonColor(ColorForConfirmButton())
+            .SetTextCancel("CANCEL")
+            .SetConfirmButtonTextColor(SelectedConfirmButtonTextColor())
+            .SetCancelFontFamily(CancelFontFamily())
+            .SetCulture(Culture())
+            .SetSelectedBackgroundColor(SelectedBackgroundColor())
+            .SetSelectedLabelColor(SelectedLabelColor())
+            .SetLabelFontFamily(LabelFontFamily());
     }
 
     private static Color ColorForConfirmButton() => Color.FromArgb(Application.Current.IsLightMode() ? "#40806A" : "#00D46A");
     private static Color PrimaryColor() => Application.Current.IsLightMode() ? Colors.Black : Colors.White;
     private static Color SelectedBackgroundColor() => Application.Current.IsLightMode() ? Colors.Black : Colors.White;
     private static Color SelectedLabelColor() => Application.Current.IsLightMode() ? Colors.White : Colors.Black;
+    private static Color SelectedConfirmButtonTextColor() => Application.Current.IsLightMode() ? Colors.White : Colors.Black;
     private static Color CalendarBackgroundColor() => Application.Current.IsLightMode() ? Colors.White : Application.Current.GetDarkMode();
     private static Color PopupBackgroundColor() => Color.FromArgb("#80A1A1A1");
     private static string CancelFontFamily() => "OpenSansRegular";
     private static string HeaderFontFamily() => "OpenSansSemibold";
     private static string LabelFontFamily() => "OpenSansRegular";
+    private static string LabelDaysOfWeekFontFamily() => "OpenSansRegular";
+    private static CultureInfo Culture() => CultureInfo.CurrentCulture;
 }
-
 
 public partial class CalendarDashboardViewModel : ObservableObject
 {
     [RelayCommand]
     public static async Task SingleMonth()
     {
-        var today = DateTime.Today;
+        var today = DateOnly.FromDateTime(DateTime.Today);
 
         var popup = CalendarPopupBuilder
-            .SingleMonth((date) =>
+            .SingleMonth(async (date) =>
             {
-                //do something with the date
+                await Callback(date, true);
             })
+            .SetDate(today)
             .SetMinimumDate(new DateOnly(today.Year - 1, today.Month, 7))
             .SetMaximumDate(new DateOnly(today.Year + 1, today.Month, 7))
             .Build();
@@ -183,7 +236,7 @@ public partial class CalendarDashboardViewModel : ObservableObject
 
 #### Pages
 
-My customizable calendar page give you the freedom to create a personalized interface with a customizable calendar and IView of your choice. The page receive as parameter a command that triggers every time a user selects a day. This powerful combination allows you displaying detailed information about a selected day, or triggering a specific event.
+My customizable calendar page give you the freedom to create a personalized interface with a customizable calendar and IView of your choice. The page receive as parameter a command that triggers every time an user selects a day. This powerful combination allows you displaying detailed information about a selected day, or triggering a specific event.
 
 Here's an example:
 
@@ -209,29 +262,32 @@ don't forget to change the Code-behind
 ```csharp
 public partial class SingleDaySelectorPage : MauiDays.Views.Pages.SingleDaySelectorPage
 {
-  public SingleDaySelectorPage()
+	public SingleDaySelectorPage()
 	{
-		InitializeComponent();
+	   InitializeComponent();
 	}
 }
 ```
 
 ##### Customizable properties for Calendar Pages
 
-- **Date:** allows you to set an initial date for the calendar.
-- **Culture:** allows you to set the calendar culture, which can affect the formatting of dates and the names of months and weekdays displayed in the calendar popups.
-- **PrimaryColor:** allows you to customize the color scheme of the calendar and selectors to match your app's branding.
+- **HighlightColor:** allows you change the color for bring attention to event-filled days.
+- **DaysWithEvents:** a list of int that represents all days with some event, that means, you want to put attention on this days on the current month.
+- **OnDaySelectedCommand:** command that will trigger automatically when the user choose a day.
 - **SelectedDayColor:** allows you to change the text color that is displayed when a user selects a day on the calendar.
 - **SelectedBackgroundColor:** allows you to change the background color that is displayed when a user selects a day/month on the calendar.
+- **DaysFontFamily:** allows you to set the font family for the text displayed for the days on the popups.
+- **DaysOfWeekFontFamily:** allows you to customize the font family for the days of the week in the calendar.
 - **MinimumDate:** You may use this property to set the minimum selectable date on the calendar.
 - **MaximumDate:** You may use this property to set the maximum selectable date on the calendar.
-- **HeaderFontFamily:** allows you to customize the font family for the calendar's header, that means the month year displayed
-- **DaysOfWeekFontFamily:** allows you to customize the font family for the days of the week in the calendar.
-- **DaysFontFamily:** allows you to set the font family for the text displayed for the days on the popups.
-- **DaysWithEvents:** a list of int that represents all days with some event, that means, you want to put attention on this days on the current month.
-- **HighlightColor:** allows you change the color for bring attention to event-filled days.
+- **PrimaryColor:** allows you to customize the color scheme of the calendar (day label, calendar's header) to match your app's branding.
+- **HeaderFontFamily:** allows you to customize the font family for the calendar's header, that means the month year displayed.
 - **MyContent:** the versatile property that lets you add any content you desire.
-- **OnDaySelectedCommand:** command that you trigger automatically when the user choose a day.
+
+**ATTENTION:** The next two properties are required. Don't forget to set them:
+
+- **Date:** allows you to set an initial date for the calendar.
+- **Culture:** allows you to set the calendar culture, which can affect the formatting of dates and the names of months and weekdays displayed.
 
 Now that you know all properties to customize your calendar pages, let's see an example:
 
@@ -254,7 +310,8 @@ Now that you know all properties to customize your calendar pages, let's see an 
     DaysOfWeekFontFamily="OpenSansRegular"
     DaysFontFamily="OpenSansRegular"
     DaysWithEvents="{Binding DaysWithEvents}"
-    HighlightColor="Blue"
+    HighlightColor="{AppThemeBinding Light=#DC143C, Dark=#F22613}"
+    Culture="{Binding Culture}"
     Date="{Binding Date}">
 
    <page:SingleDaySelectorPage.MyContent>
@@ -282,8 +339,13 @@ public partial class SingleDaySelectorViewModel : ObservableObject
     [ObservableProperty]
     public IList<int> daysWithEvents;
 
+    [ObservableProperty]
+    public CultureInfo culture;
+
     public SingleDaySelectorViewModel()
     {
+        Culture = CultureInfo.CurrentCulture;
+
         var today = DateOnly.FromDateTime(DateTime.Today);
 
         Date = today;
