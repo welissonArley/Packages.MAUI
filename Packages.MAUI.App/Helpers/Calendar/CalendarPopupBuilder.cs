@@ -2,7 +2,7 @@
 using MauiDays.Views.Popups.DaySelector;
 using MauiDays.Views.Popups.MonthSelector;
 using Mopups.Services;
-using Shared.Helpers.Extensions;
+using Packages.MAUI.App.Helpers.Extensions;
 using System.Globalization;
 
 namespace Packages.MAUI.App.Helpers.Calendar;

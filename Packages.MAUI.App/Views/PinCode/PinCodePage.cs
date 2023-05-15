@@ -4,9 +4,9 @@ using MauiCodes.Views.Components.CodeViewers.Show;
 using MauiCodes.Views.Components.Keyboards;
 using MauiCodes.Views.Components.Keyboards.Base;
 using MauiCodes.Views.Pages;
+using Packages.MAUI.App.Helpers.Extensions;
 using Packages.MAUI.App.Model.Enums;
 using Packages.MAUI.App.ViewModels.PinCode;
-using Shared.Helpers.Extensions;
 
 namespace Packages.MAUI.App.Views.PinCode;
 

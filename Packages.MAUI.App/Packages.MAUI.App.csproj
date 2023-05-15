@@ -65,7 +65,6 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\src\MauiCodes\MauiCodes.csproj" />
 	  <ProjectReference Include="..\src\MauiDays\MauiDays.csproj" />
-	  <ProjectReference Include="..\src\Shared\Shared.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

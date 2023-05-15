@@ -1,6 +1,4 @@
-﻿using Shared.Helpers.Extensions;
-
-namespace MauiCodes.Views.Components.CodeViewers.Base;
+﻿namespace MauiCodes.Views.Components.CodeViewers.Base;
 public abstract class BaseShowingCodeViewer : BaseCodeViewer
 {
     protected const double FONT_SIZE = 32;
@@ -25,7 +23,7 @@ public abstract class BaseShowingCodeViewer : BaseCodeViewer
     }
 
     public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(double), typeof(BaseShowingCodeViewer), FONT_SIZE, propertyChanged: null);
-    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(BaseShowingCodeViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#FFFFFF" : "#000000"), propertyChanged: null);
+    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(BaseShowingCodeViewer), Colors.Red, propertyChanged: null);
     public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(BaseShowingCodeViewer), FONT_FAMILY, propertyChanged: null);
 
     public override void SetCode(string code)

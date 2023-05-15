@@ -1,5 +1,3 @@
-using Shared.Helpers.Extensions;
-
 namespace MauiCodes.Views.Components.CodeViewers.Base;
 
 public abstract class BaseCodeViewer : ContentView
@@ -27,7 +25,7 @@ public abstract class BaseCodeViewer : ContentView
         set { SetValue(SizeProperty, value); }
     }
 
-    public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(BaseCodeViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#000000" : "#FFFFFF"), propertyChanged: OnColorPropertyChanged);
+    public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(BaseCodeViewer), Colors.Red, propertyChanged: OnColorPropertyChanged);
     public static readonly BindableProperty SizeProperty = BindableProperty.Create(nameof(Size), typeof(uint), typeof(BaseCodeViewer), CIRCLE_SIZE, propertyChanged: OnSizePropertyChanged);
     public static readonly BindableProperty CodeLengthProperty = BindableProperty.Create(nameof(CodeLength), typeof(ushort), typeof(BaseCodeViewer), CODE_LENGTH, propertyChanged: OnCodeLengthPropertyChanged);
 

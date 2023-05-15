@@ -1,5 +1,4 @@
-﻿using Shared.Helpers.Extensions;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace MauiCodes.Views.Components.Keyboards.Base;
 
@@ -49,10 +48,10 @@ public abstract class BaseKeyboardViewer : ContentView
     }
 
     public static readonly BindableProperty SizeProperty = BindableProperty.Create(nameof(Size), typeof(uint), typeof(BaseKeyboardViewer), SHAPE_SIZE, propertyChanged: OnSizePropertyChanged);
-    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(BaseKeyboardViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#000000" : "#FFFFFF"), propertyChanged: OnTextColorPropertyChanged);
+    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(BaseKeyboardViewer), Colors.Red, propertyChanged: OnTextColorPropertyChanged);
     public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(uint), typeof(BaseKeyboardViewer), FONT_SIZE, propertyChanged: OnFontSizePropertyChanged);
-    public static readonly BindableProperty BackspaceColorProperty = BindableProperty.Create(nameof(BackspaceColor), typeof(Color), typeof(BaseKeyboardViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#000000" : "#FFFFFF"), propertyChanged: OnBackspaceColorPropertyChanged);
-    public static readonly BindableProperty CancelTextColorProperty = BindableProperty.Create(nameof(CancelTextColor), typeof(Color), typeof(BaseKeyboardViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#000000" : "#FFFFFF"), propertyChanged: OnCancelTextColorPropertyChanged);
+    public static readonly BindableProperty BackspaceColorProperty = BindableProperty.Create(nameof(BackspaceColor), typeof(Color), typeof(BaseKeyboardViewer), Colors.Red, propertyChanged: OnBackspaceColorPropertyChanged);
+    public static readonly BindableProperty CancelTextColorProperty = BindableProperty.Create(nameof(CancelTextColor), typeof(Color), typeof(BaseKeyboardViewer), Colors.Red, propertyChanged: OnCancelTextColorPropertyChanged);
     public static readonly BindableProperty CancelTextFontSizeProperty = BindableProperty.Create(nameof(CancelTextFontSize), typeof(uint), typeof(BaseKeyboardViewer), FONT_SIZE, propertyChanged: OnCancelTextFontSizePropertyChanged);
     public static readonly BindableProperty CancelTextProperty = BindableProperty.Create(nameof(CancelText), typeof(string), typeof(BaseKeyboardViewer), CANCEL_TEXT, propertyChanged: OnCancelTextPropertyChanged);
 

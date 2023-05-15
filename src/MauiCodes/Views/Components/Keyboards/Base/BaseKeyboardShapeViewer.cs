@@ -1,6 +1,4 @@
-﻿using Shared.Helpers.Extensions;
-
-namespace MauiCodes.Views.Components.Keyboards.Base;
+﻿namespace MauiCodes.Views.Components.Keyboards.Base;
 public abstract class BaseKeyboardShapeViewer : BaseKeyboardViewer
 {
     public Color ShapeColor
@@ -9,7 +7,7 @@ public abstract class BaseKeyboardShapeViewer : BaseKeyboardViewer
         set { SetValue(ShapeColorProperty, value); }
     }
 
-    public static readonly BindableProperty ShapeColorProperty = BindableProperty.Create(nameof(ShapeColor), typeof(Color), typeof(BaseKeyboardShapeViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#BEBEBE" : "#353535"), propertyChanged: OnShapeColorPropertyChanged);
+    public static readonly BindableProperty ShapeColorProperty = BindableProperty.Create(nameof(ShapeColor), typeof(Color), typeof(BaseKeyboardShapeViewer), Colors.Red, propertyChanged: OnShapeColorPropertyChanged);
 
     private static void OnShapeColorPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseKeyboardShapeViewer)bindable).SetShapeColor();
 

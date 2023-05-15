@@ -1,6 +1,5 @@
 using MauiDays.Services;
 using MauiDays.Views.Components;
-using Shared.Helpers.Extensions;
 using System.Globalization;
 using System.Windows.Input;
 
@@ -99,8 +98,8 @@ public class SingleDaySelectorPage : ContentPage
     
     public static readonly BindableProperty OnDaySelectedCommandProperty = BindableProperty.Create(nameof(OnDaySelectedCommand), typeof(ICommand), typeof(SingleDaySelectorPage), null, propertyChanged: OnOnDaySelectedCommandPropertyChanged);
 
-    public static readonly BindableProperty SelectedDayColorProperty = BindableProperty.Create(nameof(SelectedDayColor), typeof(Color), typeof(SingleDaySelectorPage), Application.Current.IsLightMode() ? Colors.White : Colors.Black, propertyChanged: OnSelectedDayColorPropertyChanged);
-    public static readonly BindableProperty SelectedBackgroundColorProperty = BindableProperty.Create(nameof(SelectedBackgroundColor), typeof(Color), typeof(SingleDaySelectorPage), Application.Current.IsLightMode() ? Colors.Black : Colors.White, propertyChanged: OnSelectedBackgroundColorPropertyChanged);
+    public static readonly BindableProperty SelectedDayColorProperty = BindableProperty.Create(nameof(SelectedDayColor), typeof(Color), typeof(SingleDaySelectorPage), Colors.Yellow, propertyChanged: OnSelectedDayColorPropertyChanged);
+    public static readonly BindableProperty SelectedBackgroundColorProperty = BindableProperty.Create(nameof(SelectedBackgroundColor), typeof(Color), typeof(SingleDaySelectorPage), Colors.Blue, propertyChanged: OnSelectedBackgroundColorPropertyChanged);
 
     public static readonly BindableProperty DaysFontFamilyProperty = BindableProperty.Create(nameof(DaysFontFamily), typeof(string), typeof(SingleDaySelectorPage), null, propertyChanged: OnDaysFontFamilyPropertyChanged);
     public static readonly BindableProperty DaysOfWeekFontFamilyProperty = BindableProperty.Create(nameof(DaysOfWeekFontFamily), typeof(string), typeof(SingleDaySelectorPage), null, propertyChanged: OnDaysOfWeekFontFamilyPropertyChanged);
@@ -180,7 +179,7 @@ public class SingleDaySelectorPage : ContentPage
     private void SetDaysFontFamily() => _calendarComponent.SetDaysFontFamily(DaysFontFamily);
     private void SetDate() => CheckDateAndCulture();
     private void SetSelectedBackgroundColor() => _calendarComponent.SetSelectedBackgroundColor(SelectedBackgroundColor);
-    private void SetSelectedDayColor() => _calendarComponent.SetSelectedDayColor(SelectedBackgroundColor);
+    private void SetSelectedDayColor() => _calendarComponent.SetSelectedDayColor(SelectedDayColor);
     private void SetCallbackCommand() => _calendarComponent.SetCallback(OnDaySelectedCommand);
     private void SetHighlightColor() => _calendarComponent.SetHighlightColor(HighlightColor);
     private void SetDaysWithEvents() => _calendarComponent.SetDaysWithEvents(DaysWithEvents);
