@@ -64,7 +64,7 @@ Once the package is installed, you can add a pin code page to your application.
 To use the pin code page, you need to add a reference to the CodePage namespace in your XAML file:
 
 ```xaml
-xmlns:codePage="clr-namespace:MauiCode.Views.Pages;assembly=MauiCodes"
+xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
 ```
 
 Here's an example:
@@ -74,7 +74,7 @@ Here's an example:
 <codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codePage="clr-namespace:MauiCode.Views.Pages;assembly=MauiCodes"
+    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
     x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}">
     
@@ -108,7 +108,7 @@ You have the option to customize the headline, subheadline, and image on your pa
 <codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codePage="clr-namespace:MauiCode.Views.Pages;assembly=MauiCodes"
+    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
     x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}"
     Headline="YOUR HEADLINE HERE"
@@ -136,21 +136,33 @@ pinCodePage.Illustration = new Image { Source = ImageSource.FromFile(path), Heig
 
 ### Code Viewer
 
-You can choose to hide or show the pin code, as well as select from a variety of shapes, including circles or squares.
+You can choose to hide or show the pin code, as well as select from a variety of shapes, including circles or squares. It is important for you to make a decision to hide or show the code in order to add the correct namespace on XAML.
+
+If you want to hide, add:
+
+```xaml
+xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Hide;assembly=MauiCodes"
+```
+
+but if you want to show the pin code, use:
+
+```xaml
+xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=MauiCodes"
+```
 
 ![Code Viewers Availables][code-viewers-screenshot]
 
 Whether you prefer a minimalist or more elaborate design, my library has you covered.
 
-Here's an example:
+Here's an example showing the pincode with a circle shape:
 
 ```xaml
 <?xml version="1.0" encoding="utf-8" ?>
 <codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codePage="clr-namespace:MauiCode.Views.Pages;assembly=MauiCodes"
-    xmlns:codeViewer="clr-namespace:MauiCode.Views.Components.CodeViewers.Show;assembly=MauiCodes"
+    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
+    xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=MauiCodes"
     x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}">
     
@@ -200,7 +212,11 @@ If you choose to show the pin code, you can use the following properties too:
 
 ### Keyboard
 
-You can select from a keyboard without any shape, a square shape, or a circle shape, depending on the look and feel you want to achieve.
+You can select from a keyboard without any shape, a square shape, or a circle shape, depending on the look and feel you want to achieve. Don't forget to add the namespace on your XAML:
+
+```xaml
+xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=MauiCodes"
+```
 
 ![Keyboard Availables][keyboard-screenshot]
 
@@ -211,8 +227,8 @@ Here's an example:
 <codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codePage="clr-namespace:MauiCode.Views.Pages;assembly=MauiCodes"
-    xmlns:keyboard="clr-namespace:MauiCode.Views.Components.Keyboards;assembly=MauiCodes"
+    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
+    xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=MauiCodes"
     x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}">
     
@@ -266,7 +282,9 @@ If you choose the keyboard with shape, you can use the following property too:
 <codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codePage="clr-namespace:MauiCode.Views.Pages;assembly=MauiCodes"
+    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
+    xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=MauiCodes"
+    xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=MauiCodes"
     x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}"
     Headline="YOUR HEADLINE HERE"
