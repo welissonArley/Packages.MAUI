@@ -54,22 +54,14 @@ public abstract class BaseCodeViewer : ContentView
     {
         if (CodeLength <= 0)
             CodeLength = CODE_LENGTH;
-        else if (CodeLength > CODE_LENGTH)
-        {
-            for (var index = CODE_LENGTH; index < CodeLength; index++)
-            {
-                _layout.ColumnDefinitions.Add(CreateColumnDefinition());
-                _layout.Add(view: CreateCodeView(), column: index);
-            }
-        }
-        else if (CodeLength < CODE_LENGTH)
-        {
-            for (var index = CODE_LENGTH; index < CodeLength; index++)
-            {
-                _layout.ColumnDefinitions.RemoveAt(_layout.Count - 1);
-                _layout.RemoveAt(_layout.Count - 1);
-            }
-        }
+
+        _layout.ColumnDefinitions.Clear();
+        _layout.Clear();
+
+        _layout.ColumnDefinitions = new ColumnDefinitionCollection(Enumerable.Repeat(CreateColumnDefinition(), CodeLength).ToArray());
+
+        for (var index = 0; index < CodeLength; index++)
+            _layout.Add(view: CreateCodeView(), column: index);
     }
     private void SetSize()
     {
