@@ -88,8 +88,8 @@ You can use the Calendar popups with a fluent syntax, a programming style that f
 
 Keep in mind that:
 
-1. It is crucial for you to start implementing the two callback functions. One for when the user interacts with a cancel button and another one to OK button. This approach ensures that your application can respond appropriately to the user's actions and provide a good user experience. By providing a callback function for the cancel button, you enable the user to abort the current operation or close a dialog without proceeding further. On the other hand, by including a callback function for the OK button, you allow the user to confirm their selection and the callback will receive the date choosed.
-2. You should always finish by calling the **BUILD** function to receive an popup instance.
+1. It is crucial for you to start implementing the two callback functions. One for when the user interacts with a cancel button and another one when the user interacts with the OK button. This approach ensures that your application can respond appropriately to the user's actions and provide a good user experience. By providing a callback function for the cancel button, you enable the user to abort the current operation or close the popup without proceeding further. On the other hand, by including a callback function for the OK button, you allow the user to confirm their selection and the callback will receive the chosen date.
+2. You should always finish by calling the **BUILD** function to receive a popup instance.
 
 Here's an example:
 
@@ -125,26 +125,26 @@ Below, you will find a list of available options for the Day Selector popup and 
 ##### Customizable properties for Calendar Mopups
 
 - **SetCulture:** allows you to set the calendar culture, which can affect the formatting of dates and the names of months and weekdays displayed in the calendar popups.
-- **SetPopupBackgroundColor:** property allows you to set the background color of the popups.
-- **SetCalendarBackgroundColor:** property allows you to set the background color of the calendar page.
+- **SetPopupBackgroundColor:** allows you to set the background color of the popups.
+- **SetCalendarBackgroundColor:** allows you to set the background color of the calendar popup.
 - **SetHeaderFontFamily:** allows you to customize the font family for the calendar's header, that means the month year displayed or just the year if you are using the month calendar popup.
-- **SetLabelFontFamily:** allowd you to set the font family for the text displayed for the days/month on the popups.
+- **SetLabelFontFamily:** allows you to set the font family for the text displayed for the days/month on the popups.
 - **SetPrimaryColor:** allows you to customize the color scheme of the calendar (day label, calendar's header) to match your app's branding.
-- **SetConfirmButtonColor:** is a property that allows you to customize the color of the confirm button on the popup. Keep in mind the contrast ration.
-- **SetConfirmButtonTextColor:** allows you customize the color for the check on the Confirm button.
-- **SetTextCancel:** is a property that allows you to customize the text for the cancel button.
+- **SetConfirmButtonColor:** allows you to customize the color of the confirm button on the popup. Keep in mind the contrast ratio.
+- **SetConfirmButtonTextColor:** allows you to customize the color for the check on the Confirm button.
+- **SetTextCancel:** allows you to customize the text for the cancel button.
 - **SetCancelFontFamily:** allows you to set the font family for the cancel button text.
 - **SetSelectedBackgroundColor:** allows you to change the background color that is displayed when a user selects a day/month on the calendar.
 - **SetSelectedLabelColor:** allows you to change the text color that is displayed when a user selects a day/month on the calendar.
 - **SetDate:** allows you to set an initial date for the calendar.
-- **SetMinimumDate:** You may use this property to set the minimum selectable date on the calendar.
-- **SetMaximumDate:** You may use this property to set the maximum selectable date on the calendar.
-- **DontCloseWhenBackgroundIsClicked:** call this function if you don't want to allow the user close the popups if they touch on the popup's background.
+- **SetMinimumDate:** You may use this function to set the minimum selectable date on the calendar.
+- **SetMaximumDate:** You may use this function to set the maximum selectable date on the calendar.
+- **DontCloseWhenBackgroundIsClicked:** call this function if you don't want to allow the user to close the popup if they touch the popup's background.
 
-If you are using the Calendar Day selector, you can use the following property too, BUT remember: for technical reasons you need to call this function at first, that means:
+If you are using the Calendar Day selector, you can use the function **SetDaysOfWeekFontFamily** property too. BUT remember: for technical reasons you need to call this function first, right after instantianting the popup, that means:
 
 ```csharp
-var popup = SingleMonthSelectorCalendarPopup
+var popup = new SingleDaySelectorCalendarPopup
 	(
 	    callbackCancel: async () => { await MopupService.Instance.PopAsync(); },
 	    callbackConfirm: async (date) => { await OnDateChanged(date); }
@@ -158,7 +158,7 @@ await MopupService.Instance.PushAsync(popup);
 
 - **SetDaysOfWeekFontFamily:** allows you to customize the font family for the days of the week in the calendar.
 
-Now that you know all properties to customize your popups, let's see an example with the fluent syntax:
+Now that you know all functions to customize your popups, let's see an example with the fluent syntax:
 
 ```csharp
 public static class CalendarPopupBuilder
@@ -236,7 +236,13 @@ public partial class CalendarDashboardViewModel : ObservableObject
 
 #### Pages
 
-My customizable calendar page give you the freedom to create a personalized interface with a customizable calendar and IView of your choice. The page receive as parameter a command that triggers every time an user selects a day. This powerful combination allows you displaying detailed information about a selected day, or triggering a specific event.
+My customizable calendar page gives you the freedom to create a personalized interface with a customizable calendar and IView of your choice. The page accepts a parameter in the form of a command, which is executed whenever a user chooses a day. This powerful combination allows you to display detailed information about a selected day, or trigger a specific event.
+
+To use the Calendar page, you need to add a reference to the namespace in your XAML file:
+
+```xaml
+xmlns:page="clr-namespace:MauiDays.Views.Pages;assembly=MauiDays"
+```
 
 Here's an example:
 
@@ -257,7 +263,7 @@ Here's an example:
 </page:SingleDaySelectorPage>
 ```
 
-don't forget to change the Code-behind
+Don't forget to change the Code-behind
 
 ```csharp
 public partial class SingleDaySelectorPage : MauiDays.Views.Pages.SingleDaySelectorPage
@@ -271,8 +277,8 @@ public partial class SingleDaySelectorPage : MauiDays.Views.Pages.SingleDaySelec
 
 ##### Customizable properties for Calendar Pages
 
-- **HighlightColor:** allows you change the color for bring attention to event-filled days.
-- **DaysWithEvents:** a list of int that represents all days with some event, that means, you want to put attention on this days on the current month.
+- **HighlightColor:** allows you to change the color to bring attention to event-filled days.
+- **DaysWithEvents:** a list of int that represents all days with some event, that means, you want to put attention on these days on the current month.
 - **OnDaySelectedCommand:** command that will trigger automatically when the user choose a day.
 - **SelectedDayColor:** allows you to change the text color that is displayed when a user selects a day on the calendar.
 - **SelectedBackgroundColor:** allows you to change the background color that is displayed when a user selects a day/month on the calendar.
