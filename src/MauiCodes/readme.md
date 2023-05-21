@@ -29,12 +29,12 @@ This library provides developers with an easy way to add a customizable pin code
 
 ### **Compatibility**
 
-| Platform | Version | Availability |
-| --- | --- | --- |
-| iOS | 14.0 and higher | ✅ |
-| Android | 5.0 and higher | ✅ |
-| UWP | 10.0.17763.0 and higher | ✅ |
-| macOS | 10.15 and higher | ✅ |
+| Platform | Version | Popups Availability | Calendar Page Availability |
+| --- | --- | --- | --- |
+| iOS | 14.0 and higher | ✅ | ✅ |
+| Android | 5.0 and higher | ✅ | ✅ |
+| UWP | 10.0.17763.0 and higher | ❌ | ✅|
+| macOS | 10.15 and higher | ✅ | ✅ |
 
 ### **Features**
 
