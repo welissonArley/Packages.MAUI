@@ -1,12 +1,17 @@
 using Mopups.Services;
 using Packages.MAUI.App.Helpers.Extensions;
+using Packages.MAUI.App.Services.Screen;
 
 namespace Packages.MAUI.App.Views.Popups;
 
 public class ShowInformationPopup : Mopups.Pages.PopupPage
 {
+    private readonly DeviceOrientationService _orientationService;
+
     public ShowInformationPopup(string message)
     {
+        _orientationService = new ();
+
         CloseWhenBackgroundIsClicked = false;
         BackgroundColor = Color.FromArgb("#F2A1A1A1");
         Content = new VerticalStackLayout
@@ -34,5 +39,19 @@ public class ShowInformationPopup : Mopups.Pages.PopupPage
                 }
             }
         };
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        _orientationService.SetPortraitOrientation();
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        _orientationService.ResetOrientationForPopup();
     }
 }
