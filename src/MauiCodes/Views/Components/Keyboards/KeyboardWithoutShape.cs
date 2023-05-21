@@ -7,8 +7,8 @@ public class KeyboardWithoutShape : BaseKeyboardViewer
     {
         return new Button
         {
-            WidthRequest = Size,
-            HeightRequest = Size,
+            WidthRequest = SizeForOrientation(),
+            HeightRequest = SizeForOrientation(),
             BackgroundColor = TextColor.WithAlpha(0),
             Text = $"{value}",
             FontSize = FontSize,
@@ -18,7 +18,7 @@ public class KeyboardWithoutShape : BaseKeyboardViewer
 
     protected override void SetSize(Button button)
     {
-        button.WidthRequest = Size;
-        button.HeightRequest = Size;
+        button.WidthRequest = SizeForOrientation();
+        button.HeightRequest = SizeForOrientation();
     }
 }

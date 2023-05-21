@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace MauiCodes.Views.Pages;
 
-public class CodePage : ContentPage
+public partial class CodePage : ContentPage
 {
     private string _code = string.Empty;
 
@@ -53,108 +53,62 @@ public class CodePage : ContentPage
     public static readonly BindableProperty CodeViewerProperty = BindableProperty.Create(nameof(CodeViewer), typeof(BaseCodeViewer), typeof(CodePage), new CircleHidingCodeViewer(), propertyChanged: OnCodeViewerPropertyChanged);
     public static readonly BindableProperty KeyboardViewerProperty = BindableProperty.Create(nameof(KeyboardViewer), typeof(BaseKeyboardViewer), typeof(CodePage), new KeyboardCircle(), propertyChanged: OnKeyboardViewerPropertyChanged);
     public static readonly BindableProperty CallbackCodeFinishedProperty = BindableProperty.Create(nameof(CallbackCodeFinishedProperty), typeof(ICommand), typeof(CodePage), new Command(async () => await Shell.Current.GoToAsync("..")), propertyChanged: null);
-    
+
     private static void OnIllustrationPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetIllustration();
     private static void OnHeadlinePropertyPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetHeadline();
     private static void OnSubHeadlinePropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetSubHeadline();
-    private static void OnKeyboardViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetKeyBoard();
     private static void OnCodeViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetCodeViewer();
-
-    private readonly VerticalStackLayout _layout;
+    private static void OnKeyboardViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetKeyBoard();
 
     public CodePage()
-    {
-        _layout = CreateVerticalLayout();
+	{
+		InitializeComponent();
 
         CreateContent();
     }
 
     private void CreateContent()
     {
-        _layout.Children.Add(CreateHeadlines());
-
-        CodeViewer.Margin = new Thickness(0, 0, 0, 30);
-        _layout.Children.Add(CodeViewer);
-
-        KeyboardViewer.SetCommand(CommandForKeyboard());
-        _layout.Children.Add(KeyboardViewer);
-
-        Content = _layout;
+        SetCodeViewer();
+        SetKeyBoard();
     }
 
     private void SetIllustration()
     {
         if (Illustration is not null)
-            _layout.Children.Insert(0, Illustration);
+        {
+            IllustrationImage.Source = Illustration.Source;
+            IllustrationImage.HeightRequest = Illustration.HeightRequest;
+            IllustrationImage.WidthRequest = Illustration.WidthRequest;
+        }
     }
     private void SetHeadline()
     {
         if (string.IsNullOrWhiteSpace(Headline))
             return;
 
-        var view = GetViewHeadlines();
-
-        var textLabel = view.Children.ElementAt(0) as Label;
-        textLabel.Text = Headline;
-        textLabel.IsVisible = true;
+        HeadlineLabel.Text = Headline;
+        HeadlineLabel.IsVisible = true;
     }
     private void SetSubHeadline()
     {
         if (string.IsNullOrWhiteSpace(SubHeadline))
             return;
 
-        var view = GetViewHeadlines();
-
-        var textLabel = view.Children.ElementAt(1) as Label;
-        textLabel.Text = SubHeadline;
-        textLabel.IsVisible = true;
+        SubheadlineLabel.Text = SubHeadline;
+        SubheadlineLabel.IsVisible = true;
+    }
+    private void SetCodeViewer()
+    {
+        CodeViewerComponent.Clear();
+        CodeViewerComponent.Children.Add(CodeViewer);
     }
     private void SetKeyBoard()
     {
         KeyboardViewer.SetCommand(CommandForKeyboard());
 
-        _layout.Children.RemoveAt(_layout.Children.Count - 1);
-
-        _layout.Children.Add(KeyboardViewer);
-    }
-    private void SetCodeViewer()
-    {
-        _layout.Children.RemoveAt(_layout.Children.Count - 2);
-
-        _layout.Children.Insert(_layout.Children.Count - 1, CodeViewer);
-    }
-
-    private static VerticalStackLayout CreateVerticalLayout()
-    {
-        return new VerticalStackLayout
-        {
-            Margin = new Thickness(20, 0, 20, 30),
-            Spacing = 0,
-            Children = { }
-        };
-    }
-
-    private IView CreateHeadlines()
-    {
-       return new VerticalStackLayout
-       {
-            HorizontalOptions = LayoutOptions.Center,
-            Spacing = 10,
-            Margin = new Thickness(0,10, 0, 40),
-            Children =
-            {
-                new Label { Text = Headline, FontAttributes = FontAttributes.Bold, HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.Center, IsVisible = !string.IsNullOrWhiteSpace(Headline) },
-                new Label { Text = SubHeadline, HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.Center, IsVisible = !string.IsNullOrWhiteSpace(SubHeadline) }
-            }
-       };
-    }
-
-    private VerticalStackLayout GetViewHeadlines()
-    {
-        if (_layout.Children.ElementAt(0) is Image)
-            return _layout.Children.ElementAt(1) as VerticalStackLayout;
-
-        return _layout.Children.ElementAt(0) as VerticalStackLayout;
+        KeyboardComponent.Clear();
+        KeyboardComponent.Children.Add(KeyboardViewer);
     }
 
     private ICommand CommandForKeyboard()

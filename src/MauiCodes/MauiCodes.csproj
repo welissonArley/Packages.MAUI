@@ -49,4 +49,16 @@
 		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Views\Pages\CodePage.xaml.cs">
+	    <DependentUpon>CodePage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\Pages\CodePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

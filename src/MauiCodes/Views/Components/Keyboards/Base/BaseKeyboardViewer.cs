@@ -9,8 +9,11 @@ public abstract class BaseKeyboardViewer : ContentView
     protected const uint CANCEL_TEXT_FONT_SIZE = 18;
     protected const string CANCEL_TEXT = "Cancel";
 
+    private DisplayOrientation _currentDisplayOrientation = DisplayOrientation.Portrait;
+
     private ICommand _callbackKeyboardCommand;
 
+    private uint _sizeForLandscape;
     public uint Size
     {
         get { return (uint)GetValue(SizeProperty); }
@@ -61,7 +64,13 @@ public abstract class BaseKeyboardViewer : ContentView
     private static void OnCancelTextColorPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseKeyboardViewer)bindable).SetCancelTextColor();
     private static void OnFontSizePropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseKeyboardViewer)bindable).SetFontSize();
     private static void OnTextColorPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseKeyboardViewer)bindable).SetTextColor();
-    private static void OnSizePropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseKeyboardViewer)bindable).SetSize();
+    private static void OnSizePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var component = ((BaseKeyboardViewer)bindable);
+
+        component.CalculateSizeForLandscapeMode();
+        component.SetSize();
+    }
 
     protected readonly Grid _layout;
 
@@ -75,6 +84,18 @@ public abstract class BaseKeyboardViewer : ContentView
             ColumnDefinitions = new ColumnDefinitionCollection(Enumerable.Repeat(new ColumnDefinition { Width = GridLength() }, 3).ToArray()),
             RowDefinitions = new RowDefinitionCollection(Enumerable.Repeat(new RowDefinition { Height = GridLength() }, 4).ToArray())
         };
+
+        DeviceDisplay.MainDisplayInfoChanged += (object sender, DisplayInfoChangedEventArgs e) =>
+        {
+            if (_currentDisplayOrientation != e.DisplayInfo.Orientation)
+            {
+                _currentDisplayOrientation = e.DisplayInfo.Orientation;
+                SetSize();
+                SetCancelTextFontSize();
+            }
+        };
+        
+        CalculateSizeForLandscapeMode();
 
         CreateContent();
     }
@@ -93,7 +114,7 @@ public abstract class BaseKeyboardViewer : ContentView
     private void SetCancelTextFontSize()
     {
         var label = GetCancelLabel();
-        label.FontSize = CancelTextFontSize;
+        label.FontSize = CancelTextFontSizeForOrientation();
     }
     private void SetCancelTextColor()
     {
@@ -140,11 +161,11 @@ public abstract class BaseKeyboardViewer : ContentView
         var backspaceButton = (VerticalStackLayout)_layout.Children.Last();
 
         cancelButton.Padding = new Thickness(0, PaddingCancelAndBackspaceOption(), 0, PaddingCancelAndBackspaceOption());
-        cancelButton.WidthRequest = Size;
-        cancelButton.HeightRequest = Size;
+        cancelButton.WidthRequest = SizeForOrientation();
+        cancelButton.HeightRequest = SizeForOrientation();
 
-        backspaceButton.WidthRequest = Size;
-        backspaceButton.HeightRequest = Size;
+        backspaceButton.WidthRequest = SizeForOrientation();
+        backspaceButton.HeightRequest = SizeForOrientation();
         backspaceButton.Padding = PaddingCancelAndBackspaceOption();
 
         var labelBackspace = backspaceButton.Children.First() as Label;
@@ -200,8 +221,8 @@ public abstract class BaseKeyboardViewer : ContentView
     {
         var verticalLayout = new VerticalStackLayout
         {
-            HeightRequest = Size,
-            WidthRequest = Size,
+            HeightRequest = SizeForOrientation(),
+            WidthRequest = SizeForOrientation(),
             Padding = new Thickness(0, PaddingCancelAndBackspaceOption(), 0, PaddingCancelAndBackspaceOption()),
             Children =
             {
@@ -223,8 +244,8 @@ public abstract class BaseKeyboardViewer : ContentView
     {
         var verticalLayout = new VerticalStackLayout
         {
-            HeightRequest = Size,
-            WidthRequest = Size,
+            HeightRequest = SizeForOrientation(),
+            WidthRequest = SizeForOrientation(),
             Padding = PaddingCancelAndBackspaceOption(),
             Children =
             {
@@ -244,11 +265,38 @@ public abstract class BaseKeyboardViewer : ContentView
         return verticalLayout;
     }
 
-    private double RowColumnSpacing() => Size * 0.25;
-    private double FontSizeBackspaceOption() => Size * 0.35;
-    private double PaddingCancelAndBackspaceOption() => Size * 0.32;
-    private GridLength GridLength() => new (Size, GridUnitType.Star);
+    private double RowColumnSpacing() => SizeForOrientation() * 0.25;
+    private double FontSizeBackspaceOption() => SizeForOrientation() * 0.35;
+    private double PaddingCancelAndBackspaceOption() => SizeForOrientation() * 0.32;
+    private GridLength GridLength() => new (SizeForOrientation(), GridUnitType.Star);
 
     protected abstract Button CreateButton(int option);
     public void SetCommand(ICommand callbackCommand) => _callbackKeyboardCommand = callbackCommand;
+
+    protected uint SizeForOrientation()
+    {
+        if (DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Portrait)
+            return Size;
+
+        return _sizeForLandscape;
+    }
+
+    private uint CancelTextFontSizeForOrientation()
+    {
+        if (DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Portrait)
+            return CancelTextFontSize;
+
+        var height = DeviceDisplay.MainDisplayInfo.Height;
+        var width = DeviceDisplay.MainDisplayInfo.Width;
+
+        return (uint)(2 * CancelTextFontSize * height / width);
+    }
+
+    private void CalculateSizeForLandscapeMode()
+    {
+        var height = DeviceDisplay.MainDisplayInfo.Height;
+        var width = DeviceDisplay.MainDisplayInfo.Width;
+
+        _sizeForLandscape = (uint)(1.60 * Size * width / height);
+    }
 }

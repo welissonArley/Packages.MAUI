@@ -7,12 +7,12 @@ public class KeyboardCircle : BaseKeyboardShapeViewer
     {
         return new Button
         {
-            WidthRequest = Size,
-            HeightRequest = Size,
+            WidthRequest = SizeForOrientation(),
+            HeightRequest = SizeForOrientation(),
             BorderWidth = BorderWidth(),
             BorderColor = ShapeColor,
             BackgroundColor = ShapeColor.WithAlpha(0),
-            CornerRadius = Convert.ToInt32(Size / 2.0),
+            CornerRadius = Convert.ToInt32(SizeForOrientation() / 2.0),
             Text = $"{value}",
             FontSize = FontSize,
             TextColor = TextColor
@@ -23,11 +23,11 @@ public class KeyboardCircle : BaseKeyboardShapeViewer
 
     protected override void SetSize(Button button)
     {
-        button.WidthRequest = Size;
-        button.HeightRequest = Size;
+        button.WidthRequest = SizeForOrientation();
+        button.HeightRequest = SizeForOrientation();
         button.BorderWidth = BorderWidth();
-        button.CornerRadius = Convert.ToInt32(Size / 2.0);
+        button.CornerRadius = Convert.ToInt32(SizeForOrientation() / 2.0);
     }
 
-    private double BorderWidth() => Size * 0.03;
+    private double BorderWidth() => SizeForOrientation() * 0.03;
 }

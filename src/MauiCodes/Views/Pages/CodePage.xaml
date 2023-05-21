@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiCodes.Views.Pages.CodePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Grid" x:Key="PinCodeContent">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup>
+                            <VisualState x:Name="Portrait">
+                                <VisualState.StateTriggers>
+                                    <OrientationStateTrigger Orientation="Portrait"/>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="RowDefinitions" Value="Auto,*"/>
+                                    <Setter Property="ColumnDefinitions" Value="*"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Landscape">
+                                <VisualState.StateTriggers>
+                                    <OrientationStateTrigger Orientation="Landscape"/>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="RowDefinitions" Value="*"/>
+                                    <Setter Property="ColumnDefinitions" Value="*,*"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style TargetType="VerticalStackLayout" x:Key="HeadlinesStyle">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup>
+                            <VisualState x:Name="Portrait">
+                                <VisualState.StateTriggers>
+                                    <OrientationStateTrigger Orientation="Portrait"/>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="Grid.Row" Value="1"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Landscape">
+                                <VisualState.StateTriggers>
+                                    <OrientationStateTrigger Orientation="Landscape"/>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="Grid.Row" Value="0"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style TargetType="Image" x:Key="IllustrationStyle">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup>
+                            <VisualState x:Name="Portrait">
+                                <VisualState.StateTriggers>
+                                    <OrientationStateTrigger Orientation="Portrait"/>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="Grid.Row" Value="0"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Landscape">
+                                <VisualState.StateTriggers>
+                                    <OrientationStateTrigger Orientation="Landscape"/>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="Grid.Row" Value="2"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style TargetType="VerticalStackLayout" x:Key="BaseCodeViewerStyle">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup>
+                            <VisualState x:Name="Portrait">
+                                <VisualState.StateTriggers>
+                                    <OrientationStateTrigger Orientation="Portrait"/>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="Grid.Row" Value="2"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Landscape">
+                                <VisualState.StateTriggers>
+                                    <OrientationStateTrigger Orientation="Landscape"/>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="Grid.Row" Value="1"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style TargetType="VerticalStackLayout" x:Key="KeyboardStyle">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup>
+                            <VisualState x:Name="Portrait">
+                                <VisualState.StateTriggers>
+                                    <OrientationStateTrigger Orientation="Portrait"/>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="Grid.Row" Value="1"/>
+                                    <Setter Property="Grid.Column" Value="0"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Landscape">
+                                <VisualState.StateTriggers>
+                                    <OrientationStateTrigger Orientation="Landscape"/>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="Grid.Row" Value="0"/>
+                                    <Setter Property="Grid.Column" Value="1"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid Style="{StaticResource PinCodeContent}">
+        <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*" Grid.Column="0" Grid.Row="0" RowSpacing="20">
+            <Image x:Name="IllustrationImage" Style="{StaticResource IllustrationStyle}"/>
+            <VerticalStackLayout Style="{StaticResource HeadlinesStyle}">
+                <Label x:Name="HeadlineLabel" IsVisible="False" HorizontalTextAlignment="Center" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <Label x:Name="SubheadlineLabel" IsVisible="False" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+            <StackLayout x:Name="CodeViewerComponent" Style="{StaticResource BaseCodeViewerStyle}"/>
+        </Grid>
+
+        <VerticalStackLayout x:Name="KeyboardComponent" Style="{StaticResource KeyboardStyle}"/>
+    </Grid>
+</ContentPage>

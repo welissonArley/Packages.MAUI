@@ -7,10 +7,10 @@ public class KeyboardSquare : BaseKeyboardShapeViewer
     {
         return new Button
         {
-            WidthRequest = Size,
-            HeightRequest = Size,
+            WidthRequest = SizeForOrientation(),
+            HeightRequest = SizeForOrientation(),
             BackgroundColor = ShapeColor,
-            CornerRadius = Convert.ToInt32(Size * 0.2),
+            CornerRadius = Convert.ToInt32(SizeForOrientation() * 0.2),
             Text = $"{value}",
             FontSize = FontSize,
             TextColor = TextColor
@@ -21,8 +21,8 @@ public class KeyboardSquare : BaseKeyboardShapeViewer
 
     protected override void SetSize(Button button)
     {
-        button.WidthRequest = Size;
-        button.HeightRequest = Size;
-        button.CornerRadius = Convert.ToInt32(Size * 0.2);
+        button.WidthRequest = SizeForOrientation();
+        button.HeightRequest = SizeForOrientation();
+        button.CornerRadius = Convert.ToInt32(SizeForOrientation() * 0.2);
     }
 }
