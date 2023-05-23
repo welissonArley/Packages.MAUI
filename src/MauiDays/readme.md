@@ -17,7 +17,7 @@
         <ul>
           <li><a href="#popups">Popups</a></li>
           <ul>
-            <li><a href="#customizable-properties-for-calendar-mopups">Customizable properties for Calendar Mopups</a></li>    
+            <li><a href="#customizable-properties-for-calendar-popups">Customizable properties for Calendar Popups</a></li>    
           </ul>
           <li><a href="#pages">Pages</a></li>
           <ul>
@@ -39,12 +39,12 @@ The library has a dependency on [Mopups][mopups-url], which is used for the mont
 
 ### **Compatibility**
 
-| Platform | Version | Availability |
-| --- | --- | --- |
-| iOS | 14.0 and higher | ✅ |
-| Android | 5.0 and higher | ✅ |
-| UWP | 10.0.17763.0 and higher | ✅ |
-| macOS | 10.15 and higher | ✅ |
+| Platform | Version | Popups Availability | Calendar Page Availability |
+| --- | --- | --- | --- |
+| iOS | 14.0 and higher | ✅ | ✅ |
+| Android | 5.0 and higher | ✅ | ✅ |
+| Windows | 10.0.17763.0 and higher | ❌ | ✅|
+| macOS | 10.15 and higher | ✅ | ✅ |
 
 ### **Features**
 
@@ -66,7 +66,7 @@ Install-Package MauiDays
 
 #### Popups
 
-Please, remember that you need to install and configure the Mopups nuget package. This dependency is necessary to use the popups.
+Please, remember that you need to install and configure the [Mopups][mopups-url] nuget package. This dependency is necessary to use the popups.
 
 ```powershell
 Install-Package Mopups
@@ -122,7 +122,7 @@ Below, you will find a list of available options for the Day Selector popup and 
 - **SingleDaySelectorCalendarPopup:** the popup allows the user to select only one day.
 - **SingleMonthSelectorCalendarPopup:** popup with the option to select a single month.
 
-##### Customizable properties for Calendar Mopups
+##### Customizable properties for Calendar Popups
 
 - **SetCulture:** allows you to set the calendar culture, which can affect the formatting of dates and the names of months and weekdays displayed in the calendar popups.
 - **SetPopupBackgroundColor:** allows you to set the background color of the popups.
