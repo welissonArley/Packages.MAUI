@@ -23,7 +23,7 @@
 
    <page:SingleDaySelectorPage.MyContent>
         <VerticalStackLayout Margin="0,40,0,0">
-            <Label Text="Current data:" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+            <Label Text="Selected date:" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
             <Label Text="{Binding Date, StringFormat='{}{0:MMMM/dd/yyyy}'}" HorizontalOptions="Center" FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
         </VerticalStackLayout>
     </page:SingleDaySelectorPage.MyContent>
