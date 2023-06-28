@@ -59,18 +59,30 @@ Once the package is installed, you can add a pin code page to your application.
 
 ### Usage
 
-**REMEMBER:** be sure to provide a command callback. It will be automatically triggered once the user has provided the entire code.
-
 To use the pin code page, you need to add a reference to the CodePage namespace in your XAML file:
 
 ```xaml
 xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
 ```
 
+and instead of have a ContentPage in your XAML file, you need to change to
+
 Here's an example:
 
 ```xaml
 <?xml version="1.0" encoding="utf-8" ?>
+<codePage:CodePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
+    x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage">
+    
+</codePage:CodePage>
+```
+
+**REMEMBER:** be sure to provide a command callback. It will be automatically triggered once the user has provided the entire code.
+
+```xaml
 <codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -81,6 +93,16 @@ Here's an example:
 </codePage:CodePage>
 ```
 
+in your ViewModel
+
+```csharp
+[RelayCommand]
+public void UserEndTheCode(string code)
+{
+    //do something with the code response
+}
+```
+
 The equivalent C# code is:
 
 ```csharp
@@ -88,7 +110,6 @@ var pinCodePage = new CodePage();
 
 pinCodePage.CallbackCodeFinished = new Command((code) =>
 {
-    await Shell.Current.GoToAsync("..");
     //do something with the code response
 });
 
@@ -245,7 +266,6 @@ The equivalent C# code is:
 var pinCodePage = new CodePage();
 
 pinCodePage.KeyboardViewer = new KeyboardSquare();
-
 ```
 
 #### Customizable properties
