@@ -73,7 +73,7 @@ Now, instead of having a ContentPage in your XAML file, you need to change it to
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
-    x:Class="Packages.MAUI.App.Views.MyPinCodePage">
+    x:Class="MAUI.App.Views.MyPinCodePage">
     
 </codePage:CodePage>
 ```
@@ -99,7 +99,7 @@ public partial class MyPinCodePage : MauiCodes.Views.Pages.CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
-    x:Class="Packages.MAUI.App.Views.MyPinCodePage"
+    x:Class="MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}">
     
 </codePage:CodePage>
@@ -142,7 +142,7 @@ You have the option to customize the headline, subheadline, and image on your pa
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
-    x:Class="Packages.MAUI.App.Views.MyPinCodePage"
+    x:Class="MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}"
     Headline="YOUR HEADLINE HERE"
     SubHeadline="YOUR SUBHEADLINE HERE">
@@ -196,7 +196,7 @@ Here's an example showing the PIN Code with a circle shape:
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
     xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=MauiCodes"
-    x:Class="Packages.MAUI.App.Views.MyPinCodePage"
+    x:Class="MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}">
     
     <codePage:CodePage.CodeViewer>
@@ -262,7 +262,7 @@ Here's an example:
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
     xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=MauiCodes"
-    x:Class="Packages.MAUI.App.Views.MyPinCodePage"
+    x:Class="MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}">
     
     <codePage:CodePage.KeyboardViewer>
@@ -317,7 +317,7 @@ If you choose the keyboard with a shape (circle or square), you can use the foll
     xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
     xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=MauiCodes"
     xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=MauiCodes"
-    x:Class="Packages.MAUI.App.Views.MyPinCodePage"
+    x:Class="MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}"
     Headline="YOUR HEADLINE HERE"
     SubHeadline="YOUR SUBHEADLINE HERE">
