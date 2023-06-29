@@ -23,7 +23,7 @@
 
 # Creating a Customizable Pin Code Page in .NET MAUI
 
-This library provides developers with an easy way to add a customizable pin code page to their .NET MAUI applications. With just a few lines of code, you can create a secure page that requires a pin code to access.
+This library provides developers with an easy way to add a customizable PIN Code page to their .NET MAUI applications. With just a few lines of code, you can create a secure page that requires a PIN Code to access.
 
 ![PinCode Page Screenshot][hero-image]
 
@@ -42,32 +42,30 @@ This library provides developers with an easy way to add a customizable pin code
 - **Code viewer:** includes several different options for customization.
 - **Headline:** you have the flexibility to fully customize the headline phrases.
 - **Color customization:** giving you complete control over the look and feel of your keyboard and code viewer.
-- **Customize the length of your code:** adjust the code length (default is 4).
+- **Customize the length of your code:** adjust the amount of digits (default is 4).
 - and others.
 
 ## Getting Started
 
 ### Installation
 
-To use this package, simply install it in your .NET MAUI project using NuGet. In Visual Studio, you can do this by right-clicking on your project and selecting "Manage NuGet Packages". From there, search for "MauiCode" and install the latest version.
+To use this package, simply install the NuGet package MauiCode in your .NET MAUI project. In Visual Studio, you can do this by right-clicking on your project and selecting "Manage NuGet Packages". From there, search for "MauiCode" and install the latest version.
 
 ```powershell
 Install-Package MauiCode
 ```
 
-Once the package is installed, you can add a pin code page to your application.
+Once the package is installed, you can add a PIN Code Page to your application.
 
 ### Usage
 
-To use the pin code page, you need to add a reference to the CodePage namespace in your XAML file:
+Create a new ContentPage in your .NET MAUI project and add a reference to the CodePage namespace in your file:
 
 ```xaml
 xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
 ```
 
-and instead of have a ContentPage in your XAML file, you need to change to
-
-Here's an example:
+Now, instead of having a ContentPage in your XAML file, you need to change it to:
 
 ```xaml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -75,25 +73,39 @@ Here's an example:
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
-    x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage">
+    x:Class="Packages.MAUI.App.Views.MyPinCodePage">
     
 </codePage:CodePage>
 ```
 
-**REMEMBER:** be sure to provide a command callback. It will be automatically triggered once the user has provided the entire code.
+And the code-behind to:
+
+```csharp
+public partial class MyPinCodePage : MauiCodes.Views.Pages.CodePage
+{
+   public MyPinCodePage()
+   {
+      InitializeComponent();
+   }
+}
+```
+
+### Command callback
+
+**REMEMBER**, be sure to provide a command callback. It will be automatically triggered once the user has provided the entire code. So your XAML file will look like:
 
 ```xaml
 <codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
-    x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage"
+    x:Class="Packages.MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}">
     
 </codePage:CodePage>
 ```
 
-in your ViewModel
+And your ViewModel will look like:
 
 ```csharp
 [RelayCommand]
@@ -118,7 +130,7 @@ await Navigation.PushAsync(pinCodePage);
 
 ## Customizing the Appearance
 
-This package provides several ways to customize the appearance of the pin code page to fit the look and feel of your application. You can customize the colors and the page's elements.
+This package provides several ways to customize the appearance of the PIN Code Page to fit the look and feel of your application. You can customize the colors and the page's elements.
 
 ### Headline & Image
 
@@ -130,7 +142,7 @@ You have the option to customize the headline, subheadline, and image on your pa
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
-    x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage"
+    x:Class="Packages.MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}"
     Headline="YOUR HEADLINE HERE"
     SubHeadline="YOUR SUBHEADLINE HERE">
@@ -157,25 +169,25 @@ pinCodePage.Illustration = new Image { Source = ImageSource.FromFile(path), Heig
 
 ### Code Viewer
 
-You can choose to hide or show the pin code, as well as select from a variety of shapes, including circles or squares. It is important for you to make a decision to hide or show the code in order to add the correct namespace on XAML.
+![Code Viewers Availables][code-viewers-screenshot]
 
-If you want to hide, add:
+You can choose to hide or show the PIN Code, as well as select from a variety of shapes, including circles or squares. It is important for you to make a decision to hide or show the code in order to add the correct namespace on XAML.
+
+If you want to hide it, add:
 
 ```xaml
 xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Hide;assembly=MauiCodes"
 ```
 
-but if you want to show the pin code, use:
+but if you want to show the PIN Code, use:
 
 ```xaml
 xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=MauiCodes"
 ```
 
-![Code Viewers Availables][code-viewers-screenshot]
-
 Whether you prefer a minimalist or more elaborate design, my library has you covered.
 
-Here's an example showing the pincode with a circle shape:
+Here's an example showing the PIN Code with a circle shape:
 
 ```xaml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -184,7 +196,7 @@ Here's an example showing the pincode with a circle shape:
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
     xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=MauiCodes"
-    x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage"
+    x:Class="Packages.MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}">
     
     <codePage:CodePage.CodeViewer>
@@ -208,11 +220,11 @@ pinCodePage.CodeViewer = new CircleHidingCodeViewer();
 
 #### Customizable properties
 
-- **CodeLength:** allows you to set the desired length of your pin code.
-- **Color:** allows you to set the color of the pin code shape.
-- **Size:** allows you to set the size of the pin code shape.
+- **CodeLength:** allows you to set the desired length (amount of digits) of your PIN Code.
+- **Color:** allows you to set the color of the PIN Code shape.
+- **Size:** allows you to set the size of the PIN Code shape.
 
-If you choose to show the pin code, you can use the following properties too:
+If you choose to show the PIN Code, you can use the following properties too:
 
 - **FontSize:** allows you to set the font size for the numbers.
 - **TextColor:** allows you to set the text color for the numbers.
@@ -233,13 +245,13 @@ If you choose to show the pin code, you can use the following properties too:
 
 ### Keyboard
 
-You can select from a keyboard without any shape, a square shape, or a circle shape, depending on the look and feel you want to achieve. Don't forget to add the namespace on your XAML:
+![Keyboard Availables][keyboard-screenshot]
+
+You can select from a keyboard a circle shape, a keyboard without shape, or a square shape, depending on the look and feel you want to achieve. Don't forget to add the namespace on your XAML file:
 
 ```xaml
 xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=MauiCodes"
 ```
-
-![Keyboard Availables][keyboard-screenshot]
 
 Here's an example:
 
@@ -250,7 +262,7 @@ Here's an example:
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
     xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=MauiCodes"
-    x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage"
+    x:Class="Packages.MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}">
     
     <codePage:CodePage.KeyboardViewer>
@@ -270,7 +282,7 @@ pinCodePage.KeyboardViewer = new KeyboardSquare();
 
 #### Customizable properties
 
-- **Size:** allows you to set the size of the pin code shape.
+- **Size:** allows you to set the size of the PIN Code shape.
 - **FontSize:** allows you to set the font size for the numbers.
 - **CancelTextFontSize:** allows you to set the font size for the text "Cancel".
 - **TextColor:** allows you to set the text color for the numbers.
@@ -278,7 +290,7 @@ pinCodePage.KeyboardViewer = new KeyboardSquare();
 - **CancelText:** allows you to set the string to show if the user wants to cancel the operation. This is useful for translation, for example.
 - **BackspaceColor:** allows you to set the color of backspace button.
 
-If you choose the keyboard with shape, you can use the following property too:
+If you choose the keyboard with a shape (circle or square), you can use the following property too:
 
 - **ShapeColor:** allows you to set the color for the shape.
 
@@ -305,7 +317,7 @@ If you choose the keyboard with shape, you can use the following property too:
     xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
     xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=MauiCodes"
     xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=MauiCodes"
-    x:Class="Packages.MAUI.App.Views.PinCode.PinCodePage"
+    x:Class="Packages.MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}"
     Headline="YOUR HEADLINE HERE"
     SubHeadline="YOUR SUBHEADLINE HERE">
