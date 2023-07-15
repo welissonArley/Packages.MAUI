@@ -1,6 +1,7 @@
 ﻿using MauiCodes.Views.Components.Keyboards.Base;
 
 namespace MauiCodes.Views.Components.Keyboards;
+
 public class KeyboardCircle : BaseKeyboardShapeViewer
 {
     protected override Button CreateButton(int value)
