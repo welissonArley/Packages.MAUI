@@ -32,5 +32,11 @@ jobs:
     - name: Build Project
       run: dotnet build --configuration Release
 
+    - name: Get Nuget package name
+      run: dir /s MauiDays.*.nupkg /b > result.txt
+      
+    - name: Save on a temporary variable
+      run: set /p PACKAGENAMETOPUBLISH=<result.txt
+
     - name: Publish Nuget package
-      run: dotnet nuget push bin/Release/MauiDays.*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push %PACKAGENAMETOPUBLISH% --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
