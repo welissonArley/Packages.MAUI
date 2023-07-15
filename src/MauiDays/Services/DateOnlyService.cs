@@ -1,5 +1,4 @@
 ﻿namespace MauiDays.Services;
-
 public class DateOnlyService
 {
     private DateOnly _date;
