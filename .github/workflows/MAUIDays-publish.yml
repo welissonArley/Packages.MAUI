@@ -36,12 +36,14 @@ jobs:
       shell: powershell
       run: |
           cmd /r dir /s MauiDays.*.nupkg /b > result.txt
+          Get-Content .\result.txt | Select -First 1
       
     - name: Save on a temporary variable
       shell: powershell
       run: |
         $PACKAGENAMETOPUBLISH=Get-Content .\result.txt | Select -First 1
-
+        $PACKAGENAMETOPUBLISH
+        
     - name: Publish Nuget package
       shell: powershell
       run: |
