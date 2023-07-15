@@ -1,6 +1,7 @@
 ﻿using MauiDays.Services;
 
 namespace MauiDays.Views.Components;
+
 public class CalendarConfirmationControlsComponent : ContentView
 {
     private const string TEXT_CANCEL = "Cancel";
