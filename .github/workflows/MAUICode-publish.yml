@@ -35,4 +35,4 @@ jobs:
     - name: Publish Nuget package
       shell: powershell
       run: |
-        dotnet nuget push $(cmd /r dir /s MauiCodes.Authorization.*.nupkg /b) --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
+        dotnet nuget push $(cmd /r dir /s PinCodes.Authorization.Maui.*.nupkg /b) --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
