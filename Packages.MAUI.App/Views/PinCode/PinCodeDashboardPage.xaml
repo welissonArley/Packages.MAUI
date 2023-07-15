@@ -83,11 +83,11 @@
         <Label Text="CODE" FontSize="16" FontAttributes="Bold" Margin="0,20,0,10"/>
         <Grid ColumnDefinitions="*, 50">
             <Label Text="Show code?" VerticalOptions="Center" Grid.Column="0"/>
-            <Switch Grid.Column="1" IsToggled="{Binding ShowCode}" />
+            <CheckBox Grid.Column="1" IsChecked="{Binding ShowCode}" Color="{AppThemeBinding Light=Black, Dark=White}" />
         </Grid>
         <Grid ColumnDefinitions="*, 50">
             <Label Text="Square viewer?" VerticalOptions="Center" Grid.Column="0"/>
-            <Switch Grid.Column="1" IsToggled="{Binding SquareViewer}" />
+            <CheckBox Grid.Column="1" IsChecked="{Binding SquareViewer}" Color="{AppThemeBinding Light=Black, Dark=White}" />
         </Grid>
 
         <BoxView />
