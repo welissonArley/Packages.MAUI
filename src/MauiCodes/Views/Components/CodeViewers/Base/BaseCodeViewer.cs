@@ -1,5 +1,4 @@
 namespace MauiCodes.Views.Components.CodeViewers.Base;
-
 public abstract class BaseCodeViewer : ContentView
 {
     protected const ushort CODE_LENGTH = 4;
