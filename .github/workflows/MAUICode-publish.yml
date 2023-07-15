@@ -3,7 +3,7 @@ name: MAUICodes
 on:
   push:
     branches:
-      -master
+      - master
     paths:
       - 'src/MauiCodes/**'
       - '!src/MauiCodes/readme.md'
