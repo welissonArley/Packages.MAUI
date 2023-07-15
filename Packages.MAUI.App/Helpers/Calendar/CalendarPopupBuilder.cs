@@ -1,47 +1,58 @@
-﻿using MauiCode.Helpers.Extensions;
+﻿using MauiDays.Views.Popups;
 using MauiDays.Views.Popups.DaySelector;
 using MauiDays.Views.Popups.MonthSelector;
+using Mopups.Services;
+using Packages.MAUI.App.Helpers.Extensions;
+using System.Globalization;
 
 namespace Packages.MAUI.App.Helpers.Calendar;
 public static class CalendarPopupBuilder
 {
-    public static SingleMonthSelectorCalendarPopup SingleMonth(Action<DateOnly> callbackConfirm)
+    public static BaseCalendarPopup SingleMonth(Action<DateOnly> callbackConfirm)
     {
-        return SingleMonthSelectorCalendarPopup
-            .Instance(callbackConfirm)
-            .PopupBackgroundColor(PopupBackgroundColor())
-            .SetCancelFontFamily(CancelFontFamily())
-            .SetHeaderFontFamily(HeaderFontFamily())
-            .SetMonthFontFamily(LabelFontFamily())
-            .CalendarBackgroundColor(CalendarBackgroundColor())
+        return new SingleMonthSelectorCalendarPopup(async () => { await MopupService.Instance.PopAsync(); }, callbackConfirm)
+            .SetPopupBackgroundColor(PopupBackgroundColor())
+            .SetCalendarBackgroundColor(CalendarBackgroundColor())
             .SetPrimaryColor(PrimaryColor())
+            .SetHeaderFontFamily(HeaderFontFamily())
             .SetConfirmButtonColor(ColorForConfirmButton())
+            .SetTextCancel("CANCEL")
+            .SetConfirmButtonTextColor(SelectedConfirmButtonTextColor())
+            .SetCancelFontFamily(CancelFontFamily())
+            .SetCulture(Culture())
             .SetSelectedBackgroundColor(SelectedBackgroundColor())
-            .SetSelectedMonthColor(SelectedLabelColor());
+            .SetSelectedLabelColor(SelectedLabelColor())
+            .SetLabelFontFamily(LabelFontFamily());
     }
 
-    public static SingleDaySelectorCalendarPopup SingleDay(Action<DateOnly> callbackConfirm)
+    public static BaseCalendarPopup SingleDay(Action<DateOnly> callbackConfirm)
     {
-        return SingleDaySelectorCalendarPopup
-            .Instance(callbackConfirm)
-            .PopupBackgroundColor(PopupBackgroundColor())
-            .SetCancelFontFamily(CancelFontFamily())
-            .SetHeaderFontFamily(HeaderFontFamily())
-            .SetDaysFontFamily(LabelFontFamily())
-            .CalendarBackgroundColor(CalendarBackgroundColor())
+        return new SingleDaySelectorCalendarPopup(async () => { await MopupService.Instance.PopAsync(); }, callbackConfirm)
+            .SetDaysOfWeekFontFamily(LabelDaysOfWeekFontFamily())
+            .SetPopupBackgroundColor(PopupBackgroundColor())
+            .SetCalendarBackgroundColor(CalendarBackgroundColor())
             .SetPrimaryColor(PrimaryColor())
+            .SetHeaderFontFamily(HeaderFontFamily())
             .SetConfirmButtonColor(ColorForConfirmButton())
+            .SetTextCancel("CANCEL")
+            .SetConfirmButtonTextColor(SelectedConfirmButtonTextColor())
+            .SetCancelFontFamily(CancelFontFamily())
+            .SetCulture(Culture())
             .SetSelectedBackgroundColor(SelectedBackgroundColor())
-            .SetSelectedDayColor(SelectedLabelColor());
+            .SetSelectedLabelColor(SelectedLabelColor())
+            .SetLabelFontFamily(LabelFontFamily());
     }
 
     private static Color ColorForConfirmButton() => Color.FromArgb(Application.Current.IsLightMode() ? "#40806A" : "#00D46A");
     private static Color PrimaryColor() => Application.Current.IsLightMode() ? Colors.Black : Colors.White;
     private static Color SelectedBackgroundColor() => Application.Current.IsLightMode() ? Colors.Black : Colors.White;
     private static Color SelectedLabelColor() => Application.Current.IsLightMode() ? Colors.White : Colors.Black;
+    private static Color SelectedConfirmButtonTextColor() => Application.Current.IsLightMode() ? Colors.White : Colors.Black;
     private static Color CalendarBackgroundColor() => Application.Current.IsLightMode() ? Colors.White : Application.Current.GetDarkMode();
     private static Color PopupBackgroundColor() => Color.FromArgb("#80A1A1A1");
     private static string CancelFontFamily() => "OpenSansRegular";
     private static string HeaderFontFamily() => "OpenSansSemibold";
     private static string LabelFontFamily() => "OpenSansRegular";
+    private static string LabelDaysOfWeekFontFamily() => "OpenSansRegular";
+    private static CultureInfo Culture() => CultureInfo.CurrentCulture;
 }

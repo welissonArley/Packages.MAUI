@@ -1,6 +1,4 @@
-using MauiCode.Helpers.Extensions;
-
-namespace MauiCode.Views.Components.CodeViewers.Base;
+namespace MauiCodes.Views.Components.CodeViewers.Base;
 
 public abstract class BaseCodeViewer : ContentView
 {
@@ -27,38 +25,72 @@ public abstract class BaseCodeViewer : ContentView
         set { SetValue(SizeProperty, value); }
     }
 
-    public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(BaseCodeViewer), Color.FromArgb(Application.Current.IsLightMode() ? "#000000" : "#FFFFFF"), propertyChanged: OnPropertyChanged);
-    public static readonly BindableProperty SizeProperty = BindableProperty.Create(nameof(Size), typeof(uint), typeof(BaseCodeViewer), CIRCLE_SIZE, propertyChanged: OnPropertyChanged);
-    public static readonly BindableProperty CodeLengthProperty = BindableProperty.Create(nameof(CodeLength), typeof(ushort), typeof(BaseCodeViewer), CODE_LENGTH, propertyChanged: OnPropertyChanged);
+    public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(BaseCodeViewer), Colors.Red, propertyChanged: OnColorPropertyChanged);
+    public static readonly BindableProperty SizeProperty = BindableProperty.Create(nameof(Size), typeof(uint), typeof(BaseCodeViewer), CIRCLE_SIZE, propertyChanged: OnSizePropertyChanged);
+    public static readonly BindableProperty CodeLengthProperty = BindableProperty.Create(nameof(CodeLength), typeof(ushort), typeof(BaseCodeViewer), CODE_LENGTH, propertyChanged: OnCodeLengthPropertyChanged);
 
-    protected static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseCodeViewer)bindable).CreateContent();
+    protected static void OnColorPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseCodeViewer)bindable).SetColor();
+    private static void OnCodeLengthPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseCodeViewer)bindable).SetCodeLength();
+    private static void OnSizePropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseCodeViewer)bindable).SetSize();
+    
+    protected readonly Grid _layout;
 
-    public void CreateContent()
+    public BaseCodeViewer()
     {
-        Grid grid = new()
+        _layout = new()
         {
             HorizontalOptions = LayoutOptions.Center,
-            ColumnSpacing = Size * 0.5,
-            ColumnDefinitions = new ColumnDefinitionCollection(Enumerable.Repeat(new ColumnDefinition { Width = Size }, CodeLength).ToArray())
+            ColumnSpacing = CreateColumnSpacing(),
+            ColumnDefinitions = new ColumnDefinitionCollection(Enumerable.Repeat(CreateColumnDefinition(), CodeLength).ToArray())
         };
 
         for (var index = 0; index < CodeLength; index++)
-        {
-            char? codeChar = Code.Length > index ? Code.ElementAt(index) : null;
+            _layout.Add(view: CreateCodeView(), column: index);
 
-            grid.Add(view: CreateCodeView(codeChar), column: index);
-        }
-
-        Content = grid;
+        Content = _layout;
     }
 
-    public abstract IView CreateCodeView(char? codeChar);
-
-    public BaseCodeViewer() => CreateContent();
-
-    public void SetCode(string code)
+    private void SetCodeLength()
     {
-        Code = code;
-        CreateContent();
+        if (CodeLength <= 0)
+            CodeLength = CODE_LENGTH;
+
+        _layout.ColumnDefinitions.Clear();
+        _layout.Clear();
+
+        _layout.ColumnDefinitions = new ColumnDefinitionCollection(Enumerable.Repeat(CreateColumnDefinition(), CodeLength).ToArray());
+
+        for (var index = 0; index < CodeLength; index++)
+            _layout.Add(view: CreateCodeView(), column: index);
     }
+    private void SetSize()
+    {
+        for (var index = 0; index < CodeLength; index++)
+        {
+            var collumnDefinition = _layout.ColumnDefinitions.ElementAt(index);
+            collumnDefinition.Width = Size;
+
+            var item = (VisualElement)_layout.ElementAt(index);
+            item.WidthRequest = Size;
+            item.HeightRequest = Size;
+        }
+    }
+    private void SetColor()
+    {
+        for (var index = 0; index < CodeLength; index++)
+        {
+            var item = _layout.ElementAt(index);
+            ChangeColorCodeView(item);
+        }
+    }
+
+    private ColumnDefinition CreateColumnDefinition() => new () { Width = Size };
+    private double CreateColumnSpacing() => Size * 0.5;
+
+    protected abstract IView CreateCodeView();
+    protected abstract void ChangeColorCodeView(IView view);
+
+    protected SolidColorBrush ColorWithAlpha() => new (Color.WithAlpha(0.2f));
+
+    public virtual void SetCode(string code) => Code = code;
 }

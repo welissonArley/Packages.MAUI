@@ -7,5 +7,6 @@
     <VerticalStackLayout Spacing="30" Margin="0,70,0,0">
         <Button Text="Single DAY calendar popup" Command="{Binding SingleDayCommand}" />
         <Button Text="Single MONTH calendar popup" Command="{Binding SingleMonthCommand}" />
+        <Button Text="Single DAY Page" Command="{Binding SingleDayPageCommand}" />
     </VerticalStackLayout>
 </ContentPage>

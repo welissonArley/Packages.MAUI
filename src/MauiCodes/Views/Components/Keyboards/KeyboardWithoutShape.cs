@@ -1,18 +1,24 @@
-﻿using MauiCode.Views.Components.Keyboards.Base;
+﻿using MauiCodes.Views.Components.Keyboards.Base;
 
-namespace MauiCode.Views.Components.Keyboards;
+namespace MauiCodes.Views.Components.Keyboards;
 public class KeyboardWithoutShape : BaseKeyboardViewer
 {
-    public override Button CreateButton(int value)
+    protected override Button CreateButton(int value)
     {
         return new Button
         {
-            WidthRequest = Size,
-            HeightRequest = Size,
+            WidthRequest = SizeForOrientation(),
+            HeightRequest = SizeForOrientation(),
             BackgroundColor = TextColor.WithAlpha(0),
             Text = $"{value}",
             FontSize = FontSize,
             TextColor = TextColor
         };
+    }
+
+    protected override void SetSize(Button button)
+    {
+        button.WidthRequest = SizeForOrientation();
+        button.HeightRequest = SizeForOrientation();
     }
 }

@@ -29,7 +29,7 @@
                     <TapGestureRecognizer Command="{Binding IllustrationChangedCommand}" CommandParameter="{Static enums:IllustrationType.Turtle}"/>
                 </Border.GestureRecognizers>
                 <VerticalStackLayout Spacing="5">
-                    <Image Source="turtle.png" HeightRequest="40" />
+                    <Image Source="turtle_thumbnail.png" HeightRequest="40" />
                 </VerticalStackLayout>
             </Border>
 
@@ -43,7 +43,7 @@
                     <TapGestureRecognizer Command="{Binding IllustrationChangedCommand}" CommandParameter="{Static enums:IllustrationType.Dog}"/>
                 </Border.GestureRecognizers>
                 <VerticalStackLayout Spacing="5">
-                    <Image Source="dog.png" HeightRequest="40" />
+                    <Image Source="dog_thumbnail.png" HeightRequest="40" />
                 </VerticalStackLayout>
             </Border>
 
@@ -57,7 +57,7 @@
                     <TapGestureRecognizer Command="{Binding IllustrationChangedCommand}" CommandParameter="{Static enums:IllustrationType.Bird}"/>
                 </Border.GestureRecognizers>
                 <VerticalStackLayout Spacing="5">
-                    <Image Source="bird.png" HeightRequest="40" />
+                    <Image Source="bird_thumbnail.png" HeightRequest="40" />
                 </VerticalStackLayout>
             </Border>
 
@@ -83,11 +83,11 @@
         <Label Text="CODE" FontSize="16" FontAttributes="Bold" Margin="0,20,0,10"/>
         <Grid ColumnDefinitions="*, 50">
             <Label Text="Show code?" VerticalOptions="Center" Grid.Column="0"/>
-            <Switch Grid.Column="1" IsToggled="{Binding ShowCode}" />
+            <CheckBox Grid.Column="1" IsChecked="{Binding ShowCode}" Color="{AppThemeBinding Light=Black, Dark=White}" />
         </Grid>
         <Grid ColumnDefinitions="*, 50">
             <Label Text="Square viewer?" VerticalOptions="Center" Grid.Column="0"/>
-            <Switch Grid.Column="1" IsToggled="{Binding SquareViewer}" />
+            <CheckBox Grid.Column="1" IsChecked="{Binding SquareViewer}" Color="{AppThemeBinding Light=Black, Dark=White}" />
         </Grid>
 
         <BoxView />

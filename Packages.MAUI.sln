@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Packages.MAUI.App", "Packag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiCodes", "src\MauiCodes\MauiCodes.csproj", "{5E9AECA2-5553-4C18-816D-A163E9A68845}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiDays", "src\MauiDays\MauiDays.csproj", "{AB41320E-C13A-45A8-BA49-66A1904C8FF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiDays", "src\MauiDays\MauiDays.csproj", "{AB41320E-C13A-45A8-BA49-66A1904C8FF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

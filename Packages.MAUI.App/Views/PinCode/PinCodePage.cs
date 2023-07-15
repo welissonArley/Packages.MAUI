@@ -1,10 +1,10 @@
-using MauiCode.Helpers.Extensions;
-using MauiCode.Views.Components.CodeViewers.Base;
-using MauiCode.Views.Components.CodeViewers.Hide;
-using MauiCode.Views.Components.CodeViewers.Show;
-using MauiCode.Views.Components.Keyboards;
-using MauiCode.Views.Components.Keyboards.Base;
-using MauiCode.Views.Pages;
+using MauiCodes.Views.Components.CodeViewers.Base;
+using MauiCodes.Views.Components.CodeViewers.Hide;
+using MauiCodes.Views.Components.CodeViewers.Show;
+using MauiCodes.Views.Components.Keyboards;
+using MauiCodes.Views.Components.Keyboards.Base;
+using MauiCodes.Views.Pages;
+using Packages.MAUI.App.Helpers.Extensions;
 using Packages.MAUI.App.Model.Enums;
 using Packages.MAUI.App.ViewModels.PinCode;
 
@@ -53,7 +53,7 @@ public class PinCodePage : CodePage, IQueryAttributable
             {
                 Size = 20,
                 Color = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
-                CodeLength = 6,
+                CodeLength = 4,
                 Margin = new Thickness(0, 0, 0, 40)
             };
         }
@@ -66,7 +66,7 @@ public class PinCodePage : CodePage, IQueryAttributable
                 TextColor = Application.Current.IsLightMode() ? Colors.White : Colors.Black,
                 Color = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 FontSize = 25,
-                CodeLength = 6,
+                CodeLength = 4,
                 Margin = new Thickness(0, 0, 0, 40)
             };
         }
@@ -75,7 +75,7 @@ public class PinCodePage : CodePage, IQueryAttributable
         {
             Size = 20,
             Color = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
-            CodeLength = 6,
+            CodeLength = 4,
             Margin = new Thickness(0, 0, 0, 40)
         };
     }
@@ -90,7 +90,7 @@ public class PinCodePage : CodePage, IQueryAttributable
                 CancelTextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 BackspaceColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 FontSize = 25,
-                Size = 70,
+                Size = 75,
                 CancelTextFontSize = 18,
                 TextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White
             },
@@ -99,7 +99,7 @@ public class PinCodePage : CodePage, IQueryAttributable
                 CancelTextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 BackspaceColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 FontSize = 25,
-                Size = 70,
+                Size = 75,
                 CancelTextFontSize = 18,
                 TextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White
             },
@@ -109,14 +109,14 @@ public class PinCodePage : CodePage, IQueryAttributable
                 CancelTextColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 BackspaceColor = Application.Current.IsLightMode() ? Colors.Black : Colors.White,
                 FontSize = 25,
-                Size = 70,
+                Size = 75,
                 CancelTextFontSize = 18,
                 TextColor = Application.Current.IsLightMode() ? Colors.White : Colors.Black
             }
         };
     }
 
-    private static Image GetImage(IllustrationType illustrationType)
+    private Image GetImage(IllustrationType illustrationType)
     {
         if (illustrationType == IllustrationType.None) return null;
 
@@ -131,7 +131,7 @@ public class PinCodePage : CodePage, IQueryAttributable
         {
             Source = ImageSource.FromFile(path),
             HeightRequest = 120,
-            Margin = new Thickness(0, 0, 0, 40),
+            Margin = new Thickness(0, 0, 0, !string.IsNullOrWhiteSpace(Headline) || !string.IsNullOrWhiteSpace(SubHeadline) ? 40 : 0),
         };
     }
 }
