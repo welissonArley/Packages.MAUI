@@ -27,6 +27,7 @@
 		<PackageTags>.NET MAUI;Calendar;Scheduling;Date Picker;Popups;Cross-platform;Xamarin;Mobile Development;Date Manipulation</PackageTags>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageId>MauiDays</PackageId>
 	</PropertyGroup>
 
 	<ItemGroup>
