@@ -3,7 +3,7 @@ name: MAUIDays
 on:
   push:
     branches:
-      -master
+      - master
     paths:
       - 'src/MauiDays/**'
       - '!src/MauiDays/readme.md'
