@@ -27,6 +27,7 @@
 		<RepositoryUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiCodes</RepositoryUrl>
 		<PackageTags>.NET MAUI;Pincode;Pin Entry;Cross-platform;Mobile Development;Xamarin</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageId>MauiCodes</PackageId>
 	</PropertyGroup>
 
 	<ItemGroup>
