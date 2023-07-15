@@ -32,19 +32,9 @@ jobs:
     - name: Build Project
       run: dotnet build --configuration Release
 
-    - name: Get Nuget package name
-      shell: powershell
-      run: |
-          cmd /r dir /s MauiDays.*.nupkg /b > result.txt
-          Get-Content .\result.txt | Select -First 1
-      
-    - name: Save on a temporary variable
-      shell: powershell
-      run: |
-        $PACKAGENAMETOPUBLISH=Get-Content .\result.txt | Select -First 1
-        $PACKAGENAMETOPUBLISH
-        
     - name: Publish Nuget package
       shell: powershell
       run: |
-        dotnet nuget push $PACKAGENAMETOPUBLISH --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
+          cmd /r dir /s MauiDays.*.nupkg /b > result.txt
+          $PACKAGENAMETOPUBLISH=Get-Content .\result.txt | Select -First 1
+          dotnet nuget push $PACKAGENAMETOPUBLISH --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
