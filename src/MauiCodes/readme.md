@@ -49,10 +49,10 @@ This library provides developers with an easy way to add a customizable PIN Code
 
 ### Installation
 
-To use this package, simply install the NuGet package MauiCode in your .NET MAUI project. In Visual Studio, you can do this by right-clicking on your project and selecting "Manage NuGet Packages". From there, search for "MauiCode" and install the latest version.
+To use this package, simply install the NuGet package **PinCodes.Authorization.Maui** in your .NET MAUI project. In Visual Studio, you can do this by right-clicking on your project and selecting "Manage NuGet Packages". From there, search for "PinCodes.Authorization.Maui" and install the latest version.
 
-```powershell
-Install-Package MauiCode
+```csharp
+dotnet add package PinCodes.Authorization.Maui
 ```
 
 Once the package is installed, you can add a PIN Code Page to your application.
@@ -62,7 +62,7 @@ Once the package is installed, you can add a PIN Code Page to your application.
 Create a new ContentPage in your .NET MAUI project and add a reference to the CodePage namespace in your file:
 
 ```xaml
-xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
+xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=PinCodes.Authorization.Maui"
 ```
 
 Now, instead of having a ContentPage in your XAML file, you need to change it to:
@@ -72,7 +72,7 @@ Now, instead of having a ContentPage in your XAML file, you need to change it to
 <codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
+    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=PinCodes.Authorization.Maui"
     x:Class="MAUI.App.Views.MyPinCodePage">
     
 </codePage:CodePage>
@@ -98,7 +98,7 @@ public partial class MyPinCodePage : MauiCodes.Views.Pages.CodePage
 <codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
+    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=PinCodes.Authorization.Maui"
     x:Class="MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}">
     
@@ -141,7 +141,7 @@ You have the option to customize the headline, subheadline, and image on your pa
 <codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
+    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=PinCodes.Authorization.Maui"
     x:Class="MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}"
     Headline="YOUR HEADLINE HERE"
@@ -176,13 +176,13 @@ You can choose to hide or show the PIN Code, as well as select from a variety of
 If you want to hide it, add:
 
 ```xaml
-xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Hide;assembly=MauiCodes"
+xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Hide;assembly=PinCodes.Authorization.Maui"
 ```
 
 but if you want to show the PIN Code, use:
 
 ```xaml
-xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=MauiCodes"
+xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=PinCodes.Authorization.Maui"
 ```
 
 Whether you prefer a minimalist or more elaborate design, my library has you covered.
@@ -194,8 +194,8 @@ Here's an example showing the PIN Code with a circle shape:
 <codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
-    xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=MauiCodes"
+    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=PinCodes.Authorization.Maui"
+    xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=PinCodes.Authorization.Maui"
     x:Class="MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}">
     
@@ -250,7 +250,7 @@ If you choose to show the PIN Code, you can use the following properties too:
 You can select from a keyboard a circle shape, a keyboard without shape, or a square shape, depending on the look and feel you want to achieve. Don't forget to add the namespace on your XAML file:
 
 ```xaml
-xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=MauiCodes"
+xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=PinCodes.Authorization.Maui"
 ```
 
 Here's an example:
@@ -260,8 +260,8 @@ Here's an example:
 <codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
-    xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=MauiCodes"
+    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=PinCodes.Authorization.Maui"
+    xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=PinCodes.Authorization.Maui"
     x:Class="MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}">
     
@@ -314,9 +314,9 @@ If you choose the keyboard with a shape (circle or square), you can use the foll
 <codePage:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=MauiCodes"
-    xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=MauiCodes"
-    xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=MauiCodes"
+    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=PinCodes.Authorization.Maui"
+    xmlns:codeViewer="clr-namespace:MauiCodes.Views.Components.CodeViewers.Show;assembly=PinCodes.Authorization.Maui"
+    xmlns:keyboard="clr-namespace:MauiCodes.Views.Components.Keyboards;assembly=PinCodes.Authorization.Maui"
     x:Class="MAUI.App.Views.MyPinCodePage"
     CallbackCodeFinished="{Binding UserEndTheCodeCommand}"
     Headline="YOUR HEADLINE HERE"
@@ -357,6 +357,6 @@ MauiCodes is released under the MIT License. See LICENSE.txt for details.
 
 
 <!-- Images -->
-[code-viewers-screenshot]: https://drive.google.com/uc?id=1EX_fTkVVkHcnq9b4twuyvvr06rF6ecC0
-[keyboard-screenshot]: https://drive.google.com/uc?id=1NuYguBdXEx6K1UiqYgW7wSma1QVQNP5o
-[hero-image]: https://drive.google.com/uc?id=1jS36_xALlvNo899FaqY5jjU-M5PIh7C6
+[code-viewers-screenshot]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/fix-readme-correct-links/Resources/Images/CodeViewers.png
+[keyboard-screenshot]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/fix-readme-correct-links/Resources/Images/KeyboardViewer.png
+[hero-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/fix-readme-correct-links/Resources/Images/SmartPhoneMockupPinCode.png

@@ -56,8 +56,8 @@ You can install the NuGet Package into your .NET MAUI project or download the so
 
 ### **NuGet**
 
-![nuget-codes-shield]
-![nuget-calendar-shield]
+[![nuget-codes-shield]][mauicodes-url]
+[![nuget-calendar-shield]][mauidays-url]
 
 ### **Install and use the source code**
 
@@ -127,3 +127,5 @@ Every item on the roadmap is an issue, with a label that indicates each of the f
 [buy-me-book-url]: https://www.buymeacoffee.com/welissonArley
 [instagram-url]: https://www.instagram.com/welisson.me/
 [homuai-course]: https://www.udemy.com/course/net-core-curso-orientado-para-mercado-de-trabalho/?referralCode=C0850BF224055DE39722
+[mauicodes-url]: https://www.nuget.org/packages/PinCodes.Authorization.Maui/
+[mauidays-url]: https://www.nuget.org/packages/ControlDays.Calendar.Maui/

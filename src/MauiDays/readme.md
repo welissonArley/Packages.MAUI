@@ -56,10 +56,10 @@ The library has a dependency on [Mopups][mopups-url], which is used for the mont
 
 ### Installation
 
-To use this package, simply install it in your .NET MAUI project using NuGet. In Visual Studio, you can do this by right-clicking on your project and selecting "Manage NuGet Packages". From there, search for "MauiDays" and install the latest version.
+To use this package, simply install it in your .NET MAUI project using NuGet. In Visual Studio, you can do this by right-clicking on your project and selecting "Manage NuGet Packages". From there, search for "ControlDays.Calendar.Maui" and install the latest version.
 
-```powershell
-Install-Package MauiDays
+```csharp
+dotnet add package ControlDays.Calendar.Maui
 ```
 
 ### Usage
@@ -68,8 +68,8 @@ Install-Package MauiDays
 
 Please, remember that you need to install and configure the [Mopups][mopups-url] nuget package. This dependency is necessary to use the popups.
 
-```powershell
-Install-Package Mopups
+```csharp
+dotnet add package Mopups
 ```
 
 ```csharp
@@ -250,7 +250,7 @@ Here's an example:
 <page:SingleDaySelectorPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:page="clr-namespace:MauiDays.Views.Pages;assembly=MauiDays"
+    xmlns:page="clr-namespace:MauiDays.Views.Pages;assembly=ControlDays.Calendar.Maui"
     x:Class="Packages.MAUI.App.Views.Calendar.SingleDaySelectorPage"
     OnDaySelectedCommand="{Binding SelectedDayCommand}">
 
@@ -301,7 +301,7 @@ Now that you know all properties to customize your calendar pages, let's see an 
 <page:SingleDaySelectorPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:page="clr-namespace:MauiDays.Views.Pages;assembly=MauiDays"
+    xmlns:page="clr-namespace:MauiDays.Views.Pages;assembly=ControlDays.Calendar.Maui"
     xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels.Calendar"
     xmlns:s="clr-namespace:System;assembly=mscorlib"
     x:Class="Packages.MAUI.App.Views.Calendar.SingleDaySelectorPage"
@@ -375,7 +375,5 @@ MauiDays is released under the MIT License. See LICENSE.txt for details.
 
 
 <!-- Images -->
-[code-viewers-screenshot]: https://drive.google.com/uc?id=1EX_fTkVVkHcnq9b4twuyvvr06rF6ecC0
-[keyboard-screenshot]: https://drive.google.com/uc?id=1NuYguBdXEx6K1UiqYgW7wSma1QVQNP5o
 [mopups-url]: https://github.com/LuckyDucko/Mopups
-[hero-image]: https://drive.google.com/uc?id=19PMZPpDlhSSrAbPP30HWyLi65tKZufWE
+[hero-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/fix-readme-correct-links/Resources/Images/SmartPhoneMockupDays.png
