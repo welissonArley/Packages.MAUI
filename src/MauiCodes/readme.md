@@ -357,6 +357,6 @@ MauiCodes is released under the MIT License. See LICENSE.txt for details.
 
 
 <!-- Images -->
-[code-viewers-screenshot]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/fix-readme-correct-links/Resources/Images/CodeViewers.png
-[keyboard-screenshot]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/fix-readme-correct-links/Resources/Images/KeyboardViewer.png
-[hero-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/fix-readme-correct-links/Resources/Images/SmartPhoneMockupPinCode.png
+[code-viewers-screenshot]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/master/Resources/Images/CodeViewers.png
+[keyboard-screenshot]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/master/Resources/Images/KeyboardViewer.png
+[hero-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/master/Resources/Images/SmartPhoneMockupPinCode.png

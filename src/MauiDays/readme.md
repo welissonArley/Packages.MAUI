@@ -376,4 +376,4 @@ MauiDays is released under the MIT License. See LICENSE.txt for details.
 
 <!-- Images -->
 [mopups-url]: https://github.com/LuckyDucko/Mopups
-[hero-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/fix-readme-correct-links/Resources/Images/SmartPhoneMockupDays.png
+[hero-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/master/Resources/Images/SmartPhoneMockupDays.png
