@@ -23,12 +23,13 @@
 		<Copyright>All rights reserved.</Copyright>
 		<PackageProjectUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiCodes</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
-		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<PackageReadmeFile>maiucodesreadme.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiCodes</RepositoryUrl>
 		<PackageTags>.NET MAUI;Pincode;Pin Entry;Cross-platform;Mobile Development;Xamarin</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageId>PinCodes.Authorization.Maui</PackageId>
 		<AssemblyName>PinCodes.Authorization.Maui</AssemblyName>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -41,6 +42,10 @@
 
 	<ItemGroup>
 	  <None Include="..\..\LICENSE.txt">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\..\Resources\Raw\maiucodesreadme.md">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
