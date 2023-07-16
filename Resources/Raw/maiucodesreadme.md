@@ -1,26 +1,3 @@
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#creating-a-customizable-pin-code-page-in-net-maui">About The Project</a>
-      <ul>
-        <li><a href="#compatibility">Compatibility</a></li>
-        <li><a href="#features">Features</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#usage">Usage</a></li>
-        <li><a href="#customizing-the-appearance">Customizing the Appearance</a></li>
-        <li><a href="#full-code">Full code</a></li>
-      </ul>
-    </li>
-  </ol>
-</details>
-
 # Creating a Customizable Pin Code Page in .NET MAUI
 
 This library provides developers with an easy way to add a customizable PIN Code page to their .NET MAUI applications. With just a few lines of code, you can create a secure page that requires a PIN Code to access.

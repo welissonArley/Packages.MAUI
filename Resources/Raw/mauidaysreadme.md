@@ -1,34 +1,3 @@
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#mauidays-nuget-package-for-month-and-day-calendar-in-net-maui">About The Project</a>
-      <ul>
-        <li><a href="#compatibility">Compatibility</a></li>
-        <li><a href="#features">Features</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#usage">Usage</a></li>
-        <ul>
-          <li><a href="#popups">Popups</a></li>
-          <ul>
-            <li><a href="#customizable-properties-for-calendar-popups">Customizable properties for Calendar Popups</a></li>    
-          </ul>
-          <li><a href="#pages">Pages</a></li>
-          <ul>
-            <li><a href="#customizable-properties-for-calendar-pages">Customizable properties for Calendar Pages</a></li>    
-          </ul>
-        </ul>      
-      </ul>
-    </li>
-  </ol>
-</details>
-
 # MAUIDays NuGet Package for Month and Day Calendar in .NET MAUI
 
 MauiDays is a .NET MAUI library that provides a customizable month and day calendar popup selector, along with a calendar page. It allows developers to easily add date selection functionality to their .NET MAUI apps.
