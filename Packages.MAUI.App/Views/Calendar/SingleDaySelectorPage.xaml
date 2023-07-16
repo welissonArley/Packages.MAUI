@@ -2,7 +2,7 @@
 <page:SingleDaySelectorPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:page="clr-namespace:MauiDays.Views.Pages;assembly=MauiDays"
+    xmlns:page="clr-namespace:MauiDays.Views.Pages;assembly=ControlDays.Calendar.Maui"
     xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels.Calendar"
     xmlns:s="clr-namespace:System;assembly=mscorlib"
     x:Class="Packages.MAUI.App.Views.Calendar.SingleDaySelectorPage"
