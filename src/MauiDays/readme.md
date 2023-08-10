@@ -371,7 +371,7 @@ public partial class SingleDaySelectorViewModel : ObservableObject
 
 ## License
 
-MauiDays is released under the MIT License. See LICENSE.txt for details.
+ControlDays.Calendar.Maui is released under the MIT License. See LICENSE.txt for details.
 
 
 <!-- Images -->

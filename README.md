@@ -36,9 +36,11 @@ My project is focused on providing a collection of libraries that simplify and e
 ### **Packages**
 Here are some details about the libraries included in this project:
 
-- **[Pincode library (MauiCodes)](https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiCodes):** my pincode library provides a simple and customizable page to add PIN code functionality to your .NET MAUI applications. The library includes different options for keyboard, code viewer, colors, and more.
+- **[Pincode library (PinCodes.Authorization.Maui)](https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiCodes):** my pincode library provides a simple and customizable page to add PIN code functionality to your .NET MAUI applications. The library includes different options for keyboard, code viewer, colors, and more.
 
-- **[Calendar library (MauiDays)](https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiDays):** my calendar library provides a customizable calendar control that can be easily integrated into your .NET MAUI projects to help manage dates. The library includes various features such as multi-language support, month selector, calendar page, and more.
+- **[Calendar library (ControlDays.Calendar.Maui)](https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiDays):** my calendar library provides a customizable calendar control that can be easily integrated into your .NET MAUI projects to help manage dates. The library includes various features such as multi-language support, month selector, calendar page, and more.
+
+- **[Tabs View library (MauiTabs)](https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiTabs):** Easy integrate tab views into your projects and enjoy fluid user experiences. My library empowers you to work with tab views in your .NET MAUI app.
 
 Each library in my project comes with its own documentation, providing detailed information and examples on how to use it in your .NET MAUI projects.
 
@@ -58,6 +60,7 @@ You can install the NuGet Package into your .NET MAUI project or download the so
 
 [![nuget-codes-shield]][mauicodes-url]
 [![nuget-calendar-shield]][mauidays-url]
+[![nuget-tabs-shield]][mauitabs-url]
 
 ### **Install and use the source code**
 
@@ -113,14 +116,11 @@ Every item on the roadmap is an issue, with a label that indicates each of the f
 
 <!-- Shields -->
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=000000
-
 [buy-me-book-shield]: https://img.shields.io/badge/-buy_me_a_book-gray?logo=buy-me-a-coffee&style=for-the-badge
-
 [instagram-shield]: https://img.shields.io/badge/-Instagram-black.svg?style=for-the-badge&logo=instagram&colorB=9a3797&color=ffffff
-
-[nuget-codes-shield]: https://img.shields.io/badge/MauiCodes-004880?style=for-the-badge&logo=nuget&logoColor=white
-
-[nuget-calendar-shield]: https://img.shields.io/badge/MauiDays-004880?style=for-the-badge&logo=nuget&logoColor=white
+[nuget-codes-shield]: https://img.shields.io/badge/PinCodes.Authorization.Maui-004880?style=for-the-badge&logo=nuget&logoColor=white
+[nuget-calendar-shield]: https://img.shields.io/badge/ControlDays.Calendar.Maui-004880?style=for-the-badge&logo=nuget&logoColor=white
+[nuget-tabs-shield]: https://img.shields.io/badge/MauiTabs-004880?style=for-the-badge&logo=nuget&logoColor=white
 
 <!-- Urls -->
 [linkedin-url]: https://www.linkedin.com/in/welissonarley/
@@ -129,3 +129,4 @@ Every item on the roadmap is an issue, with a label that indicates each of the f
 [homuai-course]: https://www.udemy.com/course/net-core-curso-orientado-para-mercado-de-trabalho/?referralCode=C0850BF224055DE39722
 [mauicodes-url]: https://www.nuget.org/packages/PinCodes.Authorization.Maui/
 [mauidays-url]: https://www.nuget.org/packages/ControlDays.Calendar.Maui/
+[mauitabs-url]: https://www.nuget.org/packages/MauiTabs/

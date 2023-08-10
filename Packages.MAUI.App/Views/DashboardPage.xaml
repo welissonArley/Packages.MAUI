@@ -50,7 +50,19 @@
                 </Grid>
             </Border>
 
-            <Border Background="{AppThemeBinding Light=#F9F8FF, Dark=#FFFACD}" Grid.Column="0" Grid.Row="1" Padding="30"/>
+            <Border Background="{AppThemeBinding Light=#F9F8FF, Dark=#FFFACD}" Grid.Column="0" Grid.Row="1">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding MauiTabsCommand}"/>
+                </Border.GestureRecognizers>
+                <Grid RowDefinitions="30, *, 20" RowSpacing="20">
+                    <Image Source="diagram.png" HorizontalOptions="Center" Grid.Row="0"/>
+                    <VerticalStackLayout Spacing="10" Grid.Row="1">
+                        <Label Text="MauiTabs" FontAttributes="Bold" TextColor="Black" />
+                        <Label Text="Customizable NuGet package for creating contents along Tabs." FontSize="12" TextColor="Black" />
+                    </VerticalStackLayout>
+                    <Image Source="circle_arrow.png" HorizontalOptions="End" VerticalOptions="End" Grid.Row="2"/>
+                </Grid>
+            </Border>
 
             <Border Background="{AppThemeBinding Light=#E5ECEA,Dark=#ADD8E6}" Grid.Column="1" Grid.Row="1" Padding="30"/>
 

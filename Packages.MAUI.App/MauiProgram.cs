@@ -29,6 +29,9 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddTransientWithShellRoute<Views.PinCode.PinCodePage, ViewModels.PinCode.PinCodeViewModel>(RoutePages.PINCODE_PAGE);
         mauiAppBuilder.Services.AddTransientWithShellRoute<Views.Calendar.CalendarDashboardPage, ViewModels.Calendar.CalendarDashboardViewModel>(RoutePages.DASHBOARD_CALENDAR_PAGE);
         mauiAppBuilder.Services.AddTransientWithShellRoute<Views.Calendar.SingleDaySelectorPage, ViewModels.Calendar.SingleDaySelectorViewModel>(RoutePages.SINGLE_DAY_CALENDAR_PAGE);
+        mauiAppBuilder.Services.AddTransientWithShellRoute<Views.Tabs.TabsViewExamplePage, ViewModels.Tabs.TabsViewExampleViewModel>(RoutePages.TABSVIEW_PAGE);
+        mauiAppBuilder.Services.AddTransientWithShellRoute<Views.Tabs.Styles.RoundedStylePage, ViewModels.Tabs.StyleTabViewModel>(RoutePages.ROUNDED_TABS_PAGE);
+        mauiAppBuilder.Services.AddTransientWithShellRoute<Views.Tabs.Styles.UnderlinedStylePage, ViewModels.Tabs.StyleTabViewModel>(RoutePages.UNDERLINED_TABS_PAGE);
 
         return mauiAppBuilder;
     }

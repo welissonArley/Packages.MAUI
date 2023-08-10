@@ -1,0 +1,38 @@
+name: MAUITabs
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'src/MauiTabs/**'
+      - '!src/MauiTabs/readme.md'
+      
+jobs:
+
+  build:
+
+    name: Build
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: src/MauiTabs
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Build Project
+      run: dotnet build --configuration Release
+
+    - name: Publish Nuget package
+      shell: powershell
+      run: |
+          dotnet nuget push $(cmd /r dir /s MauiTabs.*.nupkg /b) --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json

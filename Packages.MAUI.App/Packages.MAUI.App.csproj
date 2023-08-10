@@ -65,6 +65,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\src\MauiCodes\MauiCodes.csproj" />
 	  <ProjectReference Include="..\src\MauiDays\MauiDays.csproj" />
+	  <ProjectReference Include="..\src\MauiTabs\MauiTabs.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -81,6 +82,15 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PinCode\PinCodeDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Tabs\Styles\RoundedStylePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Tabs\Styles\UnderlinedStylePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Tabs\TabsViewExamplePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

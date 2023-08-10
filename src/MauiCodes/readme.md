@@ -353,7 +353,7 @@ If you choose the keyboard with a shape (circle or square), you can use the foll
 
 ## License
 
-MauiCodes is released under the MIT License. See LICENSE.txt for details.
+PinCodes.Authorization.Maui is released under the MIT License. See LICENSE.txt for details.
 
 
 <!-- Images -->

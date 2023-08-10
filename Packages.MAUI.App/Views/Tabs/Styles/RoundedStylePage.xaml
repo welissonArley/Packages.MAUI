@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:list="clr-namespace:System.Collections.Generic;assembly=System.Collections"
+             xmlns:tabs="clr-namespace:MauiTabs;assembly=MauiTabs"
+             xmlns:tabItem="clr-namespace:MauiTabs.Entities;assembly=MauiTabs"
+             xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels.Tabs"
+             x:DataType="viewModel:StyleTabViewModel"
+             x:Class="Packages.MAUI.App.Views.Tabs.Styles.RoundedStylePage">
+    <VerticalStackLayout>
+        <tabs:RoundedTabView
+            TextColor="Black"
+            SelectedTextColor="White"
+            BackgroundTabColor="#e7ebed"
+            SelectedBackgroundTabColor="#0064f3">
+            <tabs:RoundedTabView.ItemsList>
+                <list:List x:TypeArguments="tabItem:Item">
+                    <tabItem:Item Text="Income">
+                        <tabItem:Item.Content>
+                            <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
+                                <Label Text="Income" FontSize="22" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Text}" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </tabItem:Item.Content>
+                    </tabItem:Item>
+                    <tabItem:Item Text="Expense">
+                        <tabItem:Item.Content>
+                            <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
+                                <Label Text="Expense" FontSize="22" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Text}" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </tabItem:Item.Content>
+                    </tabItem:Item>
+                    <tabItem:Item Text="Debit and loan">
+                        <tabItem:Item.Content>
+                            <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
+                                <Label Text="Debit and loan" FontSize="22" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Text}" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </tabItem:Item.Content>
+                    </tabItem:Item>
+
+                    <tabItem:Item Text="Bills for the month">
+                        <tabItem:Item.Content>
+                            <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
+                                <Label Text="Bills for the month" FontSize="22" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Text}" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </tabItem:Item.Content>
+                    </tabItem:Item>
+                </list:List>
+            </tabs:RoundedTabView.ItemsList>
+        </tabs:RoundedTabView>
+    </VerticalStackLayout>
+</ContentPage>
