@@ -52,7 +52,7 @@ public abstract class TabView : ContentView
     private static void OnFontFamilyPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((TabView)bindable).SetFontFamily();
     private static void OnSelectedFontFamilyPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((TabView)bindable).SetSelectedFontFamily();
 
-    private void SetItems()
+    protected virtual void SetItems()
     {
         var layout = (VerticalStackLayout)Content;
 

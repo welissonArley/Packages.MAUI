@@ -9,4 +9,5 @@ public static class RoutePages
     public const string TABSVIEW_PAGE = "TabsViewExamplePage";
     public const string ROUNDED_TABS_PAGE = "RoundedTabsExamplePage";
     public const string UNDERLINED_TABS_PAGE = "UnderlinedTabsExamplePage";
+    public const string SYMMETRIC_TABS_PAGE = "SymmetricTabsExamplePage";
 }

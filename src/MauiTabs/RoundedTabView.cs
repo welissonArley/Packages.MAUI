@@ -64,16 +64,18 @@ public class RoundedTabView : TabView
         return layout;
     }
 
-    protected override void UnselectCurrentTab()
-    {
-        _currentTab.BackgroundColor = BackgroundTabColor;
-        ChangeColorTextOnTab(_currentTab, TextColor);
-    }
-
     protected override void SelectTab(Border tab)
     {
         tab.BackgroundColor = SelectedBackgroundTabColor;
         ChangeColorTextOnTab(tab, SelectedTextColor);
+        ChangeFontTextOnTab(tab, SelectedFontFamily);
+    }
+
+    protected override void UnselectCurrentTab()
+    {
+        _currentTab.BackgroundColor = BackgroundTabColor;
+        ChangeColorTextOnTab(_currentTab, TextColor);
+        ChangeFontTextOnTab(_currentTab, FontFamily);
     }
 
     protected override void ChangeColorTextOnTab(Border tab, Color changeTo) => ((Label)tab.Content).TextColor = changeTo;

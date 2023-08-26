@@ -8,5 +8,6 @@
         <Label Margin="0,20,0,0" Text="In this example, each tab will have a different style. Select one option below:" FontSize="16"/>
         <Button Text="Rounded Tab Style" Command="{Binding RoundedStyleCommand}"/>
         <Button Text="Underlined Tab Style" Command="{Binding UnderlinedStyleCommand}"/>
+        <Button Text="Symmetric Tab Style" Command="{Binding SymmetricStyleCommand}"/>
     </VerticalStackLayout>
 </ContentPage>
