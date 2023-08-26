@@ -61,6 +61,7 @@ After adding the xmlns namespace to your page, it's decision time! You need to c
 
 - **RoundedTabView:** Tabs with a background and rounded corners;
 - **UnderlinedTabView:** Tabs without background but with a small line on the selected tab.
+- **SymmetricTabView:** This style will generate a component that seamlessly adapts to the entire page, ensuring uniform tab sizes.
 
 Now, you can use the tabs component doing that:
 
@@ -111,16 +112,31 @@ add how many **tabItem:Item** you want and remember that you need to tell the ta
 
 #### UnderlinedTabView - Customizable properties
 
+![Underlined Tab Style][underlined-tab-style-image]
+
 - **LineColor:** allows you to set the line color for the selected tab.
 
 #### RoundedTabView - Customizable properties
 
+![Rounded Tab Style][rounded-tab-style-image]
+
 - **BackgroundTabColor:** allows you to set the background color for the tabs (except the selected one).
 - **SelectedBackgroundTabColor:** allows you to set the background color for the selected tab.
+
+#### SymmetricTabView - Customizable properties
+
+![Symmetric Tab Style][symmetric-tab-style-image]
+
+- **BackgroundTabColor:** allows you to set the background color for the tabs (except the selected one).
+- **SelectedBackgroundTabColor:** allows you to set the background color for the selected tab.
+- **BackgroundComponentColor:** allows you to define the background color positioned behind the tabs.
 
 ## License
 
 MauiTabs is released under the MIT License. See LICENSE.txt for details.
 
 <!-- Images -->
-[hero-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/master/Resources/Images/SmartphoneMockupTabs.png
+[hero-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/tabviews/Resources/Images/SmartphoneMockupTabs.png
+[underlined-tab-style-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/tabviews/Resources/Images/UnderlinedTabStyle.png
+[rounded-tab-style-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/tabviews/Resources/Images/RoundedTabStyle.png
+[symmetric-tab-style-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/tabviews/Resources/Images/SymmetricTabStyle.png
