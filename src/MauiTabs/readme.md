@@ -136,7 +136,7 @@ add how many **tabItem:Item** you want and remember that you need to tell the ta
 MauiTabs is released under the MIT License. See LICENSE.txt for details.
 
 <!-- Images -->
-[hero-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/tabviews/Resources/Images/SmartphoneMockupTabs.png
+[hero-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/tabviews/Resources/Images/SmartphonesMockupTabs.png
 [underlined-tab-style-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/tabviews/Resources/Images/UnderlinedTabStyle.png
 [rounded-tab-style-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/tabviews/Resources/Images/RoundedTabStyle.png
 [symmetric-tab-style-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/feature/tabviews/Resources/Images/SymmetricTabStyle.png
