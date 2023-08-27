@@ -34,8 +34,11 @@ public class SymmetricTabView : TabView
     private void SetBackgroundComponentColor()
     {
         var layout = (VerticalStackLayout)Content;
-        var content = (Border)layout.Children.First();
-        content.BackgroundColor = BackgroundComponentColor;
+        if (layout.Children.Any())
+        {
+            var content = (Border)layout.Children.First();
+            content.BackgroundColor = BackgroundComponentColor;
+        }
     }
 
     private void SetBackgroundColor()
