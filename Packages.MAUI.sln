@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiCodes", "src\MauiCodes\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiDays", "src\MauiDays\MauiDays.csproj", "{AB41320E-C13A-45A8-BA49-66A1904C8FF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiTabs", "src\MauiTabs\MauiTabs.csproj", "{41F37D78-D2F9-4785-92C2-A3769F7161FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiTabs", "src\MauiTabs\MauiTabs.csproj", "{41F37D78-D2F9-4785-92C2-A3769F7161FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
