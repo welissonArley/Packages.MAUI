@@ -241,7 +241,7 @@ My customizable calendar page gives you the freedom to create a personalized int
 To use the Calendar page, you need to add a reference to the namespace in your XAML file:
 
 ```xaml
-xmlns:page="clr-namespace:MauiDays.Views.Pages;assembly=MauiDays"
+xmlns:page="clr-namespace:MauiDays.Views.Pages;assembly=ControlDays.Calendar.Maui"
 ```
 
 Here's an example:
