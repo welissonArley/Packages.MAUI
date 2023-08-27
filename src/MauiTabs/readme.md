@@ -39,13 +39,13 @@ with our user-friendly Tab Control library designed specifically for .NET MAUI p
 
 ### Installation
 
-To use this package, simply install the NuGet package **MauiTabs** in your .NET MAUI project. In Visual Studio, you can do this by right-clicking on your project and selecting "Manage NuGet Packages". From there, search for "PinCodes.Authorization.Maui" and install the latest version.
+To use this package, simply install the NuGet package **MauiTabs** in your .NET MAUI project. In Visual Studio, you can do this by right-clicking on your project and selecting "Manage NuGet Packages". From there, search for "MauiTabs" and install the latest version.
 
 ```csharp
 dotnet add package MauiTabs
 ```
 
-Once the package is installed, you can use the Tabs to your application.
+Once the package is installed, you can use the Tabs in your application.
 
 ### Usage
 
@@ -63,7 +63,7 @@ After adding the xmlns namespace to your page, it's decision time! You need to c
 - **UnderlinedTabView:** Tabs without background but with a small line on the selected tab.
 - **SymmetricTabView:** This style will generate a component that seamlessly adapts to the entire page, ensuring uniform tab sizes.
 
-Now, you can use the tabs component doing that:
+Now, you can use the tabs component like this example:
 
 ```xaml
 <tabs:RoundedTabView>
@@ -95,7 +95,7 @@ add how many **tabItem:Item** you want and remember that you need to tell the ta
 
 ## Customizing the Appearance
 
-#### Text (for all tabs style)
+#### Text (for all tabs styles)
 
 - **TextColor:** allows you the text color for the tabs.
 - **SelectedTextColor:** allows you to set the text color for the tab which is selected.
