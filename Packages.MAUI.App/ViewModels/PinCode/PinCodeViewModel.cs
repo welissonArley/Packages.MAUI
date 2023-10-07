@@ -7,7 +7,7 @@ namespace Packages.MAUI.App.ViewModels.PinCode;
 public partial class PinCodeViewModel : ObservableObject
 {
     [RelayCommand]
-    public static async void CodeEnded(string code)
+    public static async Task CodeEnded(string code)
     {
         await Shell.Current.GoToAsync("..");
 

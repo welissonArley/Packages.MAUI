@@ -11,44 +11,35 @@ public class UnderlinedTabView : TabView
         set => SetValue(LineColorProperty, value);
     }
 
-    public static readonly BindableProperty LineColorProperty = BindableProperty.Create(nameof(LineColor), typeof(Color), typeof(UnderlinedTabView), defaultValue: Colors.Red, propertyChanged: OnLineColorPropertyChanged);
-
-    private static void OnLineColorPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((UnderlinedTabView)bindable).SetLineColor();
-
-    private void SetLineColor()
-    {
-        if (_currentTab is not null)
-            UnderlinedTabView.ChangeLineColor(_currentTab, LineColor);
-    }
+    public static readonly BindableProperty LineColorProperty = BindableProperty.Create(nameof(LineColor), typeof(Color), typeof(UnderlinedTabView), defaultValue: Colors.Red, propertyChanged: null);
 
     protected override Border CreateTabContent()
     {
+        var line = new LineTabView();
+        FillTrigger(line);
+
         var layout = new Border
         {
-            BackgroundColor = Colors.Transparent,
+            HorizontalOptions = LayoutOptions.Center,
+            Background = Colors.Transparent,
             Padding = new Thickness(0, 15, 0, 15),
-            Margin = new Thickness(0, 0, 10, 0),
             Content = new VerticalStackLayout
             {
                 Spacing = 3,
                 Children =
                 {
                     CreateLabel(),
-                    new LineTabView(),
+                    line,
                 }
             }
         };
 
         layout.GestureRecognizers.Add(CreateGestureRecognizer());
 
-        if (_currentTab is null)
-        {
-            _currentTab = layout;
-            SelectTab(layout);
-        }
-
         return layout;
     }
+
+    protected override Label GetLabel(Border border) => (Label)((VerticalStackLayout)border.Content).Children.First();
 
     private new Label CreateLabel()
     {
@@ -58,23 +49,24 @@ public class UnderlinedTabView : TabView
         return label;
     }
 
-    protected override void SelectTab(Border tab)
+    private void FillTrigger(LineTabView line)
     {
-        ChangeLineColor(tab, LineColor);
-        ChangeColorTextOnTab(tab, SelectedTextColor);
-        ChangeFontTextOnTab(tab, SelectedFontFamily);
+        line.Triggers.Clear();
+
+        var trigger = new DataTrigger(typeof(LineTabView))
+        {
+            Binding = new Binding("IsSelected"),
+            Value = true,
+        };
+
+        trigger.Setters.Clear();
+        
+        trigger.Setters.Add(new Setter
+        {
+            Property = LineTabView.ColorProperty,
+            Value = LineColor
+        });
+
+        line.Triggers.Add(trigger);
     }
-
-    protected override void UnselectCurrentTab()
-    {
-        ChangeLineColor(_currentTab, Colors.Transparent);
-        ChangeColorTextOnTab(_currentTab, TextColor);
-        ChangeFontTextOnTab(_currentTab, FontFamily);
-    }
-
-    protected override void ChangeColorTextOnTab(Border tab, Color changeTo) => ((Label)((VerticalStackLayout)tab.Content).Children.First()).TextColor = changeTo;
-
-    protected override void ChangeFontTextOnTab(Border tab, string fontFamily) => ((Label)((VerticalStackLayout)tab.Content).Children.First()).FontFamily = fontFamily;
-
-    private static void ChangeLineColor(Border tab, Color changeTo) => ((LineTabView)((VerticalStackLayout)tab.Content).Children.ElementAt(1)).Color = changeTo;
 }

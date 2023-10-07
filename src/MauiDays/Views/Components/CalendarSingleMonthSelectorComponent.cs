@@ -131,7 +131,7 @@ public class CalendarSingleMonthSelectorComponent : ContentView
         return new()
         {
             Background = Colors.Transparent,
-            Padding = new Thickness(15, 20, 15, 20),
+            Padding = new Thickness(0, 20, 0, 20),
             Margin = 0
         };
     }

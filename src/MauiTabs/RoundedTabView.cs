@@ -17,68 +17,50 @@ public class RoundedTabView : TabView
         set { SetValue(SelectedBackgroundTabColorProperty, value); }
     }
 
-    public static readonly BindableProperty BackgroundTabColorProperty = BindableProperty.Create(nameof(BackgroundTabColor), typeof(Color), typeof(RoundedTabView), defaultValue: Colors.Transparent, propertyChanged: OnBackgroundTabColorPropertyChanged);
-    public static readonly BindableProperty SelectedBackgroundTabColorProperty = BindableProperty.Create(nameof(BackgroundTabColor), typeof(Color), typeof(RoundedTabView), defaultValue: Colors.Yellow, propertyChanged: OnSelectedBackgroundTabColorPropertyChanged);
-
-    private static void OnBackgroundTabColorPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((RoundedTabView)bindable).SetBackgroundColor();
-    private static void OnSelectedBackgroundTabColorPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((RoundedTabView)bindable).SetSelectedBackgroundColor();
-
-    private void SetBackgroundColor()
-    {
-        if (_currentTab is not null)
-        {
-            var allTabs = _tabs.Where(c => c != _currentTab);
-            foreach (var tab in allTabs)
-                tab.BackgroundColor = BackgroundTabColor;
-        }
-    }
-
-    private void SetSelectedBackgroundColor()
-    {
-        if (_currentTab is not null)
-            _currentTab.BackgroundColor = SelectedBackgroundTabColor;
-    }
+    public static readonly BindableProperty BackgroundTabColorProperty = BindableProperty.Create(nameof(BackgroundTabColor), typeof(Color), typeof(RoundedTabView), defaultValue: Colors.Transparent, propertyChanged: null);
+    public static readonly BindableProperty SelectedBackgroundTabColorProperty = BindableProperty.Create(nameof(BackgroundTabColor), typeof(Color), typeof(RoundedTabView), defaultValue: Colors.Yellow, propertyChanged: null);
 
     protected override Border CreateTabContent()
     {
         var layout = new Border
         {
+            HorizontalOptions = LayoutOptions.Center,
             BackgroundColor = BackgroundTabColor,
             Padding = 15,
             StrokeShape = new RoundRectangle
             {
                 CornerRadius = new CornerRadius(10)
             },
-            Margin = new Thickness(0, 0, 10, 0),
             Content = CreateLabel()
         };
 
         layout.GestureRecognizers.Add(CreateGestureRecognizer());
 
-        if (_currentTab is null)
-        {
-            _currentTab = layout;
-            SelectTab(layout);
-        }
+        FillTrigger(layout);
 
         return layout;
     }
 
-    protected override void SelectTab(Border tab)
+    protected override Label GetLabel(Border border) => (Label)border.Content;
+
+    private void FillTrigger(Border border)
     {
-        tab.BackgroundColor = SelectedBackgroundTabColor;
-        ChangeColorTextOnTab(tab, SelectedTextColor);
-        ChangeFontTextOnTab(tab, SelectedFontFamily);
+        border.Triggers.Clear();
+
+        var trigger = new DataTrigger(typeof(Border))
+        {
+            Binding = new Binding("IsSelected"),
+            Value = true,
+        };
+
+        trigger.Setters.Clear();
+        
+        trigger.Setters.Add(new Setter
+        {
+            Property = Border.BackgroundColorProperty,
+            Value = SelectedBackgroundTabColor
+        });
+
+        border.Triggers.Add(trigger);
     }
-
-    protected override void UnselectCurrentTab()
-    {
-        _currentTab.BackgroundColor = BackgroundTabColor;
-        ChangeColorTextOnTab(_currentTab, TextColor);
-        ChangeFontTextOnTab(_currentTab, FontFamily);
-    }
-
-    protected override void ChangeColorTextOnTab(Border tab, Color changeTo) => ((Label)tab.Content).TextColor = changeTo;
-
-    protected override void ChangeFontTextOnTab(Border tab, string fontFamily) => ((Label)tab.Content).FontFamily = fontFamily;
 }

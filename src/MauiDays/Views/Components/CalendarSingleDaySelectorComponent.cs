@@ -315,7 +315,7 @@ public class CalendarSingleDaySelectorComponent : ContentView
         return new()
         {
             Background = Colors.Transparent,
-            Padding = 10,
+            Padding = new Thickness(0,10,0,10),
             Margin = 0
         };
     }

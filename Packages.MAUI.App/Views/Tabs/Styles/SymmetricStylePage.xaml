@@ -1,46 +1,55 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:list="clr-namespace:System.Collections.Generic;assembly=System.Collections"
-             xmlns:tabs="clr-namespace:MauiTabs;assembly=MauiTabs"
-             xmlns:tabItem="clr-namespace:MauiTabs.Entities;assembly=MauiTabs"
-             xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels.Tabs"
-             x:DataType="viewModel:StyleTabViewModel"
-             x:Class="Packages.MAUI.App.Views.Tabs.Styles.SymmetricStylePage">
+<ContentPage
+    x:Class="Packages.MAUI.App.Views.Tabs.Styles.SymmetricStylePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:list="clr-namespace:System.Collections.Generic;assembly=System.Collections"
+    xmlns:tabItem="clr-namespace:MauiTabs.Entities;assembly=MauiTabs"
+    xmlns:tabs="clr-namespace:MauiTabs;assembly=MauiTabs"
+    xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels.Tabs"
+    x:DataType="viewModel:StyleTabViewModel">
     <VerticalStackLayout>
         <tabs:SymmetricTabView
-            TextColor="Black"
-            SelectedTextColor="Black"
-            BackgroundTabColor="#E9EAED"
             BackgroundComponentColor="#E9EAED"
-            SelectedBackgroundTabColor="White">
+            BackgroundTabColor="#E9EAED"
+            SelectedBackgroundTabColor="White"
+            SelectedTextColor="Black"
+            TextColor="Black">
             <tabs:SymmetricTabView.ItemsList>
                 <list:List x:TypeArguments="tabItem:Item">
                     <tabItem:Item Text="Income">
                         <tabItem:Item.Content>
                             <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
-                                <Label Text="Income" FontSize="22" HorizontalOptions="Center"/>
-                                <Label Text="{Binding Text}" HorizontalOptions="Center"/>
+                                <Label
+                                    FontSize="22"
+                                    HorizontalOptions="Center"
+                                    Text="Income" />
+                                <Label HorizontalOptions="Center" Text="{Binding Text}" />
                             </VerticalStackLayout>
                         </tabItem:Item.Content>
                     </tabItem:Item>
                     <tabItem:Item Text="Expense">
                         <tabItem:Item.Content>
                             <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
-                                <Label Text="Expense" FontSize="22" HorizontalOptions="Center"/>
-                                <Label Text="{Binding Text}" HorizontalOptions="Center"/>
+                                <Label
+                                    FontSize="22"
+                                    HorizontalOptions="Center"
+                                    Text="Expense" />
+                                <Label HorizontalOptions="Center" Text="{Binding Text}" />
                             </VerticalStackLayout>
                         </tabItem:Item.Content>
                     </tabItem:Item>
                     <tabItem:Item Text="Assets">
                         <tabItem:Item.Content>
                             <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
-                                <Label Text="Assets" FontSize="22" HorizontalOptions="Center"/>
-                                <Label Text="{Binding Text}" HorizontalOptions="Center"/>
+                                <Label
+                                    FontSize="22"
+                                    HorizontalOptions="Center"
+                                    Text="Assets" />
+                                <Label HorizontalOptions="Center" Text="{Binding Text}" />
                             </VerticalStackLayout>
                         </tabItem:Item.Content>
                     </tabItem:Item>
-
                 </list:List>
             </tabs:SymmetricTabView.ItemsList>
         </tabs:SymmetricTabView>
