@@ -66,28 +66,38 @@ After adding the xmlns namespace to your page, it's decision time! You need to c
 Now, you can use the tabs component like this example:
 
 ```xaml
-<tabs:RoundedTabView>
-  <tabs:RoundedTabView.ItemsList>
-    <list:List x:TypeArguments="tabItem:Item">
-        <tabItem:Item Text="Income">
-            <tabItem:Item.Content>
-                <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
-                    <Label Text="Income" FontSize="22" HorizontalOptions="Center"/>
-                    <Label Text="{Binding Text}" HorizontalOptions="Center"/>
-                </VerticalStackLayout>
-            </tabItem:Item.Content>
-        </tabItem:Item>
-
-        <tabItem:Item Text="Expense">
-            <tabItem:Item.Content>
-                <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
-                    <Label Text="Expense" FontSize="22" HorizontalOptions="Center"/>
-                    <Label Text="{Binding Text}" HorizontalOptions="Center"/>
-                </VerticalStackLayout>
-            </tabItem:Item.Content>
-        </tabItem:Item>
-    </list:List>
-  </tabs:RoundedTabView.ItemsList>
+<tabs:RoundedTabView
+    BackgroundTabColor="#e7ebed"
+    SelectedBackgroundTabColor="#0064f3"
+    SelectedTextColor="White"
+    SpacingBetweenTabAndContent="30"
+    TextColor="Black">
+    <tabs:RoundedTabView.ItemsList>
+        <list:List x:TypeArguments="tabItem:Item">
+            <tabItem:Item Text="Income" IsSelected="True">
+                <tabItem:Item.Content>
+                    <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
+                        <Label
+                            FontSize="22"
+                            HorizontalOptions="Center"
+                            Text="Income" />
+                        <Label HorizontalOptions="Center" Text="{Binding Text}" />
+                    </VerticalStackLayout>
+                </tabItem:Item.Content>
+            </tabItem:Item>
+            <tabItem:Item Text="Expense">
+                <tabItem:Item.Content>
+                    <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
+                        <Label
+                            FontSize="22"
+                            HorizontalOptions="Center"
+                            Text="Expense" />
+                        <Label HorizontalOptions="Center" Text="{Binding Text}" />
+                    </VerticalStackLayout>
+                </tabItem:Item.Content>
+            </tabItem:Item>
+        </list:List>
+    </tabs:RoundedTabView.ItemsList>
 </tabs:RoundedTabView>
 ```
 
@@ -95,18 +105,20 @@ add how many **tabItem:Item** you want and remember that you need to tell the ta
 
 ## Customizing the Appearance
 
-#### Text (for all tabs styles)
+#### For all tabs styles
 
 - **TextColor:** allows you the text color for the tabs.
 - **SelectedTextColor:** allows you to set the text color for the tab which is selected.
 - **FontFamily:** allows you to set the text font family for the tabs.
 - **SelectedFontFamily:** allows you to set the text font family for the tab which is selected.
+- **SpacingBetweenTabAndContent:** allows you to set the space between the tab and the content for the selected tab.
 
 ```xaml
 <tabs:UnderlinedTabView
   TextColor="Black"
   SelectedTextColor="White"
   FontFamily="Roboto"
+  SpacingBetweenTabAndContent="50"
   SelectedFontFamily="Raleway">
 ```
 
