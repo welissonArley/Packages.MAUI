@@ -113,7 +113,7 @@ Every item on the roadmap is an issue, with a label that indicates each of the f
 
 [instagram-shield]: https://img.shields.io/badge/-Instagram-black.svg?style=for-the-badge&logo=instagram&colorB=9a3797&color=ffffff
 
-[nuget-codes-shield]: https://img.shields.io/badge/MauiCodes-004880?style=for-the-badge&logo=nuget&logoColor=white
+[nuget-codes-shield]: https://img.shields.io/badge/PinCodes.Authorization.Maui-004880?style=for-the-badge&logo=nuget&logoColor=white
 
 [nuget-calendar-shield]: https://img.shields.io/badge/MauiDays-004880?style=for-the-badge&logo=nuget&logoColor=white
 
