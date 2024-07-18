@@ -1,6 +1,7 @@
-﻿using UIKit;
+﻿using ObjCRuntime;
+using UIKit;
 
-namespace Packages.MAUI.App.Platforms.MacCatalyst;
+namespace Packages.MAUI.App;
 public class Program
 {
     // This is the main entry point of the application.
