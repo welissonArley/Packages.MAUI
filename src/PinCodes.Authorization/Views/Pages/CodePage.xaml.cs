@@ -27,9 +27,9 @@ public partial class CodePage : ContentPage
         set => SetValue(SubHeadlineProperty, value);
     }
 
-    public CodeViewer CodeViewer
+    public BaseCodeViewer CodeViewer
     {
-        get => (CodeViewer)GetValue(CodeViewerProperty);
+        get => (BaseCodeViewer)GetValue(CodeViewerProperty);
         set => SetValue(CodeViewerProperty, value);
     }
 
@@ -42,7 +42,7 @@ public partial class CodePage : ContentPage
     public static readonly BindableProperty IllustrationProperty = BindableProperty.Create(nameof(Illustration), typeof(Image), typeof(CodePage), null, propertyChanged: OnIllustrationPropertyChanged);
     public static readonly BindableProperty HeadlineProperty = BindableProperty.Create(nameof(Headline), typeof(Label), typeof(CodePage), null, propertyChanged: OnHeadlinePropertyChanged);
     public static readonly BindableProperty SubHeadlineProperty = BindableProperty.Create(nameof(SubHeadline), typeof(Label), typeof(CodePage), null, propertyChanged: OnSubHeadlinePropertyChanged);
-    public static readonly BindableProperty CodeViewerProperty = BindableProperty.Create(nameof(CodeViewer), typeof(CodeViewer), typeof(CodePage), null, propertyChanged: OnCodeViewerPropertyChanged);
+    public static readonly BindableProperty CodeViewerProperty = BindableProperty.Create(nameof(CodeViewer), typeof(BaseCodeViewer), typeof(CodePage), null, propertyChanged: OnCodeViewerPropertyChanged);
     public static readonly BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(KeyboardViewer), typeof(CodePage), null, propertyChanged: OnKeyboardPropertyChanged);
 
     private static void OnIllustrationPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetIllustration();
