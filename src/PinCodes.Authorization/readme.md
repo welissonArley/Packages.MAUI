@@ -38,10 +38,9 @@ This library provides developers with an easy way to add a customizable PIN Code
 
 ### **Features**
 
-- **Keyboards:** offers a variety of keyboard options to choose from.
-- **Code viewer:** includes several different options for customization.
-- **Headline:** you have the flexibility to fully customize the headline phrases.
-- **Color customization:** giving you complete control over the look and feel of your keyboard and code viewer.
+- **Keyboards:** customize the buttons by specifying their shape, color, size, and other properties.
+- **Code viewer:** fully customizable, allowing developers to define [Shape](https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/shapes/?view=net-maui-8.0) (e.g., ellipse, rectangle) and other properties for a tailored viewing experience.
+- **Headlines:** fully customizable with labels, allowing for extensive customization of headline phrases and their properties..
 - **Customize the length of your code:** adjust the amount of digits (default is 4).
 - and others.
 
@@ -62,26 +61,26 @@ Once the package is installed, you can add a PIN Code Page to your application.
 Create a new ContentPage in your .NET MAUI project and add a reference to the CodePage namespace in your file:
 
 ```xaml
-xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=PinCodes.Authorization.Maui"
+xmlns:pinCodeAuthorization="clr-namespace:PinCodes.Authorization.Views.Pages;assembly=PinCodes.Authorization.Maui"
 ```
 
 Now, instead of having a ContentPage in your XAML file, you need to change it to:
 
 ```xaml
 <?xml version="1.0" encoding="utf-8" ?>
-<codePage:CodePage
+<pinCodeAuthorization:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codePage="clr-namespace:MauiCodes.Views.Pages;assembly=PinCodes.Authorization.Maui"
+    xmlns:pinCodeAuthorization="clr-namespace:PinCodes.Authorization.Views.Pages;assembly=PinCodes.Authorization.Maui"
     x:Class="MAUI.App.Views.MyPinCodePage">
     
-</codePage:CodePage>
+</pinCodeAuthorization:CodePage>
 ```
 
 And the code-behind to:
 
 ```csharp
-public partial class MyPinCodePage : MauiCodes.Views.Pages.CodePage
+public partial class MyPinCodePage : PinCodes.Authorization.Views.Pages.CodePage
 {
    public MyPinCodePage()
    {
