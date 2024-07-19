@@ -1,7 +1,6 @@
 using PinCodes.Authorization.Views.Components.CodeViewers;
 using PinCodes.Authorization.Views.Components.Keyboards;
 using System.Text;
-using System.Windows.Input;
 
 namespace PinCodes.Authorization.Views.Pages;
 
@@ -9,22 +8,10 @@ public partial class CodePage : ContentPage
 {
     private string _code = string.Empty;
 
-    public Image Illustration
+    public StackBase Header
     {
-        get => (Image)GetValue(IllustrationProperty);
-        set => SetValue(IllustrationProperty, value);
-    }
-
-    public Label Headline
-    {
-        get => (Label)GetValue(HeadlineProperty);
-        set => SetValue(HeadlineProperty, value);
-    }
-
-    public Label SubHeadline
-    {
-        get => (Label)GetValue(SubHeadlineProperty);
-        set => SetValue(SubHeadlineProperty, value);
+        get => (StackBase)GetValue(HeaderProperty);
+        set => SetValue(HeaderProperty, value);
     }
 
     public BaseCodeViewer CodeViewer
@@ -39,49 +26,25 @@ public partial class CodePage : ContentPage
         set => SetValue(KeyboardProperty, value);
     }
 
-    public static readonly BindableProperty IllustrationProperty = BindableProperty.Create(nameof(Illustration), typeof(Image), typeof(CodePage), null, propertyChanged: OnIllustrationPropertyChanged);
-    public static readonly BindableProperty HeadlineProperty = BindableProperty.Create(nameof(Headline), typeof(Label), typeof(CodePage), null, propertyChanged: OnHeadlinePropertyChanged);
-    public static readonly BindableProperty SubHeadlineProperty = BindableProperty.Create(nameof(SubHeadline), typeof(Label), typeof(CodePage), null, propertyChanged: OnSubHeadlinePropertyChanged);
+    public static readonly BindableProperty HeaderProperty = BindableProperty.Create(nameof(Header), typeof(StackBase), typeof(CodePage), null, propertyChanged: OnHeaderPropertyChanged);
     public static readonly BindableProperty CodeViewerProperty = BindableProperty.Create(nameof(CodeViewer), typeof(BaseCodeViewer), typeof(CodePage), null, propertyChanged: OnCodeViewerPropertyChanged);
     public static readonly BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(KeyboardViewer), typeof(CodePage), null, propertyChanged: OnKeyboardPropertyChanged);
 
-    private static void OnIllustrationPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetIllustration();
-    private static void OnHeadlinePropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetHeadline();
-    private static void OnSubHeadlinePropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetSubHeadline();
     private static void OnCodeViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetCodeViewer();
     private static void OnKeyboardPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetKeyboardViewer();
+    private static void OnHeaderPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetPageHeader();
 
     public CodePage()
 	{
 		InitializeComponent();
 	}
 
-    private void SetIllustration()
+    private void SetPageHeader()
     {
-        if (Illustration is not null)
+        if (Header is not null)
         {
-            IllustrationImage.Source = Illustration.Source;
-            IllustrationImage.HeightRequest = Illustration.HeightRequest;
-            IllustrationImage.WidthRequest = Illustration.WidthRequest;
-        }
-    }
-
-    private void SetHeadline()
-    {
-        if (Headline is not null)
-        {
-            if (LayoutHeaders.Children.Count > 0)
-                LayoutHeaders.Children.Insert(0, Headline);
-            else
-                LayoutHeaders.Children.Add(Headline);
-        }
-    }
-
-    private void SetSubHeadline()
-    {
-        if (SubHeadline is not null)
-        {
-            LayoutHeaders.Children.Add(SubHeadline);
+            LayoutHeaders.Clear();
+            LayoutHeaders.Children.Add(Header);
         }
     }
 
@@ -104,7 +67,7 @@ public partial class CodePage : ContentPage
         }
     }
 
-    private ICommand CommandForKeyboard()
+    private Command CommandForKeyboard()
     {
         return new Command((value) =>
         {
