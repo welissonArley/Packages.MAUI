@@ -7,9 +7,10 @@ public abstract class BaseCodeViewer : ContentView
 {
     private const ushort CODE_LENGTH = 4;
     private const ushort COLUMN_SPACING = 20;
-    private readonly List<Shape> _codeViewerLayouts;
 
     protected string Code { get; private set; } = string.Empty;
+
+    private readonly List<Shape> _codeViewerLayouts;
 
     public ushort CodeLength
     {
@@ -29,26 +30,37 @@ public abstract class BaseCodeViewer : ContentView
         set => SetValue(ShapeProperty, value);
     }
 
+    public Color CodeColor
+    {
+        get => (Color)GetValue(CodeColorProperty);
+        set => SetValue(CodeColorProperty, value);
+    }
+
+    public Color CodeStrokeColor
+    {
+        get => (Color)GetValue(CodeStrokeColorProperty);
+        set => SetValue(CodeStrokeColorProperty, value);
+    }
+
     public static readonly BindableProperty CodeLengthProperty = BindableProperty.Create(nameof(CodeLength), typeof(ushort), typeof(BaseCodeViewer), CODE_LENGTH, propertyChanged: OnCodeLengthPropertyChanged);
-    public static readonly BindableProperty ShapeProperty = BindableProperty.Create(nameof(ShapeViewer), typeof(Shape), typeof(BaseCodeViewer), GetDefaultCodeViewShape(), propertyChanged: OnShapePropertyChanged);
     public static readonly BindableProperty SpacingProperty = BindableProperty.Create(nameof(Spacing), typeof(ushort), typeof(BaseCodeViewer), COLUMN_SPACING, propertyChanged: OnSpacingPropertyChanged);
+    public static readonly BindableProperty ShapeProperty = BindableProperty.Create(nameof(ShapeViewer), typeof(Shape), typeof(BaseCodeViewer), null, propertyChanged: OnShapePropertyChanged);
+    public static readonly BindableProperty CodeColorProperty = BindableProperty.Create(nameof(CodeColor), typeof(Color), typeof(BaseCodeViewer), Colors.Red);
+    public static readonly BindableProperty CodeStrokeColorProperty = BindableProperty.Create(nameof(CodeStrokeColor), typeof(Color), typeof(BaseCodeViewer), Colors.Yellow);
 
     private static void OnCodeLengthPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseCodeViewer)bindable).SetCodeLength();
-    private static void OnShapePropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseCodeViewer)bindable).UpdateLayout();
     private static void OnSpacingPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseCodeViewer)bindable).SetColumnSpacing();
+    private static void OnShapePropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseCodeViewer)bindable).CreateLayout();
 
     public BaseCodeViewer()
     {
-        _codeViewerLayouts = Enumerable.Range(0, CodeLength).Select(_ => CreateCodeView()).ToList();
-
         var grid = new Grid
         {
             HorizontalOptions = LayoutOptions.Center,
             ColumnSpacing = Spacing
         };
 
-        for (var index = 0; index < CodeLength; index++)
-            grid.Add(view: _codeViewerLayouts[index], column: index);
+        _codeViewerLayouts = [];
 
         Content = grid;
     }
@@ -62,9 +74,15 @@ public abstract class BaseCodeViewer : ContentView
             var item = _codeViewerLayouts[index];
 
             if (Code.Length > index)
-                item.Fill = ShapeViewer.Fill;
+            {
+                item.Fill = new SolidColorBrush(CodeColor);
+                item.Stroke = new SolidColorBrush(CodeStrokeColor);
+            }
             else
-                item.Fill = ColorWithAlpha(ShapeViewer.Fill);
+            {
+                item.Fill = ShapeViewer.Fill;
+                item.Stroke = ShapeViewer.Stroke;
+            }
         }
     }
 
@@ -72,9 +90,13 @@ public abstract class BaseCodeViewer : ContentView
     {
         if (CodeLength <= 0)
             CodeLength = CODE_LENGTH;
+
+        if (_codeViewerLayouts.Count == 0)
+            return;
         
         var grid = Content as Grid;
         var currentCodeLength = _codeViewerLayouts.Count;
+        
         if (CodeLength < currentCodeLength)
         {
             for (var index = 0; index < currentCodeLength - CodeLength; index++)
@@ -96,16 +118,15 @@ public abstract class BaseCodeViewer : ContentView
         }
     }
 
-    private void UpdateLayout()
+    private void CreateLayout()
     {
         var grid = Content as Grid;
+        grid!.Clear();
 
         for (var index = 0; index < CodeLength; index++)
         {
-            _codeViewerLayouts[index] = CreateCodeView();
-            grid![index] = _codeViewerLayouts[index];
-
-            Grid.SetColumn(_codeViewerLayouts[index], index);
+            _codeViewerLayouts.Add(CreateCodeView());
+            grid.Add(view: _codeViewerLayouts[index], column: index);
         }
     }
 
@@ -121,31 +142,7 @@ public abstract class BaseCodeViewer : ContentView
     private Shape CreateCodeView()
     {
         var shape = ShapeViewer.Clone();
-        shape.Fill = ColorWithAlpha(shape.Fill);
 
         return shape;
-    }
-
-    private static SolidColorBrush ColorWithAlpha(Brush brush)
-    {
-        var solidColorBrush = brush as SolidColorBrush;
-        var color = solidColorBrush!.Color;
-
-        return new (color.WithAlpha(0.2f));
-    }
-
-    private static Ellipse GetDefaultCodeViewShape()
-    {
-        var color = Colors.Red;
-
-        return new Ellipse
-        {
-            WidthRequest = 30,
-            HeightRequest = 30,
-            HorizontalOptions = LayoutOptions.Start,
-            Fill = color.WithAlpha(0.2f),
-            StrokeThickness = 20 * 0.1,
-            Stroke = new SolidColorBrush(color)
-        };
     }
 }

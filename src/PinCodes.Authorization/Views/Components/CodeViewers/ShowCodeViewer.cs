@@ -3,7 +3,7 @@
 namespace PinCodes.Authorization.Views.Components.CodeViewers;
 public class ShowCodeViewer : BaseCodeViewer
 {
-    private List<Label> _labels;
+    private readonly List<Label> _labels;
 
     public Label PinCharacterLabel
     {
@@ -11,17 +11,13 @@ public class ShowCodeViewer : BaseCodeViewer
         set => SetValue(PinCharacterLabelProperty, value);
     }
 
-    public static readonly BindableProperty PinCharacterLabelProperty = BindableProperty.Create(nameof(PinCharacterLabel), typeof(Label), typeof(ShowCodeViewer), GetDefaultLabelShape(), propertyChanged: OnPinCharacterLabelPropertyChanged);
+    public static readonly BindableProperty PinCharacterLabelProperty = BindableProperty.Create(nameof(PinCharacterLabel), typeof(Label), typeof(ShowCodeViewer), null, propertyChanged: OnPinCharacterLabelPropertyChanged);
 
-    private static void OnPinCharacterLabelPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((ShowCodeViewer)bindable).UpdateLabelLayout();
+    private static void OnPinCharacterLabelPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((ShowCodeViewer)bindable).CreateLayout();
 
     public ShowCodeViewer()
     {
-        _labels = Enumerable.Range(0, CodeLength).Select(_ => PinCharacterLabel.Clone()).ToList();
-
-        var grid = Content as Grid;
-        for (var index = 0; index < CodeLength; index++)
-            grid!.Add(view: _labels[index], column: index);
+        _labels = [];
     }
 
     public override void SetCode(string code)
@@ -41,27 +37,14 @@ public class ShowCodeViewer : BaseCodeViewer
         }
     }
 
-    private void UpdateLabelLayout()
+    private void CreateLayout()
     {
         var grid = Content as Grid;
 
         for (var index = 0; index < CodeLength; index++)
         {
-            _labels[index] = PinCharacterLabel.Clone();
-            grid![index + CodeLength] = _labels[index];
-
-            Grid.SetColumn(_labels[index], index);
+            _labels.Add(PinCharacterLabel.Clone());
+            grid.Add(view: _labels[index], column: index);
         }
-    }
-
-    private static Label GetDefaultLabelShape()
-    {
-        return new Label
-        {
-            TextColor = Colors.Red,
-            FontSize = 14,
-            HorizontalOptions = LayoutOptions.Center,
-            VerticalOptions = LayoutOptions.Center,
-        };
     }
 }
