@@ -1,12 +1,19 @@
 using PinCodes.Authorization.Views.Components.CodeViewers;
 using PinCodes.Authorization.Views.Components.Keyboards;
 using System.Text;
+using System.Windows.Input;
 
 namespace PinCodes.Authorization.Views.Pages;
 
 public partial class CodePage : ContentPage
 {
     private string _code = string.Empty;
+
+    public ICommand CallbackCodeFinished
+    {
+        get => (ICommand)GetValue(CallbackCodeFinishedProperty);
+        set => SetValue(CallbackCodeFinishedProperty, value);
+    }
 
     public StackBase Header
     {
@@ -36,6 +43,7 @@ public partial class CodePage : ContentPage
     public static readonly BindableProperty SubHeaderProperty = BindableProperty.Create(nameof(SubHeader), typeof(StackBase), typeof(CodePage), null, propertyChanged: OnSubHeaderPropertyChanged);
     public static readonly BindableProperty CodeViewerProperty = BindableProperty.Create(nameof(CodeViewer), typeof(BaseCodeViewer), typeof(CodePage), null, propertyChanged: OnCodeViewerPropertyChanged);
     public static readonly BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(KeyboardViewer), typeof(CodePage), null, propertyChanged: OnKeyboardPropertyChanged);
+    public static readonly BindableProperty CallbackCodeFinishedProperty = BindableProperty.Create(nameof(CallbackCodeFinishedProperty), typeof(ICommand), typeof(CodePage), null, propertyChanged: null);
 
     private static void OnCodeViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetCodeViewer();
     private static void OnKeyboardPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetKeyboardViewer();
@@ -106,8 +114,8 @@ public partial class CodePage : ContentPage
                 CodeViewer.SetCode(_code);
             }
 
-            /*if (_code.Length == CodeViewer.CodeLength)
-                CallbackCodeFinished?.Execute(_code);*/
+            if (_code.Length == CodeViewer.CodeLength)
+                CallbackCodeFinished?.Execute(_code);
         });
     }
 }
