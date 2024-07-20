@@ -14,6 +14,12 @@ public partial class CodePage : ContentPage
         set => SetValue(HeaderProperty, value);
     }
 
+    public StackBase SubHeader
+    {
+        get => (StackBase)GetValue(SubHeaderProperty);
+        set => SetValue(SubHeaderProperty, value);
+    }
+
     public BaseCodeViewer CodeViewer
     {
         get => (BaseCodeViewer)GetValue(CodeViewerProperty);
@@ -27,12 +33,14 @@ public partial class CodePage : ContentPage
     }
 
     public static readonly BindableProperty HeaderProperty = BindableProperty.Create(nameof(Header), typeof(StackBase), typeof(CodePage), null, propertyChanged: OnHeaderPropertyChanged);
+    public static readonly BindableProperty SubHeaderProperty = BindableProperty.Create(nameof(SubHeader), typeof(StackBase), typeof(CodePage), null, propertyChanged: OnSubHeaderPropertyChanged);
     public static readonly BindableProperty CodeViewerProperty = BindableProperty.Create(nameof(CodeViewer), typeof(BaseCodeViewer), typeof(CodePage), null, propertyChanged: OnCodeViewerPropertyChanged);
     public static readonly BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(KeyboardViewer), typeof(CodePage), null, propertyChanged: OnKeyboardPropertyChanged);
 
     private static void OnCodeViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetCodeViewer();
     private static void OnKeyboardPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetKeyboardViewer();
     private static void OnHeaderPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetPageHeader();
+    private static void OnSubHeaderPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetPageSubHeader();
 
     public CodePage()
 	{
@@ -43,8 +51,17 @@ public partial class CodePage : ContentPage
     {
         if (Header is not null)
         {
-            LayoutHeaders.Clear();
-            LayoutHeaders.Children.Add(Header);
+            LayoutHeader.Clear();
+            LayoutHeader.Children.Add(Header);
+        }
+    }
+
+    private void SetPageSubHeader()
+    {
+        if (SubHeader is not null)
+        {
+            LayoutSubHeader.Clear();
+            LayoutSubHeader.Children.Add(SubHeader);
         }
     }
 
