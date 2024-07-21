@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using Mopups.Hosting;
 using Packages.MAUI.App.Helpers;
 
 namespace Packages.MAUI.App;
@@ -12,6 +13,7 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
             .RegisterPagesAndViewModels()
+            .ConfigureMopups()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

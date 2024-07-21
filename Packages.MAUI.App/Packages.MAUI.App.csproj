@@ -57,10 +57,8 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\circle_arrow.svg" />
-	  <None Remove="Resources\Images\dog.svg" />
 	  <None Remove="Resources\Images\illustration_calendar.svg" />
 	  <None Remove="Resources\Images\illustration_code.svg" />
-	  <None Remove="Resources\Images\turtle.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -69,6 +67,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.70" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.70" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Mopups" Version="1.3.1" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -80,10 +79,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Popups\InformationPopup.xaml.cs">
+	    <DependentUpon>InformationPopup.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="DashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PinCodes\PinCodePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Popups\InvalidCodePopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Popups\InformationPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Popups\UserCompletedCodePopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

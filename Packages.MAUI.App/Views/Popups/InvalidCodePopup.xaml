@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Mopups:PopupPage
+    x:Class="Packages.MAUI.App.Views.Popups.InvalidCodePopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Animations="clr-namespace:Mopups.Animations;assembly=Mopups"
+    xmlns:Mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+    BackgroundColor="#B3000000"
+    BackgroundInputTransparent="False"
+    CloseWhenBackgroundIsClicked="False"
+    HasSystemPadding="False">
+
+    <Mopups:PopupPage.Animation>
+        <Animations:MoveAnimation PositionIn="Top" PositionOut="Top" />
+    </Mopups:PopupPage.Animation>
+
+    <VerticalStackLayout
+        Padding="30,40,30,30"
+        BackgroundColor="White"
+        Spacing="10"
+        VerticalOptions="Center">
+
+        <Label
+            FontAttributes="Bold"
+            FontSize="22"
+            Text="Code is invalid"
+            TextColor="Black" />
+
+        <Label
+            Margin="0,0,0,30"
+            FontSize="18"
+            Text="The code you submitted is not valid."
+            TextColor="Black" />
+
+        <Button
+            BackgroundColor="#DF340C"
+            Clicked="Button_Clicked"
+            FontAttributes="Bold"
+            Text="Try again"
+            TextColor="White" />
+    </VerticalStackLayout>
+</Mopups:PopupPage>
