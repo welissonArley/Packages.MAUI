@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.Messaging;
+using PinCodes.Authorization.Messages;
 using PinCodes.Authorization.Views.Components.CodeViewers;
 using PinCodes.Authorization.Views.Components.Keyboards;
 using System.Text;
@@ -53,7 +55,20 @@ public partial class CodePage : ContentPage
     public CodePage()
 	{
 		InitializeComponent();
-	}
+
+        WeakReferenceMessenger.Default.Register<CleanPinCodeMessage>(this, (recipient, message) =>
+        {
+            CodeViewer.SetCode(string.Empty);
+            _code = string.Empty;
+        });
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        WeakReferenceMessenger.Default.UnregisterAll(this);
+    }
 
     private void SetPageHeader()
     {
@@ -99,20 +114,16 @@ public partial class CodePage : ContentPage
             var option = (int)value;
 
             if (option == -1 && !string.IsNullOrWhiteSpace(_code))
-            {
                 _code = _code.Remove(_code.Length - 1);
-
-                CodeViewer.SetCode(_code);
-            }
             else if (option != -1 && _code.Length + 1 <= CodeViewer.CodeLength)
             {
                 var sb = new StringBuilder(_code, CodeViewer.CodeLength);
                 sb.Append(value);
 
                 _code = sb.ToString();
-
-                CodeViewer.SetCode(_code);
             }
+
+            CodeViewer.SetCode(_code);
 
             if (_code.Length == CodeViewer.CodeLength)
                 CallbackCodeFinished?.Execute(_code);
