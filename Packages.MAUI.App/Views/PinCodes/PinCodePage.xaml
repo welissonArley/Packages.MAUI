@@ -96,24 +96,22 @@
             </keyboardViewer:KeyboardViewer.ShapeViewer>
 
             <keyboardViewer:KeyboardViewer.BackspaceViewer>
-                <Button
-                    Padding="25"
-                    BackgroundColor="Transparent"
-                    FontAttributes="Bold"
-                    FontSize="20"
-                    HeightRequest="80"
-                    ImageSource="{AppThemeBinding Light=illustration_delete_lightmode.png,
-                                                  Dark=illustration_delete_darkmode.png}"
-                    WidthRequest="80" />
+                <ImageButton
+                    Padding="12"
+                    BackgroundColor="{AppThemeBinding Light=White,
+                                                      Dark={StaticResource DarkModeColor}}"
+                    Source="{AppThemeBinding Light=illustration_delete_lightmode.png,
+                                             Dark=illustration_delete_darkmode.png}" />
             </keyboardViewer:KeyboardViewer.BackspaceViewer>
 
             <keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
-                <Button
-                    Padding="20"
-                    BackgroundColor="Transparent"
+                <ImageButton
+                    Padding="12"
+                    BackgroundColor="{AppThemeBinding Light=White,
+                                                      Dark={StaticResource DarkModeColor}}"
                     Command="{Binding BindingContext.FaceIdCommand, Source={x:Reference PagePinCode}}"
-                    ImageSource="{AppThemeBinding Light=illustration_faceid_lightmode.png,
-                                                  Dark=illustration_faceid_darkmode.png}" />
+                    Source="{AppThemeBinding Light=illustration_faceid_lightmode.png,
+                                             Dark=illustration_faceid_darkmode.png}" />
             </keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
         </keyboardViewer:KeyboardViewer>
     </pinCodeAuthorization:CodePage.Keyboard>

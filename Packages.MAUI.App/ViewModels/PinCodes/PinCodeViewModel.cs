@@ -16,7 +16,7 @@ public partial class PinCodeViewModel : ObservableObject
     [RelayCommand]
     public static async Task UserCompletedCode(string code)
     {
-        if(code.Equals("0000"))
+        if(code.All(c => c == '0'))
         {
             await MopupService.Instance.PushAsync(new InvalidCodePopup());
 

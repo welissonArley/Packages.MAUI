@@ -15,15 +15,15 @@ public sealed class KeyboardViewer : ContentView
         set => SetValue(ShapeViewerProperty, value);
     }
 
-    public Button LeftSideButtonShapeViewer
+    public View LeftSideButtonShapeViewer
     {
-        get => (Button)GetValue(LeftSideButtonShapeViewerProperty);
+        get => (View)GetValue(LeftSideButtonShapeViewerProperty);
         set => SetValue(LeftSideButtonShapeViewerProperty, value);
     }
 
-    public Button BackspaceViewer
+    public View BackspaceViewer
     {
-        get => (Button)GetValue(BackspaceViewerProperty);
+        get => (View)GetValue(BackspaceViewerProperty);
         set => SetValue(BackspaceViewerProperty, value);
     }
 
@@ -40,8 +40,8 @@ public sealed class KeyboardViewer : ContentView
     }
 
     public static readonly BindableProperty ShapeViewerProperty = BindableProperty.Create(nameof(ShapeViewer), typeof(Button), typeof(KeyboardViewer), null, propertyChanged: OnShapePropertyChanged);
-    public static readonly BindableProperty LeftSideButtonShapeViewerProperty = BindableProperty.Create(nameof(LeftSideButtonShapeViewer), typeof(Button), typeof(KeyboardViewer), null, propertyChanged: OnLeftSideButtonShapeViewerPropertyChanged);
-    public static readonly BindableProperty BackspaceViewerProperty = BindableProperty.Create(nameof(BackspaceViewer), typeof(Button), typeof(KeyboardViewer), null, propertyChanged: OnBackspaceViewerPropertyChanged);
+    public static readonly BindableProperty LeftSideButtonShapeViewerProperty = BindableProperty.Create(nameof(LeftSideButtonShapeViewer), typeof(View), typeof(KeyboardViewer), null, propertyChanged: OnLeftSideButtonShapeViewerPropertyChanged, validateValue: ValidateButtonProperty);
+    public static readonly BindableProperty BackspaceViewerProperty = BindableProperty.Create(nameof(BackspaceViewer), typeof(View), typeof(KeyboardViewer), null, propertyChanged: OnBackspaceViewerPropertyChanged, validateValue: ValidateButtonProperty);
     public static readonly BindableProperty RowSpacingProperty = BindableProperty.Create(nameof(RowSpacing), typeof(ushort), typeof(KeyboardViewer), SPACING, propertyChanged: OnRowSpacingPropertyChanged);
     public static readonly BindableProperty ColumnSpacingProperty = BindableProperty.Create(nameof(ColumnSpacing), typeof(ushort), typeof(KeyboardViewer), SPACING, propertyChanged: OnColumnSpacingPropertyChanged);
 
@@ -146,15 +146,21 @@ public sealed class KeyboardViewer : ContentView
         return button;
     }
 
-    private Button CreateBackspaceOption()
+    private View CreateBackspaceOption()
     {
-        var button = BackspaceViewer.Clone();
+        var viewer = BackspaceViewer.Clone();
 
-        button.WidthRequest = ShapeViewer.WidthRequest;
-        button.HeightRequest = ShapeViewer.HeightRequest;
+        viewer.WidthRequest = ShapeViewer.WidthRequest;
+        viewer.HeightRequest = ShapeViewer.HeightRequest;
 
-        button.Command = new Command(() => { _callbackKeyboardCommand?.Execute(-1); });
+        var command = new Command(() => { _callbackKeyboardCommand?.Execute(-1); });
+        if (viewer is Button button)
+            button.Command = command;
+        else
+            ((ImageButton)viewer).Command = command;
 
-        return button;
+        return viewer;
     }
+
+    private static bool ValidateButtonProperty(BindableObject bindable, object value) => value is Button or ImageButton;
 }

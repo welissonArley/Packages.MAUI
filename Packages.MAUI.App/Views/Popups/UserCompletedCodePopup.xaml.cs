@@ -9,7 +9,9 @@ public partial class UserCompletedCodePopup : PopupPage
 	{
 		InitializeComponent();
 
-		CodeSubmitted.Text = code;
+        var characters = code.ToCharArray();
+
+        CodeSubmitted.Text = string.Join(" ", characters);
 	}
 
     private void Button_Clicked(object sender, EventArgs e)
