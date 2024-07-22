@@ -97,7 +97,9 @@
 
             <keyboardViewer:KeyboardViewer.BackspaceViewer>
                 <ImageButton
-                    Padding="{OnPlatform Default=12,Android=12,iOS=22}"
+                    Padding="{OnPlatform Default=12,
+                                         Android=12,
+                                         iOS=22}"
                     BackgroundColor="{AppThemeBinding Light=White,
                                                       Dark={StaticResource DarkModeColor}}"
                     Source="{AppThemeBinding Light=illustration_delete_lightmode.png,
@@ -106,7 +108,9 @@
 
             <keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
                 <ImageButton
-                    Padding="{OnPlatform Default=12,Android=12,iOS=22}"
+                    Padding="{OnPlatform Default=12,
+                                         Android=12,
+                                         iOS=22}"
                     BackgroundColor="{AppThemeBinding Light=White,
                                                       Dark={StaticResource DarkModeColor}}"
                     Command="{Binding BindingContext.FaceIdCommand, Source={x:Reference PagePinCode}}"
