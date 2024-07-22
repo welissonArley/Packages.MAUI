@@ -5,15 +5,13 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1D500DEE-A72B-4218-8E89-6C1A8F3A1FFD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5CA04243-9BD1-48B1-9733-AEA8E83ECD5D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiCodes", "src\MauiCodes\MauiCodes.csproj", "{5E9AECA2-5553-4C18-816D-A163E9A68845}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiDays", "src\MauiDays\MauiDays.csproj", "{AB41320E-C13A-45A8-BA49-66A1904C8FF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinCodes.Authorization", "src\PinCodes.Authorization\PinCodes.Authorization.csproj", "{E619F162-926A-4169-965B-7FFD1BD5F110}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PinCodes.Authorization", "src\PinCodes.Authorization\PinCodes.Authorization.csproj", "{E619F162-926A-4169-965B-7FFD1BD5F110}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Packages.MAUI.App", "Packages.MAUI.App\Packages.MAUI.App.csproj", "{95E8EBF8-3230-4CD2-ABC9-F372F74FFCD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Packages.MAUI.App", "Packages.MAUI.App\Packages.MAUI.App.csproj", "{95E8EBF8-3230-4CD2-ABC9-F372F74FFCD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

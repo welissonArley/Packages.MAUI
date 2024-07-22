@@ -30,7 +30,7 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddTransient<Views.PinCodes.PinCodePage>();
         mauiAppBuilder.Services.AddTransient<ViewModels.PinCodes.PinCodeViewModel>();
 
-        Routing.RegisterRoute(RoutePages.DASHBOARD_PINCODE_PAGE, typeof(Views.PinCodes.PinCodePage));
+        Routing.RegisterRoute(RoutePages.PINCODE_PAGE, typeof(Views.PinCodes.PinCodePage));
 
         return mauiAppBuilder;
     }

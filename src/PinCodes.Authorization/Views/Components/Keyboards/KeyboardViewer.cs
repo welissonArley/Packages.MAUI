@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace PinCodes.Authorization.Views.Components.Keyboards;
 
-public sealed class KeyboardViewer : ContentPage
+public sealed class KeyboardViewer : ContentView
 {
     private const ushort SPACING = 30;
 
@@ -83,7 +83,7 @@ public sealed class KeyboardViewer : ContentPage
         grid.Add(view: AddButtonWithCommand(9), column: 2, row: 2);
         grid.Add(view: AddButtonWithCommand(0), column: 1, row: 3);
 
-        if(BackspaceViewer is not null)
+        if (BackspaceViewer is not null)
             grid.Add(view: CreateBackspaceOption(), column: 2, row: 3);
 
         Content = grid;
@@ -91,7 +91,7 @@ public sealed class KeyboardViewer : ContentPage
 
     private void UpdateBackSpaceLayout()
     {
-        if(Content is not null)
+        if (Content is not null)
         {
             var grid = Content as Grid;
             grid.Add(view: CreateBackspaceOption(), column: 2, row: 3);
@@ -115,26 +115,32 @@ public sealed class KeyboardViewer : ContentPage
 
     private void SetColumnSpacing()
     {
-        if (ColumnSpacing <= 0)
-            ColumnSpacing = SPACING;
+        if (Content is not null)
+        {
+            if (ColumnSpacing <= 0)
+                ColumnSpacing = SPACING;
 
-        var grid = Content as Grid;
-        grid!.ColumnSpacing = ColumnSpacing;
+            var grid = Content as Grid;
+            grid!.ColumnSpacing = ColumnSpacing;
+        }
     }
 
     private void SetRowColumnSpacing()
     {
-        if (RowSpacing <= 0)
-            RowSpacing = SPACING;
+        if (Content is not null)
+        {
+            if (RowSpacing <= 0)
+                RowSpacing = SPACING;
 
-        var grid = Content as Grid;
-        grid!.RowSpacing = RowSpacing;
+            var grid = Content as Grid;
+            grid!.RowSpacing = RowSpacing;
+        }
     }
 
     private Button AddButtonWithCommand(int value)
     {
         var button = ShapeViewer.Clone();
-        button.Text = value.ToString();
+        button.Text = $"{value}";
         button.Command = new Command(() => { _callbackKeyboardCommand?.Execute(value); });
 
         return button;
