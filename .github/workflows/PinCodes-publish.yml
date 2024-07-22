@@ -1,0 +1,36 @@
+name: PinCodes.Authorization
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'src/PinCodes.Authorization/**'
+      - '!src/PinCodes.Authorization/readme.md'
+      
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: src/PinCodes.Authorization
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Build Project
+      run: dotnet build --configuration Release
+
+    - name: Publish Nuget package
+      shell: powershell
+      run: |
+        dotnet nuget push $(cmd /r dir /s PinCodes.Authorization.Maui.*.nupkg /b) --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json

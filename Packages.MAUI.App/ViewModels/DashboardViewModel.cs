@@ -6,8 +6,5 @@ namespace Packages.MAUI.App.ViewModels;
 public partial class DashboardViewModel : ObservableObject
 {
     [RelayCommand]
-    public static async void MauiCodes() => await Shell.Current.GoToAsync(RoutePages.DASHBOARD_PINCODE_PAGE);
-
-    [RelayCommand]
-    public static async void MauiDays() => await Shell.Current.GoToAsync(RoutePages.DASHBOARD_CALENDAR_PAGE);
+    public static async Task PinCodesAuthorization() => await Shell.Current.GoToAsync(RoutePages.PINCODE_PAGE);
 }
