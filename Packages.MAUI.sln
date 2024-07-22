@@ -5,8 +5,6 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1D500DEE-A72B-4218-8E89-6C1A8F3A1FFD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiCodes", "src\MauiCodes\MauiCodes.csproj", "{5E9AECA2-5553-4C18-816D-A163E9A68845}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiDays", "src\MauiDays\MauiDays.csproj", "{AB41320E-C13A-45A8-BA49-66A1904C8FF9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PinCodes.Authorization", "src\PinCodes.Authorization\PinCodes.Authorization.csproj", "{E619F162-926A-4169-965B-7FFD1BD5F110}"
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5E9AECA2-5553-4C18-816D-A163E9A68845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E9AECA2-5553-4C18-816D-A163E9A68845}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E9AECA2-5553-4C18-816D-A163E9A68845}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E9AECA2-5553-4C18-816D-A163E9A68845}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AB41320E-C13A-45A8-BA49-66A1904C8FF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AB41320E-C13A-45A8-BA49-66A1904C8FF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB41320E-C13A-45A8-BA49-66A1904C8FF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -42,7 +36,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{5E9AECA2-5553-4C18-816D-A163E9A68845} = {1D500DEE-A72B-4218-8E89-6C1A8F3A1FFD}
 		{AB41320E-C13A-45A8-BA49-66A1904C8FF9} = {1D500DEE-A72B-4218-8E89-6C1A8F3A1FFD}
 		{E619F162-926A-4169-965B-7FFD1BD5F110} = {1D500DEE-A72B-4218-8E89-6C1A8F3A1FFD}
 	EndGlobalSection
