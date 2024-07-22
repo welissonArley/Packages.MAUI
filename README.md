@@ -5,7 +5,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#features">Features</a></li>
+        <li><a href="#packages">Packages</a></li>
       </ul>
     </li>
     <li>
@@ -21,7 +21,6 @@
         </li>
       </ul>
     </li>
-    <li><a href="#bonus">BONUS</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
   </ol>
 </details>
@@ -36,7 +35,7 @@ My project is focused on providing a collection of libraries that simplify and e
 ### **Packages**
 Here are some details about the libraries included in this project:
 
-- **[Pincode library (MauiCodes)](https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiCodes):** my pincode library provides a simple and customizable page to add PIN code functionality to your .NET MAUI applications. The library includes different options for keyboard, code viewer, colors, and more.
+- **[Pincode library (PinCodes.Authorization)](https://github.com/welissonArley/Packages.MAUI/tree/master/src/PinCodes.Authorization):** my pincode library provides a simple and customizable page to add PIN code functionality to your .NET MAUI applications. Feel free to customize the keyboard, code viewer, colors, and more.
 
 - **[Calendar library (MauiDays)](https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiDays):** my calendar library provides a customizable calendar control that can be easily integrated into your .NET MAUI projects to help manage dates. The library includes various features such as multi-language support, month selector, calendar page, and more.
 
@@ -56,7 +55,7 @@ You can install the NuGet Package into your .NET MAUI project or download the so
 
 ### **NuGet**
 
-[![nuget-codes-shield]][mauicodes-url]
+[![nuget-codes-shield]][pincodes-authorization-url]
 [![nuget-calendar-shield]][mauidays-url]
 
 ### **Install and use the source code**
@@ -79,10 +78,6 @@ You can install the NuGet Package into your .NET MAUI project or download the so
 2. Run the app Packages.MAUI.App to see the examples of all libraries.
 
 3. Have a good time testing.
-
-## **BONUS**
-
-If you are new to .NET MAUI or you want to improve your skills, I also offer a course on this topic. This course is designed to help developers learn from the basics of .NET MAUI development and how to build and publish on Google Play and App Store. You can find more information about the course on my website: https://www.homuai.com/homuai-course.
 
 ## **Roadmap**
 
@@ -118,7 +113,7 @@ Every item on the roadmap is an issue, with a label that indicates each of the f
 
 [instagram-shield]: https://img.shields.io/badge/-Instagram-black.svg?style=for-the-badge&logo=instagram&colorB=9a3797&color=ffffff
 
-[nuget-codes-shield]: https://img.shields.io/badge/MauiCodes-004880?style=for-the-badge&logo=nuget&logoColor=white
+[nuget-codes-shield]: https://img.shields.io/badge/PinCodes.Authorization.Maui-004880?style=for-the-badge&logo=nuget&logoColor=white
 
 [nuget-calendar-shield]: https://img.shields.io/badge/MauiDays-004880?style=for-the-badge&logo=nuget&logoColor=white
 
@@ -126,6 +121,5 @@ Every item on the roadmap is an issue, with a label that indicates each of the f
 [linkedin-url]: https://www.linkedin.com/in/welissonarley/
 [buy-me-book-url]: https://www.buymeacoffee.com/welissonArley
 [instagram-url]: https://www.instagram.com/welisson.me/
-[homuai-course]: https://www.udemy.com/course/net-core-curso-orientado-para-mercado-de-trabalho/?referralCode=C0850BF224055DE39722
-[mauicodes-url]: https://www.nuget.org/packages/PinCodes.Authorization.Maui/
+[pincodes-authorization-url]: https://www.nuget.org/packages/PinCodes.Authorization.Maui/
 [mauidays-url]: https://www.nuget.org/packages/ControlDays.Calendar.Maui/
