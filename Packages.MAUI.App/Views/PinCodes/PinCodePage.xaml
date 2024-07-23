@@ -7,8 +7,9 @@
     xmlns:keyboardViewer="clr-namespace:PinCodes.Authorization.Views.Components.Keyboards;assembly=PinCodes.Authorization.Maui"
     xmlns:pinCodeAuthorization="clr-namespace:PinCodes.Authorization.Views.Pages;assembly=PinCodes.Authorization.Maui"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    x:Name="PagePinCode"
-    CallbackCodeFinished="{Binding BindingContext.UserCompletedCodeCommand, Source={x:Reference PagePinCode}}">
+    xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels.PinCodes"
+    x:DataType="viewModel:PinCodeViewModel"
+    CallbackCodeFinished="{Binding UserCompletedCodeCommand}">
 
     <pinCodeAuthorization:CodePage.Header>
         <VerticalStackLayout Margin="0,20,0,40" Spacing="5">
@@ -43,7 +44,7 @@
                 HeightRequest="40"
                 HorizontalOptions="Center">
                 <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding BindingContext.ResendCodeCommand, Source={x:Reference PagePinCode}}" />
+                    <TapGestureRecognizer Command="{Binding ResendCodeCommand}" />
                 </VerticalStackLayout.GestureRecognizers>
                 <Label
                     FontAttributes="Bold"
@@ -113,7 +114,7 @@
                                          iOS=22}"
                     BackgroundColor="{AppThemeBinding Light=White,
                                                       Dark={StaticResource DarkModeColor}}"
-                    Command="{Binding BindingContext.FaceIdCommand, Source={x:Reference PagePinCode}}"
+                    Command="{Binding FaceIdCommand}"
                     Source="{AppThemeBinding Light=illustration_faceid_lightmode.png,
                                              Dark=illustration_faceid_darkmode.png}" />
             </keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>

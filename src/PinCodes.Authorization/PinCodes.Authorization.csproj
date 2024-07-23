@@ -20,10 +20,10 @@
 		<Company>Id1Tech</Company>
 		<Description>An easy way to add a customizable pin code page to your .NET MAUI applications. With just a few lines of code, you can create a secure page that requires a pin code to access.</Description>
 		<Copyright>All rights reserved.</Copyright>
-		<PackageProjectUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiCodes</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/PinCodes.Authorization</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
-		<PackageReadmeFile>maiucodesreadme.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiCodes</RepositoryUrl>
+		<PackageReadmeFile>readme_pincodeauthorization.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/PinCodes.Authorization</RepositoryUrl>
 		<PackageTags>.NET MAUI;Pincode;Pin Entry;Cross-platform;Mobile Development;Xamarin</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageId>PinCodes.Authorization.Maui</PackageId>
@@ -42,7 +42,7 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
-		<None Include="..\..\Resources\Raw\maiucodesreadme.md">
+		<None Include="..\..\Resources\Raw\readme_pincodeauthorization.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
