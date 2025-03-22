@@ -7,10 +7,14 @@ using System.Threading;
 namespace PinCodes.Authorization.Views.Components.CodeViewers;
 public partial class MaskedCodeViewer : BaseCodeViewer
 {
+    private const ushort MIN_MASK_TIMEOUT = 250;
+    private const ushort MIN_MASK_SPEED = 100;
+
     private readonly List<Label> _labels;
     private readonly List<Shape> _maskShapes;
     private readonly System.Timers.Timer _uiTimer;
     private int _lastIndex = -1;
+    private ushort _maskSpeed = MIN_MASK_SPEED;
 
     public Label PinCharacterLabel
     {
@@ -32,38 +36,46 @@ public partial class MaskedCodeViewer : BaseCodeViewer
 
     private static void OnMaskShapePropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((MaskedCodeViewer)bindable).SetMaskShape();
 
-    public int MaskTimeout
+    public ushort? MaskTimeout
     {
-        get => (int)GetValue(MaskTimeoutProperty);
+        get => (ushort?)GetValue(MaskTimeoutProperty);
         set => SetValue(MaskTimeoutProperty, value);
     }
 
-    public static readonly BindableProperty MaskTimeoutProperty = BindableProperty.Create(nameof(MaskTimeout), typeof(int), typeof(MaskedCodeViewer), null, propertyChanged: OnMaskTimeoutPropertyChanged);
+    public static readonly BindableProperty MaskTimeoutProperty = BindableProperty.Create(nameof(MaskTimeout), typeof(ushort?), typeof(MaskedCodeViewer), null, propertyChanged: OnMaskTimeoutPropertyChanged);
 
-    private static void OnMaskTimeoutPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((MaskedCodeViewer)bindable).SetMaskTimer((newValue as int?) ?? 0);
+    private static void OnMaskTimeoutPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((MaskedCodeViewer)bindable).SetMaskTimer((newValue as ushort?) ?? MIN_MASK_TIMEOUT);
 
-    private void SetMaskTimer(int value)
+    private void SetMaskTimer(ushort value)
     {
         _uiTimer.Interval = value;
     }
 
-    public int MaskSpeed
+    public ushort? MaskAppearanceSpeed
     {
-        get => (int)GetValue(MaskSpeedProperty);
+        get => (ushort?)GetValue(MaskSpeedProperty);
         set => SetValue(MaskSpeedProperty, value);
     }
 
-    public static readonly BindableProperty MaskSpeedProperty = BindableProperty.Create(nameof(MaskSpeed), typeof(int), typeof(MaskedCodeViewer), null, propertyChanged: null);
+    public static readonly BindableProperty MaskSpeedProperty = BindableProperty.Create(nameof(MaskAppearanceSpeed), typeof(ushort?), typeof(MaskedCodeViewer), null, propertyChanged: OnMaskSpeedPropertyChanged);
+
+    private static void OnMaskSpeedPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((MaskedCodeViewer)bindable).SetMaskSpeed((newValue as ushort?) ?? MIN_MASK_SPEED);
+
+    private void SetMaskSpeed(ushort value)
+    {
+        _maskSpeed = value;
+    }
 
     public MaskedCodeViewer()
     {
         _labels = [];
         _maskShapes = [];
 
-        _uiTimer = new System.Timers.Timer();
-        _uiTimer.AutoReset = false;
-        _uiTimer.Stop();
-
+        _uiTimer = new System.Timers.Timer(MIN_MASK_TIMEOUT)
+        {
+            Enabled = false,
+            AutoReset = false
+        };
 
         _uiTimer.Elapsed += async (s, e) =>
         {
@@ -73,7 +85,7 @@ public partial class MaskedCodeViewer : BaseCodeViewer
         };
     }
 
-    private bool IsValidTimer => _uiTimer.Interval >= 250;
+    private bool IsValidTimer => _uiTimer.Interval >= MIN_MASK_TIMEOUT;
 
     public override void SetCode(string code)
     {
@@ -186,11 +198,11 @@ public partial class MaskedCodeViewer : BaseCodeViewer
     {
         _maskShapes[index].IsVisible = show;
 
-        if (MaskSpeed >= 100)
+        if (_maskSpeed >= MIN_MASK_SPEED)
         {
             if (show)
             {
-                _maskShapes[index].TranslateTo(0, 0, 100, Easing.CubicIn);
+                _maskShapes[index].TranslateTo(0, 0, _maskSpeed, Easing.CubicIn);
             }
             else
             {

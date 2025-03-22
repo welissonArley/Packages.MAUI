@@ -59,7 +59,7 @@
     </pinCodeAuthorization:CodePage.SubHeader>
 
     <pinCodeAuthorization:CodePage.CodeViewer>
-        <codeViewer:MaskedCodeViewer CodeColor="{AppThemeBinding Light=White, Dark={StaticResource DarkModeColor}}" CodeStrokeColor="{AppThemeBinding Light=Black, Dark=White}" MaskTimeout="500" MaskSpeed="100">
+        <codeViewer:MaskedCodeViewer CodeColor="{AppThemeBinding Light=White, Dark={StaticResource DarkModeColor}}" CodeStrokeColor="{AppThemeBinding Light=Black, Dark=White}" MaskTimeout="250" MaskAppearanceSpeed="100">
             <codeViewer:MaskedCodeViewer.ShapeViewer>
                 <RoundRectangle
                     CornerRadius="10"

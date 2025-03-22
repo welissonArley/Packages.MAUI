@@ -40,6 +40,7 @@ This library provides developers with an easy way to add a customizable PIN Code
 
 - **Keyboards:** customize buttons by defining their appearance, including shape, color, size, and other properties.
 - **Code viewer:** fully customizable, allowing developers to define a [Shape](https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/shapes/?view=net-maui-8.0) (e.g., ellipse, rectangle) and other properties for a tailored viewing experience.
+- **Masked code viewer:** automatic hiding of digits during user input with customizable mask shape, mask timeout and animation speed.
 - **Headers:** complete flexibility, allowing developers incorporate images, labels, and various other elements to suit their needs.
 - **Customize the length of your code:** adjust the amount of digits (default is 4).
 - and others.
@@ -260,6 +261,38 @@ Below is an example demonstrating how easy it is to define the properties:
     </codeViewer:ShowCodeViewer>
 </pinCodeAuthorization:CodePage.CodeViewer>
 ```
+
+### Masked Code Viewer
+
+The `MaskedCodeViewer` follows the same setup as the `ShowCodeViewer` with one property and two optional attributes:
+
+```xaml
+<pinCodeAuthorization:CodePage.CodeViewer>
+    <codeViewer:MaskedCodeViewer CodeColor="{AppThemeBinding Light=White, Dark={StaticResource DarkModeColor}}" CodeStrokeColor="{AppThemeBinding Light=Black, Dark=White}" MaskTimeout="500" MaskAppearanceSpeed="100">
+
+        <!-- Define ShapeViewer and PinCharacterLabel just like for the ShowCodeViewer -->
+
+        <codeViewer:MaskedCodeViewer.MaskShape>
+            <Ellipse
+                WidthRequest="20"
+                HeightRequest="20"
+                Fill="Black"
+                Stroke="Black"
+                StrokeThickness="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+        </codeViewer:MaskedCodeViewer.MaskShape>
+
+    </codeViewer:MaskedCodeViewer>
+</pinCodeAuthorization:CodePage.CodeViewer>
+```
+The mask shape will appear after 250 milliseconds and will translate from the bottom to the center of the shape using the `Easing.CubicIn` easing function. This can be customized by changing the `MaskTimeout` and `MaskAppearanceSpeed` properties.
+
+| Option | Type | Purpose |
+| --- | --- | --- |
+| MaskTimeout | int | Specifies the time to wait before the new pin digit entered by the user is automatically masked. If the provided `MaskTimout` is less than 250 the timeout is disabled and the digits will not be hidden until the user enters the next digit. |
+| MaskAppearanceSpeed | int | Defines the speed of appearence of the mask shape (translates from bottom to to center using TranslateTo with Easing.CubicIn). If the provided `MaskAppearanceSpeed` is less than 100, the animation is disabled. |
+
 
 ### Keyboard
 
