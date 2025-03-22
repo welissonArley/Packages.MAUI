@@ -14,15 +14,7 @@
       <ul>
         <li><a href="#installation">Installation</a></li>
         <li><a href="#usage">Usage</a></li>
-        <li><a href="#customizing-the-appearance">Customizing the Appearance</a>
-            <ul>
-            <li><a href="#header">Header</a></li>
-            <li><a href="#subheader">SubHeader</a></li>
-            <li><a href="#code-viewer">Code Viewer</a></li>
-            <li><a href="#keyboard">Keyboard</a></li>
-            <li><a href="#how-to-clear-the-pin-code">How to Clear the Pin Code</a></li>
-        </ul>
-        </li>
+        <li><a href="#customizing-the-appearance">Customizing the Appearance</a></li>
         <li><a href="#full-xaml-code">Full code</a></li>
       </ul>
     </li>
@@ -68,13 +60,13 @@ Once the package is installed, you can add a PIN Code Page to your application.
 
 Create a new ContentPage in your .NET MAUI project and add a reference to the CodePage namespace in your file:
 
-```vb
+```xaml
 xmlns:pinCodeAuthorization="clr-namespace:PinCodes.Authorization.Views.Pages;assembly=PinCodes.Authorization.Maui"
 ```
 
 Now, instead of having a ContentPage in your XAML file, you need to change it to:
 
-```html
+```xaml
 <?xml version="1.0" encoding="utf-8" ?>
 <pinCodeAuthorization:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -101,29 +93,23 @@ public partial class MyPinCodePage : PinCodes.Authorization.Views.Pages.CodePage
 
 **REMEMBER**, be sure to provide a command callback. It will be automatically triggered once the user has provided the entire code. So your XAML file will look like:
 
-```html
+```xaml
 <pinCodeAuthorization:CodePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels.PinCodes"
-    x:DataType="viewModel:PinCodeViewModel"
-    CallbackCodeFinished="{Binding UserCompletedCodeCommand}">
+    x:Name="PagePinCode"
+    CallbackCodeFinished="{Binding BindingContext.UserCompletedCodeCommand, Source={x:Reference PagePinCode}}">
     
-    <!-- Now, we'll add a header, the CodeViewer, and the keyboard to the page's content. -->
-
 </pinCodeAuthorization:CodePage>
 ```
 
 And your ViewModel will look like:
 
 ```csharp
-public partial class PinCodeViewModel : ObservableObject
+[RelayCommand]
+public void UserCompletedCode(string code)
 {
-    [RelayCommand]
-    public void UserCompletedCode(string code)
-    {
-        //do something with the code response
-    }
+    //do something with the code response
 }
 ```
 
@@ -131,41 +117,52 @@ public partial class PinCodeViewModel : ObservableObject
 
 This package provides several ways to customize the appearance of the PIN Code Page to fit the look and feel of your application. You can customize the colors and the page's elements.
 
-### Header
-###### Above the PinCode Viewer
+### Header (Above the PinCode Viewer)
 
 You can customize the header on your page by passing it as a **StackLayout** (e.g., VerticalStackLayout, HorizontalStackLayout), giving you the flexibility to tailor its appearance and functionality to your needs. This allows you to include images, labels, commands, and other UI elements, providing complete control over the header's content and layout. To set up your header, use the Header property within CodePage.
 
-```html
-<pinCodeAuthorization:CodePage.Header>
-    <VerticalStackLayout Margin="0,20,0,40" Spacing="5">
-        <Label
-            FontAttributes="Bold"
-            FontSize="36"
-            HorizontalOptions="Center"
-            HorizontalTextAlignment="Center"
-            Text="Verify Phone"
-            TextColor="{AppThemeBinding Light=Black,
-                                        Dark=White}" />
+```xaml
+<pinCodeAuthorization:CodePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="PagePinCode"
+    CallbackCodeFinished="{Binding BindingContext.UserCompletedCodeCommand, Source={x:Reference PagePinCode}}">
+    
+    <pinCodeAuthorization:CodePage.Header>
+      <VerticalStackLayout Margin="0,20,0,40" Spacing="5">
+          <Label
+              FontAttributes="Bold"
+              FontSize="36"
+              HorizontalOptions="Center"
+              HorizontalTextAlignment="Center"
+              Text="Verify Phone"
+              TextColor="{AppThemeBinding Light=Black,
+                                          Dark=White}" />
 
-        <Label
-            FontAttributes="Italic"
-            FontSize="14"
-            HorizontalOptions="Center"
-            Text="code has been sent to +351 912345678"
-            TextColor="{AppThemeBinding Light=Black,
-                                        Dark=White}" />
-    </VerticalStackLayout>
-</pinCodeAuthorization:CodePage.Header>
+          <Label
+              FontAttributes="Italic"
+              FontSize="14"
+              HorizontalOptions="Center"
+              Text="code has been sent to +351 912345678"
+              TextColor="{AppThemeBinding Light=Black,
+                                          Dark=White}" />
+      </VerticalStackLayout>
+  </pinCodeAuthorization:CodePage.Header>
+</pinCodeAuthorization:CodePage>
 ```
 
-### SubHeader
-###### Below the PinCode Viewer
+### SubHeader (Below the PinCode Viewer)
 
 You have the option to add a subheader to display more information beneath the code viewer component. Utilize the StackLayout (such as VerticalStackLayout or HorizontalStackLayout) to customize the subheader's look and functionality according to your requirements. This feature allows you to incorporate images, labels, commands, and various UI elements, providing comprehensive control over the subheader's content and structure. To add a subheader, simply assign your customized layout to the SubHeader property within CodePage.
 
-```html
-<pinCodeAuthorization:CodePage.SubHeader>
+```xaml
+<pinCodeAuthorization:CodePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="PagePinCode"
+    CallbackCodeFinished="{Binding BindingContext.UserCompletedCodeCommand, Source={x:Reference PagePinCode}}">
+    
+    <pinCodeAuthorization:CodePage.SubHeader>
     <VerticalStackLayout Margin="0,30,0,20" HorizontalOptions="Center">
         <Label
             Margin="0,0,0,20"
@@ -177,7 +174,7 @@ You have the option to add a subheader to display more information beneath the c
             HeightRequest="40"
             HorizontalOptions="Center">
             <VerticalStackLayout.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding ResendCodeCommand}" />
+                <TapGestureRecognizer Command="{Binding BindingContext.ResendCodeCommand, Source={x:Reference PagePinCode}}" />
             </VerticalStackLayout.GestureRecognizers>
             <Label
                 FontAttributes="Bold"
@@ -189,13 +186,14 @@ You have the option to add a subheader to display more information beneath the c
         </VerticalStackLayout>
     </VerticalStackLayout>
 </pinCodeAuthorization:CodePage.SubHeader>
+</pinCodeAuthorization:CodePage>
 ```
 
 ### Code Viewer
 
 The first step is to reference the CodeViewer component namespace in your XAML file:
 
-```vb
+```xaml
 xmlns:codeViewer="clr-namespace:PinCodes.Authorization.Views.Components.CodeViewers;assembly=PinCodes.Authorization.Maui"
 ```
 
@@ -203,20 +201,20 @@ Now it's time to use the **CodeViewer** property. It's important to decide wheth
 
 If you want to hide it, add:
 
-```html
+```xaml
 <pinCodeAuthorization:CodePage.CodeViewer>
     <codeViewer:HideCodeViewer>
-        <!-- CUSTOMIZATION HERE -->
+      ... CUSTOMIZATION HERE
     </codeViewer:HideCodeViewer>
 </pinCodeAuthorization:CodePage.CodeViewer>
 ```
 
 but if you want to show the PIN Code, use:
 
-```html
+```xaml
 <pinCodeAuthorization:CodePage.CodeViewer>
     <codeViewer:ShowCodeViewer>
-        <!-- CUSTOMIZATION HERE -->
+      ... CUSTOMIZATION HERE
     </codeViewer:ShowCodeViewer>
 </pinCodeAuthorization:CodePage.CodeViewer>
 ```
@@ -235,7 +233,7 @@ If you choose to show the code as the user types, you need to use the **PinChara
 
 Below is an example demonstrating how easy it is to define the properties:
 
-```html
+```xaml
 <pinCodeAuthorization:CodePage.CodeViewer>
     <codeViewer:ShowCodeViewer CodeColor="{AppThemeBinding Light=White, Dark={StaticResource DarkModeColor}}" CodeStrokeColor="{AppThemeBinding Light=Black, Dark=White}">
         <codeViewer:ShowCodeViewer.ShapeViewer>
@@ -267,7 +265,7 @@ Below is an example demonstrating how easy it is to define the properties:
 
 You must use the **Keyboard** property available on the CodePage to select the appearance of the keyboard buttons, depending on the look and feel you want to achieve. Don't forget to add the namespace on your XAML file:
 
-```vb
+```xaml
 xmlns:keyboardViewer="clr-namespace:PinCodes.Authorization.Views.Components.Keyboards;assembly=PinCodes.Authorization.Maui"
 ```
 
@@ -283,7 +281,7 @@ The keyboard view has several properties for customization, with two being manda
 
 Below is an example demonstrating how easy it is to define the properties:
 
-```html
+```xaml
 <pinCodeAuthorization:CodePage.Keyboard>
     <keyboardViewer:KeyboardViewer ColumnSpacing="40" RowSpacing="20">
         <keyboardViewer:KeyboardViewer.ShapeViewer>
@@ -299,19 +297,25 @@ Below is an example demonstrating how easy it is to define the properties:
 
         <keyboardViewer:KeyboardViewer.BackspaceViewer>
             <ImageButton
-                Padding="22"
+                Padding="{OnPlatform Default=12,
+                                     Android=12,
+                                     iOS=22}"
                 BackgroundColor="{AppThemeBinding Light=White,
                                                   Dark={StaticResource DarkModeColor}}"
-                Source="illustration_delete.png" />
+                Source="{AppThemeBinding Light=illustration_delete_lightmode.png,
+                                         Dark=illustration_delete_darkmode.png}" />
         </keyboardViewer:KeyboardViewer.BackspaceViewer>
 
         <keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
             <ImageButton
-                Padding="22"
+                Padding="{OnPlatform Default=12,
+                                     Android=12,
+                                     iOS=22}"
                 BackgroundColor="{AppThemeBinding Light=White,
                                                   Dark={StaticResource DarkModeColor}}"
-                Command="{Binding FaceIdCommand}"
-                Source="illustration_faceid.png" />
+                Command="{Binding BindingContext.FaceIdCommand, Source={x:Reference PagePinCode}}"
+                Source="{AppThemeBinding Light=illustration_faceid_lightmode.png,
+                                         Dark=illustration_faceid_darkmode.png}" />
         </keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
     </keyboardViewer:KeyboardViewer>
 </pinCodeAuthorization:CodePage.Keyboard>
@@ -324,17 +328,9 @@ Below is an example demonstrating how easy it is to define the properties:
 | CodeViewer | ✅ Yes, it's mandatory |
 | Keyboard | ✅ Yes, it's mandatory |
 
-## How to Clear the Pin Code
-
-Imagine that when you receive the code via the callback command, you determine that the code is incorrect. You will want to clear the PIN code and prompt the user to input it again, right? To achieve this, simply call the following line of code from your ViewModel or in the Page with CodeBehind (both methods work):
-
-```csharp
-PinCodeAuthorizationCenter.ClearPinCode();
-```
-
 ## Full XAML code
 
-```html
+```xaml
 <?xml version="1.0" encoding="utf-8" ?>
 <pinCodeAuthorization:CodePage
     x:Class="Packages.MAUI.App.Views.PinCodes.PinCodePage"
@@ -343,8 +339,8 @@ PinCodeAuthorizationCenter.ClearPinCode();
     xmlns:codeViewer="clr-namespace:PinCodes.Authorization.Views.Components.CodeViewers;assembly=PinCodes.Authorization.Maui"
     xmlns:keyboardViewer="clr-namespace:PinCodes.Authorization.Views.Components.Keyboards;assembly=PinCodes.Authorization.Maui"
     xmlns:pinCodeAuthorization="clr-namespace:PinCodes.Authorization.Views.Pages;assembly=PinCodes.Authorization.Maui"
-    xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels.PinCodes"
-    x:DataType="viewModel:PinCodeViewModel"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Name="PagePinCode"
     CallbackCodeFinished="{Binding BindingContext.UserCompletedCodeCommand, Source={x:Reference PagePinCode}}">
 
     <pinCodeAuthorization:CodePage.Header>
@@ -380,7 +376,7 @@ PinCodeAuthorizationCenter.ClearPinCode();
                 HeightRequest="40"
                 HorizontalOptions="Center">
                 <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ResendCodeCommand}" />
+                    <TapGestureRecognizer Command="{Binding BindingContext.ResendCodeCommand, Source={x:Reference PagePinCode}}" />
                 </VerticalStackLayout.GestureRecognizers>
                 <Label
                     FontAttributes="Bold"
@@ -434,19 +430,25 @@ PinCodeAuthorizationCenter.ClearPinCode();
 
             <keyboardViewer:KeyboardViewer.BackspaceViewer>
                 <ImageButton
-                    Padding="22"
+                    Padding="{OnPlatform Default=12,
+                                         Android=12,
+                                         iOS=22}"
                     BackgroundColor="{AppThemeBinding Light=White,
                                                       Dark={StaticResource DarkModeColor}}"
-                    Source="illustration_delete.png" />
+                    Source="{AppThemeBinding Light=illustration_delete_lightmode.png,
+                                             Dark=illustration_delete_darkmode.png}" />
             </keyboardViewer:KeyboardViewer.BackspaceViewer>
 
             <keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
                 <ImageButton
-                    Padding="22"
+                    Padding="{OnPlatform Default=12,
+                                         Android=12,
+                                         iOS=22}"
                     BackgroundColor="{AppThemeBinding Light=White,
                                                       Dark={StaticResource DarkModeColor}}"
-                    Command="{Binding FaceIdCommand}"
-                    Source="illustration_faceide.png" />
+                    Command="{Binding BindingContext.FaceIdCommand, Source={x:Reference PagePinCode}}"
+                    Source="{AppThemeBinding Light=illustration_faceid_lightmode.png,
+                                             Dark=illustration_faceid_darkmode.png}" />
             </keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
         </keyboardViewer:KeyboardViewer>
     </pinCodeAuthorization:CodePage.Keyboard>

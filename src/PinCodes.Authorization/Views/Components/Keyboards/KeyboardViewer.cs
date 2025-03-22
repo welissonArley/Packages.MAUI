@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace PinCodes.Authorization.Views.Components.Keyboards;
 
-public sealed class KeyboardViewer : ContentView
+public sealed partial class KeyboardViewer : ContentView
 {
     private const ushort SPACING = 30;
 

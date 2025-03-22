@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pinCodeAuthorization:CodePage
+    x:Class="Packages.MAUI.App.Views.PinCodes.MaskedPinCodePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:codeViewer="clr-namespace:PinCodes.Authorization.Views.Components.CodeViewers;assembly=PinCodes.Authorization.Maui"
+    xmlns:keyboardViewer="clr-namespace:PinCodes.Authorization.Views.Components.Keyboards;assembly=PinCodes.Authorization.Maui"
+    xmlns:pinCodeAuthorization="clr-namespace:PinCodes.Authorization.Views.Pages;assembly=PinCodes.Authorization.Maui"
+    xmlns:Animations="clr-namespace:Mopups.Animations;assembly=Mopups"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels.PinCodes"
+    x:DataType="viewModel:MaskedPinCodeViewModel"
+    CallbackCodeFinished="{Binding UserCompletedCodeCommand}">
+
+    <pinCodeAuthorization:CodePage.Header>
+        <VerticalStackLayout Margin="0,20,0,40" Spacing="5">
+            <Label
+                FontAttributes="Bold"
+                FontSize="36"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="Unlock your account"
+                TextColor="{AppThemeBinding Light=Black,
+                                            Dark=White}" />
+
+            <Label
+                FontAttributes="Italic"
+                FontSize="14"
+                HorizontalOptions="Center"
+                Text="Account number: 912345678"
+                TextColor="{AppThemeBinding Light=Black,
+                                            Dark=White}" />
+        </VerticalStackLayout>
+    </pinCodeAuthorization:CodePage.Header>
+
+    <pinCodeAuthorization:CodePage.SubHeader>
+        <VerticalStackLayout Margin="0,30,0,20" HorizontalOptions="Center">
+            <Label
+                Margin="0,0,0,20"
+                FontSize="16"
+                Text="Forgot your pin?" />
+
+            <VerticalStackLayout
+                Padding="0,5,0,5"
+                HeightRequest="40"
+                HorizontalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ResendCodeCommand}" />
+                </VerticalStackLayout.GestureRecognizers>
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    Text="Reset pin"
+                    TextColor="{AppThemeBinding Light=#007AFF,
+                                                Dark=#19B5FE}" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </pinCodeAuthorization:CodePage.SubHeader>
+
+    <pinCodeAuthorization:CodePage.CodeViewer>
+        <codeViewer:MaskedCodeViewer CodeColor="{AppThemeBinding Light=White, Dark={StaticResource DarkModeColor}}" CodeStrokeColor="{AppThemeBinding Light=Black, Dark=White}" MaskTimeout="500" MaskSpeed="100">
+            <codeViewer:MaskedCodeViewer.ShapeViewer>
+                <RoundRectangle
+                    CornerRadius="10"
+                    Fill="{AppThemeBinding Light=White,
+                                            Dark={StaticResource DarkModeColor}}"
+                    HeightRequest="50"
+                    Stroke="{AppThemeBinding Light=Black,
+                                                Dark=White}"
+                    StrokeThickness="5"
+                    WidthRequest="50"/>
+            </codeViewer:MaskedCodeViewer.ShapeViewer>
+
+            <codeViewer:MaskedCodeViewer.MaskShape>
+                <Ellipse
+                    WidthRequest="20"
+                    HeightRequest="20"
+                    Fill="Black"
+                    Stroke="Black"
+                    StrokeThickness="1"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </codeViewer:MaskedCodeViewer.MaskShape>
+
+            <codeViewer:MaskedCodeViewer.PinCharacterLabel>
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    TextColor="{AppThemeBinding Light=Black,
+                                                Dark=White}"
+                    VerticalOptions="Center" />
+            </codeViewer:MaskedCodeViewer.PinCharacterLabel>
+            
+        </codeViewer:MaskedCodeViewer>
+    </pinCodeAuthorization:CodePage.CodeViewer>
+
+    <pinCodeAuthorization:CodePage.Keyboard>
+        <keyboardViewer:KeyboardViewer ColumnSpacing="40" RowSpacing="20">
+            <keyboardViewer:KeyboardViewer.ShapeViewer>
+                <Button
+                    BackgroundColor="Transparent"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    HeightRequest="80"
+                    TextColor="{AppThemeBinding Light=Black,
+                                                Dark=White}"
+                    WidthRequest="80" />
+            </keyboardViewer:KeyboardViewer.ShapeViewer>
+
+            <keyboardViewer:KeyboardViewer.BackspaceViewer>
+                <ImageButton
+                    Padding="{OnPlatform Default=12,
+                                         Android=12,
+                                         iOS=22}"
+                    BackgroundColor="{AppThemeBinding Light=White,
+                                                      Dark={StaticResource DarkModeColor}}"
+                    Source="{AppThemeBinding Light=illustration_delete_lightmode.png,
+                                             Dark=illustration_delete_darkmode.png}" />
+            </keyboardViewer:KeyboardViewer.BackspaceViewer>
+
+            <keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
+                <ImageButton
+                    Padding="{OnPlatform Default=12,
+                                         Android=12,
+                                         iOS=22}"
+                    BackgroundColor="{AppThemeBinding Light=White,
+                                                      Dark={StaticResource DarkModeColor}}"
+                    Command="{Binding FaceIdCommand}"
+                    Source="{AppThemeBinding Light=illustration_faceid_lightmode.png,
+                                             Dark=illustration_faceid_darkmode.png}" />
+            </keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
+        </keyboardViewer:KeyboardViewer>
+    </pinCodeAuthorization:CodePage.Keyboard>
+
+</pinCodeAuthorization:CodePage>

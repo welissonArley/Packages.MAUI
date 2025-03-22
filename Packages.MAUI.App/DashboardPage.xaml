@@ -85,12 +85,19 @@
                 </Grid>
             </Border>
 
-            <Border
-                Grid.Row="1"
-                Grid.Column="0"
-                Padding="30"
-                Background="{AppThemeBinding Light=#F9F8FF,
-                                             Dark=#FFFACD}" />
+            <Border Grid.Column="0" Grid.Row="1" Padding="30" Background="{AppThemeBinding Light=#F9E8E2, Dark=#00FA9A}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding MaskedPinCodesAuthorizationCommand}" />
+                </Border.GestureRecognizers>
+                <Grid Style="{StaticResource GridCard}">
+                    <Image Source="illustration_code.png" Style="{StaticResource IllustrationCard}" />
+                    <VerticalStackLayout Grid.Row="1" Spacing="10">
+                        <Label Style="{StaticResource TitleCard}" Text="MaskedPinCodes.Authorization" />
+                        <Label Style="{StaticResource DescriptionCard}" Text="Customizable NuGet package for creating masked pin code input pages." />
+                    </VerticalStackLayout>
+                    <Image Source="circle_arrow.png" Style="{StaticResource ArrowCard}" />
+                </Grid>
+            </Border>
 
             <Border
                 Grid.Row="1"

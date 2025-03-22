@@ -1,7 +1,7 @@
 ﻿using PinCodes.Authorization.Extensions;
 
 namespace PinCodes.Authorization.Views.Components.CodeViewers;
-public class ShowCodeViewer : BaseCodeViewer
+public partial class ShowCodeViewer : BaseCodeViewer
 {
     private readonly List<Label> _labels;
 

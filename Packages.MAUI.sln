@@ -11,6 +11,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PinCodes.Authorization", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Packages.MAUI.App", "Packages.MAUI.App\Packages.MAUI.App.csproj", "{95E8EBF8-3230-4CD2-ABC9-F372F74FFCD6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cicd", "cicd", "{E0ADEC3C-1488-4143-B5DF-5B5F98765DCB}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.github\workflows\MAUIDays-publish.yml = .github\workflows\MAUIDays-publish.yml
+		.github\workflows\PinCodes-publish.yml = .github\workflows\PinCodes-publish.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F1F179B6-3F78-40F3-B815-98A58D0C61AD}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,4 +1,4 @@
 ﻿namespace PinCodes.Authorization.Views.Components.CodeViewers;
-public sealed class HideCodeViewer : BaseCodeViewer
+public  sealed partial class HideCodeViewer : BaseCodeViewer
 {
 }

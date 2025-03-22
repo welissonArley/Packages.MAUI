@@ -11,6 +11,7 @@ public abstract class BaseCodeViewer : ContentView
     protected string Code { get; private set; } = string.Empty;
 
     private readonly List<Shape> _codeViewerLayouts;
+    private readonly List<AbsoluteLayout> _codeViewerContainers;
 
     public ushort CodeLength
     {
@@ -61,6 +62,7 @@ public abstract class BaseCodeViewer : ContentView
         };
 
         _codeViewerLayouts = [];
+        _codeViewerContainers = [];
 
         Content = grid;
     }
@@ -111,9 +113,10 @@ public abstract class BaseCodeViewer : ContentView
             {
                 var viewer = CreateCodeView();
 
-                _codeViewerLayouts.Add(viewer);
+                _codeViewerContainers.Add(viewer.Container);
+                _codeViewerLayouts.Add(viewer.Shape);
 
-                grid.Add(view: viewer, column: _codeViewerLayouts.Count - 1);
+                grid.Add(view: viewer.Container, column: _codeViewerLayouts.Count - 1);
             }
         }
     }
@@ -125,8 +128,12 @@ public abstract class BaseCodeViewer : ContentView
 
         for (var index = 0; index < CodeLength; index++)
         {
-            _codeViewerLayouts.Add(CreateCodeView());
-            grid.Add(view: _codeViewerLayouts[index], column: index);
+            var viewer = CreateCodeView();
+
+            _codeViewerContainers.Add(viewer.Container);
+            _codeViewerLayouts.Add(viewer.Shape);
+
+            grid.Add(view: viewer.Container, column: index);
         }
     }
 
@@ -139,10 +146,27 @@ public abstract class BaseCodeViewer : ContentView
         grid!.ColumnSpacing = Spacing;
     }
 
-    private Shape CreateCodeView()
+    private (AbsoluteLayout Container, Shape Shape) CreateCodeView()
     {
         var shape = ShapeViewer.Clone();
+        var container = new AbsoluteLayout
+        {
+            HeightRequest = shape.HeightRequest,
+            WidthRequest = shape.WidthRequest,
+            Background = Colors.Transparent,
+            HorizontalOptions = LayoutOptions.Center,
+            VerticalOptions = LayoutOptions.Center,
 
-        return shape;
+            Clip = new RectangleGeometry
+            {
+                Rect = new Rect(0, 0, shape.WidthRequest, shape.HeightRequest)
+            }
+        };
+
+        container.Add(shape);
+
+        return (container, shape);
     }
+
+    protected AbsoluteLayout this[int index] => _codeViewerContainers[index];
 }

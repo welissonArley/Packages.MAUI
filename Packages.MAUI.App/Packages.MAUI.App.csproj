@@ -79,6 +79,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\PinCodes\MaskedPinCodePage.xaml.cs">
+	    <DependentUpon>MaskedPinCodePage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Popups\InformationPopup.xaml.cs">
 	    <DependentUpon>InformationPopup.xaml</DependentUpon>
 	  </Compile>
@@ -86,6 +89,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="DashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PinCodes\MaskedPinCodePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PinCodes\PinCodePage.xaml">
