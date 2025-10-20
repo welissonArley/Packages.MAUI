@@ -1,7 +1,7 @@
-using Packages.MAUI.App.ViewModels.PinCodes;
+using Packages.MAUI.App.ViewModels.Pages.PinCodes;
 using PinCodes.Authorization.Views.Pages;
 
-namespace Packages.MAUI.App.Views.PinCodes;
+namespace Packages.MAUI.App.Views.Pages.PinCodes;
 
 public partial class PinCodePage : CodePage
 {

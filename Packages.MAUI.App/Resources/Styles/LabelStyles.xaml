@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontFamily="clr-namespace:Packages.MAUI.App.Constants">
+
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="{Static fontFamily:FontFamily.MAIN_FONT_REGULAR}" />
+    </Style>
+
+    <Style x:Key="PageTitle" TargetType="Label">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontFamily" Value="{Static fontFamily:FontFamily.MAIN_FONT_BOLD}" />
+    </Style>
+
+    <Style x:Key="TitleCard" TargetType="Label">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontFamily" Value="{Static fontFamily:FontFamily.MAIN_FONT_BOLD}" />
+    </Style>
+
+</ResourceDictionary>
