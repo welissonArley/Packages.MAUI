@@ -1,6 +1,6 @@
-using Packages.MAUI.App.ViewModels;
+using Packages.MAUI.App.ViewModels.Pages.Dashboard;
 
-namespace Packages.MAUI.App;
+namespace Packages.MAUI.App.Views.Pages.Dashboard;
 
 public partial class DashboardPage : ContentPage
 {
