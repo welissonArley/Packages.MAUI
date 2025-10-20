@@ -131,21 +131,14 @@ You can customize the header on your page by passing it as a **StackLayout** (e.
     <pinCodeAuthorization:CodePage.Header>
       <VerticalStackLayout Margin="0,20,0,40" Spacing="5">
           <Label
-              FontAttributes="Bold"
-              FontSize="36"
-              HorizontalOptions="Center"
-              HorizontalTextAlignment="Center"
-              Text="Verify Phone"
-              TextColor="{AppThemeBinding Light=Black,
-                                          Dark=White}" />
+                FontSize="36"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="Verify Phone" />
 
-          <Label
-              FontAttributes="Italic"
-              FontSize="14"
-              HorizontalOptions="Center"
-              Text="code has been sent to +351 912345678"
-              TextColor="{AppThemeBinding Light=Black,
-                                          Dark=White}" />
+            <Label
+                HorizontalOptions="Center"
+                Text="code has been sent to +351 912345678" />
       </VerticalStackLayout>
   </pinCodeAuthorization:CodePage.Header>
 </pinCodeAuthorization:CodePage>
@@ -163,29 +156,17 @@ You have the option to add a subheader to display more information beneath the c
     CallbackCodeFinished="{Binding BindingContext.UserCompletedCodeCommand, Source={x:Reference PagePinCode}}">
     
     <pinCodeAuthorization:CodePage.SubHeader>
-    <VerticalStackLayout Margin="0,30,0,20" HorizontalOptions="Center">
-        <Label
-            Margin="0,0,0,20"
-            FontSize="16"
-            Text="Didn’t get the verification code?" />
+        <VerticalStackLayout Margin="0,30,0,20" HorizontalOptions="Center">
+            <Label Margin="0,0,0,10" FontSize="16" Text="Didn’t get the verification code?" />
 
-        <VerticalStackLayout
-            Padding="0,5,0,5"
-            HeightRequest="40"
-            HorizontalOptions="Center">
-            <VerticalStackLayout.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding BindingContext.ResendCodeCommand, Source={x:Reference PagePinCode}}" />
-            </VerticalStackLayout.GestureRecognizers>
-            <Label
-                FontAttributes="Bold"
-                FontSize="20"
-                HorizontalOptions="Center"
-                Text="Resend code"
-                TextColor="{AppThemeBinding Light=#007AFF,
-                                            Dark=#19B5FE}" />
+            <VerticalStackLayout Padding="0,5,0,5" HeightRequest="40" HorizontalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BindingContext.ResendCodeCommand, Source={x:Reference PagePinCode}}" />
+                </VerticalStackLayout.GestureRecognizers>
+                <Label HorizontalOptions="Center" Text="Resend code" />
+            </VerticalStackLayout>
         </VerticalStackLayout>
-    </VerticalStackLayout>
-</pinCodeAuthorization:CodePage.SubHeader>
+    </pinCodeAuthorization:CodePage.SubHeader>
 </pinCodeAuthorization:CodePage>
 ```
 
@@ -235,26 +216,23 @@ Below is an example demonstrating how easy it is to define the properties:
 
 ```xaml
 <pinCodeAuthorization:CodePage.CodeViewer>
-    <codeViewer:ShowCodeViewer CodeColor="{AppThemeBinding Light=White, Dark={StaticResource DarkModeColor}}" CodeStrokeColor="{AppThemeBinding Light=Black, Dark=White}">
+    <codeViewer:ShowCodeViewer
+        CodeColor="Transparent"
+        CodeStrokeColor="Blue">
         <codeViewer:ShowCodeViewer.ShapeViewer>
             <RoundRectangle
                 CornerRadius="10"
-                Fill="{AppThemeBinding Light=White,
-                                       Dark={StaticResource DarkModeColor}}"
+                Fill="Transparent"
                 HeightRequest="50"
-                Stroke="{AppThemeBinding Light=Black,
-                                         Dark=White}"
-                StrokeThickness="5"
+                Stroke="Red"
+                StrokeThickness="2"
                 WidthRequest="50" />
         </codeViewer:ShowCodeViewer.ShapeViewer>
 
         <codeViewer:ShowCodeViewer.PinCharacterLabel>
             <Label
-                FontAttributes="Bold"
                 FontSize="16"
                 HorizontalOptions="Center"
-                TextColor="{AppThemeBinding Light=Black,
-                                            Dark=White}"
                 VerticalOptions="Center" />
         </codeViewer:ShowCodeViewer.PinCharacterLabel>
     </codeViewer:ShowCodeViewer>
@@ -287,35 +265,29 @@ Below is an example demonstrating how easy it is to define the properties:
         <keyboardViewer:KeyboardViewer.ShapeViewer>
             <Button
                 BackgroundColor="Transparent"
-                FontAttributes="Bold"
+                CornerRadius="20"
                 FontSize="24"
                 HeightRequest="80"
-                TextColor="{AppThemeBinding Light=Black,
-                                            Dark=White}"
                 WidthRequest="80" />
         </keyboardViewer:KeyboardViewer.ShapeViewer>
 
         <keyboardViewer:KeyboardViewer.BackspaceViewer>
             <ImageButton
-                Padding="{OnPlatform Default=12,
-                                     Android=12,
-                                     iOS=22}"
-                BackgroundColor="{AppThemeBinding Light=White,
-                                                  Dark={StaticResource DarkModeColor}}"
-                Source="{AppThemeBinding Light=illustration_delete_lightmode.png,
-                                         Dark=illustration_delete_darkmode.png}" />
+                Padding="{OnPlatform Default=15,
+                                        Android=20,
+                                        iOS=22}"
+                BackgroundColor="Transparent"
+                Source="illustration_delete.png" />
         </keyboardViewer:KeyboardViewer.BackspaceViewer>
 
         <keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
             <ImageButton
-                Padding="{OnPlatform Default=12,
-                                     Android=12,
-                                     iOS=22}"
-                BackgroundColor="{AppThemeBinding Light=White,
-                                                  Dark={StaticResource DarkModeColor}}"
+                Padding="{OnPlatform Default=15,
+                                        Android=20,
+                                        iOS=22}"
+                BackgroundColor="Transparent"
                 Command="{Binding BindingContext.FaceIdCommand, Source={x:Reference PagePinCode}}"
-                Source="{AppThemeBinding Light=illustration_faceid_lightmode.png,
-                                         Dark=illustration_faceid_darkmode.png}" />
+                Source="illustration_faceid.png" />
         </keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
     </keyboardViewer:KeyboardViewer>
 </pinCodeAuthorization:CodePage.Keyboard>
@@ -327,134 +299,6 @@ Below is an example demonstrating how easy it is to define the properties:
 | SubHeader | ⛔ No, it's optional |
 | CodeViewer | ✅ Yes, it's mandatory |
 | Keyboard | ✅ Yes, it's mandatory |
-
-## Full XAML code
-
-```xaml
-<?xml version="1.0" encoding="utf-8" ?>
-<pinCodeAuthorization:CodePage
-    x:Class="Packages.MAUI.App.Views.PinCodes.PinCodePage"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:codeViewer="clr-namespace:PinCodes.Authorization.Views.Components.CodeViewers;assembly=PinCodes.Authorization.Maui"
-    xmlns:keyboardViewer="clr-namespace:PinCodes.Authorization.Views.Components.Keyboards;assembly=PinCodes.Authorization.Maui"
-    xmlns:pinCodeAuthorization="clr-namespace:PinCodes.Authorization.Views.Pages;assembly=PinCodes.Authorization.Maui"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    x:Name="PagePinCode"
-    CallbackCodeFinished="{Binding BindingContext.UserCompletedCodeCommand, Source={x:Reference PagePinCode}}">
-
-    <pinCodeAuthorization:CodePage.Header>
-        <VerticalStackLayout Margin="0,20,0,40" Spacing="5">
-            <Label
-                FontAttributes="Bold"
-                FontSize="36"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
-                Text="Verify Phone"
-                TextColor="{AppThemeBinding Light=Black,
-                                            Dark=White}" />
-
-            <Label
-                FontAttributes="Italic"
-                FontSize="14"
-                HorizontalOptions="Center"
-                Text="code has been sent to +351 912345678"
-                TextColor="{AppThemeBinding Light=Black,
-                                            Dark=White}" />
-        </VerticalStackLayout>
-    </pinCodeAuthorization:CodePage.Header>
-
-    <pinCodeAuthorization:CodePage.SubHeader>
-        <VerticalStackLayout Margin="0,30,0,20" HorizontalOptions="Center">
-            <Label
-                Margin="0,0,0,20"
-                FontSize="16"
-                Text="Didn’t get the verification code?" />
-
-            <VerticalStackLayout
-                Padding="0,5,0,5"
-                HeightRequest="40"
-                HorizontalOptions="Center">
-                <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding BindingContext.ResendCodeCommand, Source={x:Reference PagePinCode}}" />
-                </VerticalStackLayout.GestureRecognizers>
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="20"
-                    HorizontalOptions="Center"
-                    Text="Resend code"
-                    TextColor="{AppThemeBinding Light=#007AFF,
-                                                Dark=#19B5FE}" />
-            </VerticalStackLayout>
-        </VerticalStackLayout>
-    </pinCodeAuthorization:CodePage.SubHeader>
-
-    <pinCodeAuthorization:CodePage.CodeViewer>
-        <codeViewer:ShowCodeViewer CodeColor="{AppThemeBinding Light=White, Dark={StaticResource DarkModeColor}}" CodeStrokeColor="{AppThemeBinding Light=Black, Dark=White}">
-            <codeViewer:ShowCodeViewer.ShapeViewer>
-                <RoundRectangle
-                    CornerRadius="10"
-                    Fill="{AppThemeBinding Light=White,
-                                           Dark={StaticResource DarkModeColor}}"
-                    HeightRequest="50"
-                    Stroke="{AppThemeBinding Light=Black,
-                                             Dark=White}"
-                    StrokeThickness="5"
-                    WidthRequest="50" />
-            </codeViewer:ShowCodeViewer.ShapeViewer>
-
-            <codeViewer:ShowCodeViewer.PinCharacterLabel>
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="16"
-                    HorizontalOptions="Center"
-                    TextColor="{AppThemeBinding Light=Black,
-                                                Dark=White}"
-                    VerticalOptions="Center" />
-            </codeViewer:ShowCodeViewer.PinCharacterLabel>
-        </codeViewer:ShowCodeViewer>
-    </pinCodeAuthorization:CodePage.CodeViewer>
-
-    <pinCodeAuthorization:CodePage.Keyboard>
-        <keyboardViewer:KeyboardViewer ColumnSpacing="40" RowSpacing="20">
-            <keyboardViewer:KeyboardViewer.ShapeViewer>
-                <Button
-                    BackgroundColor="Transparent"
-                    FontAttributes="Bold"
-                    FontSize="24"
-                    HeightRequest="80"
-                    TextColor="{AppThemeBinding Light=Black,
-                                                Dark=White}"
-                    WidthRequest="80" />
-            </keyboardViewer:KeyboardViewer.ShapeViewer>
-
-            <keyboardViewer:KeyboardViewer.BackspaceViewer>
-                <ImageButton
-                    Padding="{OnPlatform Default=12,
-                                         Android=12,
-                                         iOS=22}"
-                    BackgroundColor="{AppThemeBinding Light=White,
-                                                      Dark={StaticResource DarkModeColor}}"
-                    Source="{AppThemeBinding Light=illustration_delete_lightmode.png,
-                                             Dark=illustration_delete_darkmode.png}" />
-            </keyboardViewer:KeyboardViewer.BackspaceViewer>
-
-            <keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
-                <ImageButton
-                    Padding="{OnPlatform Default=12,
-                                         Android=12,
-                                         iOS=22}"
-                    BackgroundColor="{AppThemeBinding Light=White,
-                                                      Dark={StaticResource DarkModeColor}}"
-                    Command="{Binding BindingContext.FaceIdCommand, Source={x:Reference PagePinCode}}"
-                    Source="{AppThemeBinding Light=illustration_faceid_lightmode.png,
-                                             Dark=illustration_faceid_darkmode.png}" />
-            </keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
-        </keyboardViewer:KeyboardViewer>
-    </pinCodeAuthorization:CodePage.Keyboard>
-
-</pinCodeAuthorization:CodePage>
-```
 
 ## License
 

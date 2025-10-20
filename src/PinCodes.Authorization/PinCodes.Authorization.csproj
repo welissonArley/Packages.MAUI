@@ -7,7 +7,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<IsAotCompatible>true</IsAotCompatible>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
 		<Title>Net MAUI customizable pin code page</Title>
 		<Authors>Welisson Arley</Authors>
@@ -16,7 +16,7 @@
 		<Copyright>All rights reserved.</Copyright>
 		<PackageProjectUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiCodes</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
-		<PackageReadmeFile>pincodeauthorizationreadme.md</PackageReadmeFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiCodes</RepositoryUrl>
 		<PackageTags>.NET MAUI;Pincode;Pin Entry;Cross-platform;Mobile Development;Xamarin</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -35,15 +35,11 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
-		<None Include="..\..\Resources\Raw\pincodeauthorizationreadme.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="icon.png" Pack="true" PackagePath="\" />
-		<None Include="readme.md" Pack="true" PackagePath="\" />
+		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
