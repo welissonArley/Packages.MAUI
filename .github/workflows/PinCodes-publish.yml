@@ -6,11 +6,10 @@ on:
       - master
     paths:
       - 'src/PinCodes.Authorization/**'
-      - '!src/PinCodes.Authorization/readme.md'
-      
+
 jobs:
   build:
-    name: Build
+    name: Build & Push
     runs-on: windows-latest
     defaults:
       run:
@@ -25,7 +24,17 @@ jobs:
     - name: Install .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 9.0.x
+
+    - name: Copying README file to the correct location
+      shell: bash
+      run: |
+        cp readme.md ../../Resources/Raw/pincodeauthorizationreadme.md
+
+    - name: Removing table content for the NuGet platform README
+      shell: bash
+      run: |
+         awk '/<\/details>/ {print NR}' ../../Resources/Raw/pincodeauthorizationreadme.md | xargs -I {} sed -i '1,{}d' ../../Resources/Raw/pincodeauthorizationreadme.md
 
     - name: Build Project
       run: dotnet build --configuration Release

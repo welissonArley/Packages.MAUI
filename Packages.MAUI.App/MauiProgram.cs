@@ -1,6 +1,10 @@
 ﻿using CommunityToolkit.Maui;
 using Mopups.Hosting;
-using Packages.MAUI.App.Helpers;
+using Packages.MAUI.App.Constants;
+using Packages.MAUI.App.Navigation;
+using Packages.MAUI.App.ViewModels.Pages.Dashboard;
+using Packages.MAUI.App.ViewModels.Pages.PinCodes;
+using Packages.MAUI.App.Views.Pages.PinCodes;
 
 namespace Packages.MAUI.App;
 public static class MauiProgram
@@ -12,26 +16,32 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .AddNavigationService()
             .RegisterPagesAndViewModels()
             .ConfigureMopups()
             .ConfigureFonts(fonts =>
             {
-                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("OpenSans-Regular.ttf", FontFamily.MAIN_FONT_REGULAR);
+                fonts.AddFont("OpenSans-Light.ttf", FontFamily.MAIN_FONT_LIGHT);
+                fonts.AddFont("OpenSans-Bold.ttf", FontFamily.MAIN_FONT_BOLD);
             });
 
         return builder.Build();
     }
 
-    private static MauiAppBuilder RegisterPagesAndViewModels(this MauiAppBuilder mauiAppBuilder)
+    private static MauiAppBuilder AddNavigationService(this MauiAppBuilder appBuilder)
     {
-        mauiAppBuilder.Services.AddTransient<DashboardPage, ViewModels.DashboardViewModel>();
+        appBuilder.Services.AddSingleton<INavigationService, NavigationService>();
 
-        mauiAppBuilder.Services.AddTransient<Views.PinCodes.PinCodePage>();
-        mauiAppBuilder.Services.AddTransient<ViewModels.PinCodes.PinCodeViewModel>();
+        return appBuilder;
+    }
 
-        Routing.RegisterRoute(RoutePages.PINCODE_PAGE, typeof(Views.PinCodes.PinCodePage));
+    private static MauiAppBuilder RegisterPagesAndViewModels(this MauiAppBuilder appBuilder)
+    {
+        appBuilder.Services.AddTransient<DashboardViewModel>();
 
-        return mauiAppBuilder;
+        appBuilder.Services.AddTransientWithShellRoute<PinCodePage, PinCodeViewModel>(RoutePages.PINCODE_PAGE);
+
+        return appBuilder;
     }
 }

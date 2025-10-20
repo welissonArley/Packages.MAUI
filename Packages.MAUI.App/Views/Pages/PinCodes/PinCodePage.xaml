@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <pinCodeAuthorization:CodePage
-    x:Class="Packages.MAUI.App.Views.PinCodes.PinCodePage"
+    x:Class="Packages.MAUI.App.Views.Pages.PinCodes.PinCodePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:codeViewer="clr-namespace:PinCodes.Authorization.Views.Components.CodeViewers;assembly=PinCodes.Authorization.Maui"
+    xmlns:fontFamily="clr-namespace:Packages.MAUI.App.Constants"
     xmlns:keyboardViewer="clr-namespace:PinCodes.Authorization.Views.Components.Keyboards;assembly=PinCodes.Authorization.Maui"
     xmlns:pinCodeAuthorization="clr-namespace:PinCodes.Authorization.Views.Pages;assembly=PinCodes.Authorization.Maui"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -13,28 +14,24 @@
     <pinCodeAuthorization:CodePage.Header>
         <VerticalStackLayout Margin="0,20,0,40" Spacing="5">
             <Label
-                FontAttributes="Bold"
+                FontFamily="{Static fontFamily:FontFamily.MAIN_FONT_BOLD}"
                 FontSize="36"
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
-                Text="Verify Phone"
-                TextColor="{AppThemeBinding Light=Black,
-                                            Dark=White}" />
+                Text="Verify Phone" />
 
             <Label
-                FontAttributes="Italic"
-                FontSize="14"
+                FontFamily="{Static fontFamily:FontFamily.MAIN_FONT_LIGHT}"
                 HorizontalOptions="Center"
-                Text="code has been sent to +351 912345678"
-                TextColor="{AppThemeBinding Light=Black,
-                                            Dark=White}" />
+                Text="code has been sent to +351 912345678" />
         </VerticalStackLayout>
     </pinCodeAuthorization:CodePage.Header>
 
     <pinCodeAuthorization:CodePage.SubHeader>
         <VerticalStackLayout Margin="0,30,0,20" HorizontalOptions="Center">
             <Label
-                Margin="0,0,0,20"
+                Margin="0,0,0,10"
+                FontFamily="{Static fontFamily:FontFamily.MAIN_FONT_REGULAR}"
                 FontSize="16"
                 Text="Didn’t get the verification code?" />
 
@@ -46,37 +43,35 @@
                     <TapGestureRecognizer Command="{Binding BindingContext.ResendCodeCommand, Source={x:Reference PagePinCode}}" />
                 </VerticalStackLayout.GestureRecognizers>
                 <Label
-                    FontAttributes="Bold"
-                    FontSize="20"
+                    FontFamily="{Static fontFamily:FontFamily.MAIN_FONT_BOLD}"
                     HorizontalOptions="Center"
                     Text="Resend code"
-                    TextColor="{AppThemeBinding Light=#007AFF,
-                                                Dark=#19B5FE}" />
+                    TextColor="{AppThemeBinding Light={StaticResource HIGHLIGHT_COLOR_LIGHT},
+                                                Dark={StaticResource HIGHLIGHT_COLOR_DARK}}" />
             </VerticalStackLayout>
         </VerticalStackLayout>
     </pinCodeAuthorization:CodePage.SubHeader>
 
     <pinCodeAuthorization:CodePage.CodeViewer>
-        <codeViewer:ShowCodeViewer CodeColor="{AppThemeBinding Light=White, Dark={StaticResource DarkModeColor}}" CodeStrokeColor="{AppThemeBinding Light=Black, Dark=White}">
+        <codeViewer:ShowCodeViewer CodeColor="Transparent" CodeStrokeColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}">
             <codeViewer:ShowCodeViewer.ShapeViewer>
                 <RoundRectangle
                     CornerRadius="10"
-                    Fill="{AppThemeBinding Light=White,
-                                           Dark={StaticResource DarkModeColor}}"
+                    Fill="Transparent"
                     HeightRequest="50"
-                    Stroke="{AppThemeBinding Light=Black,
-                                             Dark=White}"
-                    StrokeThickness="5"
+                    Stroke="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT},
+                                             Dark={StaticResource PRIMARY_COLOR_DARK}}"
+                    StrokeThickness="2"
                     WidthRequest="50" />
             </codeViewer:ShowCodeViewer.ShapeViewer>
 
             <codeViewer:ShowCodeViewer.PinCharacterLabel>
                 <Label
-                    FontAttributes="Bold"
+                    FontFamily="{Static fontFamily:FontFamily.MAIN_FONT_BOLD}"
                     FontSize="16"
                     HorizontalOptions="Center"
-                    TextColor="{AppThemeBinding Light=Black,
-                                                Dark=White}"
+                    TextColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT},
+                                                Dark={StaticResource PRIMARY_COLOR_DARK}}"
                     VerticalOptions="Center" />
             </codeViewer:ShowCodeViewer.PinCharacterLabel>
         </codeViewer:ShowCodeViewer>
@@ -86,33 +81,33 @@
         <keyboardViewer:KeyboardViewer ColumnSpacing="40" RowSpacing="20">
             <keyboardViewer:KeyboardViewer.ShapeViewer>
                 <Button
-                    BackgroundColor="Transparent"
-                    FontAttributes="Bold"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource KEYBOARD_COLOR_LIGHT},
+                                                      Dark={StaticResource KEYBOARD_COLOR_DARK}}"
+                    CornerRadius="20"
+                    FontFamily="{Static fontFamily:FontFamily.MAIN_FONT_BOLD}"
                     FontSize="24"
                     HeightRequest="80"
-                    TextColor="{AppThemeBinding Light=Black,
-                                                Dark=White}"
+                    TextColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT},
+                                                Dark={StaticResource PRIMARY_COLOR_DARK}}"
                     WidthRequest="80" />
             </keyboardViewer:KeyboardViewer.ShapeViewer>
 
             <keyboardViewer:KeyboardViewer.BackspaceViewer>
                 <ImageButton
-                    Padding="{OnPlatform Default=12,
-                                         Android=12,
+                    Padding="{OnPlatform Default=15,
+                                         Android=20,
                                          iOS=22}"
-                    BackgroundColor="{AppThemeBinding Light=White,
-                                                      Dark={StaticResource DarkModeColor}}"
+                    BackgroundColor="Transparent"
                     Source="{AppThemeBinding Light=illustration_delete_lightmode.png,
                                              Dark=illustration_delete_darkmode.png}" />
             </keyboardViewer:KeyboardViewer.BackspaceViewer>
 
             <keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
                 <ImageButton
-                    Padding="{OnPlatform Default=12,
-                                         Android=12,
+                    Padding="{OnPlatform Default=15,
+                                         Android=20,
                                          iOS=22}"
-                    BackgroundColor="{AppThemeBinding Light=White,
-                                                      Dark={StaticResource DarkModeColor}}"
+                    BackgroundColor="Transparent"
                     Command="{Binding BindingContext.FaceIdCommand, Source={x:Reference PagePinCode}}"
                     Source="{AppThemeBinding Light=illustration_faceid_lightmode.png,
                                              Dark=illustration_faceid_darkmode.png}" />

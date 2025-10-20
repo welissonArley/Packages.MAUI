@@ -1,4 +1,4 @@
-﻿namespace Packages.MAUI.App.Helpers;
+﻿namespace Packages.MAUI.App.Navigation;
 public static class RoutePages
 {
     public const string DASHBOARD_PAGE = "DashboardPage";
