@@ -12,40 +12,19 @@ public abstract class BaseCodeViewer : ContentView
 
     private readonly List<Shape> _codeViewerLayouts;
 
-    public ushort CodeLength
-    {
-        get => (ushort)GetValue(CodeLengthProperty);
-        set => SetValue(CodeLengthProperty, value);
-    }
-
-    public ushort Spacing
-    {
-        get => (ushort)GetValue(SpacingProperty);
-        set => SetValue(SpacingProperty, value);
-    }
-
-    public Shape ShapeViewer
-    {
-        get => (Shape)GetValue(ShapeProperty);
-        set => SetValue(ShapeProperty, value);
-    }
-
-    public Color CodeColor
-    {
-        get => (Color)GetValue(CodeColorProperty);
-        set => SetValue(CodeColorProperty, value);
-    }
-
-    public Color CodeStrokeColor
-    {
-        get => (Color)GetValue(CodeStrokeColorProperty);
-        set => SetValue(CodeStrokeColorProperty, value);
-    }
-
+    public ushort CodeLength { get => (ushort)GetValue(CodeLengthProperty); set => SetValue(CodeLengthProperty, value); }
     public static readonly BindableProperty CodeLengthProperty = BindableProperty.Create(nameof(CodeLength), typeof(ushort), typeof(BaseCodeViewer), CODE_LENGTH, propertyChanged: OnCodeLengthPropertyChanged);
+
+    public ushort Spacing { get => (ushort)GetValue(SpacingProperty); set => SetValue(SpacingProperty, value); }
     public static readonly BindableProperty SpacingProperty = BindableProperty.Create(nameof(Spacing), typeof(ushort), typeof(BaseCodeViewer), COLUMN_SPACING, propertyChanged: OnSpacingPropertyChanged);
+
+    public Shape ShapeViewer { get => (Shape)GetValue(ShapeProperty); set => SetValue(ShapeProperty, value); }
     public static readonly BindableProperty ShapeProperty = BindableProperty.Create(nameof(ShapeViewer), typeof(Shape), typeof(BaseCodeViewer), null, propertyChanged: OnShapePropertyChanged);
+
+    public Color CodeColor { get => (Color)GetValue(CodeColorProperty); set => SetValue(CodeColorProperty, value); }
     public static readonly BindableProperty CodeColorProperty = BindableProperty.Create(nameof(CodeColor), typeof(Color), typeof(BaseCodeViewer), Colors.Red);
+
+    public Color CodeStrokeColor { get => (Color)GetValue(CodeStrokeColorProperty); set => SetValue(CodeStrokeColorProperty, value); }
     public static readonly BindableProperty CodeStrokeColorProperty = BindableProperty.Create(nameof(CodeStrokeColor), typeof(Color), typeof(BaseCodeViewer), Colors.Yellow);
 
     private static void OnCodeLengthPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((BaseCodeViewer)bindable).SetCodeLength();
