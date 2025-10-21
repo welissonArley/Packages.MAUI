@@ -1,11 +1,7 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
-using PinCodes.Authorization.Messages;
-
-namespace PinCodes.Authorization.Helpers;
-public class PinCodeAuthorizationCenter
+﻿namespace PinCodes.Authorization.Helpers;
+public static class PinCodeAuthorizationCenter
 {
-    public static void ClearPinCode()
-    {
-        WeakReferenceMessenger.Default.Send(new CleanPinCodeMessage(string.Empty));
-    }
+    public static event Action? ClearRequest;
+
+    public static void ClearPinCode() => ClearRequest?.Invoke();
 }

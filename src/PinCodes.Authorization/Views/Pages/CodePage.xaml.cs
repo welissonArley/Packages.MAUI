@@ -1,5 +1,4 @@
-using CommunityToolkit.Mvvm.Messaging;
-using PinCodes.Authorization.Messages;
+using PinCodes.Authorization.Helpers;
 using PinCodes.Authorization.Views.Components.CodeViewers;
 using PinCodes.Authorization.Views.Components.Keyboards;
 using System.Text;
@@ -56,18 +55,14 @@ public partial class CodePage : ContentPage
 	{
 		InitializeComponent();
 
-        WeakReferenceMessenger.Default.Register<CleanPinCodeMessage>(this, (recipient, message) =>
-        {
-            CodeViewer.SetCode(string.Empty);
-            _code = string.Empty;
-        });
+        PinCodeAuthorizationCenter.ClearRequest += OnClearRequested;
     }
 
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
 
-        WeakReferenceMessenger.Default.UnregisterAll(this);
+        PinCodeAuthorizationCenter.ClearRequest -= OnClearRequested;
     }
 
     private void SetPageHeader()
@@ -128,5 +123,11 @@ public partial class CodePage : ContentPage
             if (_code.Length == CodeViewer.CodeLength)
                 CallbackCodeFinished?.Execute(_code);
         });
+    }
+
+    void OnClearRequested()
+    {
+        CodeViewer.SetCode(string.Empty);
+        _code = string.Empty;
     }
 }

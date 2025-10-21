@@ -1,17 +1,26 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 
 namespace PinCodes.Authorization.Extensions;
+
+[UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Cloned view types are preserved via DynamicDependency.")]
+[UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Members are preserved via DynamicDependency/linker.xml for cloned types.")]
 internal static class ViewExtensions
 {
-    internal static T Clone<T>(this T originalShape) where T : View
+    internal static T Clone<T>(this T original) where T : View
     {
-        var shapeType = originalShape.GetType();
+        var shapeType = original.GetType();
+        if(shapeType is null)
+            return original;
+        
         var newShape = (T)Activator.CreateInstance(shapeType)!;
 
-        foreach (var property in shapeType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(property => property.CanWrite))
+        foreach (var p in shapeType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
         {
-            var value = property.GetValue(originalShape);
-            property.SetValue(newShape, value);
+            if (p.CanWrite == false)
+                continue;
+
+            p.SetValue(newShape, p.GetValue(original));
         }
 
         return newShape;
