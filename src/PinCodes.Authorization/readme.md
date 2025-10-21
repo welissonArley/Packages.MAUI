@@ -178,9 +178,11 @@ The first step is to reference the CodeViewer component namespace in your XAML f
 xmlns:codeViewer="clr-namespace:PinCodes.Authorization.Views.Components.CodeViewers;assembly=PinCodes.Authorization.Maui"
 ```
 
-Now it's time to use the **CodeViewer** property. It's important to decide whether you want to hide or show the code, as this will determine which component to use in the XAML.
+The **CodeViewer** property allows you to control how the PIN code is displayed in the UI. You can choose whether to show, hide, or temporarily display the code, and each behavior is handled by a different component in the XAML.
 
-If you want to hide it, add:
+🔒 Option 1 — Hide the Code
+
+If you want to completely hide the code from the user, use the **HideCodeViewer** component:
 
 ```xaml
 <pinCodeAuthorization:CodePage.CodeViewer>
@@ -190,7 +192,9 @@ If you want to hide it, add:
 </pinCodeAuthorization:CodePage.CodeViewer>
 ```
 
-but if you want to show the PIN Code, use:
+👀 Option 2 — Show the Code
+
+If you prefer to display the PIN code clearly, use the **ShowCodeViewer** component:
 
 ```xaml
 <pinCodeAuthorization:CodePage.CodeViewer>
@@ -200,19 +204,33 @@ but if you want to show the PIN Code, use:
 </pinCodeAuthorization:CodePage.CodeViewer>
 ```
 
-Let's discuss the customization of the CodeViewer. Whether you choose to hide or show the code, the following properties are the same for both options:
+⏳ Option 3 — Temporarily Show Then Hide
+
+If you want to show the code briefly and automatically mask it after a delay, use the **MaskedCodeViewer** component:
+
+```xaml
+<pinCodeAuthorization:CodePage.CodeViewer>
+    <codeViewer:MaskedCodeViewer>
+      ... CUSTOMIZATION HERE
+    </codeViewer:MaskedCodeViewer>
+</pinCodeAuthorization:CodePage.CodeViewer>
+```
+
+#### Customizing the CodeViewer
+
+No matter which viewer type you choose (HideCodeViewer, ShowCodeViewer, or MaskedCodeViewer), the following customization properties are available:
 
 | Option | Type | Purpose |
 | --- | --- | --- |
-| CodeLength | ushort | Specifies the size of the code (default is 4). |
-| Spacing | ushort | Defines the spacing between elements that represent each character of the code. |
-| ShapeViewer | Shape | An abstract class that enables you to draw a shape on the screen. You can pass a concrete type like **Ellipse**, **Rectangle**, etc. |
-| CodeColor | Color | Specifies the color to fill the shape when there is a code character for the component. By default, the color specified for the shape will be used when the element representing the code character is empty. |
-| CodeStrokeColor | Color | Specifies the color for the shape stroke when there is a code character for the component. By default, the color stroke specified for the shape will be used when the element representing the code character is empty. |
+| CodeLength | ushort | Defines the number of digits in the code. Default is 4. |
+| Spacing | ushort | Sets the spacing between each character indicator. |
+| ShapeViewer | Shape | Defines the shape used to represent each character slot. Accepts any shape such as Ellipse, Rectangle, etc. |
+| CodeColor | Color | Fill color used when a code digit is entered. If empty, the default shape fill color is used. |
+| CodeStrokeColor | Color | Stroke color used when a code digit is entered. If empty, the default shape stroke color is used. |
 
-If you choose to show the code as the user types, you need to use the **PinCharacterLabel** property. This is a label that you must pass to the library to specify how you want to display the number. Feel free to use all properties available on the label, such as **FontSize**, **FontColor**, etc.
+##### Showing or Briefly Revealing the Code
 
-Below is an example demonstrating how easy it is to define the properties:
+If you want users to see the code as they type, you must define the **PinCharacterLabel** property. This property accepts a Label that controls how each digit is displayed. You can fully customize its style using any label properties like FontSize, TextColor, FontAttributes, and more.
 
 ```xaml
 <pinCodeAuthorization:CodePage.CodeViewer>
@@ -236,6 +254,51 @@ Below is an example demonstrating how easy it is to define the properties:
                 VerticalOptions="Center" />
         </codeViewer:ShowCodeViewer.PinCharacterLabel>
     </codeViewer:ShowCodeViewer>
+</pinCodeAuthorization:CodePage.CodeViewer>
+```
+
+If instead you want a more secure experience, where each digit is briefly shown and then automatically hidden, use the **MaskedCodeViewer**. This component improves security in scenarios like banking or authentication apps.
+
+The MaskedCodeViewer offers two additional customization properties:
+
+| Property	| Type | Description
+| --- | --- | --- |
+| HideCodeAfter |	TimeSpan | Defines how long each character remains visible before being masked. Default is 1 second.
+| MaskContent | View | (Optional) Custom content displayed after hiding the code.
+
+
+```xaml
+<pinCodeAuthorization:CodePage.CodeViewer>
+    <codeViewer:MaskedCodeViewer
+        CodeColor="Transparent"
+        CodeStrokeColor="Blue"
+        HideCodeAfter="0:0:0.300"> <!-- 300 milliseconds -->
+        <codeViewer:MaskedCodeViewer.ShapeViewer>
+            <RoundRectangle
+                CornerRadius="10"
+                Fill="Transparent"
+                HeightRequest="50"
+                Stroke="Red"
+                StrokeThickness="2"
+                WidthRequest="50" />
+        </codeViewer:MaskedCodeViewer.ShapeViewer>
+
+        <codeViewer:MaskedCodeViewer.MaskContent>
+            <Ellipse
+                Fill="Red"
+                HeightRequest="20"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="20" />
+        </codeViewer:MaskedCodeViewer.MaskContent>
+
+        <codeViewer:MaskedCodeViewer.PinCharacterLabel>
+            <Label
+                FontSize="16"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+        </codeViewer:MaskedCodeViewer.PinCharacterLabel>
+    </codeViewer:MaskedCodeViewer>
 </pinCodeAuthorization:CodePage.CodeViewer>
 ```
 
