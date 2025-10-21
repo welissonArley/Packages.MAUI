@@ -69,20 +69,26 @@ public abstract class BaseCodeViewer : ContentView
     {
         Code = code;
 
-        for (var index = 0; index < CodeLength; index++)
+        if (string.IsNullOrWhiteSpace(code))
         {
-            var item = _codeViewerLayouts[index];
+            foreach (var shape in _codeViewerLayouts)
+            {
+                shape.Fill = ShapeViewer.Fill;
+                shape.Stroke = ShapeViewer.Stroke;
+            }
 
-            if (Code.Length > index)
-            {
-                item.Fill = new SolidColorBrush(CodeColor);
-                item.Stroke = new SolidColorBrush(CodeStrokeColor);
-            }
-            else
-            {
-                item.Fill = ShapeViewer.Fill;
-                item.Stroke = ShapeViewer.Stroke;
-            }
+            return;
+        }
+
+        var current = _codeViewerLayouts[code.Length - 1];
+        current.Fill = new SolidColorBrush(CodeColor);
+        current.Stroke = new SolidColorBrush(CodeStrokeColor);
+
+        if (code.Length < CodeLength)
+        {
+            var next = _codeViewerLayouts[code.Length];
+            next.Fill = ShapeViewer.Fill;
+            next.Stroke = ShapeViewer.Stroke;
         }
     }
 

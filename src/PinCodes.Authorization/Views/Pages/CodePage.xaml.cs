@@ -1,5 +1,4 @@
-using CommunityToolkit.Mvvm.Messaging;
-using PinCodes.Authorization.Messages;
+using PinCodes.Authorization.Helpers;
 using PinCodes.Authorization.Views.Components.CodeViewers;
 using PinCodes.Authorization.Views.Components.Keyboards;
 using System.Text;
@@ -11,63 +10,38 @@ public partial class CodePage : ContentPage
 {
     private string _code = string.Empty;
 
-    public ICommand CallbackCodeFinished
-    {
-        get => (ICommand)GetValue(CallbackCodeFinishedProperty);
-        set => SetValue(CallbackCodeFinishedProperty, value);
-    }
+    public ICommand CallbackCodeFinished { get => (ICommand)GetValue(CallbackCodeFinishedProperty); set => SetValue(CallbackCodeFinishedProperty, value); }
+    public static readonly BindableProperty CallbackCodeFinishedProperty = BindableProperty.Create(nameof(CallbackCodeFinishedProperty), typeof(ICommand), typeof(CodePage));
 
-    public StackBase Header
-    {
-        get => (StackBase)GetValue(HeaderProperty);
-        set => SetValue(HeaderProperty, value);
-    }
+    public View Header { get => (View)GetValue(HeaderProperty); set => SetValue(HeaderProperty, value); }
+    public static readonly BindableProperty HeaderProperty = BindableProperty.Create(nameof(Header), typeof(View), typeof(CodePage), propertyChanged: OnHeaderPropertyChanged);
 
-    public StackBase SubHeader
-    {
-        get => (StackBase)GetValue(SubHeaderProperty);
-        set => SetValue(SubHeaderProperty, value);
-    }
+    public View SubHeader { get => (StackBase)GetValue(SubHeaderProperty); set => SetValue(SubHeaderProperty, value); }
+    public static readonly BindableProperty SubHeaderProperty = BindableProperty.Create(nameof(SubHeader), typeof(View), typeof(CodePage), propertyChanged: OnSubHeaderPropertyChanged);
 
-    public BaseCodeViewer CodeViewer
-    {
-        get => (BaseCodeViewer)GetValue(CodeViewerProperty);
-        set => SetValue(CodeViewerProperty, value);
-    }
+    public BaseCodeViewer CodeViewer { get => (BaseCodeViewer)GetValue(CodeViewerProperty); set => SetValue(CodeViewerProperty, value); }
+    public static readonly BindableProperty CodeViewerProperty = BindableProperty.Create(nameof(CodeViewer), typeof(BaseCodeViewer), typeof(CodePage), propertyChanged: OnCodeViewerPropertyChanged);
 
-    public KeyboardViewer Keyboard
-    {
-        get => (KeyboardViewer)GetValue(KeyboardProperty);
-        set => SetValue(KeyboardProperty, value);
-    }
+    public KeyboardViewer Keyboard { get => (KeyboardViewer)GetValue(KeyboardProperty); set => SetValue(KeyboardProperty, value); }
+    public static readonly BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(KeyboardViewer), typeof(CodePage), propertyChanged: OnKeyboardPropertyChanged);
 
-    public static readonly BindableProperty HeaderProperty = BindableProperty.Create(nameof(Header), typeof(StackBase), typeof(CodePage), null, propertyChanged: OnHeaderPropertyChanged);
-    public static readonly BindableProperty SubHeaderProperty = BindableProperty.Create(nameof(SubHeader), typeof(StackBase), typeof(CodePage), null, propertyChanged: OnSubHeaderPropertyChanged);
-    public static readonly BindableProperty CodeViewerProperty = BindableProperty.Create(nameof(CodeViewer), typeof(BaseCodeViewer), typeof(CodePage), null, propertyChanged: OnCodeViewerPropertyChanged);
-    public static readonly BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(KeyboardViewer), typeof(CodePage), null, propertyChanged: OnKeyboardPropertyChanged);
-    public static readonly BindableProperty CallbackCodeFinishedProperty = BindableProperty.Create(nameof(CallbackCodeFinishedProperty), typeof(ICommand), typeof(CodePage), null);
-
-    private static void OnCodeViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetCodeViewer();
-    private static void OnKeyboardPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetKeyboardViewer();
     private static void OnHeaderPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetPageHeader();
     private static void OnSubHeaderPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetPageSubHeader();
+    private static void OnCodeViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetCodeViewer();
+    private static void OnKeyboardPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetKeyboardViewer();
 
     public CodePage()
 	{
 		InitializeComponent();
 
-        WeakReferenceMessenger.Default.Register<CleanPinCodeMessage>(this, (recipient, message) =>
-        {
-            CodeViewer.SetCode(string.Empty);
-            _code = string.Empty;
-        });
+        PinCodeAuthorizationCenter.ClearRequest += OnClearRequested;
     }
 
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
 
-        WeakReferenceMessenger.Default.UnregisterAll(this);
+        PinCodeAuthorizationCenter.ClearRequest -= OnClearRequested;
     }
 
     private void SetPageHeader()
@@ -90,7 +64,7 @@ public partial class CodePage : ContentPage
 
     private void SetCodeViewer()
     {
-        if(CodeViewer is not null)
+        if (CodeViewer is not null)
         {
             CodeViewerComponent.Clear();
             CodeViewerComponent.Children.Add(CodeViewer);
@@ -128,5 +102,11 @@ public partial class CodePage : ContentPage
             if (_code.Length == CodeViewer.CodeLength)
                 CallbackCodeFinished?.Execute(_code);
         });
+    }
+
+    void OnClearRequested()
+    {
+        CodeViewer.SetCode(string.Empty);
+        _code = string.Empty;
     }
 }
