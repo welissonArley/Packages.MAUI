@@ -69,6 +69,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Pages\PinCodes\HidePinCodePage.xaml.cs">
+	    <DependentUpon>HidePinCodePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Pages\PinCodes\MaskedPinCodePage.xaml.cs">
+	    <DependentUpon>MaskedPinCodePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Pages\PinCodes\ShowPinCodePage.xaml.cs">
+	    <DependentUpon>ShowPinCodePage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Popups\InformationPopup.xaml.cs">
 	    <DependentUpon>InformationPopup.xaml</DependentUpon>
 	  </Compile>
@@ -84,7 +93,13 @@
 	  <MauiXaml Update="Views\Pages\Dashboard\DashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Pages\PinCodes\PinCodePage.xaml">
+	  <MauiXaml Update="Views\Pages\PinCodes\MaskedPinCodePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Pages\PinCodes\HidePinCodePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Pages\PinCodes\ShowPinCodePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Popups\InvalidCodePopup.xaml">

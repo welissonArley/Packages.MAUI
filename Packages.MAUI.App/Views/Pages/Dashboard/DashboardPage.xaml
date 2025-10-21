@@ -3,6 +3,7 @@
     x:Class="Packages.MAUI.App.Views.Pages.Dashboard.DashboardPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontFamily="clr-namespace:Packages.MAUI.App.Constants"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModel="clr-namespace:Packages.MAUI.App.ViewModels.Pages.Dashboard"
     x:DataType="viewModel:DashboardViewModel"
@@ -10,80 +11,91 @@
     <ContentPage.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="{AppThemeBinding Light={StaticResource PAGE_BACKGROUND_COLOR_LIGHT}, Dark={StaticResource PAGE_BACKGROUND_COLOR_DARK}}" StatusBarStyle="{AppThemeBinding Dark=LightContent, Light=DarkContent}" />
     </ContentPage.Behaviors>
-
-    <ContentPage.Resources>
-        <Style ApplyToDerivedTypes="True" TargetType="Border">
-            <Setter Property="Padding" Value="20,30,20,20" />
-            <Setter Property="StrokeShape" Value="RoundRectangle 15" />
-        </Style>
-
-        <Style x:Key="GridCard" TargetType="Grid">
-            <Setter Property="RowDefinitions" Value="*,*,*" />
-            <Setter Property="RowSpacing" Value="20" />
-        </Style>
-
-        <Style x:Key="ArrowCard" TargetType="Image">
-            <Setter Property="HorizontalOptions" Value="End" />
-            <Setter Property="VerticalOptions" Value="End" />
-            <Setter Property="Margin" Value="2" />
-            <Setter Property="Grid.Row" Value="2" />
-        </Style>
-
-        <Style x:Key="IllustrationCard" TargetType="Image">
-            <Setter Property="HorizontalOptions" Value="Center" />
-            <Setter Property="Grid.Row" Value="0" />
-        </Style>
-    </ContentPage.Resources>
-
     <VerticalStackLayout Margin="0,20,0,0" Spacing="10">
         <Label Style="{StaticResource PageTitle}" Text="Packages" />
 
-        <Label Text="Discover, explore and utilize our NuGet packages for .NET MAUI using our app's comprehensive examples." />
+        <Label Margin="0,0,0,10" Text="Discover, explore and utilize our NuGet packages for .NET MAUI using our app's comprehensive examples." />
 
-        <Grid
-            Margin="0,30,0,0"
-            ColumnDefinitions="*,*"
-            ColumnSpacing="10"
-            RowDefinitions="*,*"
-            RowSpacing="30">
-            <Border Grid.Column="0" Background="{AppThemeBinding Light=#F9E8E2, Dark=#00FA9A}">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding PinCodesAuthorizationCommand}" />
-                </Border.GestureRecognizers>
-                <Grid Style="{StaticResource GridCard}">
-                    <Image Source="illustration_code.png" Style="{StaticResource IllustrationCard}" />
-                    <VerticalStackLayout Grid.Row="1" Spacing="10">
-                        <Label Style="{StaticResource TitleCard}" Text="PinCodes.Authorization" />
-                        <Label Text="Customizable NuGet package for creating pin code input pages." />
-                    </VerticalStackLayout>
-                    <Image Source="circle_arrow.png" Style="{StaticResource ArrowCard}" />
+        <toolkit:Expander x:Name="PinCodesAuthorizationExpander" IsExpanded="True">
+            <toolkit:Expander.Header>
+                <Grid ColumnDefinitions="*, 20" RowDefinitions="40">
+                    <Label
+                        Grid.Column="0"
+                        FontFamily="{Static fontFamily:FontFamily.MAIN_FONT_BOLD}"
+                        Text="PinCodes.Authorization"
+                        VerticalOptions="Center" />
+
+                    <Image
+                        Grid.Column="1"
+                        HeightRequest="15"
+                        Source="icon_chevron.png"
+                        VerticalOptions="Center"
+                        WidthRequest="15">
+                        <Image.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={Reference PinCodesAuthorizationExpander}, Path=IsExpanded}"
+                                TargetType="Image"
+                                Value="True">
+                                <Setter Property="Rotation" Value="-180" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
                 </Grid>
-            </Border>
+            </toolkit:Expander.Header>
 
-            <Border Grid.Column="1" Background="{AppThemeBinding Light=#FEF7EA, Dark=#F9BF3B}">
-                <Grid Style="{StaticResource GridCard}">
-                    <Image Source="illustration_calendar.png" Style="{StaticResource IllustrationCard}" />
-                    <VerticalStackLayout Grid.Row="1" Spacing="10">
-                        <Label Style="{StaticResource TitleCard}" Text="ControlDays.Calendar" />
-                        <Label Text="Customizable NuGet package for creating one/multi day/month selection calendars." />
-                    </VerticalStackLayout>
-                    <Image Source="circle_arrow.png" Style="{StaticResource ArrowCard}" />
+            <VerticalStackLayout Margin="20,40,0,0" Spacing="20">
+                <Grid ColumnDefinitions="*, 20" RowDefinitions="40">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PinCodesAuthorizationShowCodeCommand}" />
+                    </Grid.GestureRecognizers>
+                    <Label
+                        Grid.Column="0"
+                        Text="Show code example"
+                        VerticalOptions="Center" />
+
+                    <Image
+                        Grid.Column="1"
+                        HeightRequest="20"
+                        Source="icon_arrow.png"
+                        VerticalOptions="Center"
+                        WidthRequest="20" />
                 </Grid>
-            </Border>
 
-            <Border
-                Grid.Row="1"
-                Grid.Column="0"
-                Padding="30"
-                Background="{AppThemeBinding Light=#F9F8FF,
-                                             Dark=#FFFACD}" />
+                <Grid ColumnDefinitions="*, 20" RowDefinitions="40">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PinCodesAuthorizationHideCodeCommand}" />
+                    </Grid.GestureRecognizers>
+                    <Label
+                        Grid.Column="0"
+                        Text="Hide code example"
+                        VerticalOptions="Center" />
 
-            <Border
-                Grid.Row="1"
-                Grid.Column="1"
-                Padding="30"
-                Background="{AppThemeBinding Light=#E5ECEA,
-                                             Dark=#ADD8E6}" />
-        </Grid>
+                    <Image
+                        Grid.Column="1"
+                        HeightRequest="20"
+                        Source="icon_arrow.png"
+                        VerticalOptions="Center"
+                        WidthRequest="20" />
+                </Grid>
+
+                <Grid ColumnDefinitions="*, 20" RowDefinitions="40">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PinCodesAuthorizationMaskedCodeCommand}" />
+                    </Grid.GestureRecognizers>
+                    <Label
+                        Grid.Column="0"
+                        Text="Mask code example"
+                        VerticalOptions="Center" />
+
+                    <Image
+                        Grid.Column="1"
+                        HeightRequest="20"
+                        Source="icon_arrow.png"
+                        VerticalOptions="Center"
+                        WidthRequest="20" />
+                </Grid>
+            </VerticalStackLayout>
+
+        </toolkit:Expander>
     </VerticalStackLayout>
 </ContentPage>

@@ -3,9 +3,9 @@ using PinCodes.Authorization.Views.Pages;
 
 namespace Packages.MAUI.App.Views.Pages.PinCodes;
 
-public partial class PinCodePage : CodePage
+public partial class HidePinCodePage : CodePage
 {
-	public PinCodePage(PinCodeViewModel viewModel)
+	public HidePinCodePage(PinCodeViewModel viewModel)
 	{
 		InitializeComponent();
 
