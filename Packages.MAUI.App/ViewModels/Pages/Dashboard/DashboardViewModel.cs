@@ -13,5 +13,11 @@ public partial class DashboardViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task PinCodesAuthorization() => await _navigationService.GoToAsync(RoutePages.PINCODE_PAGE);
+    public async Task PinCodesAuthorizationShowCode() => await _navigationService.GoToAsync(RoutePages.SHOWPINCODE_PAGE);
+
+    [RelayCommand]
+    public async Task PinCodesAuthorizationHideCode() => await _navigationService.GoToAsync(RoutePages.HIDEPINCODE_PAGE);
+
+    [RelayCommand]
+    public async Task PinCodesAuthorizationMaskedCode() => await _navigationService.GoToAsync(RoutePages.MASKEDPINCODE_PAGE);
 }

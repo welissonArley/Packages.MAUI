@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <pinCodeAuthorization:CodePage
-    x:Class="Packages.MAUI.App.Views.Pages.PinCodes.PinCodePage"
+    x:Class="Packages.MAUI.App.Views.Pages.PinCodes.HidePinCodePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:codeViewer="clr-namespace:PinCodes.Authorization.Views.Components.CodeViewers;assembly=PinCodes.Authorization.Maui"
@@ -53,8 +53,8 @@
     </pinCodeAuthorization:CodePage.SubHeader>
 
     <pinCodeAuthorization:CodePage.CodeViewer>
-        <codeViewer:ShowCodeViewer CodeColor="Transparent" CodeStrokeColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}">
-            <codeViewer:ShowCodeViewer.ShapeViewer>
+        <codeViewer:HideCodeViewer CodeColor="Yellow" CodeStrokeColor="Red">
+            <codeViewer:HideCodeViewer.ShapeViewer>
                 <RoundRectangle
                     CornerRadius="10"
                     Fill="Transparent"
@@ -63,18 +63,8 @@
                                              Dark={StaticResource PRIMARY_COLOR_DARK}}"
                     StrokeThickness="2"
                     WidthRequest="50" />
-            </codeViewer:ShowCodeViewer.ShapeViewer>
-
-            <codeViewer:ShowCodeViewer.PinCharacterLabel>
-                <Label
-                    FontFamily="{Static fontFamily:FontFamily.MAIN_FONT_BOLD}"
-                    FontSize="16"
-                    HorizontalOptions="Center"
-                    TextColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT},
-                                                Dark={StaticResource PRIMARY_COLOR_DARK}}"
-                    VerticalOptions="Center" />
-            </codeViewer:ShowCodeViewer.PinCharacterLabel>
-        </codeViewer:ShowCodeViewer>
+            </codeViewer:HideCodeViewer.ShapeViewer>
+        </codeViewer:HideCodeViewer>
     </pinCodeAuthorization:CodePage.CodeViewer>
 
     <pinCodeAuthorization:CodePage.Keyboard>
@@ -98,8 +88,11 @@
                                          Android=20,
                                          iOS=22}"
                     BackgroundColor="Transparent"
-                    Source="{AppThemeBinding Light=illustration_delete_lightmode.png,
-                                             Dark=illustration_delete_darkmode.png}" />
+                    Source="illustration_delete.png">
+                    <ImageButton.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}" />
+                    </ImageButton.Behaviors>
+                </ImageButton>
             </keyboardViewer:KeyboardViewer.BackspaceViewer>
 
             <keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
@@ -109,8 +102,11 @@
                                          iOS=22}"
                     BackgroundColor="Transparent"
                     Command="{Binding BindingContext.FaceIdCommand, Source={x:Reference PagePinCode}}"
-                    Source="{AppThemeBinding Light=illustration_faceid_lightmode.png,
-                                             Dark=illustration_faceid_darkmode.png}" />
+                    Source="illustration_faceid.png">
+                    <ImageButton.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}" />
+                    </ImageButton.Behaviors>
+                </ImageButton>
             </keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
         </keyboardViewer:KeyboardViewer>
     </pinCodeAuthorization:CodePage.Keyboard>
