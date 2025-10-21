@@ -24,17 +24,18 @@ public class ShowCodeViewer : BaseCodeViewer
     {
         base.SetCode(code);
 
-        for (var index = 0; index < CodeLength; index++)
+        if (string.IsNullOrWhiteSpace(code))
         {
-            var item = _labels[index];
+            foreach (var label in _labels)
+                label.Text = null;
 
-            char? codeChar = code.Length > index ? code[index] : null;
-
-            if (codeChar is not null)
-                item.Text = $"{codeChar}";
-            else
-                item.Text = string.Empty;
+            return;
         }
+
+        _labels[code.Length - 1].Text = code[^1].ToString();
+
+        if (code.Length < CodeLength)
+            _labels[code.Length].Text = null;
     }
 
     private void CreateLayout()
