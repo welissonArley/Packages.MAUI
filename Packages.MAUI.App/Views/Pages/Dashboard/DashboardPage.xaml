@@ -31,6 +31,9 @@
                         Source="icon_chevron.png"
                         VerticalOptions="Center"
                         WidthRequest="15">
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}" />
+                        </Image.Behaviors>
                         <Image.Triggers>
                             <DataTrigger
                                 Binding="{Binding Source={Reference PinCodesAuthorizationExpander}, Path=IsExpanded}"
@@ -58,7 +61,11 @@
                         HeightRequest="20"
                         Source="icon_arrow.png"
                         VerticalOptions="Center"
-                        WidthRequest="20" />
+                        WidthRequest="20">
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}" />
+                        </Image.Behaviors>
+                    </Image>
                 </Grid>
 
                 <Grid ColumnDefinitions="*, 20" RowDefinitions="40">
@@ -75,7 +82,11 @@
                         HeightRequest="20"
                         Source="icon_arrow.png"
                         VerticalOptions="Center"
-                        WidthRequest="20" />
+                        WidthRequest="20">
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}" />
+                        </Image.Behaviors>
+                    </Image>
                 </Grid>
 
                 <Grid ColumnDefinitions="*, 20" RowDefinitions="40">
@@ -92,7 +103,11 @@
                         HeightRequest="20"
                         Source="icon_arrow.png"
                         VerticalOptions="Center"
-                        WidthRequest="20" />
+                        WidthRequest="20">
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}" />
+                        </Image.Behaviors>
+                    </Image>
                 </Grid>
             </VerticalStackLayout>
 

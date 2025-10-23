@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst;</TargetFrameworks>
+		<TargetFrameworks>net9.0;net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
-		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -14,15 +13,19 @@
 		<Company>Id1Tech</Company>
 		<Description>An easy way to add a customizable pin code page to your .NET MAUI applications. With just a few lines of code, you can create a secure page that requires a pin code to access.</Description>
 		<Copyright>All rights reserved.</Copyright>
-		<PackageProjectUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiCodes</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/welissonArley/Packages.MAUI/tree/master</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiCodes</RepositoryUrl>
+		<RepositoryUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/PinCodes.Authorization</RepositoryUrl>
 		<PackageTags>.NET MAUI;Pincode;Pin Entry;Cross-platform;Mobile Development;Xamarin</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageId>PinCodes.Authorization.Maui</PackageId>
 		<AssemblyName>PinCodes.Authorization.Maui</AssemblyName>
-		<Version>3.1.0</Version>
+		<Version>3.1.1</Version>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="'$(TargetFramework)' != 'net9.0'">
+		<UseMaui>true</UseMaui>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -37,14 +40,14 @@
 		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' != 'net9.0'">
 	  <MauiXaml Update="Views\Pages\CodePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
-
+	
 	<ItemGroup>
-	  <PackageReference Update="Microsoft.Maui.Controls" Version="9.0.120" />
+	  <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.120" />
 	</ItemGroup>
 
 </Project>
