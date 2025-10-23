@@ -3,50 +3,29 @@ using System.Windows.Input;
 
 namespace PinCodes.Authorization.Views.Components.Keyboards;
 
-public sealed class KeyboardViewer : ContentView
+public sealed partial class KeyboardViewer : ContentView
 {
     private const ushort SPACING = 30;
 
     private ICommand _callbackKeyboardCommand = default!;
 
-    public Button ShapeViewer
-    {
-        get => (Button)GetValue(ShapeViewerProperty);
-        set => SetValue(ShapeViewerProperty, value);
-    }
-
-    public View LeftSideButtonShapeViewer
-    {
-        get => (View)GetValue(LeftSideButtonShapeViewerProperty);
-        set => SetValue(LeftSideButtonShapeViewerProperty, value);
-    }
-
-    public View BackspaceViewer
-    {
-        get => (View)GetValue(BackspaceViewerProperty);
-        set => SetValue(BackspaceViewerProperty, value);
-    }
-
-    public ushort RowSpacing
-    {
-        get => (ushort)GetValue(RowSpacingProperty);
-        set => SetValue(RowSpacingProperty, value);
-    }
-
-    public ushort ColumnSpacing
-    {
-        get => (ushort)GetValue(ColumnSpacingProperty);
-        set => SetValue(ColumnSpacingProperty, value);
-    }
-
+    public Button ShapeViewer { get => (Button)GetValue(ShapeViewerProperty); set => SetValue(ShapeViewerProperty, value); }
     public static readonly BindableProperty ShapeViewerProperty = BindableProperty.Create(nameof(ShapeViewer), typeof(Button), typeof(KeyboardViewer), null, propertyChanged: OnShapePropertyChanged);
+
+    public View LeftSideButtonShapeViewer { get => (View)GetValue(LeftSideButtonShapeViewerProperty); set => SetValue(LeftSideButtonShapeViewerProperty, value); }
     public static readonly BindableProperty LeftSideButtonShapeViewerProperty = BindableProperty.Create(nameof(LeftSideButtonShapeViewer), typeof(View), typeof(KeyboardViewer), null, propertyChanged: OnLeftSideButtonShapeViewerPropertyChanged, validateValue: ValidateButtonProperty);
+
+    public View BackspaceViewer { get => (View)GetValue(BackspaceViewerProperty); set => SetValue(BackspaceViewerProperty, value); }
     public static readonly BindableProperty BackspaceViewerProperty = BindableProperty.Create(nameof(BackspaceViewer), typeof(View), typeof(KeyboardViewer), null, propertyChanged: OnBackspaceViewerPropertyChanged, validateValue: ValidateButtonProperty);
+
+    public ushort RowSpacing { get => (ushort)GetValue(RowSpacingProperty); set => SetValue(RowSpacingProperty, value); }
     public static readonly BindableProperty RowSpacingProperty = BindableProperty.Create(nameof(RowSpacing), typeof(ushort), typeof(KeyboardViewer), SPACING, propertyChanged: OnRowSpacingPropertyChanged);
+
+    public ushort ColumnSpacing { get => (ushort)GetValue(ColumnSpacingProperty); set => SetValue(ColumnSpacingProperty, value); }
     public static readonly BindableProperty ColumnSpacingProperty = BindableProperty.Create(nameof(ColumnSpacing), typeof(ushort), typeof(KeyboardViewer), SPACING, propertyChanged: OnColumnSpacingPropertyChanged);
 
     private static void OnShapePropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyboardViewer)bindable).CreateLayout();
-    private static void OnBackspaceViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyboardViewer)bindable).UpdateBackSpaceLayout();
+    private static void OnBackspaceViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyboardViewer)bindable).AddBackspaceButton();
     private static void OnRowSpacingPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyboardViewer)bindable).SetRowColumnSpacing();
     private static void OnColumnSpacingPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyboardViewer)bindable).SetColumnSpacing();
     private static void OnLeftSideButtonShapeViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyboardViewer)bindable).AddLeftSideButton();
@@ -83,19 +62,10 @@ public sealed class KeyboardViewer : ContentView
         grid.Add(view: AddButtonWithCommand(9), column: 2, row: 2);
         grid.Add(view: AddButtonWithCommand(0), column: 1, row: 3);
 
-        if (BackspaceViewer is not null)
-            grid.Add(view: CreateBackspaceOption(), column: 2, row: 3);
-
         Content = grid;
-    }
 
-    private void UpdateBackSpaceLayout()
-    {
-        if (Content is not null)
-        {
-            var grid = Content as Grid;
-            grid.Add(view: CreateBackspaceOption(), column: 2, row: 3);
-        }
+        AddLeftSideButton();
+        AddBackspaceButton();
     }
 
     private void AddLeftSideButton()
@@ -146,20 +116,23 @@ public sealed class KeyboardViewer : ContentView
         return button;
     }
 
-    private View CreateBackspaceOption()
+    private void AddBackspaceButton()
     {
-        var viewer = BackspaceViewer.Clone();
+        if (BackspaceViewer is not null && Content is not null)
+        {
+            var grid = Content as Grid;
 
-        viewer.WidthRequest = ShapeViewer.WidthRequest;
-        viewer.HeightRequest = ShapeViewer.HeightRequest;
+            BackspaceViewer.WidthRequest = ShapeViewer.WidthRequest;
+            BackspaceViewer.HeightRequest = ShapeViewer.HeightRequest;
 
-        var command = new Command(() => { _callbackKeyboardCommand?.Execute(-1); });
-        if (viewer is Button button)
-            button.Command = command;
-        else
-            ((ImageButton)viewer).Command = command;
+            var command = new Command(() => { _callbackKeyboardCommand?.Execute(-1); });
+            if (BackspaceViewer is Button button)
+                button.Command = command;
+            else
+                ((ImageButton)BackspaceViewer).Command = command;
 
-        return viewer;
+            grid!.Add(BackspaceViewer, column: 2, row: 3);
+        }
     }
 
     private static bool ValidateButtonProperty(BindableObject bindable, object value) => value is Button or ImageButton;

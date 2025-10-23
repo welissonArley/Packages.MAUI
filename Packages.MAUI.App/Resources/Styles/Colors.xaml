@@ -27,5 +27,5 @@
     <Color x:Key="PLACEHOLDER_COLOR_DARK">#33FFFFFF</Color>
 
     <Color x:Key="KEYBOARD_COLOR_LIGHT">#BEBEBE</Color>
-    <Color x:Key="KEYBOARD_COLOR_DARK">#AEA8D3</Color>
+    <Color x:Key="KEYBOARD_COLOR_DARK">#4da6ff</Color>
 </ResourceDictionary>
