@@ -3,6 +3,8 @@
 namespace PinCodes.Authorization.Views.Components.CodeViewers;
 public sealed class MaskedCodeViewer : BaseCodeViewer
 {
+    private CancellationTokenSource _hideCodeCancelationTokenSource;
+
     private readonly List<Label> _labels;
     private readonly List<View> _maskContent;
 
@@ -22,6 +24,7 @@ public sealed class MaskedCodeViewer : BaseCodeViewer
     {
         _labels = [];
         _maskContent = [];
+        _hideCodeCancelationTokenSource = new CancellationTokenSource();
     }
 
     public override void SetCode(string code)
@@ -30,6 +33,8 @@ public sealed class MaskedCodeViewer : BaseCodeViewer
 
         if (string.IsNullOrWhiteSpace(code))
         {
+            _hideCodeCancelationTokenSource.Cancel();
+
             foreach (var label in _labels)
             {
                 label.Text = null;
@@ -38,6 +43,9 @@ public sealed class MaskedCodeViewer : BaseCodeViewer
 
             foreach (var mask in _maskContent)
                 mask.IsVisible = false;
+
+            _hideCodeCancelationTokenSource.Dispose();
+            _hideCodeCancelationTokenSource = new CancellationTokenSource();
 
             return;
         }
@@ -58,18 +66,7 @@ public sealed class MaskedCodeViewer : BaseCodeViewer
         {
             current.Text = code[^1].ToString();
 
-            Task.Run(async () =>
-            {
-                await Task.Delay(HideCodeAfter);
-
-                MainThread.BeginInvokeOnMainThread(() =>
-                {
-                    current.Opacity = 0;
-
-                    if (_maskContent.Count != 0)
-                        _maskContent[code.Length - 1].IsVisible = true;
-                });                
-            });
+            _ = HideAfter(label: current, index: code.Length - 1);
         }
     }
 
@@ -101,5 +98,24 @@ public sealed class MaskedCodeViewer : BaseCodeViewer
 
             grid.Add(view: _maskContent[index], column: index);
         }
+    }
+
+    private async Task HideAfter(Label label, int index)
+    {
+        await Task.Delay(HideCodeAfter, _hideCodeCancelationTokenSource.Token).ConfigureAwait(false);
+
+        if (_hideCodeCancelationTokenSource.IsCancellationRequested)
+            return;
+
+        await MainThread.InvokeOnMainThreadAsync(() =>
+        {
+            if (_hideCodeCancelationTokenSource.IsCancellationRequested)
+                return;
+
+            label.Opacity = 0;
+
+            if (_maskContent.Count != 0)
+                _maskContent[index].IsVisible = true;
+        });
     }
 }
