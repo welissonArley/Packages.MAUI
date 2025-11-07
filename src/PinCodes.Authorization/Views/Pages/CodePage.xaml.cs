@@ -1,3 +1,4 @@
+using PinCodes.Authorization.Extensions;
 using PinCodes.Authorization.Helpers;
 using PinCodes.Authorization.Views.Components.CodeViewers;
 using PinCodes.Authorization.Views.Components.Keyboards;
@@ -87,7 +88,7 @@ public partial class CodePage : ContentPage
         {
             var option = (int)value;
 
-            if (option == -1 && !string.IsNullOrWhiteSpace(_code))
+            if (option == -1 && _code.NotEmpty())
                 _code = _code.Remove(_code.Length - 1);
             else if (option != -1 && _code.Length + 1 <= CodeViewer.CodeLength)
             {

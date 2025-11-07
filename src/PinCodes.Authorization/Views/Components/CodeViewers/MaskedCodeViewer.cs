@@ -3,10 +3,9 @@
 namespace PinCodes.Authorization.Views.Components.CodeViewers;
 public sealed class MaskedCodeViewer : BaseCodeViewer
 {
-    private CancellationTokenSource _hideCodeCancelationTokenSource;
-
     private readonly List<Label> _labels;
     private readonly List<View> _maskContent;
+    private readonly List<CancellationTokenSource> _cancellationTokenSources;
 
     public Label PinCharacterLabel { get => (Label)GetValue(PinCharacterLabelProperty); set => SetValue(PinCharacterLabelProperty, value); }
     public static readonly BindableProperty PinCharacterLabelProperty = BindableProperty.Create(nameof(PinCharacterLabel), typeof(Label), typeof(ShowCodeViewer), propertyChanged: OnPinCharacterLabelPropertyChanged);
@@ -24,28 +23,30 @@ public sealed class MaskedCodeViewer : BaseCodeViewer
     {
         _labels = [];
         _maskContent = [];
-        _hideCodeCancelationTokenSource = new CancellationTokenSource();
+        _cancellationTokenSources = [];
     }
 
     public override void SetCode(string code)
     {
         base.SetCode(code);
 
-        if (string.IsNullOrWhiteSpace(code))
+        if (code.IsEmpty())
         {
-            _hideCodeCancelationTokenSource.Cancel();
-
-            foreach (var label in _labels)
+            for (var index = 0; index < _labels.Count; index++)
             {
-                label.Text = null;
-                label.Opacity = 1;
+                if (_labels[index].Text.NotEmpty())
+                {
+                    _cancellationTokenSources[index].Cancel();
+
+                    _labels[index].Text = null;
+                    _labels[index].Opacity = 1;
+
+                    _maskContent[index].IsVisible = false;
+
+                    _cancellationTokenSources[index].Dispose();
+                    _cancellationTokenSources[index] = new CancellationTokenSource();
+                }
             }
-
-            foreach (var mask in _maskContent)
-                mask.IsVisible = false;
-
-            _hideCodeCancelationTokenSource.Dispose();
-            _hideCodeCancelationTokenSource = new CancellationTokenSource();
 
             return;
         }
@@ -54,11 +55,18 @@ public sealed class MaskedCodeViewer : BaseCodeViewer
         {
             var label = _labels[code.Length];
 
-            label.Text = null;
-            label.Opacity = 1;
+            if(label.Text.NotEmpty())
+            {
+                _cancellationTokenSources[code.Length].Cancel();
 
-            if (_maskContent.Count != 0)
+                label.Text = null;
+                label.Opacity = 1;
+
                 _maskContent[code.Length].IsVisible = false;
+
+                _cancellationTokenSources[code.Length].Dispose();
+                _cancellationTokenSources[code.Length] = new CancellationTokenSource();
+            }
         }
 
         var current = _labels[code.Length - 1];
@@ -77,6 +85,8 @@ public sealed class MaskedCodeViewer : BaseCodeViewer
         for (var index = 0; index < CodeLength; index++)
         {
             _labels.Add(PinCharacterLabel.Clone());
+
+            _cancellationTokenSources.Add(new CancellationTokenSource());
 
             grid.Add(view: _labels[index], column: index);
         }
@@ -102,14 +112,14 @@ public sealed class MaskedCodeViewer : BaseCodeViewer
 
     private async Task HideAfter(Label label, int index)
     {
-        await Task.Delay(HideCodeAfter, _hideCodeCancelationTokenSource.Token).ConfigureAwait(false);
+        await Task.Delay(HideCodeAfter, _cancellationTokenSources[index].Token).ConfigureAwait(false);
 
-        if (_hideCodeCancelationTokenSource.IsCancellationRequested)
+        if (_cancellationTokenSources[index].IsCancellationRequested)
             return;
 
         await MainThread.InvokeOnMainThreadAsync(() =>
         {
-            if (_hideCodeCancelationTokenSource.IsCancellationRequested)
+            if (_cancellationTokenSources[index].IsCancellationRequested)
                 return;
 
             label.Opacity = 0;

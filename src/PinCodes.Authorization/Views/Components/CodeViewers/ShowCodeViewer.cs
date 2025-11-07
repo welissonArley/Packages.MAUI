@@ -24,7 +24,7 @@ public sealed class ShowCodeViewer : BaseCodeViewer
     {
         base.SetCode(code);
 
-        if (string.IsNullOrWhiteSpace(code))
+        if (code.IsEmpty())
         {
             foreach (var label in _labels)
                 label.Text = null;
