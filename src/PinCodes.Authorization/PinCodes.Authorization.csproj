@@ -1,7 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net9.0;net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- Start with base .NET and Android (always supported) -->
+		<TargetFrameworks>net10.0;net10.0-android</TargetFrameworks>
+		
+		<!-- Add iOS/Mac Catalyst only when NOT on Linux -->
+		<TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">$(TargetFrameworks);net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+		
+		<!-- Add Windows only when on Windows -->
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -24,7 +30,7 @@
 		<Version>3.1.1</Version>
 	</PropertyGroup>
 	
-	<PropertyGroup Condition="'$(TargetFramework)' != 'net9.0'">
+	<PropertyGroup Condition="'$(TargetFramework)' != 'net10.0'">
 		<UseMaui>true</UseMaui>
 	</PropertyGroup>
 
@@ -40,14 +46,14 @@
 		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' != 'net9.0'">
+	<ItemGroup Condition="'$(TargetFramework)' != 'net10.0'">
 	  <MauiXaml Update="Views\Pages\CodePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.120" />
+	  <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.0" />
 	</ItemGroup>
 
 </Project>
