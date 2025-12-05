@@ -31,8 +31,7 @@
 		<PackageIcon>icon.png</PackageIcon>
 		<RepositoryUrl>https://github.com/welissonArley/Packages.MAUI/tree/master/src/MauiDays</RepositoryUrl>
 		<PackageTags>.NET MAUI;Calendar;Scheduling;Date Picker;Popups;Cross-platform;Xamarin;Mobile Development;Date Manipulation</PackageTags>
-		<!-- Note: mauidaysreadme.md file does not exist, commenting out to prevent build errors -->
-		<!-- <PackageReadmeFile>mauidaysreadme.md</PackageReadmeFile> -->
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageId>ControlDays.Calendar.Maui</PackageId>
 		<AssemblyName>ControlDays.Calendar.Maui</AssemblyName>
@@ -44,11 +43,6 @@
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
-	  <!-- Note: mauidaysreadme.md file does not exist, commenting out to prevent build errors -->
-	  <!-- <None Include="..\..\Resources\Raw\mauidaysreadme.md">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None> -->
 	</ItemGroup>
 
 	<ItemGroup>
