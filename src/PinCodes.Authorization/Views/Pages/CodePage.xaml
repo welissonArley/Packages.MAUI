@@ -3,7 +3,10 @@
     x:Class="PinCodes.Authorization.Views.Pages.CodePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto, Auto">
+    <Grid
+        x:Name="LayoutRoot"
+        ColumnDefinitions="*"
+        RowDefinitions="Auto, Auto, Auto, Auto">
 
         <VerticalStackLayout x:Name="LayoutHeader" Grid.Row="0" />
 

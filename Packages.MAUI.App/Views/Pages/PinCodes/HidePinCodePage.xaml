@@ -88,6 +88,7 @@
                                          Android=20,
                                          iOS=22}"
                     BackgroundColor="Transparent"
+                    BorderWidth="0"
                     Source="illustration_delete.png">
                     <ImageButton.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}" />
@@ -101,6 +102,7 @@
                                          Android=20,
                                          iOS=22}"
                     BackgroundColor="Transparent"
+                    BorderWidth="0"
                     Command="{Binding BindingContext.FaceIdCommand, Source={x:Reference PagePinCode}}"
                     Source="illustration_faceid.png">
                     <ImageButton.Behaviors>

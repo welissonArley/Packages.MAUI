@@ -12,7 +12,13 @@ public partial class CodePage : ContentPage
     private string _code = string.Empty;
 
     public ICommand CallbackCodeFinished { get => (ICommand)GetValue(CallbackCodeFinishedProperty); set => SetValue(CallbackCodeFinishedProperty, value); }
-    public static readonly BindableProperty CallbackCodeFinishedProperty = BindableProperty.Create(nameof(CallbackCodeFinishedProperty), typeof(ICommand), typeof(CodePage));
+    public static readonly BindableProperty CallbackCodeFinishedProperty = BindableProperty.Create(nameof(CallbackCodeFinished), typeof(ICommand), typeof(CodePage));
+
+    public LayoutOptions VerticalOptions { get => (LayoutOptions)GetValue(VerticalOptionsProperty); set => SetValue(VerticalOptionsProperty, value); }
+    public static readonly BindableProperty VerticalOptionsProperty = BindableProperty.Create(nameof(VerticalOptions), typeof(LayoutOptions), typeof(CodePage), propertyChanged: VerticalOptionsPropertyChanged);
+
+    public LayoutOptions HorizontalOptions { get => (LayoutOptions)GetValue(HorizontalOptionsProperty); set => SetValue(HorizontalOptionsProperty, value); }
+    public static readonly BindableProperty HorizontalOptionsProperty = BindableProperty.Create(nameof(HorizontalOptions), typeof(LayoutOptions), typeof(CodePage), propertyChanged: HorizontalOptionsPropertyChanged);
 
     public View Header { get => (View)GetValue(HeaderProperty); set => SetValue(HeaderProperty, value); }
     public static readonly BindableProperty HeaderProperty = BindableProperty.Create(nameof(Header), typeof(View), typeof(CodePage), propertyChanged: OnHeaderPropertyChanged);
@@ -30,6 +36,9 @@ public partial class CodePage : ContentPage
     private static void OnSubHeaderPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetPageSubHeader();
     private static void OnCodeViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetCodeViewer();
     private static void OnKeyboardPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetKeyboardViewer();
+
+    private static void VerticalOptionsPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).LayoutRoot.VerticalOptions = (LayoutOptions)newValue;
+    private static void HorizontalOptionsPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).LayoutRoot.HorizontalOptions = (LayoutOptions)newValue;
 
     public CodePage()
 	{
