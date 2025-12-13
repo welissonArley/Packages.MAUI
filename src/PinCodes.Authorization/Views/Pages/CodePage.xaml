@@ -2,11 +2,14 @@
 <ContentPage
     x:Class="PinCodes.Authorization.Views.Pages.CodePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="this">
     <Grid
-        x:Name="LayoutRoot"
+        BindingContext="{x:Reference this}"
         ColumnDefinitions="*"
-        RowDefinitions="Auto, Auto, Auto, Auto">
+        HorizontalOptions="{Binding HorizontalOptions}"
+        RowDefinitions="Auto, Auto, Auto, Auto"
+        VerticalOptions="{Binding VerticalOptions}">
 
         <VerticalStackLayout x:Name="LayoutHeader" Grid.Row="0" />
 
