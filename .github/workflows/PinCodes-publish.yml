@@ -31,6 +31,9 @@ jobs:
       run: |
          awk '/<\/details>/ {print NR}' README.md | xargs -I {} sed -i '1,{}d' README.md
 
+    - name: Workload restore
+      run: dotnet workload restore
+      
     - name: Build Project
       run: dotnet build --configuration Release
 
