@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MauiDays/MauiDays.csproj" />
+    <Project Path="src/PinCodes.Authorization/PinCodes.Authorization.csproj" />
+  </Folder>
+  <Project Path="Packages.MAUI.App/Packages.MAUI.App.csproj">
+    <Deploy />
+  </Project>
+</Solution>

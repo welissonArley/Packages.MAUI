@@ -48,7 +48,7 @@ public abstract class BaseCodeViewer : ContentView
     {
         Code = code;
 
-        if (string.IsNullOrWhiteSpace(code))
+        if (code.IsEmpty())
         {
             foreach (var shape in _codeViewerLayouts)
             {

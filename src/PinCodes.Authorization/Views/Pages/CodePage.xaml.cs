@@ -1,3 +1,4 @@
+using PinCodes.Authorization.Extensions;
 using PinCodes.Authorization.Helpers;
 using PinCodes.Authorization.Views.Components.CodeViewers;
 using PinCodes.Authorization.Views.Components.Keyboards;
@@ -11,7 +12,13 @@ public partial class CodePage : ContentPage
     private string _code = string.Empty;
 
     public ICommand CallbackCodeFinished { get => (ICommand)GetValue(CallbackCodeFinishedProperty); set => SetValue(CallbackCodeFinishedProperty, value); }
-    public static readonly BindableProperty CallbackCodeFinishedProperty = BindableProperty.Create(nameof(CallbackCodeFinishedProperty), typeof(ICommand), typeof(CodePage));
+    public static readonly BindableProperty CallbackCodeFinishedProperty = BindableProperty.Create(nameof(CallbackCodeFinished), typeof(ICommand), typeof(CodePage));
+
+    public LayoutOptions VerticalOptions { get => (LayoutOptions)GetValue(VerticalOptionsProperty); set => SetValue(VerticalOptionsProperty, value); }
+    public static readonly BindableProperty VerticalOptionsProperty = BindableProperty.Create(nameof(VerticalOptions), typeof(LayoutOptions), typeof(CodePage), defaultValue: LayoutOptions.Start);
+
+    public LayoutOptions HorizontalOptions { get => (LayoutOptions)GetValue(HorizontalOptionsProperty); set => SetValue(HorizontalOptionsProperty, value); }
+    public static readonly BindableProperty HorizontalOptionsProperty = BindableProperty.Create(nameof(HorizontalOptions), typeof(LayoutOptions), typeof(CodePage), defaultValue: LayoutOptions.Center);
 
     public View Header { get => (View)GetValue(HeaderProperty); set => SetValue(HeaderProperty, value); }
     public static readonly BindableProperty HeaderProperty = BindableProperty.Create(nameof(Header), typeof(View), typeof(CodePage), propertyChanged: OnHeaderPropertyChanged);
@@ -87,7 +94,7 @@ public partial class CodePage : ContentPage
         {
             var option = (int)value;
 
-            if (option == -1 && !string.IsNullOrWhiteSpace(_code))
+            if (option == -1 && _code.NotEmpty())
                 _code = _code.Remove(_code.Length - 1);
             else if (option != -1 && _code.Length + 1 <= CodeViewer.CodeLength)
             {
