@@ -68,8 +68,8 @@
     </pinCodeAuthorization:CodePage.CodeViewer>
 
     <pinCodeAuthorization:CodePage.Keyboard>
-        <keyboardViewer:KeyboardViewer ColumnSpacing="40" RowSpacing="20">
-            <keyboardViewer:KeyboardViewer.ShapeViewer>
+        <keyboardViewer:NumericKeyboard ColumnSpacing="40" RowSpacing="20">
+            <keyboardViewer:NumericKeyboard.ShapeViewer>
                 <Button
                     BackgroundColor="{AppThemeBinding Light={StaticResource KEYBOARD_COLOR_LIGHT},
                                                       Dark={StaticResource KEYBOARD_COLOR_DARK}}"
@@ -80,9 +80,9 @@
                     TextColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT},
                                                 Dark={StaticResource PRIMARY_COLOR_DARK}}"
                     WidthRequest="80" />
-            </keyboardViewer:KeyboardViewer.ShapeViewer>
+            </keyboardViewer:NumericKeyboard.ShapeViewer>
 
-            <keyboardViewer:KeyboardViewer.BackspaceViewer>
+            <keyboardViewer:NumericKeyboard.BackspaceViewer>
                 <ImageButton
                     Padding="{OnPlatform Default=15,
                                          Android=20,
@@ -94,9 +94,9 @@
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}" />
                     </ImageButton.Behaviors>
                 </ImageButton>
-            </keyboardViewer:KeyboardViewer.BackspaceViewer>
+            </keyboardViewer:NumericKeyboard.BackspaceViewer>
 
-            <keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
+            <keyboardViewer:NumericKeyboard.LeftSideButtonShapeViewer>
                 <ImageButton
                     Padding="{OnPlatform Default=15,
                                          Android=20,
@@ -109,8 +109,8 @@
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}" />
                     </ImageButton.Behaviors>
                 </ImageButton>
-            </keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
-        </keyboardViewer:KeyboardViewer>
+            </keyboardViewer:NumericKeyboard.LeftSideButtonShapeViewer>
+        </keyboardViewer:NumericKeyboard>
     </pinCodeAuthorization:CodePage.Keyboard>
 
 </pinCodeAuthorization:CodePage>

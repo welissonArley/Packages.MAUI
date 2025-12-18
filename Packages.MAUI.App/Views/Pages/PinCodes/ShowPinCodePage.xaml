@@ -78,25 +78,25 @@
     </pinCodeAuthorization:CodePage.CodeViewer>
 
     <pinCodeAuthorization:CodePage.Keyboard>
-        <keyboardViewer:KeyboardViewer ColumnSpacing="40" RowSpacing="20">
-            <keyboardViewer:KeyboardViewer.ShapeViewer>
+        <keyboardViewer:AlphabeticKeyboard ColumnSpacing="7" RowSpacing="30">
+            <keyboardViewer:AlphabeticKeyboard.ShapeViewer>
                 <Button
                     BackgroundColor="{AppThemeBinding Light={StaticResource KEYBOARD_COLOR_LIGHT},
                                                       Dark={StaticResource KEYBOARD_COLOR_DARK}}"
-                    CornerRadius="20"
+                    CornerRadius="10"
                     FontFamily="{Static fontFamily:FontFamily.MAIN_FONT_BOLD}"
-                    FontSize="24"
-                    HeightRequest="80"
+                    FontSize="14"
+                    HeightRequest="50"
                     TextColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT},
                                                 Dark={StaticResource PRIMARY_COLOR_DARK}}"
-                    WidthRequest="80" />
-            </keyboardViewer:KeyboardViewer.ShapeViewer>
+                    WidthRequest="50" />
+            </keyboardViewer:AlphabeticKeyboard.ShapeViewer>
 
-            <keyboardViewer:KeyboardViewer.BackspaceViewer>
+            <keyboardViewer:AlphabeticKeyboard.BackspaceViewer>
                 <ImageButton
-                    Padding="{OnPlatform Default=15,
-                                         Android=20,
-                                         iOS=22}"
+                    Padding="{OnPlatform Default=7,
+                                         Android=10,
+                                         iOS=11}"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
                     Source="illustration_delete.png">
@@ -104,13 +104,13 @@
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}" />
                     </ImageButton.Behaviors>
                 </ImageButton>
-            </keyboardViewer:KeyboardViewer.BackspaceViewer>
+            </keyboardViewer:AlphabeticKeyboard.BackspaceViewer>
 
-            <keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
+            <keyboardViewer:AlphabeticKeyboard.LeftSideButtonShapeViewer>
                 <ImageButton
-                    Padding="{OnPlatform Default=15,
-                                         Android=20,
-                                         iOS=22}"
+                    Padding="{OnPlatform Default=7,
+                                         Android=10,
+                                         iOS=11}"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
                     Command="{Binding BindingContext.FaceIdCommand, Source={x:Reference PagePinCode}}"
@@ -119,8 +119,8 @@
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}" />
                     </ImageButton.Behaviors>
                 </ImageButton>
-            </keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
-        </keyboardViewer:KeyboardViewer>
+            </keyboardViewer:AlphabeticKeyboard.LeftSideButtonShapeViewer>
+        </keyboardViewer:AlphabeticKeyboard>
     </pinCodeAuthorization:CodePage.Keyboard>
 
 </pinCodeAuthorization:CodePage>
