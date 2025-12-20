@@ -29,8 +29,8 @@ public partial class CodePage : ContentPage
     public BaseCodeViewer CodeViewer { get => (BaseCodeViewer)GetValue(CodeViewerProperty); set => SetValue(CodeViewerProperty, value); }
     public static readonly BindableProperty CodeViewerProperty = BindableProperty.Create(nameof(CodeViewer), typeof(BaseCodeViewer), typeof(CodePage), propertyChanged: OnCodeViewerPropertyChanged);
 
-    public KeyboardViewer Keyboard { get => (KeyboardViewer)GetValue(KeyboardProperty); set => SetValue(KeyboardProperty, value); }
-    public static readonly BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(KeyboardViewer), typeof(CodePage), propertyChanged: OnKeyboardPropertyChanged);
+    public KeyBoardViewerBase Keyboard { get => (KeyBoardViewerBase)GetValue(KeyboardProperty); set => SetValue(KeyboardProperty, value); }
+    public static readonly BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(KeyBoardViewerBase), typeof(CodePage), propertyChanged: OnKeyboardPropertyChanged);
 
     private static void OnHeaderPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetPageHeader();
     private static void OnSubHeaderPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((CodePage)bindable).SetPageSubHeader();
@@ -92,11 +92,11 @@ public partial class CodePage : ContentPage
     {
         return new Command((value) =>
         {
-            var option = (int)value;
+            var option = (string)value;
 
-            if (option == -1 && _code.NotEmpty())
+            if (option.Equals("-1") && _code.NotEmpty())
                 _code = _code.Remove(_code.Length - 1);
-            else if (option != -1 && _code.Length + 1 <= CodeViewer.CodeLength)
+            else if (option.Equals("-1").IsFalse() && _code.Length + 1 <= CodeViewer.CodeLength)
             {
                 var sb = new StringBuilder(_code, CodeViewer.CodeLength);
                 sb.Append(value);

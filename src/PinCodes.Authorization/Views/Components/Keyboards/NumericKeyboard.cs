@@ -1,7 +1,6 @@
 ﻿namespace PinCodes.Authorization.Views.Components.Keyboards;
 
-[Obsolete("Use NumericKeyboard instead")]
-public sealed partial class KeyboardViewer : KeyBoardViewerBase
+public sealed class NumericKeyboard : KeyBoardViewerBase
 {
     protected override ushort LEFT_SIDE_BUTTON_COLUMN => 0;
     protected override ushort LEFT_SIDE_BUTTON_ROW => 3;
@@ -16,8 +15,8 @@ public sealed partial class KeyboardViewer : KeyBoardViewerBase
             HorizontalOptions = LayoutOptions.Center,
             ColumnSpacing = ColumnSpacing,
             RowSpacing = RowSpacing,
-            ColumnDefinitions = new ColumnDefinitionCollection(Enumerable.Repeat(new ColumnDefinition { Width = ShapeViewer.WidthRequest }, 3).ToArray()),
-            RowDefinitions = new RowDefinitionCollection(Enumerable.Repeat(new RowDefinition { Height = ShapeViewer.HeightRequest }, 4).ToArray())
+            ColumnDefinitions = [.. Enumerable.Repeat(new ColumnDefinition { Width = ShapeViewer.WidthRequest }, 3).ToArray()],
+            RowDefinitions = [.. Enumerable.Repeat(new RowDefinition { Height = ShapeViewer.HeightRequest }, 4).ToArray()]
         };
 
         if (LeftSideButtonShapeViewer is not null)
