@@ -304,13 +304,36 @@ The MaskedCodeViewer offers two additional customization properties:
 
 ### Keyboard
 
-You must use the **Keyboard** property available on the CodePage to select the appearance of the keyboard buttons, depending on the look and feel you want to achieve. Don't forget to add the namespace on your XAML file:
+The Keyboard component allows you to fully customize the keypad used by CodePage.
+You must explicitly choose which keyboard layout to use:
+
+- NumericKeyboard – displays only numbers (0–9)
+
+- AlphabeticKeyboard – displays letters in alphabetical order (A–Z)
+
+Before using any keyboard, add the required XAML namespace:
 
 ```xaml
 xmlns:keyboardViewer="clr-namespace:PinCodes.Authorization.Views.Components.Keyboards;assembly=PinCodes.Authorization.Maui"
 ```
 
-The keyboard view has several properties for customization, with two being mandatory (ShapeViewer & BackspaceViewer) and the others optional:
+#### Selecting a Keyboard Type
+
+The keyboard type is defined by assigning either a NumericKeyboard or an AlphabeticKeyboard to the CodePage.Keyboard property.
+
+```xaml
+<pinCodeAuthorization:CodePage.Keyboard>
+    <keyboardViewer:NumericKeyboard />
+</pinCodeAuthorization:CodePage.Keyboard>
+```
+
+```xaml
+<pinCodeAuthorization:CodePage.Keyboard>
+    <keyboardViewer:AlphabeticKeyboard />
+</pinCodeAuthorization:CodePage.Keyboard>
+```
+
+Both NumericKeyboard and AlphabeticKeyboard share the same customization properties.
 
 | Option | Type | Purpose |
 | --- | --- | --- |
@@ -320,30 +343,30 @@ The keyboard view has several properties for customization, with two being manda
 | RowSpacing | ushort | Defines the spacing between each line of the keyboard. |
 | ColumnSpacing | ushort | Defines the spacing between each column of the keyboard. |
 
-Below is an example demonstrating how easy it is to define the properties:
+Below is an example for the NumericKeyboard demonstrating how easy it is to define the properties:
 
 ```xaml
 <pinCodeAuthorization:CodePage.Keyboard>
-    <keyboardViewer:KeyboardViewer ColumnSpacing="40" RowSpacing="20">
-        <keyboardViewer:KeyboardViewer.ShapeViewer>
+    <keyboardViewer:NumericKeyboard ColumnSpacing="40" RowSpacing="20">
+        <keyboardViewer:NumericKeyboard.ShapeViewer>
             <Button
                 BackgroundColor="Transparent"
                 CornerRadius="20"
                 FontSize="24"
                 HeightRequest="80"
                 WidthRequest="80" />
-        </keyboardViewer:KeyboardViewer.ShapeViewer>
+        </keyboardViewer:NumericKeyboard.ShapeViewer>
 
-        <keyboardViewer:KeyboardViewer.BackspaceViewer>
+        <keyboardViewer:NumericKeyboard.BackspaceViewer>
             <ImageButton
                 Padding="{OnPlatform Default=15,
                                         Android=20,
                                         iOS=22}"
                 BackgroundColor="Transparent"
                 Source="illustration_delete.png" />
-        </keyboardViewer:KeyboardViewer.BackspaceViewer>
+        </keyboardViewer:NumericKeyboard.BackspaceViewer>
 
-        <keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
+        <keyboardViewer:NumericKeyboard.LeftSideButtonShapeViewer>
             <ImageButton
                 Padding="{OnPlatform Default=15,
                                         Android=20,
@@ -351,8 +374,8 @@ Below is an example demonstrating how easy it is to define the properties:
                 BackgroundColor="Transparent"
                 Command="{Binding BindingContext.FaceIdCommand, Source={x:Reference PagePinCode}}"
                 Source="illustration_faceid.png" />
-        </keyboardViewer:KeyboardViewer.LeftSideButtonShapeViewer>
-    </keyboardViewer:KeyboardViewer>
+        </keyboardViewer:NumericKeyboard.LeftSideButtonShapeViewer>
+    </keyboardViewer:NumericKeyboard>
 </pinCodeAuthorization:CodePage.Keyboard>
 ```
 
