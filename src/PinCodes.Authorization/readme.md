@@ -392,4 +392,4 @@ PinCodes.Authorization.Maui is released under the MIT License. See LICENSE.txt f
 
 
 <!-- Images -->
-[hero-image]: https://raw.githubusercontent.com/welissonArley/Packages.MAUI/master/Resources/Images/SmartPhoneMockupPinCode.png
+[hero-image]: https://github.com/welissonArley/Packages.MAUI/blob/master/Resources/Images/SmartPhoneMockupPinCode.png?raw=true
