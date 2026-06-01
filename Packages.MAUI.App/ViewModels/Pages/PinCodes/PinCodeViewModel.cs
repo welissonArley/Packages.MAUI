@@ -1,8 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Mopups.Services;
 using Packages.MAUI.App.Navigation;
-using Packages.MAUI.App.Views.Popups;
+using Packages.MAUI.App.ViewModels.Popups.Information;
+using Packages.MAUI.App.ViewModels.Popups.InvalidCode;
+using Packages.MAUI.App.ViewModels.Popups.UserCompletedCode;
 using PinCodes.Authorization.Helpers;
 
 namespace Packages.MAUI.App.ViewModels.Pages.PinCodes;
@@ -16,13 +17,15 @@ public partial class PinCodeViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public static async Task ResendCode()
+    public async Task ResendCode()
     {
-        var popup = new InformationPopup(
-            title: "Code on the Go: It's Coming Back to You!",
-            body: "Your code is on its way back, freshly debugged and ready for action! 😄");
-
-        await MopupService.Instance.PushAsync(popup);
+        var queryAttributes = new Dictionary<string, object>
+        {
+            [nameof(InformationVieweModel.Title)] = "Code on the go: It's coming back to you!",
+            [nameof(InformationVieweModel.Message)] = "Your code is on its way back, freshly debugged and ready for action! 😄"
+        };
+        
+        await _navigationService.ShowPopup<InformationVieweModel>(queryAttributes);
     }
 
     [RelayCommand]
@@ -30,23 +33,32 @@ public partial class PinCodeViewModel : ObservableObject
     {
         if (code.All(c => c == '0'))
         {
-            await MopupService.Instance.PushAsync(new InvalidCodePopup());
+            await _navigationService.ShowPopup<InvalidCodeViewModel>();
 
             PinCodeAuthorizationCenter.ClearPinCode();
         }
         else
         {
-            await MopupService.Instance.PushAsync(new UserCompletedCodePopup(code));
+            var queryAttributes = new Dictionary<string, object>
+            {
+                [nameof(UserCompletedCodeViewModel.Code)] = code
+            };
+
+            await _navigationService.ShowPopup<UserCompletedCodeViewModel>(queryAttributes);
 
             await _navigationService.ClosePage();
         }
     }
 
     [RelayCommand]
-    public static async Task FaceId()
+    public async Task FaceId()
     {
-        var popup = new InformationPopup(title: "Face ID Magic", body: "Your face is the key – get ready to unlock with a smile! 😄");
-        
-        await MopupService.Instance.PushAsync(popup);
+        var queryAttributes = new Dictionary<string, object>
+        {
+            [nameof(InformationVieweModel.Title)] = "Face ID Magic",
+            [nameof(InformationVieweModel.Message)] = "Your face is the key – get ready to unlock with a smile! 😄"
+        };
+
+        await _navigationService.ShowPopup<InformationVieweModel>(queryAttributes);
     }
 }
