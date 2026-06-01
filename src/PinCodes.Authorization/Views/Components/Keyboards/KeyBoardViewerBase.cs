@@ -40,26 +40,20 @@ public abstract class KeyBoardViewerBase : ContentView
 
     private void SetColumnSpacing()
     {
-        if (Content is not null)
-        {
-            if (ColumnSpacing <= 0)
-                ColumnSpacing = SPACING;
+        if (ColumnSpacing <= 0)
+            ColumnSpacing = SPACING;
 
-            var grid = Content as Grid;
-            grid!.ColumnSpacing = ColumnSpacing;
-        }
+        if (Content is Grid grid)
+            grid.ColumnSpacing = ColumnSpacing;
     }
 
     private void SetRowColumnSpacing()
     {
-        if (Content is not null)
-        {
-            if (RowSpacing <= 0)
-                RowSpacing = SPACING;
+        if (RowSpacing <= 0)
+            RowSpacing = SPACING;
 
-            var grid = Content as Grid;
-            grid!.RowSpacing = RowSpacing;
-        }
+        if (Content is Grid grid)
+            grid.RowSpacing = RowSpacing;
     }
 
     protected Button AddButtonWithCommand(string value)
@@ -75,7 +69,7 @@ public abstract class KeyBoardViewerBase : ContentView
 
     protected abstract void CreateLayout();
 
-    protected void AddLeftSideButton()
+    protected virtual void AddLeftSideButton()
     {
         if (LeftSideButtonShapeViewer is not null && Content is not null)
         {
@@ -90,7 +84,7 @@ public abstract class KeyBoardViewerBase : ContentView
         }
     }
 
-    protected void AddBackspaceButton()
+    protected virtual void AddBackspaceButton()
     {
         if (BackspaceViewer is not null && Content is not null)
         {
@@ -99,13 +93,19 @@ public abstract class KeyBoardViewerBase : ContentView
             BackspaceViewer.WidthRequest = ShapeViewer.WidthRequest;
             BackspaceViewer.HeightRequest = ShapeViewer.HeightRequest;
 
-            var command = new Command(() => { _callbackKeyboardCommand?.Execute("-1"); });
-            if (BackspaceViewer is Button button)
-                button.Command = command;
-            else
-                ((ImageButton)BackspaceViewer).Command = command;
+            WireBackspaceCommand(BackspaceViewer);
 
             grid!.Add(BackspaceViewer, column: BACKSPACE_SIDE_BUTTON_COLUMN, row: BACKSPACE_SIDE_BUTTON_ROW);
         }
+    }
+
+    protected void WireBackspaceCommand(View backspace)
+    {
+        var command = new Command(() => _callbackKeyboardCommand?.Execute("-1"));
+
+        if (backspace is Button button)
+            button.Command = command;
+        else if (backspace is ImageButton imageButton)
+            imageButton.Command = command;
     }
 }
