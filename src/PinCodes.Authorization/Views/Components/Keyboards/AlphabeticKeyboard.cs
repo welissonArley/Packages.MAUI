@@ -15,8 +15,8 @@ public sealed class AlphabeticKeyboard : KeyBoardViewerBase
             HorizontalOptions = LayoutOptions.Center,
             ColumnSpacing = ColumnSpacing,
             RowSpacing = RowSpacing,
-            ColumnDefinitions = [.. Enumerable.Repeat(new ColumnDefinition { Width = ShapeViewer.WidthRequest }, 7).ToArray()],
-            RowDefinitions = [.. Enumerable.Repeat(new RowDefinition { Height = ShapeViewer.HeightRequest }, 4).ToArray()]
+            ColumnDefinitions = [.. Enumerable.Range(0, 7).Select(_ => new ColumnDefinition { Width = ShapeViewer.WidthRequest })],
+            RowDefinitions = [.. Enumerable.Range(0, 4).Select(_ => new RowDefinition { Height = ShapeViewer.HeightRequest })]
         };
 
         if (LeftSideButtonShapeViewer is not null)

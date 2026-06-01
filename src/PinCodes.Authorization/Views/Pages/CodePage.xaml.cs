@@ -2,7 +2,6 @@ using PinCodes.Authorization.Extensions;
 using PinCodes.Authorization.Helpers;
 using PinCodes.Authorization.Views.Components.CodeViewers;
 using PinCodes.Authorization.Views.Components.Keyboards;
-using System.Text;
 using System.Windows.Input;
 
 namespace PinCodes.Authorization.Views.Pages;
@@ -40,7 +39,13 @@ public partial class CodePage : ContentPage
     public CodePage()
 	{
 		InitializeComponent();
+    }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        PinCodeAuthorizationCenter.ClearRequest -= OnClearRequested;
         PinCodeAuthorizationCenter.ClearRequest += OnClearRequested;
     }
 
@@ -94,15 +99,10 @@ public partial class CodePage : ContentPage
         {
             var option = (string)value;
 
-            if (option.Equals("-1") && _code.NotEmpty())
-                _code = _code.Remove(_code.Length - 1);
-            else if (option.Equals("-1").IsFalse() && _code.Length + 1 <= CodeViewer.CodeLength)
-            {
-                var sb = new StringBuilder(_code, CodeViewer.CodeLength);
-                sb.Append(value);
-
-                _code = sb.ToString();
-            }
+            if (option == "-1" && _code.NotEmpty())
+                _code = _code[..^1];
+            else if (option != "-1" && _code.Length < CodeViewer.CodeLength)
+                _code += option;
 
             CodeViewer.SetCode(_code);
 

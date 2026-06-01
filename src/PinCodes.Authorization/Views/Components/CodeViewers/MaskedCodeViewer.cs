@@ -74,7 +74,7 @@ public sealed class MaskedCodeViewer : BaseCodeViewer
         {
             current.Text = code[^1].ToString();
 
-            _ = HideAfter(label: current, index: code.Length - 1);
+            _ = HideAfter(label: current, index: code.Length - 1, token: _cancellationTokenSources[code.Length - 1].Token);
         }
     }
 
@@ -110,16 +110,34 @@ public sealed class MaskedCodeViewer : BaseCodeViewer
         }
     }
 
-    private async Task HideAfter(Label label, int index)
+    protected override void OnHandlerChanging(HandlerChangingEventArgs args)
     {
-        await Task.Delay(HideCodeAfter, _cancellationTokenSources[index].Token).ConfigureAwait(false);
+        base.OnHandlerChanging(args);
 
-        if (_cancellationTokenSources[index].IsCancellationRequested)
+        if (args.NewHandler is not null)
             return;
+
+        foreach (var cancellationTokenSource in _cancellationTokenSources)
+        {
+            cancellationTokenSource.Cancel();
+            cancellationTokenSource.Dispose();
+        }
+    }
+
+    private async Task HideAfter(Label label, int index, CancellationToken token)
+    {
+        try
+        {
+            await Task.Delay(HideCodeAfter, token).ConfigureAwait(false);
+        }
+        catch (OperationCanceledException)
+        {
+            return;
+        }
 
         await MainThread.InvokeOnMainThreadAsync(() =>
         {
-            if (_cancellationTokenSources[index].IsCancellationRequested)
+            if (token.IsCancellationRequested)
                 return;
 
             label.Opacity = 0;

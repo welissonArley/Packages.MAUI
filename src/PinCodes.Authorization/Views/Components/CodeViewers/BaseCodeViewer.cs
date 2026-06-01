@@ -84,10 +84,10 @@ public abstract class BaseCodeViewer : ContentView
         
         if (CodeLength < currentCodeLength)
         {
-            for (var index = 0; index < currentCodeLength - CodeLength; index++)
+            for (var index = currentCodeLength - 1; index >= CodeLength; index--)
             {
-                _codeViewerLayouts.RemoveAt(_codeViewerLayouts.Count);
-                grid!.RemoveAt(_codeViewerLayouts.Count);
+                _codeViewerLayouts.RemoveAt(index);
+                grid!.RemoveAt(index);
             }
         }
         else if (CodeLength > currentCodeLength)
