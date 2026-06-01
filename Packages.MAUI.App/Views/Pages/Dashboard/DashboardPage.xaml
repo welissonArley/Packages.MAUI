@@ -109,6 +109,27 @@
                         </Image.Behaviors>
                     </Image>
                 </Grid>
+
+                <Grid ColumnDefinitions="*, 20" RowDefinitions="40">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PinCodesAuthorizationAlphanumericCodeCommand}" />
+                    </Grid.GestureRecognizers>
+                    <Label
+                        Grid.Column="0"
+                        Text="Alphanumeric code example"
+                        VerticalOptions="Center" />
+
+                    <Image
+                        Grid.Column="1"
+                        HeightRequest="20"
+                        Source="icon_arrow.png"
+                        VerticalOptions="Center"
+                        WidthRequest="20">
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource PRIMARY_COLOR_LIGHT}, Dark={StaticResource PRIMARY_COLOR_DARK}}" />
+                        </Image.Behaviors>
+                    </Image>
+                </Grid>
             </VerticalStackLayout>
 
         </toolkit:Expander>

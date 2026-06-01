@@ -46,6 +46,7 @@ public static class MauiProgram
         appBuilder.Services.AddTransientWithShellRoute<ShowPinCodePage, PinCodeViewModel>(RoutePages.SHOWPINCODE_PAGE);
         appBuilder.Services.AddTransientWithShellRoute<HidePinCodePage, PinCodeViewModel>(RoutePages.HIDEPINCODE_PAGE);
         appBuilder.Services.AddTransientWithShellRoute<MaskedPinCodePage, PinCodeViewModel>(RoutePages.MASKEDPINCODE_PAGE);
+        appBuilder.Services.AddTransientWithShellRoute<AlphanumericPinCodePage, PinCodeViewModel>(RoutePages.ALPHANUMERICPINCODE_PAGE);
 
         return appBuilder;
     }
