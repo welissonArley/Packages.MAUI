@@ -18,6 +18,7 @@
         <li><a href="#full-xaml-code">Full code</a></li>
       </ul>
     </li>
+    <li><a href="#accessibility">Accessibility</a></li>
   </ol>
 </details>
 
@@ -42,6 +43,7 @@ This library provides developers with an easy way to add a customizable PIN Code
 - **Code viewer:** fully customizable, allowing developers to define a [Shape](https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/shapes/?view=net-maui-8.0) (e.g., ellipse, rectangle) and other properties for a tailored viewing experience.
 - **Headers:** complete flexibility, allowing developers incorporate images, labels, and various other elements to suit their needs.
 - **Customize the length of your code:** adjust the amount of digits (default is 4).
+- **Accessibility:** built-in screen reader announcements and per-key labels, with fully customizable phrases.
 - and others.
 
 ## Getting Started
@@ -311,6 +313,8 @@ You must explicitly choose which keyboard layout to use:
 
 - AlphabeticKeyboard – displays letters in alphabetical order (A–Z)
 
+- AlphanumericKeyboard – displays letters (A–Z) and numbers (0–9)
+
 Before using any keyboard, add the required XAML namespace:
 
 ```xaml
@@ -319,7 +323,7 @@ xmlns:keyboardViewer="clr-namespace:PinCodes.Authorization.Views.Components.Keyb
 
 #### Selecting a Keyboard Type
 
-The keyboard type is defined by assigning either a NumericKeyboard or an AlphabeticKeyboard to the CodePage.Keyboard property.
+The keyboard type is defined by assigning a NumericKeyboard, an AlphabeticKeyboard or an AlphanumericKeyboard to the CodePage.Keyboard property.
 
 ```xaml
 <pinCodeAuthorization:CodePage.Keyboard>
@@ -333,7 +337,15 @@ The keyboard type is defined by assigning either a NumericKeyboard or an Alphabe
 </pinCodeAuthorization:CodePage.Keyboard>
 ```
 
-Both NumericKeyboard and AlphabeticKeyboard share the same customization properties.
+```xaml
+<pinCodeAuthorization:CodePage.Keyboard>
+    <keyboardViewer:AlphanumericKeyboard />
+</pinCodeAuthorization:CodePage.Keyboard>
+```
+
+The **AlphanumericKeyboard** combines both layouts: the letters (A–Z) are shown first and the numbers (0–9) are anchored at the bottom, so the user can type a code that mixes letters and digits.
+
+NumericKeyboard, AlphabeticKeyboard and AlphanumericKeyboard share the same customization properties.
 
 | Option | Type | Purpose |
 | --- | --- | --- |
@@ -385,6 +397,68 @@ Below is an example for the NumericKeyboard demonstrating how easy it is to defi
 | SubHeader | ⛔ No, it's optional |
 | CodeViewer | ✅ Yes, it's mandatory |
 | Keyboard | ✅ Yes, it's mandatory |
+
+## Accessibility
+
+The PIN Code Page works with the platform screen readers (VoiceOver on iOS, TalkBack on Android and Narrator on Windows). There are two kinds of accessibility support, and every phrase is customizable so you can localize it or adjust the wording to match your app.
+
+### Screen Reader Announcements
+
+As the user types, CodePage announces what is happening through the screen reader. You customize each announcement directly on CodePage. Leaving a phrase empty disables that specific announcement.
+
+| Option | Type | Purpose |
+| --- | --- | --- |
+| ProgressAnnouncement | string | Announced after each character is entered or removed. Use {0} for the number of characters entered and {1} for the total length. Default is "{0} of {1} entered". |
+| CodeCompletedAnnouncement | string | Announced when the last character is entered. Default is "Code complete". |
+| CodeClearedAnnouncement | string | Announced when the code is cleared. Default is "Code cleared". |
+| AnnounceCodeContent | bool | When true, the entered character is spoken out loud instead of only the progress. Default is false. ⚠️ Speaking the code can be overheard by people nearby, keep it false unless you understand the risk. |
+
+```xaml
+<pinCodeAuthorization:CodePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="PagePinCode"
+    CallbackCodeFinished="{Binding BindingContext.UserCompletedCodeCommand, Source={x:Reference PagePinCode}}"
+    ProgressAnnouncement="You typed {0} of {1} characters"
+    CodeCompletedAnnouncement="The code was completed"
+    CodeClearedAnnouncement="The code was cleared">
+
+</pinCodeAuthorization:CodePage>
+```
+
+### Custom Label for Each Key
+
+By default the screen reader reads the text of each key (for example "A" or "1"). If you want a friendlier or localized description, define a description per key through the **KeyDescriptions** property of any keyboard. Keys without a custom description fall back to their text.
+
+| Option | Type | Purpose |
+| --- | --- | --- |
+| KeyDescriptions | KeyDescriptionCollection | A collection of KeyDescription items. Each item maps a Key (the character of the button) to the Description spoken by the screen reader. |
+
+```xaml
+<pinCodeAuthorization:CodePage.Keyboard>
+    <keyboardViewer:AlphanumericKeyboard>
+        <keyboardViewer:AlphanumericKeyboard.KeyDescriptions>
+            <keyboardViewer:KeyDescriptionCollection>
+                <keyboardViewer:KeyDescription Key="A" Description="letter A" />
+                <keyboardViewer:KeyDescription Key="B" Description="letter B" />
+                <keyboardViewer:KeyDescription Key="1" Description="number one" />
+                <keyboardViewer:KeyDescription Key="0" Description="number zero" />
+            </keyboardViewer:KeyDescriptionCollection>
+        </keyboardViewer:AlphanumericKeyboard.KeyDescriptions>
+    </keyboardViewer:AlphanumericKeyboard>
+</pinCodeAuthorization:CodePage.Keyboard>
+```
+
+The **BackspaceViewer** and **LeftSideButtonShapeViewer** are views you provide, so set their accessibility text directly with SemanticProperties.Description:
+
+```xaml
+<keyboardViewer:AlphanumericKeyboard.BackspaceViewer>
+    <ImageButton
+        BackgroundColor="Transparent"
+        SemanticProperties.Description="Clear the code"
+        Source="illustration_delete.png" />
+</keyboardViewer:AlphanumericKeyboard.BackspaceViewer>
+```
 
 ## License
 

@@ -30,11 +30,22 @@ public abstract class KeyBoardViewerBase : ContentView
     public ushort ColumnSpacing { get => (ushort)GetValue(ColumnSpacingProperty); set => SetValue(ColumnSpacingProperty, value); }
     public static readonly BindableProperty ColumnSpacingProperty = BindableProperty.Create(nameof(ColumnSpacing), typeof(ushort), typeof(KeyBoardViewerBase), SPACING, propertyChanged: OnColumnSpacingPropertyChanged);
 
+    public KeyDescriptionCollection KeyDescriptions { get => (KeyDescriptionCollection)GetValue(KeyDescriptionsProperty); set => SetValue(KeyDescriptionsProperty, value); }
+    public static readonly BindableProperty KeyDescriptionsProperty = BindableProperty.Create(nameof(KeyDescriptions), typeof(KeyDescriptionCollection), typeof(KeyBoardViewerBase), propertyChanged: OnKeyDescriptionsPropertyChanged);
+
     private static void OnShapePropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyBoardViewerBase)bindable).CreateLayout();
     private static void OnLeftSideButtonShapeViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyBoardViewerBase)bindable).AddLeftSideButton();
     private static void OnBackspaceViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyBoardViewerBase)bindable).AddBackspaceButton();
     private static void OnRowSpacingPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyBoardViewerBase)bindable).SetRowColumnSpacing();
     private static void OnColumnSpacingPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyBoardViewerBase)bindable).SetColumnSpacing();
+
+    private static void OnKeyDescriptionsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var keyboard = (KeyBoardViewerBase)bindable;
+
+        if (keyboard.ShapeViewer is not null)
+            keyboard.CreateLayout();
+    }
 
     public void SetCommandWhenUserPressButtonOnKeyboard(ICommand callbackCommand) => _callbackKeyboardCommand = callbackCommand;
 
@@ -61,6 +72,10 @@ public abstract class KeyBoardViewerBase : ContentView
         var button = ShapeViewer.Clone();
         button.Text = value;
         button.Command = new Command(() => { _callbackKeyboardCommand?.Execute(value); });
+
+        var description = KeyDescriptions?.FirstOrDefault(item => item.Key == value)?.Description;
+        if (description.NotEmpty())
+            SemanticProperties.SetDescription(button, description);
 
         return button;
     }
