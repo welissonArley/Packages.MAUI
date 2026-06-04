@@ -1,20 +1,14 @@
-using Mopups.Pages;
-using Mopups.Services;
+using CommunityToolkit.Maui.Views;
+using Packages.MAUI.App.ViewModels.Popups.Information;
 
 namespace Packages.MAUI.App.Views.Popups;
 
-public partial class InformationPopup : PopupPage
+public partial class InformationPopup : Popup
 {
-	public InformationPopup(string title, string body)
+	public InformationPopup(InformationVieweModel viewModel)
 	{
 		InitializeComponent();
 
-        LabelTitle.Text = title;
-        LabelBody.Text = body;
-	}
-
-    private void Button_Clicked(object sender, EventArgs e)
-    {
-        MopupService.Instance.PopAsync();
+		BindingContext = viewModel;
     }
 }

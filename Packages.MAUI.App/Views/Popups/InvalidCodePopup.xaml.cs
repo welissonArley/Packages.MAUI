@@ -1,17 +1,14 @@
-using Mopups.Pages;
-using Mopups.Services;
+using CommunityToolkit.Maui.Views;
+using Packages.MAUI.App.ViewModels.Popups.InvalidCode;
 
 namespace Packages.MAUI.App.Views.Popups;
 
-public partial class InvalidCodePopup : PopupPage
+public partial class InvalidCodePopup : Popup
 {
-	public InvalidCodePopup()
+	public InvalidCodePopup(InvalidCodeViewModel viewModel)
 	{
 		InitializeComponent();
-	}
 
-    private void Button_Clicked(object sender, EventArgs e)
-    {
-        MopupService.Instance.PopAsync();
-    }
+		BindingContext = viewModel;
+	}
 }

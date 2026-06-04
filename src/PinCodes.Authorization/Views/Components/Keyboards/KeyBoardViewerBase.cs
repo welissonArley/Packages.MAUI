@@ -30,36 +30,41 @@ public abstract class KeyBoardViewerBase : ContentView
     public ushort ColumnSpacing { get => (ushort)GetValue(ColumnSpacingProperty); set => SetValue(ColumnSpacingProperty, value); }
     public static readonly BindableProperty ColumnSpacingProperty = BindableProperty.Create(nameof(ColumnSpacing), typeof(ushort), typeof(KeyBoardViewerBase), SPACING, propertyChanged: OnColumnSpacingPropertyChanged);
 
+    public KeyDescriptionCollection KeyDescriptions { get => (KeyDescriptionCollection)GetValue(KeyDescriptionsProperty); set => SetValue(KeyDescriptionsProperty, value); }
+    public static readonly BindableProperty KeyDescriptionsProperty = BindableProperty.Create(nameof(KeyDescriptions), typeof(KeyDescriptionCollection), typeof(KeyBoardViewerBase), propertyChanged: OnKeyDescriptionsPropertyChanged);
+
     private static void OnShapePropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyBoardViewerBase)bindable).CreateLayout();
     private static void OnLeftSideButtonShapeViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyBoardViewerBase)bindable).AddLeftSideButton();
     private static void OnBackspaceViewerPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyBoardViewerBase)bindable).AddBackspaceButton();
     private static void OnRowSpacingPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyBoardViewerBase)bindable).SetRowColumnSpacing();
     private static void OnColumnSpacingPropertyChanged(BindableObject bindable, object oldValue, object newValue) => ((KeyBoardViewerBase)bindable).SetColumnSpacing();
 
+    private static void OnKeyDescriptionsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var keyboard = (KeyBoardViewerBase)bindable;
+
+        if (keyboard.ShapeViewer is not null)
+            keyboard.CreateLayout();
+    }
+
     public void SetCommandWhenUserPressButtonOnKeyboard(ICommand callbackCommand) => _callbackKeyboardCommand = callbackCommand;
 
     private void SetColumnSpacing()
     {
-        if (Content is not null)
-        {
-            if (ColumnSpacing <= 0)
-                ColumnSpacing = SPACING;
+        if (ColumnSpacing <= 0)
+            ColumnSpacing = SPACING;
 
-            var grid = Content as Grid;
-            grid!.ColumnSpacing = ColumnSpacing;
-        }
+        if (Content is Grid grid)
+            grid.ColumnSpacing = ColumnSpacing;
     }
 
     private void SetRowColumnSpacing()
     {
-        if (Content is not null)
-        {
-            if (RowSpacing <= 0)
-                RowSpacing = SPACING;
+        if (RowSpacing <= 0)
+            RowSpacing = SPACING;
 
-            var grid = Content as Grid;
-            grid!.RowSpacing = RowSpacing;
-        }
+        if (Content is Grid grid)
+            grid.RowSpacing = RowSpacing;
     }
 
     protected Button AddButtonWithCommand(string value)
@@ -68,6 +73,10 @@ public abstract class KeyBoardViewerBase : ContentView
         button.Text = value;
         button.Command = new Command(() => { _callbackKeyboardCommand?.Execute(value); });
 
+        var description = KeyDescriptions?.FirstOrDefault(item => item.Key == value)?.Description;
+        if (description.NotEmpty())
+            SemanticProperties.SetDescription(button, description);
+
         return button;
     }
 
@@ -75,7 +84,7 @@ public abstract class KeyBoardViewerBase : ContentView
 
     protected abstract void CreateLayout();
 
-    protected void AddLeftSideButton()
+    protected virtual void AddLeftSideButton()
     {
         if (LeftSideButtonShapeViewer is not null && Content is not null)
         {
@@ -90,7 +99,7 @@ public abstract class KeyBoardViewerBase : ContentView
         }
     }
 
-    protected void AddBackspaceButton()
+    protected virtual void AddBackspaceButton()
     {
         if (BackspaceViewer is not null && Content is not null)
         {
@@ -99,13 +108,19 @@ public abstract class KeyBoardViewerBase : ContentView
             BackspaceViewer.WidthRequest = ShapeViewer.WidthRequest;
             BackspaceViewer.HeightRequest = ShapeViewer.HeightRequest;
 
-            var command = new Command(() => { _callbackKeyboardCommand?.Execute("-1"); });
-            if (BackspaceViewer is Button button)
-                button.Command = command;
-            else
-                ((ImageButton)BackspaceViewer).Command = command;
+            WireBackspaceCommand(BackspaceViewer);
 
             grid!.Add(BackspaceViewer, column: BACKSPACE_SIDE_BUTTON_COLUMN, row: BACKSPACE_SIDE_BUTTON_ROW);
         }
+    }
+
+    protected void WireBackspaceCommand(View backspace)
+    {
+        var command = new Command(() => _callbackKeyboardCommand?.Execute("-1"));
+
+        if (backspace is Button button)
+            button.Command = command;
+        else if (backspace is ImageButton imageButton)
+            imageButton.Command = command;
     }
 }

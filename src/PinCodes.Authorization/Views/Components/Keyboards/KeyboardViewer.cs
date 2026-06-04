@@ -16,8 +16,8 @@ public sealed partial class KeyboardViewer : KeyBoardViewerBase
             HorizontalOptions = LayoutOptions.Center,
             ColumnSpacing = ColumnSpacing,
             RowSpacing = RowSpacing,
-            ColumnDefinitions = new ColumnDefinitionCollection(Enumerable.Repeat(new ColumnDefinition { Width = ShapeViewer.WidthRequest }, 3).ToArray()),
-            RowDefinitions = new RowDefinitionCollection(Enumerable.Repeat(new RowDefinition { Height = ShapeViewer.HeightRequest }, 4).ToArray())
+            ColumnDefinitions = new ColumnDefinitionCollection(Enumerable.Range(0, 3).Select(_ => new ColumnDefinition { Width = ShapeViewer.WidthRequest }).ToArray()),
+            RowDefinitions = new RowDefinitionCollection(Enumerable.Range(0, 4).Select(_ => new RowDefinition { Height = ShapeViewer.HeightRequest }).ToArray())
         };
 
         if (LeftSideButtonShapeViewer is not null)

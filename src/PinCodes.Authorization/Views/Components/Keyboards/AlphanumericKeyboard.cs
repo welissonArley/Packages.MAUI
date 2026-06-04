@@ -1,10 +1,10 @@
 ﻿namespace PinCodes.Authorization.Views.Components.Keyboards;
 
-public sealed class AlphabeticKeyboard : KeyBoardViewerBase
+public sealed class AlphanumericKeyboard : KeyBoardViewerBase
 {
-    private const string Letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private const string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
-    private static readonly int[] RowLetterCounts = [6, 5, 6, 5, 4];
+    private static readonly int[] RowCounts = [6, 5, 6, 5, 4, 6, 4];
 
     protected override ushort LEFT_SIDE_BUTTON_COLUMN => 0;
     protected override ushort LEFT_SIDE_BUTTON_ROW => 0;
@@ -27,9 +27,9 @@ public sealed class AlphabeticKeyboard : KeyBoardViewerBase
         };
 
         var index = 0;
-        for (var rowIndex = 0; rowIndex < RowLetterCounts.Length; rowIndex++)
+        for (var rowIndex = 0; rowIndex < RowCounts.Length; rowIndex++)
         {
-            var isLastRow = rowIndex == RowLetterCounts.Length - 1;
+            var isLastRow = rowIndex == RowCounts.Length - 1;
 
             var row = new HorizontalStackLayout
             {
@@ -44,8 +44,8 @@ public sealed class AlphabeticKeyboard : KeyBoardViewerBase
                 row.Add(LeftSideButtonShapeViewer);
             }
 
-            for (var column = 0; column < RowLetterCounts[rowIndex] && index < Letters.Length; column++)
-                row.Add(AddButtonWithCommand(Letters[index++].ToString()));
+            for (var column = 0; column < RowCounts[rowIndex] && index < Characters.Length; column++)
+                row.Add(AddButtonWithCommand(Characters[index++].ToString()));
 
             if (isLastRow && BackspaceViewer is not null)
             {

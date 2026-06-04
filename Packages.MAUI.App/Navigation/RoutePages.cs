@@ -5,4 +5,5 @@ public static class RoutePages
     public const string SHOWPINCODE_PAGE = "ShowPinCodePage";
     public const string HIDEPINCODE_PAGE = "HidePinCodePage";
     public const string MASKEDPINCODE_PAGE = "MaskedPinCodePage";
+    public const string ALPHANUMERICPINCODE_PAGE = "AlphanumericPinCodePage";
 }

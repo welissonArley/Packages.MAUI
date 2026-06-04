@@ -1,21 +1,14 @@
-using Mopups.Pages;
-using Mopups.Services;
+using CommunityToolkit.Maui.Views;
+using Packages.MAUI.App.ViewModels.Popups.UserCompletedCode;
 
 namespace Packages.MAUI.App.Views.Popups;
 
-public partial class UserCompletedCodePopup : PopupPage
+public partial class UserCompletedCodePopup : Popup
 {
-	public UserCompletedCodePopup(string code)
-	{
-		InitializeComponent();
-
-        var characters = code.ToCharArray();
-
-        CodeSubmitted.Text = string.Join(" ", characters);
-	}
-
-    private void Button_Clicked(object sender, EventArgs e)
+    public UserCompletedCodePopup(UserCompletedCodeViewModel viewModel)
     {
-		MopupService.Instance.PopAsync();
+        InitializeComponent();
+
+        BindingContext = viewModel;
     }
 }
