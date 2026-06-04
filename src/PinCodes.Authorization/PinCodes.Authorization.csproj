@@ -22,7 +22,7 @@
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageId>PinCodes.Authorization.Maui</PackageId>
 		<AssemblyName>PinCodes.Authorization.Maui</AssemblyName>
-		<Version>4.0.0</Version>
+		<Version>5.0.0</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(TargetFramework)' != 'net9.0' And '$(TargetFramework)' != 'net10.0'">
